@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		3A0596DFA66F8F5928BB5C6D /* Pods_ColemanJustin_FinalProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E6DE5ACE8D6560A9FF5F979 /* Pods_ColemanJustin_FinalProject.framework */; };
 		D078B5BE1F7C1A5F00A6F8C5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D078B5BD1F7C1A5F00A6F8C5 /* AppDelegate.swift */; };
-		D078B5C01F7C1A5F00A6F8C5 /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D078B5BF1F7C1A5F00A6F8C5 /* Onboarding.swift */; };
+		D078B5C01F7C1A5F00A6F8C5 /* HairTypesOnboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D078B5BF1F7C1A5F00A6F8C5 /* HairTypesOnboarding.swift */; };
 		D078B5C31F7C1A5F00A6F8C5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D078B5C11F7C1A5F00A6F8C5 /* Main.storyboard */; };
 		D078B5C51F7C1A5F00A6F8C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D078B5C41F7C1A5F00A6F8C5 /* Assets.xcassets */; };
 		D078B5C81F7C1A5F00A6F8C5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D078B5C61F7C1A5F00A6F8C5 /* LaunchScreen.storyboard */; };
@@ -21,7 +21,7 @@
 		7E6DE5ACE8D6560A9FF5F979 /* Pods_ColemanJustin_FinalProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ColemanJustin_FinalProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D078B5BA1F7C1A5F00A6F8C5 /* ColemanJustin_FinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColemanJustin_FinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D078B5BD1F7C1A5F00A6F8C5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D078B5BF1F7C1A5F00A6F8C5 /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
+		D078B5BF1F7C1A5F00A6F8C5 /* HairTypesOnboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HairTypesOnboarding.swift; sourceTree = "<group>"; };
 		D078B5C21F7C1A5F00A6F8C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D078B5C41F7C1A5F00A6F8C5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D078B5C71F7C1A5F00A6F8C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -52,7 +52,7 @@
 		D006D4DA1F8BC9AA00BAFD24 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				D078B5BF1F7C1A5F00A6F8C5 /* Onboarding.swift */,
+				D078B5BF1F7C1A5F00A6F8C5 /* HairTypesOnboarding.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -236,7 +236,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D078B5C01F7C1A5F00A6F8C5 /* Onboarding.swift in Sources */,
+				D078B5C01F7C1A5F00A6F8C5 /* HairTypesOnboarding.swift in Sources */,
 				D078B5BE1F7C1A5F00A6F8C5 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,7 +9,7 @@
 import UIKit
 import paper_onboarding
 
-class AnalyzeOnboarding: UIViewController, PaperOnboardingDelegate, PaperOnboardingDataSource {
+class HairTypesOnboarding: UIViewController, PaperOnboardingDelegate, PaperOnboardingDataSource {
 
     override func viewDidLoad() {
         super.viewDidLoad()
