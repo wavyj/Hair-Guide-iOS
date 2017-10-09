@@ -1,0 +1,6 @@
+framework module Pods_ColemanJustin_FinalProject {
+  umbrella header "Pods-ColemanJustin_FinalProject-umbrella.h"
+
+  export *
+  module * { export * }
+}
