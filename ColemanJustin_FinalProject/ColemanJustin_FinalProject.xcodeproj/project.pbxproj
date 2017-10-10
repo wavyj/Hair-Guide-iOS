@@ -13,7 +13,9 @@
 		D078B5C31F7C1A5F00A6F8C5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D078B5C11F7C1A5F00A6F8C5 /* Main.storyboard */; };
 		D078B5C51F7C1A5F00A6F8C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D078B5C41F7C1A5F00A6F8C5 /* Assets.xcassets */; };
 		D078B5C81F7C1A5F00A6F8C5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D078B5C61F7C1A5F00A6F8C5 /* LaunchScreen.storyboard */; };
-		D0FFAAAC1F8D177E005E11BE /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FFAAAB1F8D177E005E11BE /* FeedViewController.swift */; };
+		D0FFAAAC1F8D177E005E11BE /* GuidesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FFAAAB1F8D177E005E11BE /* GuidesViewController.swift */; };
+		D0FFAAB21F8D25DC005E11BE /* FrontViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0FFAAB01F8D25DC005E11BE /* FrontViewCell.xib */; };
+		D0FFAAB31F8D25DC005E11BE /* FrontViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FFAAB11F8D25DC005E11BE /* FrontViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +29,9 @@
 		D078B5C41F7C1A5F00A6F8C5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D078B5C71F7C1A5F00A6F8C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D078B5C91F7C1A5F00A6F8C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D0FFAAAB1F8D177E005E11BE /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		D0FFAAAB1F8D177E005E11BE /* GuidesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuidesViewController.swift; sourceTree = "<group>"; };
+		D0FFAAB01F8D25DC005E11BE /* FrontViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FrontViewCell.xib; sourceTree = "<group>"; };
+		D0FFAAB11F8D25DC005E11BE /* FrontViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrontViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,7 +66,7 @@
 		D006D4DB1F8BC9B600BAFD24 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				D0FFAAAB1F8D177E005E11BE /* FeedViewController.swift */,
+				D0FFAAB81F8D2E64005E11BE /* Guides */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -106,6 +110,24 @@
 				D078B5C91F7C1A5F00A6F8C5 /* Info.plist */,
 			);
 			path = ColemanJustin_FinalProject;
+			sourceTree = "<group>";
+		};
+		D0FFAAAD1F8D2569005E11BE /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				D0FFAAB11F8D25DC005E11BE /* FrontViewCell.swift */,
+				D0FFAAB01F8D25DC005E11BE /* FrontViewCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		D0FFAAB81F8D2E64005E11BE /* Guides */ = {
+			isa = PBXGroup;
+			children = (
+				D0FFAAAD1F8D2569005E11BE /* Cells */,
+				D0FFAAAB1F8D177E005E11BE /* GuidesViewController.swift */,
+			);
+			path = Guides;
 			sourceTree = "<group>";
 		};
 		F395B42B686BE62C7D677EDB /* Frameworks */ = {
@@ -180,6 +202,7 @@
 			files = (
 				D078B5C81F7C1A5F00A6F8C5 /* LaunchScreen.storyboard in Resources */,
 				D078B5C51F7C1A5F00A6F8C5 /* Assets.xcassets in Resources */,
+				D0FFAAB21F8D25DC005E11BE /* FrontViewCell.xib in Resources */,
 				D078B5C31F7C1A5F00A6F8C5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -240,7 +263,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D078B5C01F7C1A5F00A6F8C5 /* HairTypesOnboarding.swift in Sources */,
-				D0FFAAAC1F8D177E005E11BE /* FeedViewController.swift in Sources */,
+				D0FFAAAC1F8D177E005E11BE /* GuidesViewController.swift in Sources */,
+				D0FFAAB31F8D25DC005E11BE /* FrontViewCell.swift in Sources */,
 				D078B5BE1F7C1A5F00A6F8C5 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

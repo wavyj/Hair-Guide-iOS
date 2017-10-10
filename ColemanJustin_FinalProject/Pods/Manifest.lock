@@ -1,96 +1,15 @@
 PODS:
-  - BoringSSL (9.0):
-    - BoringSSL/Implementation (= 9.0)
-    - BoringSSL/Interface (= 9.0)
-  - BoringSSL/Implementation (9.0):
-    - BoringSSL/Interface (= 9.0)
-  - BoringSSL/Interface (9.0)
-  - Firebase/Core (4.3.0):
-    - FirebaseAnalytics (= 4.0.4)
-    - FirebaseCore (= 4.0.8)
-  - Firebase/Firestore (4.3.0):
-    - Firebase/Core
-    - FirebaseFirestore (= 0.8.0)
-  - FirebaseAnalytics (4.0.4):
-    - FirebaseCore (~> 4.0)
-    - FirebaseInstanceID (~> 2.0)
-    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-    - nanopb (~> 0.3)
-  - FirebaseAuth (4.2.1):
-    - FirebaseAnalytics (~> 4.0)
-    - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
-    - GTMSessionFetcher/Core (~> 1.1)
-  - FirebaseCore (4.0.8):
-    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-    - nanopb (~> 0.3)
-  - FirebaseFirestore (0.8.0):
-    - FirebaseAnalytics (~> 4.0)
-    - FirebaseAuth (~> 4.2)
-    - FirebaseCore (~> 4.0)
-    - gRPC-ProtoRPC (~> 1.0)
-    - leveldb-library (~> 1.18)
-    - Protobuf (~> 3.1)
-  - FirebaseInstanceID (2.0.4)
-  - GoogleToolboxForMac/DebugUtils (2.1.1):
-    - GoogleToolboxForMac/Defines (= 2.1.1)
-  - GoogleToolboxForMac/Defines (2.1.1)
-  - GoogleToolboxForMac/NSData+zlib (2.1.1):
-    - GoogleToolboxForMac/Defines (= 2.1.1)
-  - GoogleToolboxForMac/NSDictionary+URLArguments (2.1.1):
-    - GoogleToolboxForMac/DebugUtils (= 2.1.1)
-    - GoogleToolboxForMac/Defines (= 2.1.1)
-    - GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)
-  - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
-  - gRPC (1.6.0):
-    - gRPC-Core (= 1.6.0)
-    - gRPC-RxLibrary (= 1.6.0)
-  - gRPC-Core (1.6.0):
-    - gRPC-Core/Implementation (= 1.6.0)
-    - gRPC-Core/Interface (= 1.6.0)
-  - gRPC-Core/Implementation (1.6.0):
-    - BoringSSL (~> 9.0)
-    - gRPC-Core/Interface (= 1.6.0)
-    - nanopb (~> 0.3)
-  - gRPC-Core/Interface (1.6.0)
-  - gRPC-ProtoRPC (1.6.0):
-    - gRPC (= 1.6.0)
-    - gRPC-RxLibrary (= 1.6.0)
-    - Protobuf (~> 3.0)
-  - gRPC-RxLibrary (1.6.0)
-  - GTMSessionFetcher/Core (1.1.12)
-  - leveldb-library (1.18.3)
-  - nanopb (0.3.8):
-    - nanopb/decode (= 0.3.8)
-    - nanopb/encode (= 0.3.8)
-  - nanopb/decode (0.3.8)
-  - nanopb/encode (0.3.8)
+  - expanding-collection (1.0.4)
   - paper-onboarding (2.0.1)
-  - Protobuf (3.4.0)
 
 DEPENDENCIES:
-  - Firebase/Core
-  - Firebase/Firestore
+  - expanding-collection
   - paper-onboarding
 
 SPEC CHECKSUMS:
-  BoringSSL: 19083b821ef3ae0f758fae15482e183003b1e265
-  Firebase: 83283761a1ef6dc9846e03d08059f51421afbd65
-  FirebaseAnalytics: 722b53c7b32bfc7806b06e0093a2f5180d4f2c5a
-  FirebaseAuth: d7f047fbeab98062b98ea933b8d934e0fb1190e2
-  FirebaseCore: 69b1a5ac5f857ba6d5fd9d5fe794f4786dd5e579
-  FirebaseFirestore: 8e2fd99a621ae6fc6acfac3bdea824fe9d9c128d
-  FirebaseInstanceID: 70c2b877e9338971b2429ea5a4293df6961aa44e
-  GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
-  gRPC: 07788969b862af21491908f82b83d17ac08c94cd
-  gRPC-Core: f707ade59c559fe718e27713189607d03b15f571
-  gRPC-ProtoRPC: de7505e493a9d1b6b96c8ea8f976c73100fdf53f
-  gRPC-RxLibrary: 17b9699beb0a838b95b57832244f9ead18e66777
-  GTMSessionFetcher: ebaa1f79a5366922c1735f1566901f50beba23b7
-  leveldb-library: 10fb39c39e243db4af1828441162405bbcec1404
-  nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  expanding-collection: be78b5822d7382d3da02b52d52273f4661567a64
   paper-onboarding: a8e001214d9ce9decf78e160b3823f396dbd51ac
-  Protobuf: 03eef2ee0b674770735cf79d9c4d3659cf6908e8
 
-PODFILE CHECKSUM: 2348c17e28363b6c49211765519722db958c3379
+PODFILE CHECKSUM: 4a9e676d88001dc085419dbab0204b877f2a9167
 
 COCOAPODS: 1.2.0

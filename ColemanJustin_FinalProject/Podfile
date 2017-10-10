@@ -7,7 +7,6 @@ target 'ColemanJustin_FinalProject' do
 
   # Pods for ColemanJustin_FinalProject
 pod 'paper-onboarding'
-pod 'Firebase/Core'
-pod 'Firebase/Firestore'
+pod 'expanding-collection'
 
 end
