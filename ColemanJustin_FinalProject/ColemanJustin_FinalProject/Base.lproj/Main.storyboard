@@ -13,21 +13,27 @@
         <!--Feed-->
         <scene sceneID="C7B-5D-GSo">
             <objects>
-                <viewController title="Feed" id="Pca-ol-yJ0" sceneMemberID="viewController">
+                <viewController title="Feed" id="Pca-ol-yJ0" customClass="FeedViewController" customModule="ColemanJustin_FinalProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HKW-S7-uBR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tKc-T4-9u0" userLabel="Switcher">
-                                <rect key="frame" x="-0.5" y="0.0" width="375" height="67"/>
+                                <rect key="frame" x="-0.5" y="16" width="375" height="67"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gdt-Zc-JAF">
                                         <rect key="frame" x="121.5" y="18" width="38" height="30"/>
                                         <state key="normal" title="Posts"/>
+                                        <connections>
+                                            <action selector="pageChangedWithSender:" destination="Pca-ol-yJ0" eventType="touchUpInside" id="c1V-4s-fGe"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vbo-V2-Urh">
                                         <rect key="frame" x="210.5" y="18" width="48" height="30"/>
                                         <state key="normal" title="Guides"/>
+                                        <connections>
+                                            <action selector="pageChangedWithSender:" destination="Pca-ol-yJ0" eventType="touchUpInside" id="3y9-ma-HwK"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -44,11 +50,15 @@
                             <constraint firstItem="tKc-T4-9u0" firstAttribute="height" secondItem="HKW-S7-uBR" secondAttribute="height" multiplier="0.1" id="FGK-zl-MVy"/>
                             <constraint firstItem="tKc-T4-9u0" firstAttribute="centerX" secondItem="rPL-iT-blB" secondAttribute="centerX" id="JVX-kY-4Ur"/>
                             <constraint firstItem="tKc-T4-9u0" firstAttribute="width" secondItem="HKW-S7-uBR" secondAttribute="width" id="yq3-pp-IxF"/>
-                            <constraint firstItem="tKc-T4-9u0" firstAttribute="top" secondItem="HKW-S7-uBR" secondAttribute="top" id="zbd-Qh-Xgo"/>
+                            <constraint firstItem="tKc-T4-9u0" firstAttribute="top" secondItem="HKW-S7-uBR" secondAttribute="top" constant="16" id="zbd-Qh-Xgo"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="rPL-iT-blB"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="SgI-3w-Tyw"/>
+                    <connections>
+                        <outlet property="guidesBtn" destination="Vbo-V2-Urh" id="oKh-5O-7p0"/>
+                        <outlet property="postsBtn" destination="gdt-Zc-JAF" id="rL5-xw-AkP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ov7-h6-seA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
