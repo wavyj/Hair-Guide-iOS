@@ -1,43 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="I0p-l2-sID">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Data Source-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Feed-->
+        <scene sceneID="C7B-5D-GSo">
             <objects>
-                <viewController storyboardIdentifier="analyzeOnboarding" title="Analyze Onboarding" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="HairTypesOnboarding" customModule="ColemanJustin_FinalProject" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                <viewController title="Feed" id="Pca-ol-yJ0" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="HKW-S7-uBR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qEn-yW-1Ry" customClass="PaperOnboarding" customModule="paper_onboarding">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tKc-T4-9u0" userLabel="Switcher">
+                                <rect key="frame" x="-0.5" y="0.0" width="375" height="67"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gdt-Zc-JAF">
+                                        <rect key="frame" x="121.5" y="18" width="38" height="30"/>
+                                        <state key="normal" title="Posts"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vbo-V2-Urh">
+                                        <rect key="frame" x="210.5" y="18" width="48" height="30"/>
+                                        <state key="normal" title="Guides"/>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="uJf-Oi-Eog"/>
-                                </connections>
+                                <constraints>
+                                    <constraint firstItem="gdt-Zc-JAF" firstAttribute="centerY" secondItem="Vbo-V2-Urh" secondAttribute="centerY" id="9hj-85-4AK"/>
+                                    <constraint firstItem="gdt-Zc-JAF" firstAttribute="centerX" secondItem="Vbo-V2-Urh" secondAttribute="centerX" multiplier="0.6" id="A9y-nX-Wxe"/>
+                                    <constraint firstItem="Vbo-V2-Urh" firstAttribute="centerX" secondItem="tKc-T4-9u0" secondAttribute="centerX" multiplier="1.25" id="C5F-LG-Izq"/>
+                                    <constraint firstItem="Vbo-V2-Urh" firstAttribute="centerY" secondItem="tKc-T4-9u0" secondAttribute="centerY" id="bwL-0L-h87"/>
+                                </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="qEn-yW-1Ry" secondAttribute="bottom" id="dGH-Sf-qf7"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qEn-yW-1Ry" secondAttribute="trailing" id="l4X-YB-dj3"/>
-                            <constraint firstItem="qEn-yW-1Ry" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="lRQ-P3-ZZp"/>
-                            <constraint firstItem="qEn-yW-1Ry" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="qJm-xe-s66"/>
+                            <constraint firstItem="tKc-T4-9u0" firstAttribute="height" secondItem="HKW-S7-uBR" secondAttribute="height" multiplier="0.1" id="FGK-zl-MVy"/>
+                            <constraint firstItem="tKc-T4-9u0" firstAttribute="centerX" secondItem="rPL-iT-blB" secondAttribute="centerX" id="JVX-kY-4Ur"/>
+                            <constraint firstItem="tKc-T4-9u0" firstAttribute="width" secondItem="HKW-S7-uBR" secondAttribute="width" id="yq3-pp-IxF"/>
+                            <constraint firstItem="tKc-T4-9u0" firstAttribute="top" secondItem="HKW-S7-uBR" secondAttribute="top" id="zbd-Qh-Xgo"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <viewLayoutGuide key="safeArea" id="rPL-iT-blB"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="SgI-3w-Tyw"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ov7-h6-seA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136.80000000000001" y="133.5832083958021"/>
+            <point key="canvasLocation" x="-340" y="106.59670164917542"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="bRj-rw-rxL">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="I0p-l2-sID" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="aud-R5-jMT">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="Pca-ol-yJ0" kind="relationship" relationship="viewControllers" id="tsD-tm-8Vt"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pZa-1P-DpI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1103" y="107"/>
         </scene>
     </scenes>
 </document>

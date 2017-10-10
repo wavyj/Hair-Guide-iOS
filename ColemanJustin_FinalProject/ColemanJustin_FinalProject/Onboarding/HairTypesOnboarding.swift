@@ -28,24 +28,25 @@ class HairTypesOnboarding: UIViewController, PaperOnboardingDelegate, PaperOnboa
 
     //MARK: Onboarding Delegate
     func onboardingWillTransitonToIndex(_ index: Int) {
-        <#code#>
+        
     }
     
     func onboardingDidTransitonToIndex(_ index: Int) {
-        <#code#>
+        
     }
     
     func onboardingConfigurationItem(_ item: OnboardingContentViewItem, index: Int) {
-        <#code#>
+        
     }
     
     //MARK: Onboarding DataSource
     func onboardingItemsCount() -> Int {
-        <#code#>
+        return 3
     }
     
     func onboardingItemAtIndex(_ index: Int) -> OnboardingItemInfo {
-        <#code#>
+    
+        return ("", "Straight", "Description Text", "Icon", UIColor.init(red: 229/255, green: 229/255, blue: 229/255, alpha: 1), UIColor.init(red: 41/255, green: 47/255, blue: 54/255, alpha: 1), UIColor.init(red: 0.41, green: 0.47, blue: 0.54, alpha: 1), UIFont.systemFont(ofSize: 12), UIFont.systemFont(ofSize: 12))
     }
 }
 
