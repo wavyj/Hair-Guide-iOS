@@ -6,7 +6,9 @@ target 'ColemanJustin_FinalProject' do
   use_frameworks!
 
   # Pods for ColemanJustin_FinalProject
-pod 'paper-onboarding'
-pod 'expanding-collection'
+
+pod 'Firebase/Core'
+pod 'Firebase/Auth'
+pod "ILLoginKit"
 
 end
