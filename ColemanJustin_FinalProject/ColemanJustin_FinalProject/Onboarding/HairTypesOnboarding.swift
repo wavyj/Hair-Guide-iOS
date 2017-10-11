@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import paper_onboarding
 
 class HairTypesOnboarding: UIViewController, PaperOnboardingDelegate, PaperOnboardingDataSource {
 

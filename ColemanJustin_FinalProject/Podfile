@@ -9,6 +9,12 @@ target 'ColemanJustin_FinalProject' do
 
 pod 'Firebase/Core'
 pod 'Firebase/Auth'
-pod "ILLoginKit"
+pod ’Firebase/Firestore'
+pod 'MaterialComponents'
+pod 'MaterialComponents/NavigationBar'
+pod 'MaterialComponents/BottomAppBar'
+pod 'MaterialComponents/Buttons' 
+pod 'MaterialComponents/Palettes'
+pod 'MaterialComponents/TextFields'
 
 end
