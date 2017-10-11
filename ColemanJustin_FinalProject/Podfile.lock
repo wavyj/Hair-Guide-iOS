@@ -388,11 +388,6 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Firestore
   - MaterialComponents
-  - MaterialComponents/BottomAppBar
-  - MaterialComponents/Buttons
-  - MaterialComponents/NavigationBar
-  - MaterialComponents/Palettes
-  - MaterialComponents/TextFields
 
 SPEC CHECKSUMS:
   BoringSSL: 19083b821ef3ae0f758fae15482e183003b1e265
@@ -417,6 +412,6 @@ SPEC CHECKSUMS:
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   Protobuf: 03eef2ee0b674770735cf79d9c4d3659cf6908e8
 
-PODFILE CHECKSUM: 36661bd593f9953ec592b334815f64ca94243e96
+PODFILE CHECKSUM: f5e5bffbbf6852cc9b050b1981b4d2824561f663
 
 COCOAPODS: 1.2.0
