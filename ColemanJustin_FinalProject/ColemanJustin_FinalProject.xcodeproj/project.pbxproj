@@ -10,6 +10,8 @@
 		3A0596DFA66F8F5928BB5C6D /* Pods_ColemanJustin_FinalProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E6DE5ACE8D6560A9FF5F979 /* Pods_ColemanJustin_FinalProject.framework */; };
 		D01BB59F1F8EECE000EBE6C6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01BB59E1F8EECE000EBE6C6 /* LoginViewController.swift */; };
 		D01BB5A11F8EFAB200EBE6C6 /* ValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01BB5A01F8EFAB200EBE6C6 /* ValidationError.swift */; };
+		D01BB5A41F8F0E1200EBE6C6 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01BB5A31F8F0E1200EBE6C6 /* FeedViewController.swift */; };
+		D03D40EF1F8FB3C3007ACE22 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03D40EE1F8FB3C3007ACE22 /* NavigationViewController.swift */; };
 		D05AAD791F8E60CD00716C74 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D05AAD781F8E60CD00716C74 /* GoogleService-Info.plist */; };
 		D05AAD7C1F8E639C00716C74 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05AAD7B1F8E639C00716C74 /* AuthenticationViewController.swift */; };
 		D05AAD801F8E91CD00716C74 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05AAD7F1F8E91CD00716C74 /* SignupViewController.swift */; };
@@ -25,6 +27,8 @@
 		7E6DE5ACE8D6560A9FF5F979 /* Pods_ColemanJustin_FinalProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ColemanJustin_FinalProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D01BB59E1F8EECE000EBE6C6 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D01BB5A01F8EFAB200EBE6C6 /* ValidationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationError.swift; sourceTree = "<group>"; };
+		D01BB5A31F8F0E1200EBE6C6 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		D03D40EE1F8FB3C3007ACE22 /* NavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
 		D05AAD781F8E60CD00716C74 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D05AAD7B1F8E639C00716C74 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 		D05AAD7F1F8E91CD00716C74 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
@@ -67,6 +71,7 @@
 		D006D4DB1F8BC9B600BAFD24 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				D01BB5A21F8F0D3800EBE6C6 /* Feed */,
 				D05AAD7A1F8E630100716C74 /* Authentication */,
 				D0FFAAB81F8D2E64005E11BE /* Guides */,
 			);
@@ -79,6 +84,22 @@
 			);
 			name = Uitls;
 			path = Main;
+			sourceTree = "<group>";
+		};
+		D01BB5A21F8F0D3800EBE6C6 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				D01BB5A31F8F0E1200EBE6C6 /* FeedViewController.swift */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
+		D03D40ED1F8FB3A3007ACE22 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				D03D40EE1F8FB3C3007ACE22 /* NavigationViewController.swift */,
+			);
+			path = Navigation;
 			sourceTree = "<group>";
 		};
 		D05AAD7A1F8E630100716C74 /* Authentication */ = {
@@ -114,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				D078B5BD1F7C1A5F00A6F8C5 /* AppDelegate.swift */,
+				D03D40ED1F8FB3A3007ACE22 /* Navigation */,
 				D006D4DA1F8BC9AA00BAFD24 /* Onboarding */,
 				D006D4DB1F8BC9B600BAFD24 /* Main */,
 				D006D4DC1F8BCA8900BAFD24 /* Uitls */,
@@ -277,6 +299,8 @@
 				D01BB5A11F8EFAB200EBE6C6 /* ValidationError.swift in Sources */,
 				D05AAD801F8E91CD00716C74 /* SignupViewController.swift in Sources */,
 				D05AAD7C1F8E639C00716C74 /* AuthenticationViewController.swift in Sources */,
+				D01BB5A41F8F0E1200EBE6C6 /* FeedViewController.swift in Sources */,
+				D03D40EF1F8FB3C3007ACE22 /* NavigationViewController.swift in Sources */,
 				D078B5BE1F7C1A5F00A6F8C5 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
