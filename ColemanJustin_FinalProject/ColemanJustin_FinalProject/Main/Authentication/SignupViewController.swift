@@ -9,7 +9,6 @@
 import UIKit
 import Firebase
 import MaterialComponents
-import MaterialComponents.MDCAppBar
 
 class SignupViewController: UIViewController, UITextFieldDelegate {
     
@@ -35,7 +34,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
         // Material Components Setup
         enterBtn.setTitleColor(MDCPalette.blue.tint500, for: .normal)
         enterBtn.setTitle("Submit", for: .normal)
-        enterBtn.target(forAction: #selector(submitTapped(_:)), withSender: self)
+        enterBtn.addTarget(self, action: #selector(submitTapped(_:)), for: .touchUpInside)
         
         for i in [emailField, usernameField, passwordField, confirmPassField]{
             i?.delegate = self
@@ -43,7 +42,8 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
         }
         
         for i in textFieldControllers{
-            i.activeColor = MDCPalette.blueGrey.tint800
+            i.activeColor = MDCPalette.blue.tint500
+            
         }
         
         // AppBar Setup

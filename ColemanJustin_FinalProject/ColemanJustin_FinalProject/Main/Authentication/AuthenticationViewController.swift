@@ -12,10 +12,11 @@ import MaterialComponents
 class AuthenticationViewController: UIViewController {
     
     //MARK: - Outlets
-    
-    @IBOutlet weak var loginContainer: UIView!
-    @IBOutlet weak var signupContainer: UIView!
-    @IBOutlet weak var facebookContainer: UIView!
+
+    @IBOutlet weak var signupBtn: MDCFlatButton!
+    @IBOutlet weak var loginBtn: MDCFlatButton!
+    @IBOutlet weak var facebookBtn: MDCRaisedButton!
+    @IBOutlet weak var instagramBtn: MDCRaisedButton!
     
     //MARK: - Variables
 
@@ -23,36 +24,32 @@ class AuthenticationViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         // Create Material Components Buttons
-        let loginBtn = MDCFlatButton()
         loginBtn.setTitleColor(MDCPalette.blue.tint400, for: .normal)
         loginBtn.setTitle("Login", for: .normal)
-        loginBtn.sizeToFit()
-        loginBtn.center = CGPoint(x: loginContainer.bounds.width / 2, y: loginContainer.bounds.height / 2)
         loginBtn.addTarget(self, action: #selector(loginTapped(_:)) , for: .touchUpInside)
-        loginContainer.addSubview(loginBtn)
         
-        let signupBtn = MDCFlatButton()
         signupBtn.setTitleColor(MDCPalette.blue.tint400, for: .normal)
-        signupBtn.setTitle("Signup", for: .normal)
-        signupBtn.sizeToFit()
-        signupBtn.center = CGPoint(x: signupContainer.bounds.width / 2, y: signupContainer.bounds.height / 2)
+        signupBtn.setTitle("Create Account", for: .normal)
         signupBtn.addTarget(self, action: #selector(signupTapped(_:)) , for: .touchUpInside)
-        signupContainer.addSubview(signupBtn)
         
-        let facebookBtn = MDCRaisedButton()
         facebookBtn.setTitleColor(MDCPalette.grey.tint50, for: .normal)
         facebookBtn.setTitle("Log In With Facebook", for: .normal)
         facebookBtn.setBackgroundColor(MDCPalette.blue.tint800)
-        facebookBtn.sizeToFit()
-        facebookBtn.center = CGPoint(x: facebookContainer.bounds.width / 2, y: facebookContainer.bounds.height / 2)
         facebookBtn.addTarget(self, action: #selector(facebookTapped(_:)) , for: .touchUpInside)
-        facebookContainer.addSubview(facebookBtn)
         
+        instagramBtn.setTitleColor(MDCPalette.blue.tint400, for: .normal)
+        instagramBtn.setTitle("Log In With Instagram", for: .normal)
+        instagramBtn.setBackgroundColor(UIColor.white)
+        instagramBtn.addTarget(self, action: #selector(instagramTapped(_sender:)), for: .touchUpInside)
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle{
+        return .lightContent
     }
 
     override func didReceiveMemoryWarning() {
@@ -74,6 +71,10 @@ class AuthenticationViewController: UIViewController {
     
     func facebookTapped(_ sender: UIButton){
         print("Facebook Tapped")
+    }
+    
+    func instagramTapped(_sender: UIButton){
+        print("Instagram Tapped")
     }
     
     @IBAction func unwind(_ sender: UIStoryboardSegue){

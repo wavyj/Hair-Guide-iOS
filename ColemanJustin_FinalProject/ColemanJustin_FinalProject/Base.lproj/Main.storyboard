@@ -39,23 +39,77 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qhY-w1-qM3" userLabel="LoginContainer">
-                                <rect key="frame" x="206.5" y="491" width="150" height="60"/>
-                            </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image3" translatesAutoresizingMaskIntoConstraints="NO" id="oiF-Qt-RQf">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image1" translatesAutoresizingMaskIntoConstraints="NO" id="oiF-Qt-RQf">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="467"/>
                             </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qhY-w1-qM3" userLabel="LoginContainer">
+                                <rect key="frame" x="206.5" y="483" width="150" height="33.5"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aUl-u6-rFQ" customClass="MDCFlatButton">
+                                        <rect key="frame" x="0.0" y="0.0" width="150" height="33.5"/>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="aUl-u6-rFQ" firstAttribute="centerX" secondItem="qhY-w1-qM3" secondAttribute="centerX" id="DY4-Wh-y0D"/>
+                                    <constraint firstItem="aUl-u6-rFQ" firstAttribute="width" secondItem="qhY-w1-qM3" secondAttribute="width" id="lDX-Vz-K7j"/>
+                                    <constraint firstItem="aUl-u6-rFQ" firstAttribute="centerY" secondItem="qhY-w1-qM3" secondAttribute="centerY" id="qjq-hc-eIw"/>
+                                    <constraint firstItem="aUl-u6-rFQ" firstAttribute="height" secondItem="qhY-w1-qM3" secondAttribute="height" id="tf6-Ai-IfD"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ygO-IJ-l5X" userLabel="SignupContainer">
-                                <rect key="frame" x="19.5" y="491" width="150" height="60"/>
+                                <rect key="frame" x="19.5" y="483" width="150" height="33.5"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3t6-wF-jlg" customClass="MDCFlatButton">
+                                        <rect key="frame" x="-0.5" y="0.0" width="150" height="33.5"/>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="3t6-wF-jlg" firstAttribute="centerX" secondItem="ygO-IJ-l5X" secondAttribute="centerX" id="UXn-8x-pqj"/>
+                                    <constraint firstItem="3t6-wF-jlg" firstAttribute="height" secondItem="ygO-IJ-l5X" secondAttribute="height" id="Vax-ZH-AqL"/>
+                                    <constraint firstItem="3t6-wF-jlg" firstAttribute="width" secondItem="ygO-IJ-l5X" secondAttribute="width" id="gMc-LY-fjQ"/>
+                                    <constraint firstItem="3t6-wF-jlg" firstAttribute="centerY" secondItem="ygO-IJ-l5X" secondAttribute="centerY" id="zM2-ba-rcb"/>
+                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YkH-7D-8RU" userLabel="FacebookContainer">
-                                <rect key="frame" x="20" y="591" width="335" height="60"/>
+                                <rect key="frame" x="20" y="532.5" width="335" height="50.5"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mv6-Z3-yGy" customClass="MDCRaisedButton">
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="50.5"/>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="mv6-Z3-yGy" firstAttribute="height" secondItem="YkH-7D-8RU" secondAttribute="height" id="EHi-Gy-kfT"/>
+                                    <constraint firstItem="mv6-Z3-yGy" firstAttribute="width" secondItem="YkH-7D-8RU" secondAttribute="width" id="VND-Lo-NYN"/>
+                                    <constraint firstItem="mv6-Z3-yGy" firstAttribute="centerY" secondItem="YkH-7D-8RU" secondAttribute="centerY" id="c03-iu-2Yi"/>
+                                    <constraint firstItem="mv6-Z3-yGy" firstAttribute="centerX" secondItem="YkH-7D-8RU" secondAttribute="centerX" id="iOZ-tl-vxI"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XLv-YF-xYb" userLabel="InstagramContainer">
+                                <rect key="frame" x="20" y="599" width="335" height="50.5"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Xt-sb-X76" customClass="MDCRaisedButton">
+                                        <rect key="frame" x="0.0" y="0.5" width="335" height="50.5"/>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="7Xt-sb-X76" firstAttribute="centerX" secondItem="XLv-YF-xYb" secondAttribute="centerX" id="J3j-oW-yO5"/>
+                                    <constraint firstItem="7Xt-sb-X76" firstAttribute="height" secondItem="XLv-YF-xYb" secondAttribute="height" id="RnX-QP-ach"/>
+                                    <constraint firstItem="7Xt-sb-X76" firstAttribute="width" secondItem="XLv-YF-xYb" secondAttribute="width" id="Uiw-wz-61t"/>
+                                    <constraint firstItem="7Xt-sb-X76" firstAttribute="centerY" secondItem="XLv-YF-xYb" secondAttribute="centerY" id="uGc-fI-hGy"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="NDT-Yr-pm9" firstAttribute="trailing" secondItem="oiF-Qt-RQf" secondAttribute="trailing" id="0uZ-eh-jVM"/>
+                            <constraint firstItem="XLv-YF-xYb" firstAttribute="height" secondItem="YkH-7D-8RU" secondAttribute="height" id="3ph-Zm-Xpk"/>
+                            <constraint firstItem="XLv-YF-xYb" firstAttribute="top" secondItem="YkH-7D-8RU" secondAttribute="bottom" constant="16" id="CGb-sv-bWE"/>
                             <constraint firstItem="YkH-7D-8RU" firstAttribute="leading" secondItem="NDT-Yr-pm9" secondAttribute="leading" constant="20" id="I6P-qZ-n3I"/>
                             <constraint firstItem="YkH-7D-8RU" firstAttribute="centerX" secondItem="oiF-Qt-RQf" secondAttribute="centerX" id="Iqb-tc-RtR"/>
                             <constraint firstItem="oiF-Qt-RQf" firstAttribute="height" secondItem="t1w-LF-aH9" secondAttribute="height" multiplier="0.7" id="K9C-Wb-g5J"/>
@@ -63,13 +117,15 @@
                             <constraint firstItem="qhY-w1-qM3" firstAttribute="width" secondItem="t1w-LF-aH9" secondAttribute="width" multiplier="0.4" id="NcA-1B-WoV"/>
                             <constraint firstItem="oiF-Qt-RQf" firstAttribute="leading" secondItem="NDT-Yr-pm9" secondAttribute="leading" id="O1y-Ey-6BV"/>
                             <constraint firstItem="ygO-IJ-l5X" firstAttribute="centerY" secondItem="qhY-w1-qM3" secondAttribute="centerY" id="Oao-UB-2xE"/>
-                            <constraint firstItem="YkH-7D-8RU" firstAttribute="height" secondItem="qhY-w1-qM3" secondAttribute="height" id="ULO-C2-4Xk"/>
-                            <constraint firstItem="NDT-Yr-pm9" firstAttribute="bottom" secondItem="YkH-7D-8RU" secondAttribute="bottom" constant="16" id="YNR-Vr-0du"/>
-                            <constraint firstItem="qhY-w1-qM3" firstAttribute="top" secondItem="oiF-Qt-RQf" secondAttribute="bottom" constant="24" id="eVl-do-8pu"/>
-                            <constraint firstItem="qhY-w1-qM3" firstAttribute="height" secondItem="t1w-LF-aH9" secondAttribute="height" multiplier="0.09" id="fVB-ge-XfJ"/>
+                            <constraint firstItem="YkH-7D-8RU" firstAttribute="height" secondItem="qhY-w1-qM3" secondAttribute="height" multiplier="1.5" id="ULO-C2-4Xk"/>
+                            <constraint firstItem="XLv-YF-xYb" firstAttribute="centerX" secondItem="YkH-7D-8RU" secondAttribute="centerX" id="Wc7-vu-BA1"/>
+                            <constraint firstItem="XLv-YF-xYb" firstAttribute="width" secondItem="YkH-7D-8RU" secondAttribute="width" id="cBj-De-3gh"/>
+                            <constraint firstItem="qhY-w1-qM3" firstAttribute="top" secondItem="oiF-Qt-RQf" secondAttribute="bottom" constant="16" id="eVl-do-8pu"/>
+                            <constraint firstItem="qhY-w1-qM3" firstAttribute="height" secondItem="t1w-LF-aH9" secondAttribute="height" multiplier="0.05" id="fVB-ge-XfJ"/>
                             <constraint firstItem="oiF-Qt-RQf" firstAttribute="top" secondItem="t1w-LF-aH9" secondAttribute="top" id="fga-FJ-PNc"/>
                             <constraint firstItem="ygO-IJ-l5X" firstAttribute="height" secondItem="qhY-w1-qM3" secondAttribute="height" id="iVn-Zd-Rp3"/>
                             <constraint firstItem="qhY-w1-qM3" firstAttribute="centerX" secondItem="oiF-Qt-RQf" secondAttribute="centerX" multiplier="1.5" id="lCW-dk-svL"/>
+                            <constraint firstItem="YkH-7D-8RU" firstAttribute="top" secondItem="aUl-u6-rFQ" secondAttribute="bottom" constant="16" id="phI-AW-8Tl"/>
                             <constraint firstItem="qhY-w1-qM3" firstAttribute="leading" secondItem="ygO-IJ-l5X" secondAttribute="trailing" multiplier="1.17" constant="8" symbolic="YES" id="tyu-ON-nKO"/>
                             <constraint firstItem="ygO-IJ-l5X" firstAttribute="width" secondItem="qhY-w1-qM3" secondAttribute="width" id="zVP-k8-6QU"/>
                         </constraints>
@@ -77,9 +133,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="bCU-Nz-uSz"/>
                     <connections>
-                        <outlet property="facebookContainer" destination="YkH-7D-8RU" id="EQ2-vj-HQW"/>
-                        <outlet property="loginContainer" destination="qhY-w1-qM3" id="itJ-vc-7RM"/>
-                        <outlet property="signupContainer" destination="ygO-IJ-l5X" id="nBF-h9-732"/>
+                        <outlet property="facebookBtn" destination="mv6-Z3-yGy" id="whH-Sw-qSD"/>
+                        <outlet property="instagramBtn" destination="7Xt-sb-X76" id="J4Z-0F-wJF"/>
+                        <outlet property="loginBtn" destination="aUl-u6-rFQ" id="R7s-ha-rg8"/>
+                        <outlet property="signupBtn" destination="3t6-wF-jlg" id="Z1M-vY-wEA"/>
                         <segue destination="yXB-up-Wqj" kind="show" identifier="toSignup" id="3gV-xH-WIn"/>
                     </connections>
                 </viewController>
@@ -96,10 +153,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nhs-iI-Idr" userLabel="EmailContainer">
-                                <rect key="frame" x="37.5" y="90" width="300" height="66.5"/>
+                                <rect key="frame" x="37.5" y="173" width="300" height="66.5"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cRh-wo-aTJ" customClass="MDCTextField">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="66.5"/>
+                                        <rect key="frame" x="0.0" y="0.5" width="300" height="66.5"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" textContentType="email"/>
@@ -117,7 +174,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sMc-46-Lpy" userLabel="UsernameContainer">
-                                <rect key="frame" x="37" y="186.5" width="300" height="66.5"/>
+                                <rect key="frame" x="37" y="269.5" width="300" height="66.5"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eRd-CY-Myw" customClass="MDCTextField">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="66.5"/>
@@ -138,7 +195,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b44-lr-6Sl" userLabel="PasswordContainer">
-                                <rect key="frame" x="37" y="283" width="300" height="66.5"/>
+                                <rect key="frame" x="37" y="366" width="300" height="66.5"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kVc-qV-7mn" customClass="MDCTextField">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="66.5"/>
@@ -159,7 +216,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IYR-wF-cGN" userLabel="ConfirmPassContainer">
-                                <rect key="frame" x="37" y="379.5" width="300" height="66.5"/>
+                                <rect key="frame" x="37" y="462.5" width="300" height="66.5"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dpg-9h-b4s" customClass="MDCTextField">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="66.5"/>
@@ -208,11 +265,11 @@
                             <constraint firstItem="Zbi-Zv-Lqt" firstAttribute="width" secondItem="IYR-wF-cGN" secondAttribute="width" id="Gaa-36-n1L"/>
                             <constraint firstItem="b44-lr-6Sl" firstAttribute="centerX" secondItem="sMc-46-Lpy" secondAttribute="centerX" id="IoA-N2-TMR"/>
                             <constraint firstItem="b44-lr-6Sl" firstAttribute="height" secondItem="sMc-46-Lpy" secondAttribute="height" id="Njs-6h-YuS"/>
-                            <constraint firstItem="nhs-iI-Idr" firstAttribute="top" secondItem="Dhd-fP-kPZ" secondAttribute="top" constant="70" id="OsA-ZZ-K63"/>
                             <constraint firstItem="b44-lr-6Sl" firstAttribute="width" secondItem="sMc-46-Lpy" secondAttribute="width" id="QUd-wz-idA"/>
                             <constraint firstItem="sMc-46-Lpy" firstAttribute="top" secondItem="nhs-iI-Idr" secondAttribute="bottom" constant="30" id="bcU-zX-jZv"/>
                             <constraint firstItem="Dhd-fP-kPZ" firstAttribute="bottom" secondItem="Zbi-Zv-Lqt" secondAttribute="bottom" constant="16" id="esh-dq-QuD"/>
                             <constraint firstItem="IYR-wF-cGN" firstAttribute="centerX" secondItem="b44-lr-6Sl" secondAttribute="centerX" id="gVk-Rf-7iV"/>
+                            <constraint firstItem="nhs-iI-Idr" firstAttribute="centerY" secondItem="Dhd-fP-kPZ" secondAttribute="centerY" multiplier="0.6" id="h8D-f1-Z80"/>
                             <constraint firstItem="IYR-wF-cGN" firstAttribute="height" secondItem="b44-lr-6Sl" secondAttribute="height" id="kfP-fS-cvT"/>
                             <constraint firstItem="sMc-46-Lpy" firstAttribute="height" secondItem="nhs-iI-Idr" secondAttribute="height" id="q9g-NS-gdr"/>
                             <constraint firstItem="nhs-iI-Idr" firstAttribute="width" secondItem="WQY-0K-Y2R" secondAttribute="width" multiplier="0.8" id="qe7-Sk-ZhP"/>
@@ -237,6 +294,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="image3" width="1280" height="1707"/>
+        <image name="image1" width="2560" height="1707"/>
     </resources>
 </document>
