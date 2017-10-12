@@ -50,6 +50,23 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         if (validateInput()){
             // Login
+        
+            auth?.signIn(withEmail: emailField.text!, password: passwordField.text!, completion: { (user, error) in
+                if (error != nil){
+                    // Error
+                    print(error?.localizedDescription)
+                    return
+                }
+                user?.getIDToken(completion: { (token, error) in
+                    if (error != nil){
+                        print(error?.localizedDescription)
+                        return
+                    }
+                    //print(token)
+                    self.segue()
+                })
+                
+            })
         }
     }
     
@@ -145,6 +162,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
         
         return isValid
+    }
+    
+    func segue(){
+        performSegue(withIdentifier: "toFeed", sender: self)
     }
 
     /*

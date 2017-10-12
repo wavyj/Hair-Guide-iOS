@@ -8,6 +8,7 @@
 
 import UIKit
 import MaterialComponents
+import Firebase
 
 class AuthenticationViewController: UIViewController {
     
@@ -25,12 +26,11 @@ class AuthenticationViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
+        //TODO: Check if logged in
+        
+        
         // Setup Material Components
         setupMaterialComponents()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle{

@@ -61,7 +61,23 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
         // Input Validation
         if (validateInput()){
             // Create Account
-            
+            auth?.createUser(withEmail: emailField.text!, password: passwordField.text!, completion: { (user, error) in
+                if (error != nil){
+                    // Error
+                    print(error?.localizedDescription)
+                    return
+                }
+                
+                user?.getIDToken(completion: { (token, error) in
+                    if (error != nil){
+                        // Error
+                        print(error?.localizedDescription)
+                        return
+                    }
+                    //print(token)
+                    self.segue()
+                })
+            })
         }
     }
 
@@ -190,6 +206,10 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
         }
         
         return isValid
+    }
+    
+    func segue(){
+        performSegue(withIdentifier: "toFeed", sender: self)
     }
     
     /*

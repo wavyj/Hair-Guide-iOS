@@ -12,6 +12,7 @@
 		D01BB5A11F8EFAB200EBE6C6 /* ValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01BB5A01F8EFAB200EBE6C6 /* ValidationError.swift */; };
 		D01BB5A41F8F0E1200EBE6C6 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01BB5A31F8F0E1200EBE6C6 /* FeedViewController.swift */; };
 		D03D40EF1F8FB3C3007ACE22 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03D40EE1F8FB3C3007ACE22 /* NavigationViewController.swift */; };
+		D03D40F31F8FD249007ACE22 /* UserDefaultsUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03D40F21F8FD249007ACE22 /* UserDefaultsUtil.swift */; };
 		D05AAD791F8E60CD00716C74 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D05AAD781F8E60CD00716C74 /* GoogleService-Info.plist */; };
 		D05AAD7C1F8E639C00716C74 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05AAD7B1F8E639C00716C74 /* AuthenticationViewController.swift */; };
 		D05AAD801F8E91CD00716C74 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05AAD7F1F8E91CD00716C74 /* SignupViewController.swift */; };
@@ -29,6 +30,7 @@
 		D01BB5A01F8EFAB200EBE6C6 /* ValidationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationError.swift; sourceTree = "<group>"; };
 		D01BB5A31F8F0E1200EBE6C6 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		D03D40EE1F8FB3C3007ACE22 /* NavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
+		D03D40F21F8FD249007ACE22 /* UserDefaultsUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsUtil.swift; sourceTree = "<group>"; };
 		D05AAD781F8E60CD00716C74 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D05AAD7B1F8E639C00716C74 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 		D05AAD7F1F8E91CD00716C74 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 		D006D4DC1F8BCA8900BAFD24 /* Uitls */ = {
 			isa = PBXGroup;
 			children = (
+				D03D40F21F8FD249007ACE22 /* UserDefaultsUtil.swift */,
 			);
 			name = Uitls;
 			path = Main;
@@ -301,6 +304,7 @@
 				D05AAD7C1F8E639C00716C74 /* AuthenticationViewController.swift in Sources */,
 				D01BB5A41F8F0E1200EBE6C6 /* FeedViewController.swift in Sources */,
 				D03D40EF1F8FB3C3007ACE22 /* NavigationViewController.swift in Sources */,
+				D03D40F31F8FD249007ACE22 /* UserDefaultsUtil.swift in Sources */,
 				D078B5BE1F7C1A5F00A6F8C5 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
