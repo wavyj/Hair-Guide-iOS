@@ -9,7 +9,7 @@
 import UIKit
 import MaterialComponents
 
-class FeedViewController: UIViewController {
+class FeedViewController: MDCCollectionViewController {
     
     //MARK: - Outlets
     
