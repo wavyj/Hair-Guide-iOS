@@ -9,6 +9,7 @@
 import UIKit
 import MaterialComponents
 import Firebase
+import Validator
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
 
@@ -46,6 +47,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     //MARK: - Storyboard Actions
     func submitTapped(_ sender: UIButton){
         print("Submit Tapped")
+        
+        if (validateInput()){
+            // Login
+        }
     }
     
     @IBAction func backTapped(_ sender: UIBarButtonItem){
@@ -53,7 +58,19 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     //MARK: - Input Validation
-    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        switch textField.tag {
+        case 0:
+            validateEmail(textField)
+            break
+        case 1:
+            validateCharCount(textField)
+        default:
+            break
+        }
+        
+        return true
+    }
     
     //MARK: - Methods
     func setupMaterialComponents(){
@@ -79,6 +96,55 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         title = "Login"
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "back-arrow"), style: .plain, target: self, action: #selector(backTapped(_:)))
         appBar.addSubviewsToParent()
+    }
+    
+    func validateEmail(_ textField: UITextField) -> Bool{
+        // Email
+        let emailRule = ValidationRulePattern(pattern: EmailValidationPattern.standard, error: ValidationError(message: "Invalid Email"))
+        let result = emailField.validate(rule: emailRule)
+        switch result{
+        case .valid:
+            textFieldControllers[textField.tag].setErrorText(nil, errorAccessibilityValue: nil)
+            return true
+        case .invalid( _):
+            textFieldControllers[textField.tag].setErrorText("Invalid Email", errorAccessibilityValue: "Invalid Email")
+            return false
+        }
+    }
+    
+    func validateCharCount(_ textField: UITextField) -> Bool{
+        // Character Count
+        let charCountRule = ValidationRuleLength(min: 6, max: 14, lengthType: .characters, error: ValidationError(message: "Wrong amount of characters"))
+        
+        let r = textField.validate(rule: charCountRule)
+        switch r{
+        case .valid:
+            textFieldControllers[textField.tag].setErrorText(nil, errorAccessibilityValue: nil)
+            return true
+        case .invalid( _):
+            
+            textFieldControllers[textField.tag].setErrorText("Requires Between 6 and 14 Characters", errorAccessibilityValue: "Requires Between 6 and 14 Characters")
+            return false
+        }
+    }
+    
+    func validateInput() -> Bool{
+        var isValid = true
+        var tempBool = true
+        
+        // Email
+        tempBool = validateEmail(emailField)
+        if (tempBool == false){
+            isValid = tempBool
+        }
+        
+        // Character Count
+        tempBool = validateCharCount(passwordField)
+        if (tempBool == false){
+            isValid = tempBool
+        }
+        
+        return isValid
     }
 
     /*
