@@ -25,27 +25,12 @@ class AuthenticationViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
+        // Setup Material Components
+        setupMaterialComponents()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        // Create Material Components Buttons
-        loginBtn.setTitleColor(MDCPalette.blue.tint400, for: .normal)
-        loginBtn.setTitle("Login", for: .normal)
-        loginBtn.addTarget(self, action: #selector(loginTapped(_:)) , for: .touchUpInside)
         
-        signupBtn.setTitleColor(MDCPalette.blue.tint400, for: .normal)
-        signupBtn.setTitle("Create Account", for: .normal)
-        signupBtn.addTarget(self, action: #selector(signupTapped(_:)) , for: .touchUpInside)
-        
-        facebookBtn.setTitleColor(MDCPalette.grey.tint50, for: .normal)
-        facebookBtn.setTitle("Log In With Facebook", for: .normal)
-        facebookBtn.setBackgroundColor(MDCPalette.blue.tint800)
-        facebookBtn.addTarget(self, action: #selector(facebookTapped(_:)) , for: .touchUpInside)
-        
-        instagramBtn.setTitleColor(MDCPalette.blue.tint400, for: .normal)
-        instagramBtn.setTitle("Log In With Instagram", for: .normal)
-        instagramBtn.setBackgroundColor(UIColor.white)
-        instagramBtn.addTarget(self, action: #selector(instagramTapped(_sender:)), for: .touchUpInside)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle{
@@ -61,6 +46,7 @@ class AuthenticationViewController: UIViewController {
     //MARK: - Storyboard Actions
     func loginTapped(_ sender: UIButton){
         print("Login Tapped")
+        performSegue(withIdentifier: "toLogin", sender: sender)
     }
     
     func signupTapped(_ sender: UIButton){
@@ -79,6 +65,28 @@ class AuthenticationViewController: UIViewController {
     
     @IBAction func unwind(_ sender: UIStoryboardSegue){
         
+    }
+    
+    //MARK: - Methods
+    func setupMaterialComponents(){
+        // Create Material Components Buttons
+        loginBtn.setTitleColor(MDCPalette.blue.tint400, for: .normal)
+        loginBtn.setTitle("Login", for: .normal)
+        loginBtn.addTarget(self, action: #selector(loginTapped(_:)) , for: .touchUpInside)
+        
+        signupBtn.setTitleColor(MDCPalette.blue.tint400, for: .normal)
+        signupBtn.setTitle("Create Account", for: .normal)
+        signupBtn.addTarget(self, action: #selector(signupTapped(_:)) , for: .touchUpInside)
+        
+        facebookBtn.setTitleColor(MDCPalette.grey.tint50, for: .normal)
+        facebookBtn.setTitle("Log In With Facebook", for: .normal)
+        facebookBtn.setBackgroundColor(MDCPalette.blue.tint800)
+        facebookBtn.addTarget(self, action: #selector(facebookTapped(_:)) , for: .touchUpInside)
+        
+        instagramBtn.setTitleColor(MDCPalette.blue.tint400, for: .normal)
+        instagramBtn.setTitle("Log In With Instagram", for: .normal)
+        instagramBtn.setBackgroundColor(UIColor.white)
+        instagramBtn.addTarget(self, action: #selector(instagramTapped(_sender:)), for: .touchUpInside)
     }
 
     /*

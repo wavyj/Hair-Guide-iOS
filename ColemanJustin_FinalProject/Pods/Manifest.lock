@@ -382,12 +382,14 @@ PODS:
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
   - Protobuf (3.4.0)
+  - Validator (3.0)
 
 DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Firestore
   - MaterialComponents
+  - Validator
 
 SPEC CHECKSUMS:
   BoringSSL: 19083b821ef3ae0f758fae15482e183003b1e265
@@ -411,7 +413,8 @@ SPEC CHECKSUMS:
   MotionTransitioning: caaa488e0469d93f004793b96a2ed04447af808d
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   Protobuf: 03eef2ee0b674770735cf79d9c4d3659cf6908e8
+  Validator: 7d9828daffabc757604603052e407f208fa9b6d5
 
-PODFILE CHECKSUM: f5e5bffbbf6852cc9b050b1981b4d2824561f663
+PODFILE CHECKSUM: 103b0664052df51d5a65f4551e5d79700a54e34e
 
 COCOAPODS: 1.2.0
