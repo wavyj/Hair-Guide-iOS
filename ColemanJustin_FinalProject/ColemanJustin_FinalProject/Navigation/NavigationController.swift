@@ -9,7 +9,7 @@
 import UIKit
 import MaterialComponents
 
-class NavigationViewController: UINavigationController {
+class NavigationController: UINavigationController {
     
     //MARK: - Outlets
     @IBOutlet var buttonBar: MDCButtonBar!
@@ -24,6 +24,7 @@ class NavigationViewController: UINavigationController {
 
         // Do any additional setup after loading the view.
         self.toolbar.addSubview(buttonBar)
+        
         buttonBar.frame = toolbar.bounds
         
         setupMaterialComponents()
@@ -37,31 +38,39 @@ class NavigationViewController: UINavigationController {
     
     //MARK: - Storyboard Actions
     func homeTapped(_ sender: UIBarButtonItem){
-        title = "Feed"
+        //title = "Feed"
         resetTints()
         items[0].tintColor = onColor
         resetColor()
+        
+        performSegue(withIdentifier: "toFeed", sender: self)
     }
     func searchTapped(_ sender: UIBarButtonItem){
-        title = "Search"
+        //title = "Search"
         resetTints()
         items[1].tintColor = onColor
         resetColor()
+        
+        performSegue(withIdentifier: "toSearch", sender: self)
     }
     func cameraTapped(_ sender: UIBarButtonItem){
         
     }
     func guidesTapped(_ sender: UIBarButtonItem){
-        title = "Guides"
+        //title = "Guides"
         resetTints()
         items[2].tintColor = onColor
         resetColor()
+        
+        performSegue(withIdentifier: "toGuides", sender: self)
     }
     func profileTapped(_ sender: UIBarButtonItem){
-        title = "Profile"
+        //title = "Profile"
         resetTints()
         items[3].tintColor = onColor
         resetColor()
+        
+        performSegue(withIdentifier: "toProfile", sender: self)
     }
     
     
