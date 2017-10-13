@@ -9,13 +9,15 @@
 import UIKit
 import MaterialComponents
 
-class FeedViewController: UIViewController {
+class FeedViewController: MDCCollectionViewController {
     
     //MARK: - Outlets
-
+    @IBOutlet var customCollectionView: UICollectionView!
+    
     
     //MARK: - Variables
     var posts = [Post]()
+    var appBarHeight: CGFloat? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +40,11 @@ class FeedViewController: UIViewController {
     }
     
     //MARK: - Collection View
-    /*override func numberOfSections(in collectionView: UICollectionView) -> Int {
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return posts.count
     }
     
@@ -47,19 +53,31 @@ class FeedViewController: UIViewController {
         if let cell = cell as? PostCell{
             let selected = posts[indexPath.row]
             cell.image.image = selected.mImage
-            cell.likesLabel.text = selected.mLikes?.description
-            cell.commentsLabel.text = selected.mComments?.description
-            cell.userName.text = "Curlygurl11"
         }
         return cell
-    }*/
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.bounds.width / 1 - 24, height: collectionView.bounds.height / 2)
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 16
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: appBarHeight!, left: 0, bottom: 0, right: 0)
+    }
     
     //MARK: - Methods
     func setupMaterialComponents(){
         
         // Collection View
-        //self.collectionView = customCollectionView
-        //self.collectionView?.register(UINib(nibName: "PostCell", bundle: nil), forCellWithReuseIdentifier: "cell")
+        self.collectionView = customCollectionView
+        self.collectionView?.backgroundColor = UIColor.white
+        self.styler.cellStyle = .card
+        
+        appBarHeight = self.view.bounds.height * 0.1 + 6
         
         // AppBar Setup
         let appBar = MDCAppBar()

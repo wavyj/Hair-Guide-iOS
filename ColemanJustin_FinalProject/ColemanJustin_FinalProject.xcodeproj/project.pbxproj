@@ -15,7 +15,6 @@
 		D03D40F31F8FD249007ACE22 /* UserDefaultsUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03D40F21F8FD249007ACE22 /* UserDefaultsUtil.swift */; };
 		D03D40F61F8FD8DD007ACE22 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03D40F51F8FD8DD007ACE22 /* Post.swift */; };
 		D03D40FC1F8FDCC7007ACE22 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03D40FA1F8FDCC7007ACE22 /* PostCell.swift */; };
-		D03D40FD1F8FDCC7007ACE22 /* PostCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D03D40FB1F8FDCC7007ACE22 /* PostCell.xib */; };
 		D050F9721F9110C00008370E /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D050F9711F9110C00008370E /* SearchViewController.swift */; };
 		D050F9741F91114F0008370E /* GuidesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D050F9731F91114F0008370E /* GuidesViewController.swift */; };
 		D050F9771F9111800008370E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D050F9761F9111800008370E /* ProfileViewController.swift */; };
@@ -40,7 +39,6 @@
 		D03D40F21F8FD249007ACE22 /* UserDefaultsUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsUtil.swift; sourceTree = "<group>"; };
 		D03D40F51F8FD8DD007ACE22 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		D03D40FA1F8FDCC7007ACE22 /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
-		D03D40FB1F8FDCC7007ACE22 /* PostCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostCell.xib; sourceTree = "<group>"; };
 		D050F9711F9110C00008370E /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		D050F9731F91114F0008370E /* GuidesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuidesViewController.swift; sourceTree = "<group>"; };
 		D050F9761F9111800008370E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -135,7 +133,6 @@
 			isa = PBXGroup;
 			children = (
 				D03D40FA1F8FDCC7007ACE22 /* PostCell.swift */,
-				D03D40FB1F8FDCC7007ACE22 /* PostCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -299,7 +296,6 @@
 			files = (
 				D078B5C81F7C1A5F00A6F8C5 /* LaunchScreen.storyboard in Resources */,
 				D078B5C51F7C1A5F00A6F8C5 /* Assets.xcassets in Resources */,
-				D03D40FD1F8FDCC7007ACE22 /* PostCell.xib in Resources */,
 				D05AAD791F8E60CD00716C74 /* GoogleService-Info.plist in Resources */,
 				D078B5C31F7C1A5F00A6F8C5 /* Main.storyboard in Resources */,
 			);

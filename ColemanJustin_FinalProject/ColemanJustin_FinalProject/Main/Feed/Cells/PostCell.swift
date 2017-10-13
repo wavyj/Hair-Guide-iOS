@@ -7,20 +7,12 @@
 //
 
 import UIKit
+import MaterialComponents
 
-class PostCell: UICollectionViewCell {
+class PostCell: MDCCollectionViewCell{
     
     //MARK: - Outlets
     @IBOutlet weak var image: UIImageView!
-    @IBOutlet weak var userName: UILabel!
-    @IBOutlet weak var likesBtn: UIImageView!
-    @IBOutlet weak var commentsBtn: UIImageView!
-    @IBOutlet weak var likesLabel: UILabel!
-    @IBOutlet weak var commentsLabel: UILabel!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
 
+    
 }
