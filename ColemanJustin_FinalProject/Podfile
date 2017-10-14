@@ -12,5 +12,7 @@ pod 'Firebase/Auth'
 pod ’Firebase/Firestore'
 pod 'MaterialComponents'
 pod 'Validator'
+pod 'GreedoLayout'
+pod 'Fusuma'
 
 end

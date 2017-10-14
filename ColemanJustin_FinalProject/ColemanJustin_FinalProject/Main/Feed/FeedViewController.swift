@@ -8,8 +8,9 @@
 
 import UIKit
 import MaterialComponents
+import Fusuma
 
-class FeedViewController: MDCCollectionViewController {
+class FeedViewController: MDCCollectionViewController, FusumaDelegate {
     
     //MARK: - Outlets
     @IBOutlet var customCollectionView: UICollectionView!
@@ -17,7 +18,10 @@ class FeedViewController: MDCCollectionViewController {
     
     //MARK: - Variables
     var posts = [Post]()
+    var selectedPost: Post? = nil
     var appBarHeight: CGFloat? = nil
+    var transition: MDCMaskedTransition? = nil
+    var selectedImage: UIImage? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +40,13 @@ class FeedViewController: MDCCollectionViewController {
     
     //MARK: - Storyboard Actions
     func cameraTapped(_ sender: UIBarButtonItem){
-        print("Camera Tapped")
+        let fusama = FusumaViewController()
+        fusama.delegate = self
+        present(fusama, animated: true, completion: nil)
+    }
+    
+    @IBAction func unwind(_ sender: UIStoryboardSegue){
+        
     }
     
     //MARK: - Collection View
@@ -57,6 +67,16 @@ class FeedViewController: MDCCollectionViewController {
         return cell
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! PostCell
+        let v = cell.image
+        //transition = MDCMaskedTransition(sourceView: v!)
+        
+        selectedPost = posts[indexPath.row]
+        
+        performSegue(withIdentifier: "toDetails", sender: self)
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.bounds.width / 1 - 24, height: collectionView.bounds.height / 2)
     }
@@ -69,6 +89,25 @@ class FeedViewController: MDCCollectionViewController {
         return UIEdgeInsets(top: appBarHeight!, left: 0, bottom: 0, right: 0)
     }
     
+    //MARK: - Fusama Delegate Callbacks
+    func fusumaImageSelected(_ image: UIImage, source: FusumaMode) {
+        selectedImage = image
+        performSegue(withIdentifier: "toNewPost", sender: self)
+    }
+    
+    func fusumaMultipleImageSelected(_ images: [UIImage], source: FusumaMode) {
+        // Do Nothing
+    }
+    
+    func fusumaVideoCompleted(withFileURL fileURL: URL) {
+        // Do Nothing
+    }
+    
+    func fusumaCameraRollUnauthorized() {
+        // Display Error
+        
+    }
+    
     //MARK: - Methods
     func setupMaterialComponents(){
         
@@ -77,7 +116,10 @@ class FeedViewController: MDCCollectionViewController {
         self.collectionView?.backgroundColor = UIColor.white
         self.styler.cellStyle = .card
         
-        appBarHeight = self.view.bounds.height * 0.1 + 6
+        appBarHeight = self.view.bounds.height * 0.1
+        
+        // Transition
+        
         
         // AppBar Setup
         let appBar = MDCAppBar()
@@ -100,14 +142,23 @@ class FeedViewController: MDCCollectionViewController {
     }
     
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
+        if ((segue.destination as? PostDetailsViewController) != nil){
+            let vc = segue.destination as! PostDetailsViewController
+            vc.currentPost = selectedPost
+        }
+        
+        if ((segue.destination as? NewPostViewController) != nil){
+            let vc = segue.destination as! NewPostViewController
+            vc.currentImage = selectedImage
+        }
         // Pass the selected object to the new view controller.
     }
-    */
+ 
 
 }

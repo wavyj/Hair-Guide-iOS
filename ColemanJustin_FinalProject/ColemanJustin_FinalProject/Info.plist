@@ -45,5 +45,9 @@
 	<true/>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Access Your Camera to Capture Images</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Access Your Photos to Add Image to Post</string>
 </dict>
 </plist>

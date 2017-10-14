@@ -13,6 +13,7 @@ class PostCell: MDCCollectionViewCell{
     
     //MARK: - Outlets
     @IBOutlet weak var image: UIImageView!
-
+    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
+    
     
 }
