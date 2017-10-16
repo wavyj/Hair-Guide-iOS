@@ -80,12 +80,11 @@ class AuthenticationViewController: UIViewController {
         
         facebookBtn.setTitleColor(MDCPalette.grey.tint50, for: .normal)
         facebookBtn.setTitle("Log In With Facebook", for: .normal)
-        facebookBtn.setBackgroundColor(MDCPalette.blue.tint800)
+        facebookBtn.setBackgroundColor(MDCPalette.blue.tint800, for: .normal)
         facebookBtn.addTarget(self, action: #selector(facebookTapped(_:)) , for: .touchUpInside)
         
         instagramBtn.setTitleColor(MDCPalette.blue.tint400, for: .normal)
         instagramBtn.setTitle("Log In With Instagram", for: .normal)
-        instagramBtn.setBackgroundColor(UIColor.white)
         instagramBtn.addTarget(self, action: #selector(instagramTapped(_sender:)), for: .touchUpInside)
     }
 

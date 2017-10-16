@@ -9,6 +9,7 @@
 import UIKit
 import MaterialComponents
 import Fusuma
+import IGListKit
 
 class FeedViewController: MDCCollectionViewController, FusumaDelegate {
     
@@ -22,6 +23,7 @@ class FeedViewController: MDCCollectionViewController, FusumaDelegate {
     var appBarHeight: CGFloat? = nil
     var transition: MDCMaskedTransition? = nil
     var selectedImage: UIImage? = nil
+    var addedPost: Post? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +42,7 @@ class FeedViewController: MDCCollectionViewController, FusumaDelegate {
     
     //MARK: - Storyboard Actions
     func cameraTapped(_ sender: UIBarButtonItem){
+        addedPost = nil
         let fusama = FusumaViewController()
         fusama.delegate = self
         present(fusama, animated: true, completion: nil)
@@ -47,6 +50,13 @@ class FeedViewController: MDCCollectionViewController, FusumaDelegate {
     
     @IBAction func unwind(_ sender: UIStoryboardSegue){
         
+    }
+    
+    @IBAction func newPost(_ sender: UIStoryboardSegue){
+        if addedPost != nil{
+            posts.append(addedPost!)
+            collectionView?.reloadData()
+        }
     }
     
     //MARK: - Collection View

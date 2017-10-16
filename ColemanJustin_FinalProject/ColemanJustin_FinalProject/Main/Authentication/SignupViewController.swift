@@ -18,14 +18,12 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var usernameField: MDCTextField!
     @IBOutlet weak var passwordField: MDCTextField!
     @IBOutlet weak var confirmPassField: MDCTextField!
-    @IBOutlet weak var enterBtn: MDCFlatButton!
-    
+    @IBOutlet weak var enterBtn: MDCRaisedButton!
     
     //MARK: - Variables
     var auth: Auth? = nil
     var handler: AuthStateDidChangeListenerHandle? = nil
     var textFieldControllers = [MDCTextInputControllerDefault]()
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,8 +83,9 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
     func setupMaterialComponents(){
         
         // Material Components Setup
-        enterBtn.setTitleColor(MDCPalette.blue.tint500, for: .normal)
+        enterBtn.setTitleColor(MDCPalette.grey.tint100, for: .normal)
         enterBtn.setTitle("Submit", for: .normal)
+        enterBtn.setBackgroundColor(MDCPalette.blue.tint500, for: .normal)
         enterBtn.addTarget(self, action: #selector(submitTapped(_:)), for: .touchUpInside)
         
         for i in [emailField, usernameField, passwordField, confirmPassField]{

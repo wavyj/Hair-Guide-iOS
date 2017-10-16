@@ -16,7 +16,7 @@ class NewPostViewController: UIViewController, UICollectionViewDelegate, UIColle
     @IBOutlet weak var postImage: UIImageView!
     @IBOutlet weak var captionField: MDCTextField!
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var submitBtn: UIButton!
+    @IBOutlet weak var submitBtn: MDCRaisedButton!
     
     //MARK: - Variables
     var currentImage: UIImage? = nil
@@ -38,11 +38,11 @@ class NewPostViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     //MARK: - Storyboard Actions
     func backTapped(_ sender: UIBarButtonItem){
-        dismiss(animated: true, completion: nil)
+        performSegue(withIdentifier: "unwindFeed", sender: self)
     }
     
     func submitTapped(_ sender: UIButton){
-        
+        performSegue(withIdentifier: "unwindNewPost", sender: self)
     }
     
     //MARK: - CollectionView
@@ -63,8 +63,9 @@ class NewPostViewController: UIViewController, UICollectionViewDelegate, UIColle
     //MARK: - Methods
     func setupMaterialComponents(){
         
-        submitBtn.backgroundColor = MDCPalette.blue.tint500
+        submitBtn.setBackgroundColor(MDCPalette.blue.tint500, for: .normal)
         submitBtn.setTitle("Submit", for: .normal)
+        submitBtn.setTitleColor(UIColor.white, for: .normal)
         submitBtn.addTarget(self, action: #selector(submitTapped(_:)), for: .touchUpInside)
         
         captionField.delegate = self
@@ -82,14 +83,19 @@ class NewPostViewController: UIViewController, UICollectionViewDelegate, UIColle
         appBar.addSubviewsToParent()
     }
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        if segue.destination as? FeedViewController != nil{
+            let vc = segue.destination as! FeedViewController
+            vc.addedPost = Post(caption: captionField!.text!, image: currentImage!, likes: 20, comments: 5)
+        }
     }
-    */
+ 
 
 }

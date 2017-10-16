@@ -91,8 +91,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     //MARK: - Methods
     func setupMaterialComponents(){
-        submitBtn.setTitleColor(MDCPalette.blue.tint500, for: .normal)
+        submitBtn.setTitleColor(MDCPalette.grey.tint100, for: .normal)
         submitBtn.setTitle("Submit", for: .normal)
+        submitBtn.setBackgroundColor(MDCPalette.blue.tint500, for: .normal)
         submitBtn.addTarget(self, action: #selector(submitTapped(_:)), for: .touchUpInside)
         
         for i in [emailField, passwordField]{

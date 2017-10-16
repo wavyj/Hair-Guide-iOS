@@ -9,7 +9,21 @@
 import UIKit
 import MaterialComponents
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    //MARK: - Outlets
+    @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var postsLabel: UILabel!
+    @IBOutlet weak var followingLabel: UILabel!
+    @IBOutlet weak var followersLabel: UILabel!
+    @IBOutlet weak var editProfileBtn: MDCRaisedButton!
+    @IBOutlet weak var bioView: UIView!
+    @IBOutlet weak var bioText: UITextView!
+    @IBOutlet weak var linkBtn: MDCFlatButton!
+    @IBOutlet weak var buttonBar: MDCButtonBar!
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    //MARK: - Variables
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,6 +32,8 @@ class ProfileViewController: UIViewController {
         
         self.navigationItem.setHidesBackButton(true, animated: false)
         setupMaterialComponents()
+        
+        profileImage.layer.cornerRadius = profileImage.frame.size.width / 2
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,15 +46,40 @@ class ProfileViewController: UIViewController {
         
     }
     
+    //MARK: - CollectionView Callbacks
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        
+        return cell
+    }
+    
     //MARK: - Methods
     func setupMaterialComponents(){
+        
+        // Buttons
+        editProfileBtn.setTitle("Edit Profile", for: .normal)
+        editProfileBtn.tintColor = MDCPalette.blue.tint500
+        
+        linkBtn.setTitle("Link Here", for: .normal)
+        linkBtn.setTitleColor(MDCPalette.blue.tint500, for: .normal)
+        
+        // ButtonBar
+        //buttonBar.backgroundColor = MDCPalette.grey.tint100
         
         // AppBar Setup
         let appBar = MDCAppBar()
         self.addChildViewController(appBar.headerViewController)
         appBar.headerViewController.headerView.backgroundColor = MDCPalette.grey.tint100
         appBar.navigationBar.tintColor = MDCPalette.blueGrey.tint900
-        title = "Profile"
+        title = "@Curlygurl11"
         let settingsAction = UIBarButtonItem(image: UIImage(named: "settings")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(settingsTapped(_:)))
         settingsAction.tintColor = UIColor.black
         navigationItem.rightBarButtonItem = settingsAction

@@ -9,7 +9,7 @@
 import UIKit
 import MaterialComponents
 
-class GuidesViewController: UIViewController {
+class GuidesViewController: UIViewController, UICollectionViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +28,21 @@ class GuidesViewController: UIViewController {
     //MARK: - Storyboard Actions
     func addTapped(_ sender: UIBarButtonItem){
         
+    }
+    
+    //MARK: - CollectionView Callbacks
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        
+        return cell
     }
     
     //MARK: - Methods
