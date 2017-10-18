@@ -14,6 +14,9 @@ PODS:
   - Firebase/Firestore (4.3.0):
     - Firebase/Core
     - FirebaseFirestore (= 0.8.0)
+  - Firebase/Storage (4.3.0):
+    - Firebase/Core
+    - FirebaseStorage (= 2.0.2)
   - FirebaseAnalytics (4.0.4):
     - FirebaseCore (~> 4.0)
     - FirebaseInstanceID (~> 2.0)
@@ -34,6 +37,10 @@ PODS:
     - leveldb-library (~> 1.18)
     - Protobuf (~> 3.1)
   - FirebaseInstanceID (2.0.4)
+  - FirebaseStorage (2.0.2):
+    - FirebaseAnalytics (~> 4.0)
+    - FirebaseCore (~> 4.0)
+    - GTMSessionFetcher/Core (~> 1.1)
   - Fusuma (1.2.0)
   - GoogleToolboxForMac/DebugUtils (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
@@ -389,16 +396,19 @@ PODS:
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
   - Protobuf (3.4.0)
+  - SJFluidSegmentedControl (1.1.2)
   - Validator (3.0)
 
 DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Firestore
+  - Firebase/Storage
   - Fusuma
   - GreedoLayout
   - IGListKit (~> 3.0)
   - MaterialComponents
+  - SJFluidSegmentedControl
   - Validator
 
 SPEC CHECKSUMS:
@@ -409,6 +419,7 @@ SPEC CHECKSUMS:
   FirebaseCore: 69b1a5ac5f857ba6d5fd9d5fe794f4786dd5e579
   FirebaseFirestore: 8e2fd99a621ae6fc6acfac3bdea824fe9d9c128d
   FirebaseInstanceID: 70c2b877e9338971b2429ea5a4293df6961aa44e
+  FirebaseStorage: 0cca42d9b889a0227c3a50121f45a4469fc9eb27
   Fusuma: e8158ad6650507455c9898c22bc01583fbc86d8e
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GreedoLayout: b1a1adc6ed5f281353225e3eb21d18cedee8e513
@@ -426,8 +437,9 @@ SPEC CHECKSUMS:
   MotionTransitioning: caaa488e0469d93f004793b96a2ed04447af808d
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   Protobuf: 03eef2ee0b674770735cf79d9c4d3659cf6908e8
+  SJFluidSegmentedControl: efd26ea5f0832c715e2750314a2dc0cc81e39ae5
   Validator: 7d9828daffabc757604603052e407f208fa9b6d5
 
-PODFILE CHECKSUM: 3bec8eac50c53017c67413ee19a3aa69c3987f7c
+PODFILE CHECKSUM: 0696f3e1e00d2a1c86e84f496853f436b1d7d38d
 
 COCOAPODS: 1.2.0

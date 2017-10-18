@@ -13,7 +13,26 @@ class PostCell: MDCCollectionViewCell{
     
     //MARK: - Outlets
     @IBOutlet weak var image: UIImageView!
-    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var likeBtn: MDCFlatButton!
+    @IBOutlet weak var commentBtn: MDCFlatButton!
+    @IBOutlet weak var captionText: UITextView!
+    @IBOutlet weak var authorText: UILabel!
+    @IBOutlet weak var content: UIView!
+    @IBOutlet weak var profileImg: UIImageView!
+    @IBOutlet weak var viewCommentsBtn: MDCFlatButton!
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var likesLabel: UILabel!
     
+    func applyVisuals(){
+        // Shadow
+        self.clipsToBounds = false
+        self.layer.shadowOffset = CGSize(width: 1, height: 1)
+        self.layer.shadowOpacity = 0.3
+        self.layer.shadowRadius = 3
+        
+        // Rounded Corners
+        contentView.layer.cornerRadius = 6
+        contentView.layer.masksToBounds = true
+    }
     
 }

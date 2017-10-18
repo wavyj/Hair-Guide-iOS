@@ -66,6 +66,13 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
                     return
                 }
                 
+                let u = User(email: self.emailField.text!, username: self.usernameField.text!, bio: "", profilePicUrl: "", gender: "")
+                
+                UserDefaultsUtil().saveUserData(u)
+                
+                // Save User to database
+                DatabaseUtil().createUser(u)
+                
                 user?.getIDToken(completion: { (token, error) in
                     if (error != nil){
                         // Error

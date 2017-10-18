@@ -10,10 +10,12 @@ target 'ColemanJustin_FinalProject' do
 pod 'Firebase/Core'
 pod 'Firebase/Auth'
 pod ’Firebase/Firestore'
+pod 'Firebase/Storage'
 pod 'MaterialComponents'
 pod 'Validator'
 pod 'GreedoLayout'
 pod 'Fusuma'
 pod 'IGListKit', '~> 3.0'
+pod 'SJFluidSegmentedControl'
 
 end

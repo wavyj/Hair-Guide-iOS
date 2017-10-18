@@ -14,11 +14,19 @@ class Post{
     let mImage: UIImage?
     let mLikes: Int?
     let mComments: Int?
+    var mImageUrl: String = ""
     
     init(caption: String, image: UIImage, likes: Int, comments: Int){
         mCaption = caption
         mImage = image
         mLikes = likes
         mComments = comments
+    }
+    
+    func setImageUrl(_ imageURl: String){
+        mImageUrl = imageURl
+        
+        // Save to Database
+        DatabaseUtil().createPost(self)
     }
 }

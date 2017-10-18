@@ -15,12 +15,14 @@ class NewPostViewController: UIViewController, UICollectionViewDelegate, UIColle
     //MARK: - Outlets
     @IBOutlet weak var postImage: UIImageView!
     @IBOutlet weak var captionField: MDCTextField!
-    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var submitBtn: MDCRaisedButton!
+    @IBOutlet weak var tagsView: UICollectionView!
     
     //MARK: - Variables
+    var newPost: Post? = nil
     var currentImage: UIImage? = nil
     var textViewController: MDCTextInputController? = nil
+    var tags: [String] = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,22 +44,46 @@ class NewPostViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     func submitTapped(_ sender: UIButton){
+        // Create Post
+        newPost = Post(caption: captionField!.text!, image: currentImage!, likes: 20, comments: 5)
+        
+        // Upload Image
+        CloudStorageUtil().saveImage((newPost?.mImage)!, newPost!)
+
         performSegue(withIdentifier: "unwindNewPost", sender: self)
+    }
+    
+    func addTapped(_ sender: MDCRaisedButton){
+        tags.append("Curly")
+        tagsView.reloadData()
     }
     
     //MARK: - CollectionView
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
-    }
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
+    }
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return tags.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
         
-        return cell
+        if indexPath.section == 0{
+            // Add Button
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "addCell", for: indexPath) as! AddTagCell
+            cell.addBtn.setBackgroundColor(MDCPalette.grey.tint300, for: .normal)
+            cell.addBtn.addTarget(self, action: #selector(addTapped(_:)), for: .touchUpInside)
+            cell.addBtn.setImage(UIImage(named: "add")?.withRenderingMode(.alwaysTemplate), for: .normal)
+            cell.addBtn.tintColor = UIColor.white
+            cell.addBtn.setBackgroundColor(MDCPalette.blue.tint500, for: .normal)
+            cell.addBtn.setTitle("", for: .normal)
+            return cell
+            
+        } else{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! TagCell
+            cell.tagText.text = tags[indexPath.row]
+            return cell
+        }
     }
     
     //MARK: - Methods
@@ -93,7 +119,7 @@ class NewPostViewController: UIViewController, UICollectionViewDelegate, UIColle
         
         if segue.destination as? FeedViewController != nil{
             let vc = segue.destination as! FeedViewController
-            vc.addedPost = Post(caption: captionField!.text!, image: currentImage!, likes: 20, comments: 5)
+            vc.addedPost = newPost
         }
     }
  

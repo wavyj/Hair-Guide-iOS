@@ -11,11 +11,9 @@ import MaterialComponents
 import Fusuma
 import IGListKit
 
-class FeedViewController: MDCCollectionViewController, FusumaDelegate {
+class FeedViewController: UICollectionViewController, FusumaDelegate, UICollectionViewDelegateFlowLayout {
     
     //MARK: - Outlets
-    @IBOutlet var customCollectionView: UICollectionView!
-    
     
     //MARK: - Variables
     var posts = [Post]()
@@ -33,6 +31,7 @@ class FeedViewController: MDCCollectionViewController, FusumaDelegate {
         self.navigationItem.setHidesBackButton(true, animated: false)
         setupMaterialComponents()
         createPosts()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -73,6 +72,15 @@ class FeedViewController: MDCCollectionViewController, FusumaDelegate {
         if let cell = cell as? PostCell{
             let selected = posts[indexPath.row]
             cell.image.image = selected.mImage
+            cell.clipsToBounds = false
+            cell.likeBtn.setImage(UIImage(named: "like")?.withRenderingMode(.alwaysTemplate), for: .normal)
+            cell.likeBtn.tintColor = MDCPalette.grey.tint400
+            cell.commentBtn.setImage(UIImage(named: "comment")?.withRenderingMode(.alwaysTemplate), for: .normal)
+            cell.commentBtn.tintColor = MDCPalette.grey.tint400
+            cell.profileImg.layer.cornerRadius = cell.profileImg.frame.size.width / 2
+            //cell.viewCommentsBtn.setTitle("View All 5 Comments", for: .normal)
+            //cell.likesLabel.text = "20 Likes"
+            //cell.applyVisuals()
         }
         return cell
     }
@@ -84,19 +92,11 @@ class FeedViewController: MDCCollectionViewController, FusumaDelegate {
         
         selectedPost = posts[indexPath.row]
         
-        performSegue(withIdentifier: "toDetails", sender: self)
+        performSegue(withIdentifier: "toSelectedProfile", sender: self)
     }
     
-    override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.width / 1 - 24, height: collectionView.bounds.height / 2)
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 16
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: appBarHeight!, left: 0, bottom: 0, right: 0)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
+        return CGSize(width: self.view.bounds.width, height: (self.collectionView?.bounds.height)! - 100)
     }
     
     //MARK: - Fusama Delegate Callbacks
@@ -121,15 +121,7 @@ class FeedViewController: MDCCollectionViewController, FusumaDelegate {
     //MARK: - Methods
     func setupMaterialComponents(){
         
-        // Collection View
-        self.collectionView = customCollectionView
-        self.collectionView?.backgroundColor = UIColor.white
-        self.styler.cellStyle = .card
-        
         appBarHeight = self.view.bounds.height * 0.1
-        
-        // Transition
-        
         
         // AppBar Setup
         let appBar = MDCAppBar()

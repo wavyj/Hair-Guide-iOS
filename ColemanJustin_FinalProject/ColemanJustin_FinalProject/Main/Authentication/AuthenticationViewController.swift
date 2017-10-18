@@ -27,7 +27,9 @@ class AuthenticationViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         //TODO: Check if logged in
-        
+        if UserDefaultsUtil().loadReference() != nil{
+            performSegue(withIdentifier: "toFeed", sender: self)
+        }
         
         // Setup Material Components
         setupMaterialComponents()

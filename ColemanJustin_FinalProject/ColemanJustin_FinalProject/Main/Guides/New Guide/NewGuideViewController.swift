@@ -7,13 +7,22 @@
 //
 
 import UIKit
+import MaterialComponents
 
-class NewGuideViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class NewGuideViewController: UIViewController {
+    
+    //MARK: - Outlets
+    @IBOutlet weak var buttonBar: MDCButtonBar!
+    @IBOutlet weak var inputField: UITextView!
 
+    //MARK: - Variables
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.navigationController?.setToolbarHidden(true, animated: true)
+        setupMaterialComponents()
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,22 +30,71 @@ class NewGuideViewController: UIViewController, UICollectionViewDelegate, UIColl
         // Dispose of any resources that can be recreated.
     }
     
-    //MARK: - CollectionView Callbacks
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+    //MARK: - Storyboard Actions
+    func textTapped(_ sender: UIBarButtonItem){
         
-        return cell
+    }
+    func orderedTapped(_ sender: UIBarButtonItem){
+        
+    }
+    func unOrderedTapped(_ sender: UIBarButtonItem){
+        
+    }
+    func imageTapped(_ sender: UIBarButtonItem){
+        
+    }
+    func productTapped(_ sender: UIBarButtonItem){
+        
+    }
+    func doneTapped(_ sender: UIBarButtonItem){
+        
     }
     
     
+    //MARK: - Methods
+    func setupMaterialComponents(){
+        
+        // ButtonBar
+        buttonBar.backgroundColor = MDCPalette.blue.tint500
+        
+        let textAction = UIBarButtonItem(title: "", style: .plain, target: self, action: #selector(textTapped(_:)))
+        textAction.image = UIImage(named: "text")?.withRenderingMode(.alwaysTemplate)
+        textAction.tintColor = UIColor.white
+        textAction.width = view.bounds.width / 5
+        
+        let orderedAction = UIBarButtonItem(title: "", style: .plain, target: self, action: #selector(orderedTapped(_:)))
+        orderedAction.image = UIImage(named: "ordered")?.withRenderingMode(.alwaysTemplate)
+        orderedAction.tintColor = UIColor.white
+        orderedAction.width = view.bounds.width / 5
+        
+        let unOrderedAction = UIBarButtonItem(title: "", style: .plain, target: self, action: #selector(unOrderedTapped(_:)))
+        unOrderedAction.image = UIImage(named: "unordered")?.withRenderingMode(.alwaysTemplate)
+        unOrderedAction.tintColor = UIColor.white
+        unOrderedAction.width = view.bounds.width / 5
+        
+        let imageAction = UIBarButtonItem(title: "", style: .plain, target: self, action: #selector(imageTapped(_:)))
+        imageAction.image = UIImage(named: "image")?.withRenderingMode(.alwaysTemplate)
+        imageAction.tintColor = UIColor.white
+        imageAction.width = view.bounds.width / 5
+        
+        let productAction = UIBarButtonItem(title: "", style: .plain, target: self, action: #selector(productTapped(_:)))
+        productAction.image = UIImage(named: "product")?.withRenderingMode(.alwaysTemplate)
+        productAction.tintColor = UIColor.white
+        productAction.width = view.bounds.width / 5
+        
+        buttonBar.items = [textAction, orderedAction, unOrderedAction, imageAction, productAction]
+        
+        // AppBar Setup
+        let appBar = MDCAppBar()
+        self.addChildViewController(appBar.headerViewController)
+        appBar.headerViewController.headerView.backgroundColor = MDCPalette.grey.tint100
+        appBar.navigationBar.tintColor = MDCPalette.blueGrey.tint900
+        title = "New Guide"
+        let doneAction = UIBarButtonItem(image: UIImage(named: "done")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(doneTapped(_:)))
+        doneAction.tintColor = UIColor.black
+        navigationItem.rightBarButtonItem = doneAction
+        appBar.addSubviewsToParent()
+    }
 
     /*
     // MARK: - Navigation

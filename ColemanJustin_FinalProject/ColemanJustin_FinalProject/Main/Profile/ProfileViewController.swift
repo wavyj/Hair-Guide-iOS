@@ -8,6 +8,7 @@
 
 import UIKit
 import MaterialComponents
+import SJFluidSegmentedControl
 
 class ProfileViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -20,8 +21,9 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     @IBOutlet weak var bioView: UIView!
     @IBOutlet weak var bioText: UITextView!
     @IBOutlet weak var linkBtn: MDCFlatButton!
-    @IBOutlet weak var buttonBar: MDCButtonBar!
+    @IBOutlet weak var segmentedControl: SJFluidSegmentedControl!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var reAnalyzeBtn: MDCRaisedButton!
     
     //MARK: - Variables
 
@@ -34,6 +36,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         setupMaterialComponents()
         
         profileImage.layer.cornerRadius = profileImage.frame.size.width / 2
+        
+        setupSegmentedControl()
     }
 
     override func didReceiveMemoryWarning() {
@@ -67,6 +71,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         // Buttons
         editProfileBtn.setTitle("Edit Profile", for: .normal)
         editProfileBtn.tintColor = MDCPalette.blue.tint500
+        reAnalyzeBtn.setImage(UIImage(named: "refresh")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        reAnalyzeBtn.tintColor = MDCPalette.blue.tint500
         
         linkBtn.setTitle("Link Here", for: .normal)
         linkBtn.setTitleColor(MDCPalette.blue.tint500, for: .normal)
@@ -86,6 +92,11 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         appBar.addSubviewsToParent()
     }
     
+    func setupSegmentedControl(){
+        segmentedControl.currentSegment = 0
+        segmentedControl.textFont = .systemFont(ofSize: 16, weight: UIFontWeightBold)
+    }
+    
 
     /*
     // MARK: - Navigation
@@ -97,4 +108,30 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     */
 
+}
+extension ProfileViewController: SJFluidSegmentedControlDataSource, SJFluidSegmentedControlDelegate{
+    
+    func numberOfSegmentsInSegmentedControl(_ segmentedControl: SJFluidSegmentedControl) -> Int {
+        return 2
+    }
+    
+    func segmentedControl(_ segmentedControl: SJFluidSegmentedControl,
+                          titleForSegmentAtIndex index: Int) -> String? {
+        if index == 0 {
+            return "Posts".uppercased()
+        } else {
+            return "Guides".uppercased()
+        }
+    }
+    
+    func segmentedControl(_ segmentedControl: SJFluidSegmentedControl,
+                          gradientColorsForSelectedSegmentAtIndex index: Int) -> [UIColor] {
+        return [MDCPalette.blue.tint500,
+                MDCPalette.blue.accent200!]
+    }
+    
+    func segmentedControl(_ segmentedControl: SJFluidSegmentedControl,
+                          gradientColorsForBounce bounce: SJFluidSegmentedControlBounce) -> [UIColor] {
+        return [MDCPalette.blue.tint500]
+    }
 }
