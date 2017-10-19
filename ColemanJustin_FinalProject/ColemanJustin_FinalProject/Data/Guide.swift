@@ -7,8 +7,27 @@
 //
 
 import Foundation
+import Firebase
 
-/*class Guide{
+class Guide{
     let mTitle: String
-    let mText
-}*/
+    let mText: String
+    var mViews: Int
+    let mComments: Int 
+    var mReference: DocumentReference? = nil
+    
+    init(title: String, text: String, viewCount: Int, comments: Int, reference: DocumentReference){
+        mTitle = title
+        mText = text
+        mViews = viewCount
+        mComments = comments
+        mReference = reference
+    }
+    
+    init(title: String, text: String, viewCount: Int, comments: Int){
+        mTitle = title
+        mText = text
+        mViews = viewCount
+        mComments = comments
+    }
+}

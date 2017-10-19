@@ -10,11 +10,26 @@ import UIKit
 import MaterialComponents
 
 class SelectedGuideViewController: UIViewController {
+    
+    //MARK: - Outlets
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var textView: UITextView!
+    
+    //MARK: - Variables
+    var selectedGuide: Guide? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        titleLabel.text = selectedGuide?.mTitle
+        textView.text = selectedGuide?.mText
+        setupMaterialComponents()
+        
+        // Update View Count
+        selectedGuide?.mViews += 1
+        DatabaseUtil().guideViewed(selectedGuide!)
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,10 +50,10 @@ class SelectedGuideViewController: UIViewController {
         self.addChildViewController(appBar.headerViewController)
         appBar.headerViewController.headerView.backgroundColor = MDCPalette.grey.tint100
         appBar.navigationBar.tintColor = MDCPalette.blueGrey.tint900
-        title = "Guide"
-        let bookmarkAction = UIBarButtonItem(image: UIImage(named: "bookmark")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(bookmarkTapped(_:)))
-        bookmarkAction.tintColor = UIColor.black
-        navigationItem.rightBarButtonItem = bookmarkAction
+        title = "Viewing Guide"
+        //let bookmarkAction = UIBarButtonItem(image: UIImage(named: "bookmark")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(bookmarkTapped(_:)))
+        //bookmarkAction.tintColor = UIColor.black
+        //navigationItem.rightBarButtonItem = bookmarkAction
         appBar.addSubviewsToParent()
     }
 

@@ -62,7 +62,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         print(error?.localizedDescription)
                         return
                     }
-                    //print(token)
+                    //Save User
+                    UserDefaultsUtil().saveUser(self.emailField.text!, self.passwordField.text!)
                     self.segue()
                 })
                 

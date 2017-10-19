@@ -68,6 +68,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
                 
                 let u = User(email: self.emailField.text!, username: self.usernameField.text!, bio: "", profilePicUrl: "", gender: "")
                 
+                UserDefaultsUtil().saveUser(u.email, self.passwordField.text!)
                 UserDefaultsUtil().saveUserData(u)
                 
                 // Save User to database

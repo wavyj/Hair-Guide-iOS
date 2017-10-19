@@ -22,6 +22,19 @@ class UserDefaultsUtil{
         return UserDefaults.standard.object(forKey: "userToken") as! String
     }
     
+    public func saveUser(_ email: String, _ password: String){
+        UserDefaults.standard.set(email, forKey: "userEmail")
+        UserDefaults.standard.set(password, forKey: "userPassword")
+    }
+    
+    public func loadUserEmail() -> String?{
+        return UserDefaults.standard.object(forKey: "userEmail") as? String
+    }
+    
+    public func loadUserPassword() -> String?{
+        return UserDefaults.standard.object(forKey: "userPassword") as? String
+    }
+    
     public func checkStatus() -> Bool{
         return UserDefaults.standard.bool(forKey: "loggedIn")
     }

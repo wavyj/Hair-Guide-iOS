@@ -34,13 +34,25 @@ class DatabaseUtil{
     }
     
     func createPost(_ newPost: Post){
-       db?.collection("users").document(UserDefaultsUtil().loadReference()).collection("posts").addDocument(data: ["caption" : newPost.mCaption!,
+        db?.collection("posts").addDocument(data: ["user": UserDefaultsUtil().loadReference()
+        ,"caption" : newPost.mCaption!,
                                                                                                                    "likes": newPost.mLikes!,
                                                                                                                    "comments": newPost.mComments!,
                                                                                                                    "imageUrl": newPost.mImageUrl])
     }
     
-    /*func createGuide(_ newGuide: Guide){
+    func createGuide(_ newGuide: Guide){
+        let reference = db?.collection("guides").addDocument(data: ["user" : UserDefaultsUtil().loadReference(), "title": newGuide.mTitle, "text": newGuide.mText, "views": 0, "comments": 0], completion: { (error) in
+            // Error
+            if error != nil{
+            print(error?.localizedDescription)
+            }
+        })
         
-    }*/
+        newGuide.mReference = reference
+    }
+    
+    func guideViewed(_ viewedGuide: Guide){
+        db?.collection("guides").document((viewedGuide.mReference?.documentID)!).setData(["user" : UserDefaultsUtil().loadReference(), "title": viewedGuide.mTitle, "text": viewedGuide.mText, "views": viewedGuide.mViews, "comments": 0])
+    }
 }

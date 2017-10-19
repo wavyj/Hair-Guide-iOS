@@ -9,13 +9,18 @@
 import UIKit
 import MaterialComponents
 
-class NewGuideViewController: UIViewController {
+class NewGuideViewController: UIViewController, UITextFieldDelegate {
     
     //MARK: - Outlets
     @IBOutlet weak var buttonBar: MDCButtonBar!
-    @IBOutlet weak var inputField: UITextView!
+    @IBOutlet weak var textInputContainer: UIView!
+    @IBOutlet weak var titleInput: MDCTextField!
 
     //MARK: - Variables
+    var textController: MDCTextInputController?
+    var multiTextController: MDCTextInputController?
+    var textInput: MDCMultilineTextField?
+    var newGuide: Guide? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +52,16 @@ class NewGuideViewController: UIViewController {
         
     }
     func doneTapped(_ sender: UIBarButtonItem){
+        if !titleInput.text!.isEmpty && !(textInput?.text?.isEmpty)!{
+            textController?.setErrorText("", errorAccessibilityValue: nil)
+            newGuide = Guide(title: titleInput.text!, text: (textInput?.text)!, viewCount: 0, comments: 0)
+            DatabaseUtil().createGuide(newGuide!)
+            performSegue(withIdentifier: "toNewGuide", sender: self)
+        } else{
+            textController?.setErrorText("Must have a title", errorAccessibilityValue: nil)
+            multiTextController?.setErrorText("Must have a title", errorAccessibilityValue: nil)
+        }
+        
         
     }
     
@@ -54,8 +69,20 @@ class NewGuideViewController: UIViewController {
     //MARK: - Methods
     func setupMaterialComponents(){
         
+        // TextField
+        titleInput.placeholder = "Title"
+        textController = MDCTextInputControllerDefault(textInput: titleInput)
+        textController?.activeColor = MDCPalette.blue.tint500
+        
+        textInput = MDCMultilineTextField()
+        textInputContainer.addSubview(textInput!)
+        textInput?.frame = textInputContainer.bounds
+        textInput?.placeholder = "Text"
+        multiTextController = MDCTextInputControllerDefault(textInput: textInput)
+        multiTextController?.activeColor = MDCPalette.blue.tint500
+        
         // ButtonBar
-        buttonBar.backgroundColor = MDCPalette.blue.tint500
+        /*buttonBar.backgroundColor = MDCPalette.blue.tint500
         
         let textAction = UIBarButtonItem(title: "", style: .plain, target: self, action: #selector(textTapped(_:)))
         textAction.image = UIImage(named: "text")?.withRenderingMode(.alwaysTemplate)
@@ -82,7 +109,7 @@ class NewGuideViewController: UIViewController {
         productAction.tintColor = UIColor.white
         productAction.width = view.bounds.width / 5
         
-        buttonBar.items = [textAction, orderedAction, unOrderedAction, imageAction, productAction]
+        buttonBar.items = [textAction, orderedAction, unOrderedAction, imageAction, productAction]*/
         
         // AppBar Setup
         let appBar = MDCAppBar()
@@ -96,14 +123,19 @@ class NewGuideViewController: UIViewController {
         appBar.addSubviewsToParent()
     }
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        if segue.destination as? GuidesViewController != nil{
+            let vc = segue.destination as! GuidesViewController
+            vc.createdGuide = newGuide
+        }
     }
-    */
+ 
 
 }

@@ -20,6 +20,10 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Access Your Camera to Capture Images</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Access Your Photos to Add Image to Post</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -28,11 +32,11 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>UIRequiresPersistentWiFi</key>
+	<true/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
@@ -41,13 +45,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>UIRequiresPersistentWiFi</key>
-	<true/>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
-	<key>NSCameraUsageDescription</key>
-	<string>Access Your Camera to Capture Images</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Access Your Photos to Add Image to Post</string>
 </dict>
 </plist>
