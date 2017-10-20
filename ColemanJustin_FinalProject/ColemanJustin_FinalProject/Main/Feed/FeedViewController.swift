@@ -96,7 +96,7 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
-        return CGSize(width: self.view.bounds.width, height: (self.collectionView?.bounds.height)! - 100)
+        return CGSize(width: self.view.bounds.width, height: (self.collectionView?.bounds.height)! - 200)
     }
     
     //MARK: - Fusama Delegate Callbacks

@@ -11,15 +11,7 @@ import Foundation
 class UserDefaultsUtil{
     
     init() {
-        
-    }
-    
-    public func initialLoad(){
-        UserDefaults.standard.set(false, forKey: "loggedIn")
-    }
-    
-    public func loadUser() -> String{
-        return UserDefaults.standard.object(forKey: "userToken") as! String
+   
     }
     
     public func saveUser(_ email: String, _ password: String){
@@ -35,12 +27,7 @@ class UserDefaultsUtil{
         return UserDefaults.standard.object(forKey: "userPassword") as? String
     }
     
-    public func checkStatus() -> Bool{
-        return UserDefaults.standard.bool(forKey: "loggedIn")
-    }
-    
     public func saveReference(DocumentID: String){
-        UserDefaults.standard.set(true, forKey: "loggedIn")
         UserDefaults.standard.set(DocumentID, forKey: "dbReference")
     }
     
@@ -63,6 +50,18 @@ class UserDefaultsUtil{
         let profilePicUrl = UserDefaults.standard.object(forKey: "profilePicUrl") as! String
         let gender = UserDefaults.standard.object(forKey: "gender") as! String
         return User(email: email, username: username, bio: bio, profilePicUrl: profilePicUrl, gender: gender)
+    }
+    
+    public func signOut(){
+        // Remove all Defaults
+        UserDefaults.standard.removeObject(forKey: "userEmail")
+        UserDefaults.standard.removeObject(forKey: "userPassword")
+        UserDefaults.standard.removeObject(forKey: "username")
+        UserDefaults.standard.removeObject(forKey: "email")
+        UserDefaults.standard.removeObject(forKey: "bio")
+        UserDefaults.standard.removeObject(forKey: "profilePicUrl")
+        UserDefaults.standard.removeObject(forKey: "gender")
+        UserDefaults.standard.removeObject(forKey: "dbReference")
     }
     
 }

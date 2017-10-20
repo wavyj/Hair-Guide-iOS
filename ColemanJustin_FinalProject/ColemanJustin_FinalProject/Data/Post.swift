@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Firebase
 
 class Post{
     let mCaption: String?
@@ -15,6 +16,7 @@ class Post{
     let mLikes: Int?
     let mComments: Int?
     var mImageUrl: String = ""
+    var mReference: DocumentReference? = nil
     
     init(caption: String, image: UIImage, likes: Int, comments: Int){
         mCaption = caption

@@ -15,6 +15,7 @@ class Guide{
     var mViews: Int
     let mComments: Int 
     var mReference: DocumentReference? = nil
+    let mAuthor: User? = nil
     
     init(title: String, text: String, viewCount: Int, comments: Int, reference: DocumentReference){
         mTitle = title

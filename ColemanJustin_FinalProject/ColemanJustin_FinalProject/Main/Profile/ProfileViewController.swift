@@ -47,7 +47,17 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     //MARK: - Storyboard Actions
     func settingsTapped(_ sender: UIBarButtonItem){
-        
+        let alert = UIAlertController(title: "Signing Out?", message: "Are you sure you want to go? All local data will be removed and you will need to sign in again to continue use.", preferredStyle: .alert)
+        let yesAction = UIAlertAction(title: "Yes", style: .default) { (action) in
+            UserDefaultsUtil().signOut()
+            //TODO: Segue to authentication
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "Authentication")
+            self.present(vc!, animated: true, completion: nil)
+        }
+        let noAction = UIAlertAction(title: "No", style: .cancel, handler: nil)
+        alert.addAction(yesAction)
+        alert.addAction(noAction)
+        present(alert, animated: true, completion: nil)
     }
     
     //MARK: - CollectionView Callbacks
@@ -86,7 +96,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         appBar.headerViewController.headerView.backgroundColor = MDCPalette.grey.tint100
         appBar.navigationBar.tintColor = MDCPalette.blueGrey.tint900
         title = "@Curlygurl11"
-        let settingsAction = UIBarButtonItem(image: UIImage(named: "settings")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(settingsTapped(_:)))
+        let settingsAction = UIBarButtonItem(image: UIImage(named: "signout")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(settingsTapped(_:)))
         settingsAction.tintColor = UIColor.black
         navigationItem.rightBarButtonItem = settingsAction
         appBar.addSubviewsToParent()
