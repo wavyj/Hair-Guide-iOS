@@ -82,7 +82,6 @@ class CloudStorageUtil {
     }
     
     func downloadImage(_ imageUrl: String, _ post: Post, _ collection: UICollectionView){
-        print(imageUrl)
         let ref = Storage.storage().reference(forURL: imageUrl)
         
         ref.getData(maxSize: 10 * 1024 * 1024) { (data, error) in

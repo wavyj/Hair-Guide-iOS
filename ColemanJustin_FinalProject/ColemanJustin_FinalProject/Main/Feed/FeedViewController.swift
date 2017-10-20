@@ -79,6 +79,7 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
             cell.commentBtn.setImage(UIImage(named: "comment")?.withRenderingMode(.alwaysTemplate), for: .normal)
             cell.commentBtn.tintColor = MDCPalette.grey.tint400
             cell.profileImg.layer.cornerRadius = cell.profileImg.frame.size.width / 2
+            cell.timeLabel.text = selected.getDate()
             //cell.viewCommentsBtn.setTitle("View All 5 Comments", for: .normal)
             //cell.likesLabel.text = "20 Likes"
             //cell.applyVisuals()

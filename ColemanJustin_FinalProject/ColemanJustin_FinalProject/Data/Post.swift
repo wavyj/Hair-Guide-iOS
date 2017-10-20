@@ -49,4 +49,10 @@ class Post{
     func downloadImage(_ collection: UICollectionView){
         CloudStorageUtil().downloadImage(mImageUrl, self, collection)
     }
+    
+    func getDate()-> String{
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEEE, MMM dd, HH:mm"
+        return formatter.string(from: mDate!)
+    }
 }

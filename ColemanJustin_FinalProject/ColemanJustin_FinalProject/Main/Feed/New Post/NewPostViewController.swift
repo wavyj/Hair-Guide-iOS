@@ -47,7 +47,7 @@ class NewPostViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     func submitTapped(_ sender: UIButton){
         // Create Post
-        newPost = Post(caption: captionField!.text!, image: currentImage!, likes: 20, comments: 5)
+        newPost = Post(caption: captionField!.text!, image: currentImage!, likes: 0, comments: 0)
         newPost?.mTags = tags
         
         // Upload Image
