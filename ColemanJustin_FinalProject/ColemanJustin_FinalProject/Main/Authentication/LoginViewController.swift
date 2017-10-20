@@ -34,9 +34,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        handler = auth?.addStateDidChangeListener({ (Auth, user) in
-            
-        })
+
     }
 
     override func didReceiveMemoryWarning() {

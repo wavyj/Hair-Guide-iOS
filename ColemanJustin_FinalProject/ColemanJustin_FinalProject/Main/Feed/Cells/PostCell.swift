@@ -22,6 +22,7 @@ class PostCell: MDCCollectionViewCell{
     @IBOutlet weak var viewCommentsBtn: MDCFlatButton!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var likesLabel: UILabel!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     func applyVisuals(){
         // Shadow
@@ -33,6 +34,17 @@ class PostCell: MDCCollectionViewCell{
         // Rounded Corners
         contentView.layer.cornerRadius = 6
         contentView.layer.masksToBounds = true
+    }
+    
+    func downloadImage(_ post: Post){
+        spinner.isHidden = false
+        spinner.startAnimating()
+        
+        let url = URL(string: post.mImageUrl)
+        let data = try? Data(contentsOf: url!)
+        post.mImage = UIImage(data: data!)
+        image.image = post.mImage
+        spinner.stopAnimating()
     }
     
 }

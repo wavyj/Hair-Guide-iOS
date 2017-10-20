@@ -71,4 +71,9 @@ class DatabaseUtil{
     func guideViewed(_ viewedGuide: Guide){
         db?.collection("guides").document((viewedGuide.mReference?.documentID)!).setData(["user" : UserDefaultsUtil().loadReference(), "title": viewedGuide.mTitle, "text": viewedGuide.mText, "views": viewedGuide.mViews, "comments": 0])
     }
+    
+    func saveHairTypes(_ types: [String]){
+        let newUser = UserDefaultsUtil().loadUserData()
+        db?.collection("users").document(UserDefaultsUtil().loadReference()).setData(["email" : newUser.email, "username": newUser.username, "profilePicUrl": newUser   .profilePicUrl, "bio": newUser.bio, "gender": newUser.gender, "hairTypes": types])
+    }
 }

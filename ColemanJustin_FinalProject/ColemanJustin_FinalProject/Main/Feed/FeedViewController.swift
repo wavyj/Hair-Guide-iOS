@@ -15,6 +15,7 @@ import Firebase
 class FeedViewController: UICollectionViewController, FusumaDelegate, UICollectionViewDelegateFlowLayout {
     
     //MARK: - Outlets
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     //MARK: - Variables
     var posts = [Post]()
@@ -72,8 +73,13 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
         if let cell = cell as? PostCell{
             let selected = posts[indexPath.row]
-            cell.image.image = selected.mImage
-            cell.clipsToBounds = false
+            if cell.image.image == nil{
+                print("here")
+                cell.downloadImage(selected)
+            } else{
+                cell.image.image = selected.mImage
+            }
+            
             cell.likeBtn.setImage(UIImage(named: "like")?.withRenderingMode(.alwaysTemplate), for: .normal)
             cell.likeBtn.tintColor = MDCPalette.grey.tint400
             cell.commentBtn.setImage(UIImage(named: "comment")?.withRenderingMode(.alwaysTemplate), for: .normal)
@@ -165,8 +171,7 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
                 let post = Post(caption: postCaption, likes: postLikes, comments: postComments, date: postDate, imageUrl: pic, tags: postTags)
                 post.mReference = i.reference
                 self.posts += [post]
-                post.downloadImage(self.collectionView!)
-                //self.collectionView?.reloadData()
+                self.collectionView?.reloadData()
             }
         }
     }

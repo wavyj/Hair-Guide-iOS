@@ -70,6 +70,7 @@ class UserDefaultsUtil{
         UserDefaults.standard.removeObject(forKey: "profilePicUrl")
         UserDefaults.standard.removeObject(forKey: "gender")
         UserDefaults.standard.removeObject(forKey: "dbReference")
+        UserDefaults.standard.removeObject(forKey: "hairTypes")
     }
     
 }

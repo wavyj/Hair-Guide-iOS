@@ -38,9 +38,6 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        handler = auth?.addStateDidChangeListener({ (Auth, user) in
-            
-        })
         
     }
 
@@ -74,15 +71,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
                 // Save User to database
                 DatabaseUtil().createUser(u)
                 
-                user?.getIDToken(completion: { (token, error) in
-                    if (error != nil){
-                        // Error
-                        print(error?.localizedDescription)
-                        return
-                    }
-                    //print(token)
-                    self.segue()
-                })
+                self.segue()
             })
         }
     }
@@ -216,7 +205,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
     }
     
     func segue(){
-        performSegue(withIdentifier: "toFeed", sender: self)
+        performSegue(withIdentifier: "toAnalysis", sender: self)
     }
     
     /*

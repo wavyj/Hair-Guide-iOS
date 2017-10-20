@@ -46,9 +46,10 @@ class Post{
         DatabaseUtil().createPost(self)
     }
     
-    func downloadImage(_ collection: UICollectionView){
-        CloudStorageUtil().downloadImage(mImageUrl, self, collection)
-    }
+    /*func downloadImage(){
+        
+        //CloudStorageUtil().downloadImage(mImageUrl, self, collection)
+    }*/
     
     func getDate()-> String{
         let formatter = DateFormatter()

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3A0596DFA66F8F5928BB5C6D /* Pods_ColemanJustin_FinalProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E6DE5ACE8D6560A9FF5F979 /* Pods_ColemanJustin_FinalProject.framework */; };
+		D010E2711F9A61920042A031 /* HairTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D010E2701F9A61920042A031 /* HairTypeCell.swift */; };
+		D010E2731F9A61F80042A031 /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D010E2721F9A61F80042A031 /* SectionHeaderView.swift */; };
 		D01BB59F1F8EECE000EBE6C6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01BB59E1F8EECE000EBE6C6 /* LoginViewController.swift */; };
 		D01BB5A11F8EFAB200EBE6C6 /* ValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01BB5A01F8EFAB200EBE6C6 /* ValidationError.swift */; };
 		D01BB5A41F8F0E1200EBE6C6 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01BB5A31F8F0E1200EBE6C6 /* FeedViewController.swift */; };
@@ -46,6 +48,8 @@
 		0A297C7FD92E8AEBEFF56DB1 /* Pods-ColemanJustin_FinalProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColemanJustin_FinalProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-ColemanJustin_FinalProject/Pods-ColemanJustin_FinalProject.release.xcconfig"; sourceTree = "<group>"; };
 		348F691C9077B0E0DDDED67B /* Pods-ColemanJustin_FinalProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColemanJustin_FinalProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ColemanJustin_FinalProject/Pods-ColemanJustin_FinalProject.debug.xcconfig"; sourceTree = "<group>"; };
 		7E6DE5ACE8D6560A9FF5F979 /* Pods_ColemanJustin_FinalProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ColemanJustin_FinalProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D010E2701F9A61920042A031 /* HairTypeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HairTypeCell.swift; sourceTree = "<group>"; };
+		D010E2721F9A61F80042A031 /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
 		D01BB59E1F8EECE000EBE6C6 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D01BB5A01F8EFAB200EBE6C6 /* ValidationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationError.swift; sourceTree = "<group>"; };
 		D01BB5A31F8F0E1200EBE6C6 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
@@ -135,6 +139,15 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
+		D010E26F1F9A617C0042A031 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				D010E2701F9A61920042A031 /* HairTypeCell.swift */,
+				D010E2721F9A61F80042A031 /* SectionHeaderView.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		D01BB5A21F8F0D3800EBE6C6 /* Feed */ = {
 			isa = PBXGroup;
 			children = (
@@ -205,6 +218,7 @@
 		D062C0921F91080B007BE5D7 /* Analysis */ = {
 			isa = PBXGroup;
 			children = (
+				D010E26F1F9A617C0042A031 /* Cells */,
 				D006D4DA1F8BC9AA00BAFD24 /* Onboarding */,
 				D062C0931F91082E007BE5D7 /* AnalysisViewController.swift */,
 			);
@@ -447,6 +461,7 @@
 				D01BB5A41F8F0E1200EBE6C6 /* FeedViewController.swift in Sources */,
 				D050F9721F9110C00008370E /* SearchViewController.swift in Sources */,
 				D0964F8F1F9652A50022CB7A /* User.swift in Sources */,
+				D010E2731F9A61F80042A031 /* SectionHeaderView.swift in Sources */,
 				D0964F931F9667400022CB7A /* Guide.swift in Sources */,
 				D051134C1F9143C20077179C /* PostDetailsViewController.swift in Sources */,
 				D0BC3ACE1F9506C500423B99 /* GuideCell.swift in Sources */,
@@ -459,6 +474,7 @@
 				D06641651F92768900258FB1 /* NewPostViewController.swift in Sources */,
 				D078B5BE1F7C1A5F00A6F8C5 /* AppDelegate.swift in Sources */,
 				D03D40FC1F8FDCC7007ACE22 /* PostCell.swift in Sources */,
+				D010E2711F9A61920042A031 /* HairTypeCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
