@@ -75,7 +75,7 @@ class GuidesViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        let current = guides[indexPath.section]
+        let current = guides[indexPath.item]
         if let c = cell as? GuideCell{
             c.guideTitle.text = current.mTitle
             c.viewLabel.text = current.mViews.description
@@ -120,7 +120,7 @@ class GuidesViewController: UIViewController, UICollectionViewDelegate, UICollec
                 let comment = i.data()["comments"] as! Int
                 let guide = Guide(title: guideTitle, text: guideText, viewCount: view, comments: comment, reference: i.reference)
                 
-                self.guides += [guide]
+                self.guides.append(guide)
             }
         self.collectionView.reloadData()
         }
