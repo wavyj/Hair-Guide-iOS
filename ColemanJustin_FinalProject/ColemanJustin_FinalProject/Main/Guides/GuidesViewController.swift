@@ -65,7 +65,7 @@ class GuidesViewController: UIViewController, UICollectionViewDelegate, UICollec
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //let cell = collectionView.cellForItem(at: indexPath) as! GuideCell
         //cell.cellIsOpen(!cell.isOpen)
-        selectedGuide = guides[indexPath.section]
+        selectedGuide = guides[indexPath.item]
         performSegue(withIdentifier: "toSelectedGuide", sender: self)
     }
     
