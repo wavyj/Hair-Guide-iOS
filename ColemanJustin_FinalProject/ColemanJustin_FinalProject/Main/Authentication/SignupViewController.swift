@@ -129,6 +129,11 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+    
     func validateEmail(_ textField: UITextField) -> Bool{
         // Email
         let emailRule = ValidationRulePattern(pattern: EmailValidationPattern.standard, error: ValidationError(message: "Invalid Email"))

@@ -84,6 +84,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+    
     //MARK: - Methods
     func setupMaterialComponents(){
         submitBtn.setTitleColor(MDCPalette.grey.tint100, for: .normal)

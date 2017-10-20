@@ -65,6 +65,11 @@ class NewGuideViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    //MARK: - TextField Delegate
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
     
     //MARK: - Methods
     func setupMaterialComponents(){

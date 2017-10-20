@@ -106,6 +106,12 @@ class NewPostViewController: UIViewController, UICollectionViewDelegate, UIColle
         }
     }
     
+    //MARK: - TextView Delegate
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+    
     //MARK: - Methods
     func setupMaterialComponents(){
         
