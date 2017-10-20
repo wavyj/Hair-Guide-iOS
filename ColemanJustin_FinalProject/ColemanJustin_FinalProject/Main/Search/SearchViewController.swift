@@ -42,9 +42,9 @@ class SearchViewController: UIViewController {
         appBar.headerViewController.headerView.backgroundColor = MDCPalette.grey.tint100
         appBar.navigationBar.tintColor = MDCPalette.blueGrey.tint900
         title = "Search"
-        let searchAction = UIBarButtonItem(image: UIImage(named: "search-light")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(searchTapped(_:)))
-        searchAction.tintColor = UIColor.black
-        navigationItem.rightBarButtonItem = searchAction
+        //let searchAction = UIBarButtonItem(image: UIImage(named: "search-light")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(searchTapped(_:)))
+        //searchAction.tintColor = UIColor.black
+        //navigationItem.rightBarButtonItem = searchAction
         appBar.addSubviewsToParent()
     }
 

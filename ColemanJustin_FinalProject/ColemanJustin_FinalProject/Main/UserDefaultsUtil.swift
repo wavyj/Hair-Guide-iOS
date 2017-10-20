@@ -52,6 +52,14 @@ class UserDefaultsUtil{
         return User(email: email, username: username, bio: bio, profilePicUrl: profilePicUrl, gender: gender)
     }
     
+    public func saveUserHairTypes(_ types: [String]){
+        UserDefaults.standard.set(types, forKey: "hairTypes")
+    }
+    
+    public func loadUserHairTypes()-> [String]{
+        return UserDefaults.standard.array(forKey: "hairTypes") as! [String]
+    }
+    
     public func signOut(){
         // Remove all Defaults
         UserDefaults.standard.removeObject(forKey: "userEmail")

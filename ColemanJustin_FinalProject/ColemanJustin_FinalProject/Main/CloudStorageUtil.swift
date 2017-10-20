@@ -13,6 +13,12 @@ import Firebase
 class CloudStorageUtil {
     
     var storageRef: StorageReference? = nil
+    var vc: UIViewController? = nil
+    
+    init(_ sender: UIViewController){
+        storageRef = Storage.storage().reference()
+        vc = sender
+    }
     
     init(){
         storageRef = Storage.storage().reference()
@@ -48,9 +54,46 @@ class CloudStorageUtil {
                 print(error.localizedDescription)
             }
             
-            post.setImageUrl((metaData.downloadURL()?.absoluteString)!)
+            
+            //post.setImageUrl((metaData.downloadURL()?.absoluteString)!)
+        })
+        uploadTask?.observe(.progress, handler: { (snapshot) in
+            // Progress
+
+            var percent = (snapshot.progress?.fractionCompleted)!
+            percent = round(100*percent)/100
+            if let v = self.vc as? NewPostViewController{
+                DispatchQueue.main.async {
+                    v.progressView.progress = Float(percent)
+                }
+                
+                if percent == 1.0{
+                    DispatchQueue.main.async {
+                        uploadTask?.removeAllObservers(for: .progress)
+                        v.uploadComplete()
+                    }
+                }
+            }
+        })
+        uploadTask?.observe(.success, handler: { (snapshot) in
+            post.setImageUrl((snapshot.metadata?.downloadURL()?.absoluteString)!)
         })
         
+    }
+    
+    func downloadImage(_ imageUrl: String, _ post: Post, _ collection: UICollectionView){
+        print(imageUrl)
+        let ref = Storage.storage().reference(forURL: imageUrl)
+        
+        ref.getData(maxSize: 10 * 1024 * 1024) { (data, error) in
+            if error != nil{
+                // Error
+                print(error?.localizedDescription)
+                return
+            }
+            post.mImage = UIImage(data: data!)
+            collection.reloadData()
+        }
     }
 }
 

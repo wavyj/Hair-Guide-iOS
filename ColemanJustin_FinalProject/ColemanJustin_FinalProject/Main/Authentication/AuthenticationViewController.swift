@@ -26,11 +26,6 @@ class AuthenticationViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
-        //TODO: Check if logged in
-        if UserDefaultsUtil().loadUserEmail() != nil{
-            login()
-        }
-        
         // Setup Material Components
         setupMaterialComponents()
     }
@@ -88,22 +83,6 @@ class AuthenticationViewController: UIViewController {
         instagramBtn.setTitleColor(MDCPalette.blue.tint400, for: .normal)
         instagramBtn.setTitle("Log In With Instagram", for: .normal)
         instagramBtn.addTarget(self, action: #selector(instagramTapped(_sender:)), for: .touchUpInside)
-    }
-    
-    func login(){
-        Auth.auth().signIn(withEmail: UserDefaultsUtil().loadUserEmail()!, password: UserDefaultsUtil().loadUserPassword()!) { (user, error) in
-            if error != nil{
-                // Error
-                print(error?.localizedDescription)
-                return
-            }
-            
-            self.toFeed()
-        }
-    }
-    
-    func toFeed(){
-        performSegue(withIdentifier: "toFeed", sender: self)
     }
 
     /*

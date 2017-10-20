@@ -10,6 +10,7 @@ import UIKit
 import MaterialComponents
 import Fusuma
 import IGListKit
+import Firebase
 
 class FeedViewController: UICollectionViewController, FusumaDelegate, UICollectionViewDelegateFlowLayout {
     
@@ -30,8 +31,8 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
         
         self.navigationItem.setHidesBackButton(true, animated: false)
         setupMaterialComponents()
-        createPosts()
-        
+        //createPosts()
+        loadPosts()
     }
 
     override func didReceiveMemoryWarning() {
@@ -141,6 +142,32 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
         let third = Post(caption: "Braided my hair. What you guys think?", image: UIImage(named: "image2")!, likes: 12, comments: 1)
         
         posts = [first, second, third]
+    }
+    
+    func loadPosts(){
+        let db = Firestore.firestore()
+        db.collection("posts").getDocuments { (snapshot, error) in
+            // Error
+            if error != nil{
+                print(error?.localizedDescription)
+            }
+            
+            for i in (snapshot?.documents)!{
+                let data = i.data()
+                let postCaption = data["caption"] as! String
+                let postComments = data["comments"] as! Int
+                let postDate = data["date"] as! Date
+                let pic = data["imageUrl"] as! String
+                let postLikes = data["likes"] as! Int
+                let postTags = data["tags"] as! [String]
+                let userRef = data["user"] as! String
+                let post = Post(caption: postCaption, likes: postLikes, comments: postComments, date: postDate, imageUrl: pic, tags: postTags)
+                post.mReference = i.reference
+                self.posts += [post]
+                post.downloadImage(self.collectionView!)
+                //self.collectionView?.reloadData()
+            }
+        }
     }
     
 

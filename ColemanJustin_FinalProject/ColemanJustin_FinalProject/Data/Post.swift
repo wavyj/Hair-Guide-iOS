@@ -12,17 +12,31 @@ import Firebase
 
 class Post{
     let mCaption: String?
-    let mImage: UIImage?
+    var mImage: UIImage? = nil
     let mLikes: Int?
     let mComments: Int?
+    let mDate: Date?
     var mImageUrl: String = ""
+    var mTags: [String]?
     var mReference: DocumentReference? = nil
+    
     
     init(caption: String, image: UIImage, likes: Int, comments: Int){
         mCaption = caption
         mImage = image
         mLikes = likes
         mComments = comments
+        mDate = Date()
+    }
+    
+    init(caption: String, likes: Int, comments: Int, date: Date, imageUrl: String, tags: [String]){
+        mCaption = caption
+        mLikes = likes
+        mComments = comments
+        mDate = date
+        mTags = tags
+        mImageUrl = imageUrl
+        //downloadImage()
     }
     
     func setImageUrl(_ imageURl: String){
@@ -30,5 +44,9 @@ class Post{
         
         // Save to Database
         DatabaseUtil().createPost(self)
+    }
+    
+    func downloadImage(_ collection: UICollectionView){
+        CloudStorageUtil().downloadImage(mImageUrl, self, collection)
     }
 }

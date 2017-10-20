@@ -57,15 +57,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     print(error?.localizedDescription)
                     return
                 }
-                user?.getIDToken(completion: { (token, error) in
-                    if (error != nil){
-                        print(error?.localizedDescription)
-                        return
-                    }
+            
                     //Save User
                     UserDefaultsUtil().saveUser(self.emailField.text!, self.passwordField.text!)
+                    DatabaseUtil().getUser(self.emailField.text!)
                     self.segue()
-                })
                 
             })
         }

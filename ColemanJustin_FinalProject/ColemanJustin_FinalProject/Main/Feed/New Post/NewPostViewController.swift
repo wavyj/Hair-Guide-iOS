@@ -17,6 +17,8 @@ class NewPostViewController: UIViewController, UICollectionViewDelegate, UIColle
     @IBOutlet weak var captionField: MDCTextField!
     @IBOutlet weak var submitBtn: MDCRaisedButton!
     @IBOutlet weak var tagsView: UICollectionView!
+    @IBOutlet weak var progressView: UIProgressView!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     //MARK: - Variables
     var newPost: Post? = nil
@@ -46,11 +48,15 @@ class NewPostViewController: UIViewController, UICollectionViewDelegate, UIColle
     func submitTapped(_ sender: UIButton){
         // Create Post
         newPost = Post(caption: captionField!.text!, image: currentImage!, likes: 20, comments: 5)
+        newPost?.mTags = tags
         
         // Upload Image
-        CloudStorageUtil().saveImage((newPost?.mImage)!, newPost!)
-
-        performSegue(withIdentifier: "unwindNewPost", sender: self)
+        CloudStorageUtil(self).saveImage((newPost?.mImage)!, newPost!)
+        progressView.isHidden = false
+        spinner.isHidden = false
+        submitBtn.isEnabled = false
+        captionField.isEnabled = false
+        tagsView.isUserInteractionEnabled = false
     }
     
     func addTapped(_ sender: MDCRaisedButton){
@@ -86,6 +92,20 @@ class NewPostViewController: UIViewController, UICollectionViewDelegate, UIColle
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.section > 0{
+            let alert = UIAlertController(title: "Remove Tag?", message: "", preferredStyle: .alert)
+            let yesAction = UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+                self.tags.remove(at: indexPath.section - 1)
+                collectionView.reloadData()
+            })
+            let noAction = UIAlertAction(title: "No", style: .cancel, handler: nil)
+            alert.addAction(yesAction)
+            alert.addAction(noAction)
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
     //MARK: - Methods
     func setupMaterialComponents(){
         
@@ -107,6 +127,10 @@ class NewPostViewController: UIViewController, UICollectionViewDelegate, UIColle
         title = "New Post"
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "back-arrow"), style: .plain, target: self, action: #selector(backTapped(_:)))
         appBar.addSubviewsToParent()
+    }
+    
+    func uploadComplete(){
+        performSegue(withIdentifier: "unwindNewPost", sender: self)
     }
 
     

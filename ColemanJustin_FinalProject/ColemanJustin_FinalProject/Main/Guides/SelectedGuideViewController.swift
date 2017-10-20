@@ -50,7 +50,7 @@ class SelectedGuideViewController: UIViewController {
         self.addChildViewController(appBar.headerViewController)
         appBar.headerViewController.headerView.backgroundColor = MDCPalette.grey.tint100
         appBar.navigationBar.tintColor = MDCPalette.blueGrey.tint900
-        title = "Viewing Guide"
+        title = "Guide"
         //let bookmarkAction = UIBarButtonItem(image: UIImage(named: "bookmark")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(bookmarkTapped(_:)))
         //bookmarkAction.tintColor = UIColor.black
         //navigationItem.rightBarButtonItem = bookmarkAction

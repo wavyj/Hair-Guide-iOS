@@ -13,6 +13,7 @@ class User{
     var bio: String
     var profilePicUrl: String
     var gender: String
+    var hairTypes: [String] = [String]()
     
     init(email: String, username: String, bio: String, profilePicUrl: String, gender: String) {
         self.email = email

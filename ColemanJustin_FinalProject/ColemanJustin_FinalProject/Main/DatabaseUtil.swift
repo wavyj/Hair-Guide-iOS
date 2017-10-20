@@ -33,12 +33,28 @@ class DatabaseUtil{
         })
     }
     
+    func getUser(_ email: String){
+        db?.collection("users").whereField("email", isEqualTo: email).getDocuments(completion: { (snapshot, error) in
+            if error != nil{
+                // Error
+                print(error?.localizedDescription)
+            }
+            
+            UserDefaultsUtil().saveReference(DocumentID: (snapshot?.documents[0].reference.documentID)!)
+            let userData = snapshot?.documents[0].data()
+            let username = userData!["username"] as! String
+            let email = userData!["email"] as! String
+            let pic = userData!["profilePicUrl"] as! String
+            let gender = userData!["gender"] as! String
+            let bio = userData!["bio"] as! String
+            UserDefaultsUtil().saveUserData(User(email: email, username: username, bio: bio, profilePicUrl: pic, gender: gender))
+        })
+        
+    }
+    
     func createPost(_ newPost: Post){
         db?.collection("posts").addDocument(data: ["user": UserDefaultsUtil().loadReference()
-        ,"caption" : newPost.mCaption!,
-                                                                                                                   "likes": newPost.mLikes!,
-                                                                                                                   "comments": newPost.mComments!,
-                                                                                                                   "imageUrl": newPost.mImageUrl])
+            ,"caption" : newPost.mCaption!, "likes": newPost.mLikes!, "comments": newPost.mComments!, "imageUrl": newPost.mImageUrl, "date": newPost.mDate, "tags": newPost.mTags])
     }
     
     func createGuide(_ newGuide: Guide){
