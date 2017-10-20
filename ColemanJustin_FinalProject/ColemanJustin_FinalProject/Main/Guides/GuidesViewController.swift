@@ -112,14 +112,13 @@ class GuidesViewController: UIViewController, UICollectionViewDelegate, UICollec
             
             // Get Each Guide data
             for i in (snapshot?.documents)!{
-                print(i.documentID)
                 let guideTitle = i.data()["title"] as! String
-                print(guideTitle)
                 let guideText = i.data()["text"] as! String
                 let user = i.data()["user"] as! String
                 let view = i.data()["views"] as! Int
                 let comment = i.data()["comments"] as! Int
                 let guide = Guide(title: guideTitle, text: guideText, viewCount: view, comments: comment, reference: i.reference)
+                self.guides.removeAll()
                 self.guides += [guide]
             }
         self.collectionView.reloadData()
