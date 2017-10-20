@@ -41,9 +41,11 @@ class PostCell: MDCCollectionViewCell{
         spinner.startAnimating()
         
         let url = URL(string: post.mImageUrl)
+        if url != nil{
         let data = try? Data(contentsOf: url!)
         post.mImage = UIImage(data: data!)
         image.image = post.mImage
+        }
         spinner.stopAnimating()
     }
     
