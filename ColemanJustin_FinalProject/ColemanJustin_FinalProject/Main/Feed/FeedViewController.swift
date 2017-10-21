@@ -73,11 +73,11 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
         if let cell = cell as? PostCell{
             let selected = posts[indexPath.row]
-            if cell.image.image == nil{
+            if selected.mImage == nil{
                 print("here")
-                cell.downloadImage(selected)
+                cell.butterDownloadImage(selected)
             } else{
-                cell.image.image = selected.mImage
+                cell.butterSetImage(selected)
             }
             
             cell.likeBtn.setImage(UIImage(named: "like")?.withRenderingMode(.alwaysTemplate), for: .normal)
@@ -95,8 +95,6 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! PostCell
-        let v = cell.image
-        //transition = MDCMaskedTransition(sourceView: v!)
         
         selectedPost = posts[indexPath.row]
         

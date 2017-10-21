@@ -8,11 +8,12 @@
 
 import UIKit
 import MaterialComponents
+import ImageButter
 
 class PostCell: MDCCollectionViewCell{
     
     //MARK: - Outlets
-    @IBOutlet weak var image: UIImageView!
+    @IBOutlet weak var imageView: WebPImageView!
     @IBOutlet weak var likeBtn: MDCFlatButton!
     @IBOutlet weak var commentBtn: MDCFlatButton!
     @IBOutlet weak var captionText: UITextView!
@@ -22,7 +23,6 @@ class PostCell: MDCCollectionViewCell{
     @IBOutlet weak var viewCommentsBtn: MDCFlatButton!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var likesLabel: UILabel!
-    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     func applyVisuals(){
         // Shadow
@@ -36,17 +36,20 @@ class PostCell: MDCCollectionViewCell{
         contentView.layer.masksToBounds = true
     }
     
-    func downloadImage(_ post: Post){
-        spinner.isHidden = false
-        spinner.startAnimating()
+    func butterSetImage(_ post: Post){
+        imageView.image = post.mImage
         
-        let url = URL(string: post.mImageUrl)
-        if url != nil{
-        let data = try? Data(contentsOf: url!)
-        post.mImage = UIImage(data: data!)
-        image.image = post.mImage
-        }
-        spinner.stopAnimating()
     }
+    
+    func butterDownloadImage(_ post: Post){
+        imageView.url = URL(string: post.mImageUrl)
+        let loadingView = WebPLoadingView()
+        loadingView.lineColor = MDCPalette.blue.tint500
+        loadingView.lineWidth = 2
+        imageView.loadingView = loadingView
+        post.mImage = imageView.image
+    }
+    
+    
     
 }

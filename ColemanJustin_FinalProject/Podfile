@@ -17,5 +17,6 @@ pod 'GreedoLayout'
 pod 'Fusuma'
 pod 'IGListKit', '~> 3.0'
 pod 'SJFluidSegmentedControl'
+pod 'ImageButter'
 
 end

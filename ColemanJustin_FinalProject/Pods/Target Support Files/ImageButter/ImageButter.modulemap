@@ -1,0 +1,6 @@
+framework module ImageButter {
+  umbrella header "ImageButter-umbrella.h"
+
+  export *
+  module * { export * }
+}

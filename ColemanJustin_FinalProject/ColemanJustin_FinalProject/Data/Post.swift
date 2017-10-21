@@ -9,10 +9,12 @@
 import Foundation
 import UIKit
 import Firebase
+import ImageButter
 
 class Post{
     let mCaption: String?
-    var mImage: UIImage? = nil
+    var mImage: WebPImage? = nil
+    var mImageAlt: UIImage? = nil
     let mLikes: Int?
     let mComments: Int?
     let mDate: Date?
@@ -23,10 +25,11 @@ class Post{
     
     init(caption: String, image: UIImage, likes: Int, comments: Int){
         mCaption = caption
-        mImage = image
+        mImageAlt = image
         mLikes = likes
         mComments = comments
         mDate = Date()
+        mImage = WebPImage(image: mImageAlt)
     }
     
     init(caption: String, likes: Int, comments: Int, date: Date, imageUrl: String, tags: [String]){

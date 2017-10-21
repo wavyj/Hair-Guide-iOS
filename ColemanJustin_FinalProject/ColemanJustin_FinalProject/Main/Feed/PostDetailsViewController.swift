@@ -32,7 +32,7 @@ class PostDetailsViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         title = "Curlygurl11's Post"
-        postImage.image = currentPost?.mImage
+        postImage.image = currentPost?.mImageAlt
         setupMaterialComponents()
     }
 
