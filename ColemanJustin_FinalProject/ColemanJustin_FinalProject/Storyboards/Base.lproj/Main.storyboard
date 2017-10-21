@@ -718,7 +718,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="10" id="LxU-4k-aQe">
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="16" id="LxU-4k-aQe">
                             <size key="itemSize" width="340" height="420"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -750,7 +750,7 @@
                                                     <rect key="frame" x="8" y="8" width="24" height="24.5"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15 Minutes Ago" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1kN-dj-vNL">
-                                                    <rect key="frame" x="8" y="468" width="324" height="17"/>
+                                                    <rect key="frame" x="16" y="468" width="316" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -786,7 +786,7 @@
                                                 <constraint firstItem="4aa-be-VC9" firstAttribute="leading" secondItem="dFD-VK-jcB" secondAttribute="leading" constant="8" id="eSE-Vp-9ni"/>
                                                 <constraint firstItem="pCc-9p-Eea" firstAttribute="top" secondItem="dFD-VK-jcB" secondAttribute="top" constant="8" id="f5R-oY-vyp"/>
                                                 <constraint firstItem="qMP-OH-8au" firstAttribute="width" secondItem="dFD-VK-jcB" secondAttribute="width" multiplier="0.07" id="jhY-8t-Phc"/>
-                                                <constraint firstItem="1kN-dj-vNL" firstAttribute="leading" secondItem="dFD-VK-jcB" secondAttribute="leading" constant="8" id="jna-XX-baQ"/>
+                                                <constraint firstItem="1kN-dj-vNL" firstAttribute="leading" secondItem="dFD-VK-jcB" secondAttribute="leading" constant="16" id="jna-XX-baQ"/>
                                                 <constraint firstItem="S9I-Yx-a4g" firstAttribute="top" secondItem="ERO-LH-vy9" secondAttribute="bottom" constant="8" id="nas-pj-EPu"/>
                                                 <constraint firstItem="1kN-dj-vNL" firstAttribute="top" secondItem="S9I-Yx-a4g" secondAttribute="bottom" id="re4-Sm-65h"/>
                                                 <constraint firstItem="S9I-Yx-a4g" firstAttribute="leading" secondItem="dFD-VK-jcB" secondAttribute="leading" constant="8" id="wWI-Nz-cvh"/>

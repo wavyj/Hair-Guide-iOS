@@ -21,7 +21,7 @@ class Post{
     var mImageUrl: String = ""
     var mTags: [String]?
     var mReference: DocumentReference? = nil
-    
+    var mUser: User? = nil
     
     init(caption: String, image: UIImage, likes: Int, comments: Int){
         mCaption = caption

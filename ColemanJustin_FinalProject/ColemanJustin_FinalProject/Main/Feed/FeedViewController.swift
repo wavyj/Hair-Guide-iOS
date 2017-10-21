@@ -32,7 +32,10 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
         
         self.navigationItem.setHidesBackButton(true, animated: false)
         setupMaterialComponents()
-        //createPosts()
+        //loadPosts()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         loadPosts()
     }
 
@@ -79,11 +82,12 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
             } else{
                 cell.butterSetImage(selected)
             }
-            
-            cell.likeBtn.setImage(UIImage(named: "like")?.withRenderingMode(.alwaysTemplate), for: .normal)
-            cell.likeBtn.tintColor = MDCPalette.grey.tint400
-            cell.commentBtn.setImage(UIImage(named: "comment")?.withRenderingMode(.alwaysTemplate), for: .normal)
-            cell.commentBtn.tintColor = MDCPalette.grey.tint400
+            cell.authorText.text = selected.mUser?.username.lowercased()
+            cell.captionText.text = selected.mCaption
+            //cell.likeBtn.setImage(UIImage(named: "like")?.withRenderingMode(.alwaysTemplate), for: .normal)
+            //cell.likeBtn.tintColor = MDCPalette.grey.tint400
+            //cell.commentBtn.setImage(UIImage(named: "comment")?.withRenderingMode(.alwaysTemplate), for: .normal)
+            //cell.commentBtn.tintColor = MDCPalette.grey.tint400
             cell.profileImg.layer.cornerRadius = cell.profileImg.frame.size.width / 2
             cell.timeLabel.text = selected.getDate()
             //cell.viewCommentsBtn.setTitle("View All 5 Comments", for: .normal)
@@ -141,15 +145,8 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
         appBar.addSubviewsToParent()
     }
     
-    func createPosts(){
-        let first = Post(caption: "Me and my healthy curls", image: UIImage(named: "image1")!, likes: 20, comments: 2)
-        let second = Post(caption: "Letting my hair breath at the beach", image: UIImage(named: "image3")!, likes: 48, comments: 5)
-        let third = Post(caption: "Braided my hair. What you guys think?", image: UIImage(named: "image2")!, likes: 12, comments: 1)
-        
-        posts = [first, second, third]
-    }
-    
     func loadPosts(){
+        // Get Post data
         let db = Firestore.firestore()
         db.collection("posts").getDocuments { (snapshot, error) in
             // Error
@@ -168,9 +165,34 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
                 let userRef = data["user"] as! String
                 let post = Post(caption: postCaption, likes: postLikes, comments: postComments, date: postDate, imageUrl: pic, tags: postTags)
                 post.mReference = i.reference
+                self.loadUser(userRef, post)
                 self.posts += [post]
-                self.collectionView?.reloadData()
             }
+        }
+    }
+    
+    func loadUser(_ ref: String, _ post: Post){
+        // Get Post's author data
+        let db = Firestore.firestore()
+        db.collection("users").document(ref).getDocument { (snapshot, error) in
+            if error != nil{
+                // Error
+                print(error?.localizedDescription)
+                return
+            }
+            
+            let data = snapshot?.data()
+            let userEmail = data!["email"] as! String
+            let userName = data!["username"] as! String
+            let userBio = data!["bio"] as! String
+            let userHairTypes = data!["hairTypes"] as! [String]
+            let userPic = data!["profilePicUrl"] as! String
+            let userGender = data!["gender"] as! String
+            
+            let user = User(email: userEmail, username: userName, bio: userBio, profilePicUrl: userPic, gender: userGender)
+            user.hairTypes = userHairTypes
+            post.mUser = user
+            self.collectionView?.reloadData()
         }
     }
     
@@ -189,6 +211,11 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
         if ((segue.destination as? NewPostViewController) != nil){
             let vc = segue.destination as! NewPostViewController
             vc.currentImage = selectedImage
+        }
+        
+        if ((segue.destination as? SelectedProfileViewController) != nil){
+            let vc = segue.destination as! SelectedProfileViewController
+            vc.selectedUser = selectedPost?.mUser
         }
         // Pass the selected object to the new view controller.
     }

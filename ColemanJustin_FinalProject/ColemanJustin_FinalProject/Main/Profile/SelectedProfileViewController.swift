@@ -43,7 +43,7 @@ class SelectedProfileViewController: UIViewController {
         self.addChildViewController(appBar.headerViewController)
         appBar.headerViewController.headerView.backgroundColor = MDCPalette.grey.tint100
         appBar.navigationBar.tintColor = MDCPalette.blueGrey.tint900
-        title = "@curlygurl11"
+        title = selectedUser?.username.lowercased()
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "back-arrow"), style: .plain, target: self, action: #selector(backTapped(_:)))
         appBar.addSubviewsToParent()
     }

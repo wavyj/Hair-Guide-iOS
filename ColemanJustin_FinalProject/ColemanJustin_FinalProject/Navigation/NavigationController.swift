@@ -40,6 +40,9 @@ class NavigationController: UINavigationController {
     
     //MARK: - Storyboard Actions
     func homeTapped(_ sender: UIBarButtonItem){
+        if self.visibleViewController as? FeedViewController != nil{
+            return
+        }
         //title = "Feed"
         resetTints()
         items[0].tintColor = onColor
