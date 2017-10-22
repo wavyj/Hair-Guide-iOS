@@ -32,10 +32,6 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
         
         self.navigationItem.setHidesBackButton(true, animated: false)
         setupMaterialComponents()
-        //loadPosts()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
         loadPosts()
     }
 
@@ -58,8 +54,7 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
     
     @IBAction func newPost(_ sender: UIStoryboardSegue){
         if addedPost != nil{
-            posts.append(addedPost!)
-            collectionView?.reloadData()
+            loadPosts()
         }
     }
     
@@ -74,10 +69,15 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+    
+        return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
         if let cell = cell as? PostCell{
             let selected = posts[indexPath.row]
             if selected.mImage == nil{
-                print("here")
                 cell.butterDownloadImage(selected)
             } else{
                 cell.butterSetImage(selected)
@@ -94,7 +94,6 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
             //cell.likesLabel.text = "20 Likes"
             //cell.applyVisuals()
         }
-        return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -146,6 +145,7 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
     }
     
     func loadPosts(){
+        
         // Get Post data
         let db = Firestore.firestore()
         db.collection("posts").getDocuments { (snapshot, error) in
@@ -165,10 +165,11 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
                 let userRef = data["user"] as! String
                 let post = Post(caption: postCaption, likes: postLikes, comments: postComments, date: postDate, imageUrl: pic, tags: postTags)
                 post.mReference = i.reference
-                self.loadUser(userRef, post)
                 self.posts += [post]
+                self.loadUser(userRef, post)
             }
         }
+        
     }
     
     func loadUser(_ ref: String, _ post: Post){

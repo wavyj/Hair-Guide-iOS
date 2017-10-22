@@ -40,6 +40,7 @@ class NavigationController: UINavigationController {
     
     //MARK: - Storyboard Actions
     func homeTapped(_ sender: UIBarButtonItem){
+        // Check if this is already the current view controller
         if self.visibleViewController as? FeedViewController != nil{
             return
         }
@@ -47,8 +48,9 @@ class NavigationController: UINavigationController {
         resetTints()
         items[0].tintColor = onColor
         resetColor()
-        
-        performSegue(withIdentifier: "toFeed", sender: self)
+
+        self.popToRootViewController(animated: false)
+        //performSegue(withIdentifier: "toFeed", sender: self)
     }
     func searchTapped(_ sender: UIBarButtonItem){
         //title = "Search"
@@ -57,9 +59,6 @@ class NavigationController: UINavigationController {
         resetColor()
         
         performSegue(withIdentifier: "toSearch", sender: self)
-    }
-    func cameraTapped(_ sender: UIBarButtonItem){
-        
     }
     func guidesTapped(_ sender: UIBarButtonItem){
         //title = "Guides"

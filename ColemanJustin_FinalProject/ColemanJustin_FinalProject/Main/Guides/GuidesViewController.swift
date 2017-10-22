@@ -32,8 +32,10 @@ class GuidesViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        if self.navigationController != nil{
         if (self.navigationController?.isToolbarHidden)!{
             self.navigationController?.setToolbarHidden(false, animated: false)
+        }
         }
     }
 
