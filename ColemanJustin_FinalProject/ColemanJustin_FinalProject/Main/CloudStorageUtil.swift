@@ -66,7 +66,7 @@ class CloudStorageUtil {
                 DispatchQueue.main.async {
                     v.progressView.progress = Float(percent)
                 }
-                
+                //print(percent.description)
                 if percent == 1.0{
                     DispatchQueue.main.async {
                         uploadTask?.removeAllObservers(for: .progress)
@@ -77,6 +77,7 @@ class CloudStorageUtil {
         })
         uploadTask?.observe(.success, handler: { (snapshot) in
             post.setImageUrl((snapshot.metadata?.downloadURL()?.absoluteString)!)
+            
         })
         
     }

@@ -9,7 +9,7 @@
 import UIKit
 import MaterialComponents
 
-class NavigationController: UINavigationController {
+class NavigationController: UINavigationController, UINavigationControllerDelegate {
     
     //MARK: - Outlets
     @IBOutlet var buttonBar: MDCButtonBar!
@@ -18,6 +18,7 @@ class NavigationController: UINavigationController {
     let onColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 1)
     let offColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.2)
     var items = [UIBarButtonItem]()
+    var controllers = [UIViewController]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +29,7 @@ class NavigationController: UINavigationController {
         buttonBar.frame = toolbar.bounds
         
         setupMaterialComponents()
-    
+        self.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -44,39 +45,126 @@ class NavigationController: UINavigationController {
         if self.visibleViewController as? FeedViewController != nil{
             return
         }
-        //title = "Feed"
+        
         resetTints()
         items[0].tintColor = onColor
         resetColor()
 
         self.popToRootViewController(animated: false)
-        //performSegue(withIdentifier: "toFeed", sender: self)
     }
     func searchTapped(_ sender: UIBarButtonItem){
-        //title = "Search"
+        if self.visibleViewController as? SearchViewController != nil{
+            return
+        }
+        
         resetTints()
         items[1].tintColor = onColor
         resetColor()
         
-        performSegue(withIdentifier: "toSearch", sender: self)
+        // Check if VC exists, need for when home has been tapped and navigation stack is cleared
+        var containVC = false
+        for i in self.viewControllers{
+            if let vc = i as? SearchViewController{
+                containVC = true
+            }
+        }
+        if containVC == false{
+            for i in controllers{
+                if let vc = i as? SearchViewController{
+                    self.pushViewController(vc, animated: false)
+                    return
+                }
+            }
+        }
+        
+        for i in controllers{
+            if let vc = i as? SearchViewController{
+                self.popToViewController(vc, animated: false)
+                return
+            }
+        }
+        
+        let vc = storyboard?.instantiateViewController(withIdentifier: "search")
+        controllers.append(vc!)
+        self.pushViewController(vc!, animated: false)
     }
     func guidesTapped(_ sender: UIBarButtonItem){
-        //title = "Guides"
+        if self.visibleViewController as? GuidesViewController != nil{
+            return
+        }
+        
         resetTints()
         items[2].tintColor = onColor
         resetColor()
         
-        performSegue(withIdentifier: "toGuides", sender: self)
+        // Check if VC exists, need for when home has been tapped and navigation stack is cleared
+        var containVC = false
+        for i in self.viewControllers{
+            if let vc = i as? GuidesViewController{
+                containVC = true
+            }
+        }
+        if containVC == false{
+            for i in controllers{
+                if let vc = i as? GuidesViewController{
+                    self.pushViewController(vc, animated: false)
+                    return
+                }
+            }
+        }
+    
+        for i in controllers{
+            if let vc = i as? GuidesViewController{
+                self.popToViewController(vc, animated: false)
+                return
+            }
+        }
+        
+        let vc = storyboard?.instantiateViewController(withIdentifier: "guides")
+        controllers.append(vc!)
+        self.pushViewController(vc!, animated: false)
     }
     func profileTapped(_ sender: UIBarButtonItem){
-        //title = "Profile"
+        if self.visibleViewController as? ProfileViewController != nil{
+            return
+        }
+        
         resetTints()
         items[3].tintColor = onColor
         resetColor()
         
-        performSegue(withIdentifier: "toProfile", sender: self)
+        // Check if VC exists, need for when home has been tapped and navigation stack is cleared
+        var containVC = false
+        for i in self.viewControllers{
+            if let vc = i as? ProfileViewController{
+                containVC = true
+            }
+        }
+        if containVC == false{
+            for i in controllers{
+                if let vc = i as? ProfileViewController{
+                    self.pushViewController(vc, animated: false)
+                    return
+                }
+            }
+        }
+        
+        for i in controllers{
+            if let vc = i as? ProfileViewController{
+                self.popToViewController(vc, animated: false)
+                return
+            }
+        }
+        
+        let vc = storyboard?.instantiateViewController(withIdentifier: "profile")
+        controllers.append(vc!)
+        self.pushViewController(vc!, animated: false)
     }
     
+    //MARK: - NavigationController Delegate Callbacks
+    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+        
+    }
     
     //MARK: - Methods
     func setupMaterialComponents(){

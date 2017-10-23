@@ -37,7 +37,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         
         profileImage.layer.cornerRadius = profileImage.frame.size.width / 2
         
-        setupSegmentedControl()
+        //setupSegmentedControl()
     }
 
     override func didReceiveMemoryWarning() {
@@ -102,10 +102,10 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         appBar.addSubviewsToParent()
     }
     
-    func setupSegmentedControl(){
+    /*func setupSegmentedControl(){
         segmentedControl.currentSegment = 0
         segmentedControl.textFont = .systemFont(ofSize: 16, weight: UIFontWeightBold)
-    }
+    }*/
     
 
     /*

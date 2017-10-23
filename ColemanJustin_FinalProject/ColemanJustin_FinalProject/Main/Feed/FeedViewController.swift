@@ -54,6 +54,7 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
     
     @IBAction func newPost(_ sender: UIStoryboardSegue){
         if addedPost != nil{
+            posts.removeAll()
             loadPosts()
         }
     }
@@ -68,7 +69,7 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! PostCell
     
         return cell
     }
@@ -155,6 +156,7 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
             }
             
             for i in (snapshot?.documents)!{
+                
                 let data = i.data()
                 let postCaption = data["caption"] as! String
                 let postComments = data["comments"] as! Int
@@ -165,8 +167,9 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
                 let userRef = data["user"] as! String
                 let post = Post(caption: postCaption, likes: postLikes, comments: postComments, date: postDate, imageUrl: pic, tags: postTags)
                 post.mReference = i.reference
-                self.posts += [post]
                 self.loadUser(userRef, post)
+                self.posts += [post]
+                //self.collectionView?.reloadData()
             }
         }
         
@@ -181,7 +184,7 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
                 print(error?.localizedDescription)
                 return
             }
-            
+           
             let data = snapshot?.data()
             let userEmail = data!["email"] as! String
             let userName = data!["username"] as! String
