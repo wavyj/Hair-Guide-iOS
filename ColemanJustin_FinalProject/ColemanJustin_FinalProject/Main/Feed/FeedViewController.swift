@@ -9,7 +9,6 @@
 import UIKit
 import MaterialComponents
 import Fusuma
-import IGListKit
 import Firebase
 
 class FeedViewController: UICollectionViewController, FusumaDelegate, UICollectionViewDelegateFlowLayout {
@@ -38,6 +37,14 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if self.navigationController != nil{
+            if (self.navigationController?.isToolbarHidden)!{
+                self.navigationController?.setToolbarHidden(false, animated: false)
+            }
+        }
     }
     
     //MARK: - Storyboard Actions
@@ -70,31 +77,24 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! PostCell
-    
-        return cell
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        
-        if let cell = cell as? PostCell{
-            let selected = posts[indexPath.row]
-            if selected.mImage == nil{
-                cell.butterDownloadImage(selected)
-            } else{
-                cell.butterSetImage(selected)
-            }
-            cell.authorText.text = selected.mUser?.username.lowercased()
-            cell.captionText.text = selected.mCaption
-            //cell.likeBtn.setImage(UIImage(named: "like")?.withRenderingMode(.alwaysTemplate), for: .normal)
-            //cell.likeBtn.tintColor = MDCPalette.grey.tint400
-            //cell.commentBtn.setImage(UIImage(named: "comment")?.withRenderingMode(.alwaysTemplate), for: .normal)
-            //cell.commentBtn.tintColor = MDCPalette.grey.tint400
-            cell.profileImg.layer.cornerRadius = cell.profileImg.frame.size.width / 2
-            cell.timeLabel.text = selected.getDate()
-            //cell.viewCommentsBtn.setTitle("View All 5 Comments", for: .normal)
-            //cell.likesLabel.text = "20 Likes"
-            //cell.applyVisuals()
+        let selected = posts[indexPath.row]
+        if selected.mImage == nil{
+            cell.butterDownloadImage(selected)
+        } else{
+            cell.butterSetImage(selected)
         }
+        cell.authorText.text = selected.mUser?.username.lowercased()
+        cell.captionText.text = selected.mCaption
+        //cell.likeBtn.setImage(UIImage(named: "like")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        //cell.likeBtn.tintColor = MDCPalette.grey.tint400
+        //cell.commentBtn.setImage(UIImage(named: "comment")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        //cell.commentBtn.tintColor = MDCPalette.grey.tint400
+        cell.profileImg.layer.cornerRadius = cell.profileImg.frame.size.width / 2
+        cell.timeLabel.text = selected.dateString
+        //cell.viewCommentsBtn.setTitle("View All 5 Comments", for: .normal)
+        //cell.likesLabel.text = "20 Likes"
+        //cell.applyVisuals()
+        return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -146,7 +146,7 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
     }
     
     func loadPosts(){
-        
+        posts.removeAll()
         // Get Post data
         let db = Firestore.firestore()
         db.collection("posts").getDocuments { (snapshot, error) in
@@ -169,8 +169,9 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
                 post.mReference = i.reference
                 self.loadUser(userRef, post)
                 self.posts += [post]
-                //self.collectionView?.reloadData()
+                self.update()
             }
+            
         }
         
     }
@@ -196,8 +197,12 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
             let user = User(email: userEmail, username: userName, bio: userBio, profilePicUrl: userPic, gender: userGender)
             user.hairTypes = userHairTypes
             post.mUser = user
-            self.collectionView?.reloadData()
+            self.update()
         }
+    }
+    
+    func update(){
+        self.collectionView?.reloadData()
     }
     
 

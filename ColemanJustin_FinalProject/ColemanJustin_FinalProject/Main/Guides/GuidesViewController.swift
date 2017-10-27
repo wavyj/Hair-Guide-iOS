@@ -8,7 +8,6 @@
 
 import UIKit
 import MaterialComponents
-import SJFluidSegmentedControl
 import Firebase
 
 class GuidesViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
@@ -33,9 +32,9 @@ class GuidesViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     override func viewWillAppear(_ animated: Bool) {
         if self.navigationController != nil{
-        if (self.navigationController?.isToolbarHidden)!{
-            self.navigationController?.setToolbarHidden(false, animated: false)
-        }
+            if (self.navigationController?.isToolbarHidden)!{
+                self.navigationController?.setToolbarHidden(false, animated: false)
+            }
         }
     }
 
@@ -51,6 +50,10 @@ class GuidesViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     @IBAction func newGuide(_ sender: UIStoryboardSegue){
         updateGuides()
+    }
+    func editTapped(_ sender: UIBarButtonItem){
+        selectedGuide = guides[sender.tag]
+        performSegue(withIdentifier: "toEditGuide", sender: self)
     }
     
     //MARK: - CollectionView Callbacks
@@ -81,6 +84,15 @@ class GuidesViewController: UIViewController, UICollectionViewDelegate, UICollec
         if let c = cell as? GuideCell{
             c.guideTitle.text = current.mTitle
             c.viewLabel.text = current.mViews.description
+            if current.mAuthor == UserDefaultsUtil().loadReference(){
+                c.editBtn.tag = indexPath.row
+                c.editBtn.addTarget(self, action: #selector(editTapped(_:)), for: .touchUpInside)
+                c.editBtn.isEnabled = true
+                c.editBtn.isHidden = false
+            }else{
+                c.editBtn.isHidden = true
+                c.editBtn.isEnabled = false
+            }
         }
     }
     
@@ -121,13 +133,12 @@ class GuidesViewController: UIViewController, UICollectionViewDelegate, UICollec
                 let view = i.data()["views"] as! Int
                 let comment = i.data()["comments"] as! Int
                 let guide = Guide(title: guideTitle, text: guideText, viewCount: view, comments: comment, reference: i.reference)
-                
+                guide.mAuthor = user
                 self.guides.append(guide)
             }
         self.collectionView.reloadData()
         }
     }
-
     
     // MARK: - Navigation
 
@@ -135,9 +146,16 @@ class GuidesViewController: UIViewController, UICollectionViewDelegate, UICollec
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        // View
         if ((segue.destination as? SelectedGuideViewController) != nil){
             let vc = segue.destination as! SelectedGuideViewController
             vc.selectedGuide = selectedGuide
+        }
+        
+        // Edit
+        if let vc = segue.destination as? EditGuideViewController{
+            vc.editGuide = selectedGuide
         }
     }
  

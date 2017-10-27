@@ -8,24 +8,42 @@
 
 import UIKit
 import MaterialComponents
+import WordPressEditor
+import Firebase
+import ImageButter
 
-class SelectedGuideViewController: UIViewController {
+class SelectedGuideViewController: /*WPEditorViewController, WPEditorViewDelegate, WPEditorViewControllerDelegate*/ UIViewController {
     
     //MARK: - Outlets
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var textView: UITextView!
+    //@IBOutlet weak var editor: UIView!
+    @IBOutlet weak var titleView: UILabel!
+    @IBOutlet weak var contentView: UITextView!
+    @IBOutlet weak var guideImage: WebPImageView!
     
     //MARK: - Variables
     var selectedGuide: Guide? = nil
+    var appBar: MDCAppBar?
+    var bookmarkAction: UIBarButtonItem?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
-        titleLabel.text = selectedGuide?.mTitle
-        textView.text = selectedGuide?.mText
         setupMaterialComponents()
+        
+        /*editorView.delegate = self
+        editor.addSubview(self.editorView)
+        
+        titleText = selectedGuide?.mTitle
+        bodyText = selectedGuide?.mContent
+        
+        self.stopEditing()*/
+        
+        titleView.text = selectedGuide?.mTitle
+        contentView.text = selectedGuide?.mText
+        guideImage.url = URL(string: (selectedGuide?.mImageUrl)!)
+        guideImage.frame = guideImage.bounds
         
         // Update View Count
         selectedGuide?.mViews += 1
@@ -39,22 +57,90 @@ class SelectedGuideViewController: UIViewController {
     
     //MARK: - Storyboard Actions
     func bookmarkTapped(_ sender: UIBarButtonItem){
-        
+        checkOnTapped(selectedGuide!)
     }
     
     //MARK: - Methods
     func setupMaterialComponents(){
         
+        // Display bookmark
+        checkBookmark(selectedGuide!)
+        
         // AppBar Setup
-        let appBar = MDCAppBar()
-        self.addChildViewController(appBar.headerViewController)
-        appBar.headerViewController.headerView.backgroundColor = MDCPalette.grey.tint100
-        appBar.navigationBar.tintColor = MDCPalette.blueGrey.tint900
+        appBar = MDCAppBar()
+        self.addChildViewController((appBar?.headerViewController)!)
+        appBar?.headerViewController.headerView.backgroundColor = MDCPalette.grey.tint100
+        appBar?.navigationBar.tintColor = MDCPalette.blueGrey.tint900
         title = "Guide"
-        //let bookmarkAction = UIBarButtonItem(image: UIImage(named: "bookmark")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(bookmarkTapped(_:)))
-        //bookmarkAction.tintColor = UIColor.black
-        //navigationItem.rightBarButtonItem = bookmarkAction
-        appBar.addSubviewsToParent()
+        bookmarkAction = UIBarButtonItem(image: UIImage(named: "bookmark")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(bookmarkTapped(_:)))
+        //bookmarkAction?.tintColor = UIColor.black
+        navigationItem.rightBarButtonItem = bookmarkAction
+        appBar?.addSubviewsToParent()
+    }
+    
+    func checkBookmark(_ guide: Guide){
+        var isFound = false
+        let db = Firestore.firestore()
+        db.collection("users").document(UserDefaultsUtil().loadReference()).collection("bookmarks").whereField("guide", isEqualTo: guide.mReference?.documentID).getDocuments(completion: { (snapshot, error) in
+            
+            if error != nil{
+                print(error?.localizedDescription)
+                return
+            }
+            
+            if (snapshot?.documents.isEmpty)!{
+                isFound = false
+            }
+            
+            for i in (snapshot?.documents)!{
+                isFound = true
+            }
+            self.updateBookmark(isFound)
+        })
+    }
+    
+    func checkOnTapped(_ guide: Guide){
+        var isFound = false
+        let db = Firestore.firestore()
+        db.collection("users").document(UserDefaultsUtil().loadReference()).collection("bookmarks").whereField("guide", isEqualTo: guide.mReference?.documentID).getDocuments(completion: { (snapshot, error) in
+            
+            if error != nil{
+                print(error?.localizedDescription)
+                return
+            }
+            
+            if (snapshot?.documents.isEmpty)!{
+                isFound = false
+            }
+            
+            for i in (snapshot?.documents)!{
+                isFound = true
+            }
+            
+            DatabaseUtil().bookmarkGuide(self.selectedGuide!, isFound)
+            self.updateBookmarkTap(isFound)
+            
+        })
+    }
+    
+    func updateBookmark(_ isFound: Bool){
+        if isFound{
+            bookmarkAction?.tintColor = MDCPalette.blue.tint500
+        }else{
+            bookmarkAction?.tintColor = UIColor.black
+        }
+        navigationItem.rightBarButtonItems?.removeAll()
+        navigationItem.rightBarButtonItem = bookmarkAction
+    }
+    
+    func updateBookmarkTap(_ isFound: Bool){
+        if isFound{
+            bookmarkAction?.tintColor = UIColor.black
+        }else{
+            bookmarkAction?.tintColor = MDCPalette.blue.tint500
+        }
+        navigationItem.rightBarButtonItems?.removeAll()
+        navigationItem.rightBarButtonItem = bookmarkAction
     }
 
     /*

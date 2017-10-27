@@ -41,6 +41,8 @@ class UserDefaultsUtil{
         UserDefaults.standard.set(user.bio, forKey: "bio")
         UserDefaults.standard.set(user.profilePicUrl, forKey: "profilePicUrl")
         UserDefaults.standard.set(user.gender, forKey: "gender")
+        UserDefaults.standard.set(user.followerCount, forKey: "followers")
+        UserDefaults.standard.set(user.followingCount, forKey: "following")
     }
     
     public func loadUserData() -> User{
@@ -49,7 +51,12 @@ class UserDefaultsUtil{
         let bio = UserDefaults.standard.object(forKey: "bio") as! String
         let profilePicUrl = UserDefaults.standard.object(forKey: "profilePicUrl") as! String
         let gender = UserDefaults.standard.object(forKey: "gender") as! String
-        return User(email: email, username: username, bio: bio, profilePicUrl: profilePicUrl, gender: gender)
+        let followers = UserDefaults.standard.object(forKey: "followers") as! Int
+        let following = UserDefaults.standard.object(forKey: "following") as! Int
+        let user = User(email: email, username: username, bio: bio, profilePicUrl: profilePicUrl, gender: gender)
+        user.followerCount = followers
+        user.followingCount = following
+        return user
     }
     
     public func saveUserHairTypes(_ types: [String]){
@@ -71,6 +78,8 @@ class UserDefaultsUtil{
         UserDefaults.standard.removeObject(forKey: "gender")
         UserDefaults.standard.removeObject(forKey: "dbReference")
         UserDefaults.standard.removeObject(forKey: "hairTypes")
+        UserDefaults.standard.removeObject(forKey: "followers")
+        UserDefaults.standard.removeObject(forKey: "following")
     }
     
 }

@@ -24,15 +24,16 @@ class CloudStorageUtil {
         storageRef = Storage.storage().reference()
     }
     
-    func saveImage(_ image: UIImage, _ post: Post){
+    func saveImage(_ image: UIImage, _ post: Post?){
         var downloadUrl: String = ""
         var imageData: Data? = nil
         let user = UserDefaultsUtil().loadUserData()
         var format = DateFormatter()
         format.dateFormat = "yyyyMMddHHmmss"
         
-        var imageRefString = "images/\(user.email)" + format.string(from: Date())
+        var imageRefString = "images/\(UserDefaultsUtil().loadReference())" + format.string(from: Date())
         var imageRef: StorageReference? = nil
+        
         // Convert to data
         if let jpeg = image.jpegImg{
             imageData = jpeg
@@ -66,18 +67,35 @@ class CloudStorageUtil {
                 DispatchQueue.main.async {
                     v.progressView.progress = Float(percent)
                 }
-                //print(percent.description)
-                if percent == 1.0{
-                    DispatchQueue.main.async {
-                        uploadTask?.removeAllObservers(for: .progress)
-                        v.uploadComplete()
-                    }
+            
+            }
+            
+            if let v = self.vc as? EditProfileViewController{
+                DispatchQueue.main.async {
+                    v.progressView.progress = Float(percent)
                 }
             }
         })
         uploadTask?.observe(.success, handler: { (snapshot) in
-            post.setImageUrl((snapshot.metadata?.downloadURL()?.absoluteString)!)
+            if post != nil{
+                post?.setImageUrl((snapshot.metadata?.downloadURL()?.absoluteString)!)
+            }else{
+                user.profilePicUrl = (snapshot.metadata?.downloadURL()?.absoluteString)!
+                UserDefaultsUtil().saveUserData(user)
+            }
+            if let v = self.vc as? NewPostViewController{
+                DispatchQueue.main.async {
+                    uploadTask?.removeAllObservers(for: .progress)
+                    v.uploadComplete()
+                }
+            }
             
+            if let v = self.vc as? EditProfileViewController{
+                DispatchQueue.main.async {
+                    uploadTask?.removeAllObservers(for: .progress)
+                    v.uploadComplete()
+                }
+            }
         })
         
     }

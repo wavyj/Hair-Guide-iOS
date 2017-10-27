@@ -9,6 +9,6 @@
 import UIKit
 import MaterialComponents
 
-class AddTagCell: UICollectionViewCell {
-    @IBOutlet weak var addBtn: MDCRaisedButton!
+class TagCell: UICollectionViewCell {
+    @IBOutlet weak var tagBtn: MDCRaisedButton!
 }

@@ -10,12 +10,15 @@ import Foundation
 import Firebase
 
 class Guide{
-    let mTitle: String
-    let mText: String
+    var mTitle: String
+    var mText: String
     var mViews: Int
-    let mComments: Int 
+    //var mContent: String = ""
+    var mImageUrl: String = ""
+    var mComments: Int
     var mReference: DocumentReference? = nil
-    let mAuthor: User? = nil
+    var mAuthor = ""
+    var mBookmarks: Int = 0
     
     init(title: String, text: String, viewCount: Int, comments: Int, reference: DocumentReference){
         mTitle = title

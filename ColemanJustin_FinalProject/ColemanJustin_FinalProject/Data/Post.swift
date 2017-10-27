@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import Firebase
 import ImageButter
+import DateToolsSwift
 
 class Post{
     let mCaption: String?
@@ -42,17 +43,16 @@ class Post{
         //downloadImage()
     }
     
+    var dateString: String{
+        return (mDate?.timeAgo(since: Date(), numericDates: true, numericTimes: false))!
+    }
+    
     func setImageUrl(_ imageURl: String){
         mImageUrl = imageURl
         
         // Save to Database
         DatabaseUtil().createPost(self)
     }
-    
-    /*func downloadImage(){
-        
-        //CloudStorageUtil().downloadImage(mImageUrl, self, collection)
-    }*/
     
     func getDate()-> String{
         let formatter = DateFormatter()

@@ -38,7 +38,7 @@ class AnalysisViewController: UIViewController, UICollectionViewDelegate, UIColl
     func submitTapped(_ sender: MDCRaisedButton){
         DatabaseUtil().saveHairTypes(selectedHairTypes)
         UserDefaultsUtil().saveUserHairTypes(selectedHairTypes)
-        performSegue(withIdentifier: "toFeed", sender: self)
+        performSegue(withIdentifier: "toProfileSetup", sender: self)
     }
     
     //MARK: - Collection View Callbacks

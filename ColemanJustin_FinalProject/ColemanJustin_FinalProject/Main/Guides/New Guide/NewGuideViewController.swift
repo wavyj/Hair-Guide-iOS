@@ -8,19 +8,27 @@
 
 import UIKit
 import MaterialComponents
+import Fusuma
+import Firebase
 
-class NewGuideViewController: UIViewController, UITextFieldDelegate {
+class NewGuideViewController: /*WPEditorViewController, WPEditorViewControllerDelegate, WPEditorViewDelegate*/ UIViewController, FusumaDelegate {
     
     //MARK: - Outlets
-    @IBOutlet weak var buttonBar: MDCButtonBar!
+    //@IBOutlet weak var editor: UIView!
+    //@IBOutlet weak var editorBar: UIView!
+    @IBOutlet weak var imageContainer: UIView!
+    @IBOutlet weak var guideImage: UIImageView!
     @IBOutlet weak var textInputContainer: UIView!
     @IBOutlet weak var titleInput: MDCTextField!
+    @IBOutlet weak var productsBtn: MDCRaisedButton!
+    @IBOutlet weak var progressView: UIProgressView!
 
     //MARK: - Variables
     var textController: MDCTextInputController?
     var multiTextController: MDCTextInputController?
     var textInput: MDCMultilineTextField?
     var newGuide: Guide? = nil
+    var selectedImage: UIImage? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +36,7 @@ class NewGuideViewController: UIViewController, UITextFieldDelegate {
         // Do any additional setup after loading the view.
         self.navigationController?.setToolbarHidden(true, animated: true)
         setupMaterialComponents()
+        imageContainer.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTapped(_:))))
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,39 +45,29 @@ class NewGuideViewController: UIViewController, UITextFieldDelegate {
     }
     
     //MARK: - Storyboard Actions
-    func textTapped(_ sender: UIBarButtonItem){
-        
-    }
-    func orderedTapped(_ sender: UIBarButtonItem){
-        
-    }
-    func unOrderedTapped(_ sender: UIBarButtonItem){
-        
-    }
-    func imageTapped(_ sender: UIBarButtonItem){
-        
-    }
-    func productTapped(_ sender: UIBarButtonItem){
-        
-    }
     func doneTapped(_ sender: UIBarButtonItem){
+    
         if !titleInput.text!.isEmpty && !(textInput?.text?.isEmpty)!{
-            textController?.setErrorText("", errorAccessibilityValue: nil)
+            textController?.setErrorText(nil, errorAccessibilityValue: nil)
             newGuide = Guide(title: titleInput.text!, text: (textInput?.text)!, viewCount: 0, comments: 0)
-            DatabaseUtil().createGuide(newGuide!)
-            performSegue(withIdentifier: "toNewGuide", sender: self)
+            if (selectedImage != nil){
+                progressView.isHidden = false
+                view.isUserInteractionEnabled = false
+                saveImage(selectedImage!)
+            }else{
+                uploadComplete()
+            }
+            
         } else{
             textController?.setErrorText("Must have a title", errorAccessibilityValue: nil)
-            multiTextController?.setErrorText("Must have a title", errorAccessibilityValue: nil)
+            multiTextController?.setErrorText("Must have guide text", errorAccessibilityValue: nil)
         }
-        
-        
     }
     
-    //MARK: - TextField Delegate
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
-        return false
+    func imageTapped(_ sender: UIBarButtonItem){
+        let fusama = FusumaViewController()
+        fusama.delegate = self
+        present(fusama, animated: true, completion: nil)
     }
     
     //MARK: - Methods
@@ -86,36 +85,11 @@ class NewGuideViewController: UIViewController, UITextFieldDelegate {
         multiTextController = MDCTextInputControllerDefault(textInput: textInput)
         multiTextController?.activeColor = MDCPalette.blue.tint500
         
-        // ButtonBar
-        /*buttonBar.backgroundColor = MDCPalette.blue.tint500
-        
-        let textAction = UIBarButtonItem(title: "", style: .plain, target: self, action: #selector(textTapped(_:)))
-        textAction.image = UIImage(named: "text")?.withRenderingMode(.alwaysTemplate)
-        textAction.tintColor = UIColor.white
-        textAction.width = view.bounds.width / 5
-        
-        let orderedAction = UIBarButtonItem(title: "", style: .plain, target: self, action: #selector(orderedTapped(_:)))
-        orderedAction.image = UIImage(named: "ordered")?.withRenderingMode(.alwaysTemplate)
-        orderedAction.tintColor = UIColor.white
-        orderedAction.width = view.bounds.width / 5
-        
-        let unOrderedAction = UIBarButtonItem(title: "", style: .plain, target: self, action: #selector(unOrderedTapped(_:)))
-        unOrderedAction.image = UIImage(named: "unordered")?.withRenderingMode(.alwaysTemplate)
-        unOrderedAction.tintColor = UIColor.white
-        unOrderedAction.width = view.bounds.width / 5
-        
-        let imageAction = UIBarButtonItem(title: "", style: .plain, target: self, action: #selector(imageTapped(_:)))
-        imageAction.image = UIImage(named: "image")?.withRenderingMode(.alwaysTemplate)
-        imageAction.tintColor = UIColor.white
-        imageAction.width = view.bounds.width / 5
-        
-        let productAction = UIBarButtonItem(title: "", style: .plain, target: self, action: #selector(productTapped(_:)))
-        productAction.image = UIImage(named: "product")?.withRenderingMode(.alwaysTemplate)
-        productAction.tintColor = UIColor.white
-        productAction.width = view.bounds.width / 5
-        
-        buttonBar.items = [textAction, orderedAction, unOrderedAction, imageAction, productAction]*/
-        
+        productsBtn.setBackgroundColor(MDCPalette.blue.tint500, for: .normal)
+            productsBtn.setImage(UIImage(named: "product")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        productsBtn.tintColor = UIColor.white
+        productsBtn.setTitle("", for: .normal)
+
         // AppBar Setup
         let appBar = MDCAppBar()
         self.addChildViewController(appBar.headerViewController)
@@ -124,10 +98,32 @@ class NewGuideViewController: UIViewController, UITextFieldDelegate {
         title = "New Guide"
         let doneAction = UIBarButtonItem(image: UIImage(named: "done")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(doneTapped(_:)))
         doneAction.tintColor = UIColor.black
-        navigationItem.rightBarButtonItem = doneAction
+        navigationItem.rightBarButtonItems = [doneAction]
         appBar.addSubviewsToParent()
     }
-
+    
+    func uploadComplete(){
+        DatabaseUtil().createGuide(newGuide!)
+        performSegue(withIdentifier: "toNewGuide", sender: self)
+    }
+    
+    //MARK: - Fusama Callbacks
+    func fusumaImageSelected(_ image: UIImage, source: FusumaMode) {
+        selectedImage = image
+        guideImage.image = image
+    }
+    
+    func fusumaMultipleImageSelected(_ images: [UIImage], source: FusumaMode) {
+        
+    }
+    
+    func fusumaVideoCompleted(withFileURL fileURL: URL) {
+        
+    }
+    
+    func fusumaCameraRollUnauthorized() {
+        
+    }
     
     // MARK: - Navigation
 
@@ -138,9 +134,63 @@ class NewGuideViewController: UIViewController, UITextFieldDelegate {
         
         if segue.destination as? GuidesViewController != nil{
             let vc = segue.destination as! GuidesViewController
-            vc.createdGuide = newGuide
+            //vc.createdGuide = newGuide
         }
     }
  
 
+}
+
+extension NewGuideViewController{
+    func saveImage(_ image: UIImage){
+        var downloadUrl: String = ""
+        var imageData: Data? = nil
+        var format = DateFormatter()
+        let storageRef = Storage.storage().reference()
+        format.dateFormat = "yyyyMMddHHmmss"
+        
+        var imageRefString = "images/\(UserDefaultsUtil().loadReference())" + format.string(from: Date())
+        var imageRef: StorageReference? = nil
+        
+        // Convert to data
+        if let jpeg = image.jpegImg{
+            imageData = jpeg
+            imageRefString = imageRefString + ".jpg"
+            imageRef = storageRef.child(imageRefString)
+        }else if let png = image.pngImg{
+            imageData = png
+            imageRefString = imageRefString + ".png"
+            imageRef = storageRef.child(imageRefString)
+        }
+        
+        let uploadTask = imageRef?.putData(imageData!, metadata: nil, completion: { (metaData, error) in
+            guard let metaData = metaData else{
+                // Error
+                return
+            }
+            if let error = error{
+                // Error
+                print(error.localizedDescription)
+            }
+        })
+        uploadTask?.observe(.progress, handler: { (snapshot) in
+            // Progress
+            
+            var percent = (snapshot.progress?.fractionCompleted)!
+            percent = round(100*percent)/100
+            
+            DispatchQueue.main.async {
+                self.progressView.progress = Float(percent)
+            }
+        })
+        uploadTask?.observe(.success, handler: { (snapshot) in
+            
+            self.newGuide?.mImageUrl = (snapshot.metadata?.downloadURL()?.absoluteString)!
+            DispatchQueue.main.async {
+                uploadTask?.removeAllObservers(for: .progress)
+                self.uploadComplete()
+            }
+        })
+        
+    }
 }

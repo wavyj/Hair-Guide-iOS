@@ -15,6 +15,8 @@
 		D01BB5A41F8F0E1200EBE6C6 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01BB5A31F8F0E1200EBE6C6 /* FeedViewController.swift */; };
 		D020E9E31F9E2918009E44BF /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D020E9E11F9E2918009E44BF /* ProductCell.swift */; };
 		D020E9E41F9E2918009E44BF /* ProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D020E9E21F9E2918009E44BF /* ProductCell.xib */; };
+		D020E9E61F9E31E6009E44BF /* ProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D020E9E51F9E31E6009E44BF /* ProductsViewController.swift */; };
+		D02A8AC51FA0FF0100DA0F75 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02A8AC41FA0FF0100DA0F75 /* EditProfileViewController.swift */; };
 		D03D40EF1F8FB3C3007ACE22 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03D40EE1F8FB3C3007ACE22 /* NavigationController.swift */; };
 		D03D40F31F8FD249007ACE22 /* UserDefaultsUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03D40F21F8FD249007ACE22 /* UserDefaultsUtil.swift */; };
 		D03D40F61F8FD8DD007ACE22 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03D40F51F8FD8DD007ACE22 /* Post.swift */; };
@@ -29,6 +31,7 @@
 		D05AAD801F8E91CD00716C74 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05AAD7F1F8E91CD00716C74 /* SignupViewController.swift */; };
 		D062C0941F91082E007BE5D7 /* AnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D062C0931F91082E007BE5D7 /* AnalysisViewController.swift */; };
 		D06641651F92768900258FB1 /* NewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06641641F92768900258FB1 /* NewPostViewController.swift */; };
+		D06F9A631FA21E79006B578E /* GridPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06F9A621FA21E79006B578E /* GridPostCell.swift */; };
 		D078B5BE1F7C1A5F00A6F8C5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D078B5BD1F7C1A5F00A6F8C5 /* AppDelegate.swift */; };
 		D078B5C31F7C1A5F00A6F8C5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D078B5C11F7C1A5F00A6F8C5 /* Main.storyboard */; };
 		D078B5C51F7C1A5F00A6F8C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D078B5C41F7C1A5F00A6F8C5 /* Assets.xcassets */; };
@@ -41,9 +44,11 @@
 		D0964F951F9696850022CB7A /* SelectedGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0964F941F9696850022CB7A /* SelectedGuideViewController.swift */; };
 		D09691451F93D22A00763F83 /* NewGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09691441F93D22A00763F83 /* NewGuideViewController.swift */; };
 		D0AE936F1F97BBBE0087028C /* AddTagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AE936E1F97BBBE0087028C /* AddTagCell.swift */; };
-		D0AE93711F97BBCA0087028C /* TagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AE93701F97BBCA0087028C /* TagCell.swift */; };
 		D0BC3ACE1F9506C500423B99 /* GuideCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BC3ACC1F9506C500423B99 /* GuideCell.swift */; };
 		D0BC3ACF1F9506C500423B99 /* GuideCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0BC3ACD1F9506C500423B99 /* GuideCell.xib */; };
+		D0CD6A1D1FA24E90001F5CEC /* ProfileSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CD6A1C1FA24E90001F5CEC /* ProfileSetupViewController.swift */; };
+		D0E97AED1FA36DFC00292763 /* EditGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E97AEC1FA36DFC00292763 /* EditGuideViewController.swift */; };
+		D0FD59D21FA3B4C500CE71BB /* TagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FD59D11FA3B4C500CE71BB /* TagsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +62,8 @@
 		D01BB5A31F8F0E1200EBE6C6 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		D020E9E11F9E2918009E44BF /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
 		D020E9E21F9E2918009E44BF /* ProductCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductCell.xib; sourceTree = "<group>"; };
+		D020E9E51F9E31E6009E44BF /* ProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewController.swift; sourceTree = "<group>"; };
+		D02A8AC41FA0FF0100DA0F75 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		D03D40EE1F8FB3C3007ACE22 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		D03D40F21F8FD249007ACE22 /* UserDefaultsUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsUtil.swift; sourceTree = "<group>"; };
 		D03D40F51F8FD8DD007ACE22 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -71,6 +78,7 @@
 		D05AAD7F1F8E91CD00716C74 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		D062C0931F91082E007BE5D7 /* AnalysisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisViewController.swift; sourceTree = "<group>"; };
 		D06641641F92768900258FB1 /* NewPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostViewController.swift; sourceTree = "<group>"; };
+		D06F9A621FA21E79006B578E /* GridPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridPostCell.swift; sourceTree = "<group>"; };
 		D078B5BA1F7C1A5F00A6F8C5 /* ColemanJustin_FinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColemanJustin_FinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D078B5BD1F7C1A5F00A6F8C5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D078B5C21F7C1A5F00A6F8C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -85,9 +93,11 @@
 		D0964F941F9696850022CB7A /* SelectedGuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedGuideViewController.swift; sourceTree = "<group>"; };
 		D09691441F93D22A00763F83 /* NewGuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGuideViewController.swift; sourceTree = "<group>"; };
 		D0AE936E1F97BBBE0087028C /* AddTagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagCell.swift; sourceTree = "<group>"; };
-		D0AE93701F97BBCA0087028C /* TagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCell.swift; sourceTree = "<group>"; };
 		D0BC3ACC1F9506C500423B99 /* GuideCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideCell.swift; sourceTree = "<group>"; };
 		D0BC3ACD1F9506C500423B99 /* GuideCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GuideCell.xib; sourceTree = "<group>"; };
+		D0CD6A1C1FA24E90001F5CEC /* ProfileSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSetupViewController.swift; sourceTree = "<group>"; };
+		D0E97AEC1FA36DFC00292763 /* EditGuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGuideViewController.swift; sourceTree = "<group>"; };
+		D0FD59D11FA3B4C500CE71BB /* TagsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,7 +196,6 @@
 			children = (
 				D03D40FA1F8FDCC7007ACE22 /* PostCell.swift */,
 				D0AE936E1F97BBBE0087028C /* AddTagCell.swift */,
-				D0AE93701F97BBCA0087028C /* TagCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -204,6 +213,9 @@
 			children = (
 				D050F9761F9111800008370E /* ProfileViewController.swift */,
 				D03E03B51F97DC5400A947E4 /* SelectedProfileViewController.swift */,
+				D02A8AC41FA0FF0100DA0F75 /* EditProfileViewController.swift */,
+				D06F9A621FA21E79006B578E /* GridPostCell.swift */,
+				D0CD6A1C1FA24E90001F5CEC /* ProfileSetupViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -241,6 +253,7 @@
 			isa = PBXGroup;
 			children = (
 				D06641641F92768900258FB1 /* NewPostViewController.swift */,
+				D0FD59D11FA3B4C500CE71BB /* TagsViewController.swift */,
 			);
 			path = "New Post";
 			sourceTree = "<group>";
@@ -314,6 +327,8 @@
 				D09691431F93D20D00763F83 /* New Guide */,
 				D0FFAAAD1F8D2569005E11BE /* Cells */,
 				D0964F941F9696850022CB7A /* SelectedGuideViewController.swift */,
+				D020E9E51F9E31E6009E44BF /* ProductsViewController.swift */,
+				D0E97AEC1FA36DFC00292763 /* EditGuideViewController.swift */,
 			);
 			path = Guides;
 			sourceTree = "<group>";
@@ -459,14 +474,17 @@
 				D03E03B61F97DC5400A947E4 /* SelectedProfileViewController.swift in Sources */,
 				D05AAD801F8E91CD00716C74 /* SignupViewController.swift in Sources */,
 				D062C0941F91082E007BE5D7 /* AnalysisViewController.swift in Sources */,
-				D0AE93711F97BBCA0087028C /* TagCell.swift in Sources */,
+				D0CD6A1D1FA24E90001F5CEC /* ProfileSetupViewController.swift in Sources */,
 				D050F9771F9111800008370E /* ProfileViewController.swift in Sources */,
+				D02A8AC51FA0FF0100DA0F75 /* EditProfileViewController.swift in Sources */,
 				D050F9741F91114F0008370E /* GuidesViewController.swift in Sources */,
 				D07F3B9B1F999FA500B4BF34 /* SplashScreen.swift in Sources */,
+				D06F9A631FA21E79006B578E /* GridPostCell.swift in Sources */,
 				D0964F911F9659A90022CB7A /* CloudStorageUtil.swift in Sources */,
 				D05AAD7C1F8E639C00716C74 /* AuthenticationViewController.swift in Sources */,
 				D01BB5A41F8F0E1200EBE6C6 /* FeedViewController.swift in Sources */,
 				D050F9721F9110C00008370E /* SearchViewController.swift in Sources */,
+				D0FD59D21FA3B4C500CE71BB /* TagsViewController.swift in Sources */,
 				D0964F8F1F9652A50022CB7A /* User.swift in Sources */,
 				D010E2731F9A61F80042A031 /* SectionHeaderView.swift in Sources */,
 				D0964F931F9667400022CB7A /* Guide.swift in Sources */,
@@ -481,8 +499,10 @@
 				D06641651F92768900258FB1 /* NewPostViewController.swift in Sources */,
 				D078B5BE1F7C1A5F00A6F8C5 /* AppDelegate.swift in Sources */,
 				D020E9E31F9E2918009E44BF /* ProductCell.swift in Sources */,
+				D0E97AED1FA36DFC00292763 /* EditGuideViewController.swift in Sources */,
 				D03D40FC1F8FDCC7007ACE22 /* PostCell.swift in Sources */,
 				D010E2711F9A61920042A031 /* HairTypeCell.swift in Sources */,
+				D020E9E61F9E31E6009E44BF /* ProductsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

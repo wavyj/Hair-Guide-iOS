@@ -30,7 +30,7 @@ class NewPostViewController: UIViewController, UICollectionViewDelegate, UIColle
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
+        self.navigationController?.setToolbarHidden(true, animated: false)
         postImage.image = currentImage
         setupMaterialComponents()
     }
@@ -60,50 +60,55 @@ class NewPostViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     func addTapped(_ sender: MDCRaisedButton){
-        tags.append("Curly")
+        performSegue(withIdentifier: "toAddTag", sender: self)
+    }
+    
+    @IBAction func newTags(_ sender: UIStoryboardSegue){
         tagsView.reloadData()
+    }
+    
+    @IBAction func unwindTags(_ sender: UIStoryboardSegue){
+        
+    }
+    
+    func tagTapped(_ sender: MDCRaisedButton){
+        let alert = UIAlertController(title: "Remove \(tags[sender.tag])?", message: "", preferredStyle: .alert)
+        let yesAction = UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+            self.tags.remove(at: sender.tag)
+            self.tagsView.reloadData()
+        })
+        let noAction = UIAlertAction(title: "No", style: .cancel, handler: nil)
+        alert.addAction(yesAction)
+        alert.addAction(noAction)
+        self.present(alert, animated: true, completion: nil)
     }
     
     //MARK: - CollectionView
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return tags.count + 1
     }
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return tags.count + 1
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        if indexPath.section == 0{
+       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "tagCell", for: indexPath) as! TagCell
+        if indexPath.row == 0{
             // Add Button
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "addCell", for: indexPath) as! AddTagCell
-            cell.addBtn.setBackgroundColor(MDCPalette.grey.tint300, for: .normal)
-            cell.addBtn.addTarget(self, action: #selector(addTapped(_:)), for: .touchUpInside)
-            cell.addBtn.setImage(UIImage(named: "add")?.withRenderingMode(.alwaysTemplate), for: .normal)
-            cell.addBtn.tintColor = UIColor.white
-            cell.addBtn.setBackgroundColor(MDCPalette.blue.tint500, for: .normal)
-            cell.addBtn.setTitle("", for: .normal)
-            return cell
+            cell.tagBtn.addTarget(self, action: #selector(addTapped(_:)), for: .touchUpInside)
+            cell.tagBtn.setImage(UIImage(named: "add")?.withRenderingMode(.alwaysTemplate), for: .normal)
+            cell.tagBtn.tintColor = UIColor.white
+            cell.tagBtn.setBackgroundColor(MDCPalette.blue.tint500, for: .normal)
+            cell.tagBtn.setTitle("", for: .normal)
             
         } else{
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! TagCell
-            cell.tagText.text = tags[indexPath.row]
-            return cell
+            cell.tagBtn.addTarget(self, action: #selector(tagTapped(_:)), for: .touchUpInside)
+            cell.tagBtn.setBackgroundColor(MDCPalette.grey.tint100, for: .normal)
+            cell.tagBtn.setTitle(tags[indexPath.row - 1], for: .normal)
+            cell.tagBtn.setTitleColor(UIColor.black, for: .normal)
+            cell.tagBtn.tag = indexPath.row - 1
         }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.section > 0{
-            let alert = UIAlertController(title: "Remove Tag?", message: "", preferredStyle: .alert)
-            let yesAction = UIAlertAction(title: "Yes", style: .default, handler: { (action) in
-                self.tags.remove(at: indexPath.section - 1)
-                collectionView.reloadData()
-            })
-            let noAction = UIAlertAction(title: "No", style: .cancel, handler: nil)
-            alert.addAction(yesAction)
-            alert.addAction(noAction)
-            self.present(alert, animated: true, completion: nil)
-        }
+        return cell
     }
     
     //MARK: - TextView Delegate
@@ -150,6 +155,10 @@ class NewPostViewController: UIViewController, UICollectionViewDelegate, UIColle
         if segue.destination as? FeedViewController != nil{
             let vc = segue.destination as! FeedViewController
             vc.addedPost = newPost
+        }
+        
+        if let vc = segue.destination as? TagsViewController {
+            vc.selectedTags = tags
         }
     }
  

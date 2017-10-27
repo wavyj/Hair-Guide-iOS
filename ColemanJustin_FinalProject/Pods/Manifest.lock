@@ -5,6 +5,13 @@ PODS:
   - BoringSSL/Implementation (9.0):
     - BoringSSL/Interface (= 9.0)
   - BoringSSL/Interface (9.0)
+  - CocoaLumberjack (3.2.1):
+    - CocoaLumberjack/Default (= 3.2.1)
+    - CocoaLumberjack/Extensions (= 3.2.1)
+  - CocoaLumberjack/Default (3.2.1)
+  - CocoaLumberjack/Extensions (3.2.1):
+    - CocoaLumberjack/Default
+  - DateToolsSwift (2.0.3)
   - Firebase/Auth (4.3.0):
     - Firebase/Core
     - FirebaseAuth (= 4.2.1)
@@ -52,7 +59,6 @@ PODS:
     - GoogleToolboxForMac/Defines (= 2.1.1)
     - GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)
   - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
-  - GreedoLayout (1.2.0)
   - gRPC (1.6.0):
     - gRPC-Core (= 1.6.0)
     - gRPC-RxLibrary (= 1.6.0)
@@ -70,12 +76,8 @@ PODS:
     - Protobuf (~> 3.0)
   - gRPC-RxLibrary (1.6.0)
   - GTMSessionFetcher/Core (1.1.12)
-  - IGListKit (3.1.1):
-    - IGListKit/Default (= 3.1.1)
-  - IGListKit/Default (3.1.1):
-    - IGListKit/Diffing
-  - IGListKit/Diffing (3.1.1)
   - ImageButter (1.1.0)
+  - Kingfisher (4.2.0)
   - leveldb-library (1.18.3)
   - MaterialComponents (35.2.0):
     - MaterialComponents/ActivityIndicator (= 35.2.0)
@@ -396,25 +398,30 @@ PODS:
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
+  - NSObject-SafeExpectations (0.0.2)
   - Protobuf (3.4.0)
-  - SJFluidSegmentedControl (1.1.2)
   - Validator (3.0)
+  - WordPress-iOS-Editor (1.9.7):
+    - CocoaLumberjack (~> 3.2.0)
+    - NSObject-SafeExpectations (~> 0.0.2)
 
 DEPENDENCIES:
+  - DateToolsSwift
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Firestore
   - Firebase/Storage
   - Fusuma
-  - GreedoLayout
-  - IGListKit (~> 3.0)
   - ImageButter
+  - Kingfisher (~> 4.0)
   - MaterialComponents
-  - SJFluidSegmentedControl
   - Validator
+  - WordPress-iOS-Editor
 
 SPEC CHECKSUMS:
   BoringSSL: 19083b821ef3ae0f758fae15482e183003b1e265
+  CocoaLumberjack: 2800c03334042fe80589423c8d80e582dcaec482
+  DateToolsSwift: bf69bf9056d9e53c5c03f06e51f219b9b8b02f9e
   Firebase: 83283761a1ef6dc9846e03d08059f51421afbd65
   FirebaseAnalytics: 722b53c7b32bfc7806b06e0093a2f5180d4f2c5a
   FirebaseAuth: d7f047fbeab98062b98ea933b8d934e0fb1190e2
@@ -424,14 +431,13 @@ SPEC CHECKSUMS:
   FirebaseStorage: 0cca42d9b889a0227c3a50121f45a4469fc9eb27
   Fusuma: e8158ad6650507455c9898c22bc01583fbc86d8e
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
-  GreedoLayout: b1a1adc6ed5f281353225e3eb21d18cedee8e513
   gRPC: 07788969b862af21491908f82b83d17ac08c94cd
   gRPC-Core: f707ade59c559fe718e27713189607d03b15f571
   gRPC-ProtoRPC: de7505e493a9d1b6b96c8ea8f976c73100fdf53f
   gRPC-RxLibrary: 17b9699beb0a838b95b57832244f9ead18e66777
   GTMSessionFetcher: ebaa1f79a5366922c1735f1566901f50beba23b7
-  IGListKit: cb97f405ae43e59fe1da74271e19427ec20d3c07
   ImageButter: b17bb31996f9989b4ca5554942ebdbaececba9f5
+  Kingfisher: 9ee7e788d8ba07c3f21ce0d43f33cec310a4f781
   leveldb-library: 10fb39c39e243db4af1828441162405bbcec1404
   MaterialComponents: 3edb4c96d32042242ecdfb2159e697e3c59e9f38
   MDFTextAccessibility: 94098925e0853551c5a311ce7c1ecefbe297cdb6
@@ -439,10 +445,11 @@ SPEC CHECKSUMS:
   MotionInterchange: b600100244df56c4f462bdacbcd11c44e6305d05
   MotionTransitioning: caaa488e0469d93f004793b96a2ed04447af808d
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  NSObject-SafeExpectations: 7d7f48df90df4e11da7cfe86b64f45eff7a7f521
   Protobuf: 03eef2ee0b674770735cf79d9c4d3659cf6908e8
-  SJFluidSegmentedControl: efd26ea5f0832c715e2750314a2dc0cc81e39ae5
   Validator: 7d9828daffabc757604603052e407f208fa9b6d5
+  WordPress-iOS-Editor: 03b3bc631a31520ccf78e665548286c6d12c17f4
 
-PODFILE CHECKSUM: 8de28eaefc018cf7d8b82b11a34c6ad34b41d296
+PODFILE CHECKSUM: d8153d6cea286a5686e3c5dd0a28ae86ed6b42df
 
 COCOAPODS: 1.2.0

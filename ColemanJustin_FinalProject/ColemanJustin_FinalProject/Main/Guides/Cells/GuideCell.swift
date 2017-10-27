@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MaterialComponents
 
 class GuideCell: UICollectionViewCell{
     
@@ -23,6 +24,7 @@ class GuideCell: UICollectionViewCell{
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var likesIcon: UIImageView!
     @IBOutlet weak var likesLabel: UILabel!
+    @IBOutlet weak var editBtn: MDCRaisedButton!
     
     //MARK: - Variables
     var isOpen = false
@@ -36,6 +38,9 @@ class GuideCell: UICollectionViewCell{
         backWidthOrig = backwidthConstraint.constant
         self.frontYConstraint.constant = 0
         self.backYConstraint.constant = 0
+        
+        editBtn.setTitle("Edit", for: .normal)
+        editBtn.setBackgroundColor(UIColor.white, for: .normal)
         
         createShadow()
         createRoundCorner()
