@@ -169,7 +169,7 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
                 post.mReference = i.reference
                 self.loadUser(userRef, post)
                 self.posts += [post]
-                self.update()
+                //self.update()
             }
             
         }

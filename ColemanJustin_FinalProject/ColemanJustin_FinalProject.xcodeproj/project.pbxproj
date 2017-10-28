@@ -47,6 +47,7 @@
 		D0BC3ACE1F9506C500423B99 /* GuideCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BC3ACC1F9506C500423B99 /* GuideCell.swift */; };
 		D0BC3ACF1F9506C500423B99 /* GuideCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0BC3ACD1F9506C500423B99 /* GuideCell.xib */; };
 		D0CD6A1D1FA24E90001F5CEC /* ProfileSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CD6A1C1FA24E90001F5CEC /* ProfileSetupViewController.swift */; };
+		D0E559511FA3E07000642FE6 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E559501FA3E07000642FE6 /* UserCell.swift */; };
 		D0E97AED1FA36DFC00292763 /* EditGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E97AEC1FA36DFC00292763 /* EditGuideViewController.swift */; };
 		D0FD59D21FA3B4C500CE71BB /* TagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FD59D11FA3B4C500CE71BB /* TagsViewController.swift */; };
 /* End PBXBuildFile section */
@@ -96,6 +97,7 @@
 		D0BC3ACC1F9506C500423B99 /* GuideCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideCell.swift; sourceTree = "<group>"; };
 		D0BC3ACD1F9506C500423B99 /* GuideCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GuideCell.xib; sourceTree = "<group>"; };
 		D0CD6A1C1FA24E90001F5CEC /* ProfileSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSetupViewController.swift; sourceTree = "<group>"; };
+		D0E559501FA3E07000642FE6 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		D0E97AEC1FA36DFC00292763 /* EditGuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGuideViewController.swift; sourceTree = "<group>"; };
 		D0FD59D11FA3B4C500CE71BB /* TagsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -203,6 +205,7 @@
 		D050F9701F9110B10008370E /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				D0E5594F1FA3E05B00642FE6 /* Cells */,
 				D050F9711F9110C00008370E /* SearchViewController.swift */,
 			);
 			path = Search;
@@ -307,6 +310,14 @@
 				D09691441F93D22A00763F83 /* NewGuideViewController.swift */,
 			);
 			path = "New Guide";
+			sourceTree = "<group>";
+		};
+		D0E5594F1FA3E05B00642FE6 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				D0E559501FA3E07000642FE6 /* UserCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		D0FFAAAD1F8D2569005E11BE /* Cells */ = {
@@ -500,6 +511,7 @@
 				D078B5BE1F7C1A5F00A6F8C5 /* AppDelegate.swift in Sources */,
 				D020E9E31F9E2918009E44BF /* ProductCell.swift in Sources */,
 				D0E97AED1FA36DFC00292763 /* EditGuideViewController.swift in Sources */,
+				D0E559511FA3E07000642FE6 /* UserCell.swift in Sources */,
 				D03D40FC1F8FDCC7007ACE22 /* PostCell.swift in Sources */,
 				D010E2711F9A61920042A031 /* HairTypeCell.swift in Sources */,
 				D020E9E61F9E31E6009E44BF /* ProductsViewController.swift in Sources */,

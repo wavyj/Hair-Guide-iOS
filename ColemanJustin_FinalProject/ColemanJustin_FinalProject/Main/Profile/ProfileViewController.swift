@@ -146,7 +146,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
             let userGender = data!["gender"] as! String
             let userFollowers = data!["followers"] as! Int
             let userFollowing = data!["following"] as! Int
-            
+            let userFollowersList = data!["followerList"] as! [String]
+            let userFollowingsList = data!["followingList"] as! [String]
             let user = User(email: userEmail, username: userName, bio: userBio, profilePicUrl: userPic, gender: userGender)
             user.hairTypes = userHairTypes
             user.followerCount = userFollowers
@@ -195,6 +196,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         profileImage.loadingView = loadingView
         bioText.text = currentUser?.bio
         title = currentUser?.username.lowercased()
+        followersLabel.text = currentUser?.followerCount.description
+        followingLabel.text = currentUser?.followingCount.description
     }
     
 

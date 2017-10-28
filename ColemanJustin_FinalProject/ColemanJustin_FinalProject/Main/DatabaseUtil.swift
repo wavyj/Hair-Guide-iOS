@@ -23,7 +23,7 @@ class DatabaseUtil{
          "username": newUser.username,
          "profilePicUrl": "",
          "bio": "",
-         "gender": "", "hairTypes": [], "followers": 0, "following": 0], completion: { (error) in
+         "gender": "", "hairTypes": [], "followers": 0, "following": 0, "followerList": [], "followingList": []], completion: { (error) in
             if let error = error{
                 print("Error adding document: \(error)")
             } else{
@@ -49,16 +49,20 @@ class DatabaseUtil{
             let bio = userData!["bio"] as! String
             let followers = userData!["followers"] as! Int
             let following = userData!["following"] as! Int
+            let followersList = userData!["followerList"] as! [String]
+            let followingsList = userData!["followingList"] as! [String]
             let user = User(email: email, username: username, bio: bio, profilePicUrl: pic, gender: gender)
             user.followerCount = followers
             user.followingCount = following
+            user.followerList = followersList
+            user.followingList = followingsList
             UserDefaultsUtil().saveUserData(user)
         })
         
     }
     
     func updateUser(_ user: User){
-        db?.collection("users").document(UserDefaultsUtil().loadReference()).setData(["email" : user.email, "username": user.username, "profilePicUrl": user.profilePicUrl, "bio": user.bio, "gender": user.gender, "hairTypes": user.hairTypes,  "followers": user.followerCount, "following": user.followingCount], completion: { (error) in
+        db?.collection("users").document(UserDefaultsUtil().loadReference()).setData(["email" : user.email, "username": user.username, "profilePicUrl": user.profilePicUrl, "bio": user.bio, "gender": user.gender, "hairTypes": user.hairTypes,  "followers": user.followerCount, "following": user.followingCount, "followerList": user.followerList, "followingList": user.followingList], completion: { (error) in
             if error != nil{
                 print(error?.localizedDescription)
             }
@@ -96,11 +100,6 @@ class DatabaseUtil{
     
     func guideViewed(_ viewedGuide: Guide){
         updateGuide(viewedGuide)
-    }
-    
-    func saveHairTypes(_ types: [String]){
-        let newUser = UserDefaultsUtil().loadUserData()
-        db?.collection("users").document(UserDefaultsUtil().loadReference()).setData(["email" : newUser.email, "username": newUser.username, "profilePicUrl": newUser   .profilePicUrl, "bio": newUser.bio, "gender": newUser.gender, "hairTypes": types, "followers": newUser.followerCount, "following": newUser.followingCount])
     }
     
     func bookmarkGuide(_ selectedGuide: Guide, _ isFound: Bool){

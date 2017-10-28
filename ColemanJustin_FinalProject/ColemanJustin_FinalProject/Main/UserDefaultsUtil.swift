@@ -43,6 +43,10 @@ class UserDefaultsUtil{
         UserDefaults.standard.set(user.gender, forKey: "gender")
         UserDefaults.standard.set(user.followerCount, forKey: "followers")
         UserDefaults.standard.set(user.followingCount, forKey: "following")
+        UserDefaults.standard.set(user.hairTypes, forKey: "hairTypes")
+        UserDefaults.standard.set(user.followerList, forKey: "followerList")
+        UserDefaults.standard.set(user.followingList, forKey: "followingList")
+        
     }
     
     public func loadUserData() -> User{
@@ -54,17 +58,14 @@ class UserDefaultsUtil{
         let followers = UserDefaults.standard.object(forKey: "followers") as! Int
         let following = UserDefaults.standard.object(forKey: "following") as! Int
         let user = User(email: email, username: username, bio: bio, profilePicUrl: profilePicUrl, gender: gender)
+        let types = UserDefaults.standard.object(forKey: "hairTypes") as! [String]
+        let followersList = UserDefaults.standard.object(forKey: "followerList") as! [String]
+        let followingsList = UserDefaults.standard.object(forKey: "followingList") as! [String]
         user.followerCount = followers
         user.followingCount = following
+        user.followerList = followersList
+        user.followingList = followingsList
         return user
-    }
-    
-    public func saveUserHairTypes(_ types: [String]){
-        UserDefaults.standard.set(types, forKey: "hairTypes")
-    }
-    
-    public func loadUserHairTypes()-> [String]{
-        return UserDefaults.standard.array(forKey: "hairTypes") as! [String]
     }
     
     public func signOut(){
@@ -80,6 +81,8 @@ class UserDefaultsUtil{
         UserDefaults.standard.removeObject(forKey: "hairTypes")
         UserDefaults.standard.removeObject(forKey: "followers")
         UserDefaults.standard.removeObject(forKey: "following")
+        UserDefaults.standard.removeObject(forKey: "followerList")
+        UserDefaults.standard.removeObject(forKey: "followingList")
     }
     
 }

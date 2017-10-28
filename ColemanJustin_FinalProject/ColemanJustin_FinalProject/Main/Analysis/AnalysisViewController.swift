@@ -36,8 +36,10 @@ class AnalysisViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     //MARK: - Storyboard Actions
     func submitTapped(_ sender: MDCRaisedButton){
-        DatabaseUtil().saveHairTypes(selectedHairTypes)
-        UserDefaultsUtil().saveUserHairTypes(selectedHairTypes)
+        let user = UserDefaultsUtil().loadUserData()
+        user.hairTypes = selectedHairTypes
+        DatabaseUtil().updateUser(user)
+        UserDefaultsUtil().saveUserData(user)
         performSegue(withIdentifier: "toProfileSetup", sender: self)
     }
     
