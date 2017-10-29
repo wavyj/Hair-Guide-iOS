@@ -1,6 +1,3 @@
 .DS_Store
 xcuserdata/
 *.xcuserstate
-Carthage/Build
-build/
-DerivedData/
