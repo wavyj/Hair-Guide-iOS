@@ -193,9 +193,12 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
             let userHairTypes = data!["hairTypes"] as! [String]
             let userPic = data!["profilePicUrl"] as! String
             let userGender = data!["gender"] as! String
-            
+            let userFollowers = data!["followers"] as! Int
+            let userFollowing = data!["following"] as! Int
             let user = User(email: userEmail, username: userName, bio: userBio, profilePicUrl: userPic, gender: userGender)
             user.hairTypes = userHairTypes
+            user.followerCount = userFollowers
+            user.followingCount = userFollowing
             post.mUser = user
             self.update()
         }

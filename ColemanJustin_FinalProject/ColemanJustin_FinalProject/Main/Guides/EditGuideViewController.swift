@@ -131,7 +131,7 @@ class EditGuideViewController: UIViewController, UITextFieldDelegate, FusumaDele
     
     func deleteGuide(_ guide: Guide){
         let db = Firestore.firestore()
-        db.collection("guides").document((editGuide?.mReference?.documentID)!).delete { (error) in
+        db.collection("guides").document((editGuide?.mReference)!).delete { (error) in
             if error != nil{
                 print(error?.localizedDescription)
                 return
@@ -196,8 +196,8 @@ extension EditGuideViewController{
             imageRefString = imageRefString + ".png"
             imageRef = storageRef.child(imageRefString)
         }
-        
-        let uploadTask = imageRef?.putData(imageData!, metadata: nil, completion: { (metaData, error) in
+        let metaData = StorageMetadata(dictionary: ["contentType" : "image/jpg"])
+        let uploadTask = imageRef?.putData(imageData!, metadata: metaData, completion: { (metaData, error) in
             guard let metaData = metaData else{
                 // Error
                 return

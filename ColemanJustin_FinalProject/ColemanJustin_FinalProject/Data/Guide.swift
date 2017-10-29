@@ -16,11 +16,11 @@ class Guide{
     //var mContent: String = ""
     var mImageUrl: String = ""
     var mComments: Int
-    var mReference: DocumentReference? = nil
+    var mReference = ""
     var mAuthor = ""
     var mBookmarks: Int = 0
     
-    init(title: String, text: String, viewCount: Int, comments: Int, reference: DocumentReference){
+    init(title: String, text: String, viewCount: Int, comments: Int, reference: String){
         mTitle = title
         mText = text
         mViews = viewCount

@@ -23,7 +23,7 @@ class DatabaseUtil{
          "username": newUser.username,
          "profilePicUrl": "",
          "bio": "",
-         "gender": "", "hairTypes": [], "followers": 0, "following": 0, "followerList": [], "followingList": []], completion: { (error) in
+         "gender": "", "hairTypes": [], "followers": 0, "following": 0], completion: { (error) in
             if let error = error{
                 print("Error adding document: \(error)")
             } else{
@@ -39,7 +39,7 @@ class DatabaseUtil{
                 // Error
                 print(error?.localizedDescription)
             }
-            
+        
             UserDefaultsUtil().saveReference(DocumentID: (snapshot?.documents[0].reference.documentID)!)
             let userData = snapshot?.documents[0].data()
             let username = userData!["username"] as! String
@@ -49,24 +49,94 @@ class DatabaseUtil{
             let bio = userData!["bio"] as! String
             let followers = userData!["followers"] as! Int
             let following = userData!["following"] as! Int
-            let followersList = userData!["followerList"] as! [String]
-            let followingsList = userData!["followingList"] as! [String]
             let user = User(email: email, username: username, bio: bio, profilePicUrl: pic, gender: gender)
             user.followerCount = followers
             user.followingCount = following
-            user.followerList = followersList
-            user.followingList = followingsList
             UserDefaultsUtil().saveUserData(user)
         })
         
     }
     
     func updateUser(_ user: User){
-        db?.collection("users").document(UserDefaultsUtil().loadReference()).setData(["email" : user.email, "username": user.username, "profilePicUrl": user.profilePicUrl, "bio": user.bio, "gender": user.gender, "hairTypes": user.hairTypes,  "followers": user.followerCount, "following": user.followingCount, "followerList": user.followerList, "followingList": user.followingList], completion: { (error) in
+        db?.collection("users").document(UserDefaultsUtil().loadReference()).setData(["email" : user.email, "username": user.username, "profilePicUrl": user.profilePicUrl, "bio": user.bio, "gender": user.gender, "hairTypes": user.hairTypes,  "followers": user.followerCount, "following": user.followingCount], completion: { (error) in
             if error != nil{
                 print(error?.localizedDescription)
             }
         })
+    }
+    
+    func updateOtherUser(_ user: User){
+        db?.collection("users").document(user.reference).setData(["email" : user.email, "username": user.username, "profilePicUrl": user.profilePicUrl, "bio": user.bio, "gender": user.gender, "hairTypes": user.hairTypes,  "followers": user.followerCount, "following": user.followingCount], completion: { (error) in
+            if error != nil{
+                print(error?.localizedDescription)
+            }
+        })
+
+    }
+    
+    func followUser(_ user: User){
+            
+            // Follow
+        db?.collection("users").document(user.reference).collection("followers").addDocument(data: ["user" : UserDefaultsUtil().loadReference()])
+            updateFollow(user.reference)
+            user.followerCount += 1
+            updateOtherUser(user)
+    }
+    
+    func unfollowUser(_ user: User){
+        db?.collection("users").document(user.reference).collection("followers").getDocuments(completion: { (snapshot, error) in
+            if error != nil {
+                print(error?.localizedDescription)
+                return
+            }
+            
+            for i in (snapshot?.documents)!{
+                let userRef = i.data()["user"] as! String
+                if userRef == UserDefaultsUtil().loadReference(){
+                    // Unfollow
+                    if user.followerCount > 0{
+                        user.followerCount -= 1
+                    }
+                    self.db?.collection("users").document(user.reference).collection("followers").document(i.documentID).delete()
+                    self.updateUnfollow(user.reference)
+                    self.updateOtherUser(user)
+                }
+            }
+    })
+    }
+    
+    func updateUnfollow(_ ref: String){
+        let user = UserDefaultsUtil().loadUserData()
+        if user.followingCount > 0{
+            user.followingCount -= 1
+        }else{
+            user.followingCount = 0
+        }
+        UserDefaultsUtil().saveUserData(user)
+        db?.collection("users").document(UserDefaultsUtil().loadReference()).collection("following").whereField("user", isEqualTo: ref).getDocuments(completion: { (snapshot, error) in
+            if error != nil{
+                print(error?.localizedDescription)
+                return
+            }
+            
+            for i in (snapshot?.documents)!{
+               // Remove from Following List
+                self.db?.collection("users").document(UserDefaultsUtil().loadReference()).collection("following").document(i.documentID).delete()
+                
+                self.updateUser(user)
+            }
+        })
+    }
+    
+    func updateFollow(_ ref: String){
+        let user = UserDefaultsUtil().loadUserData()
+        user.followingCount += 1
+        UserDefaultsUtil().saveUserData(user)
+        
+        // Add to Following List
+        self.db?.collection("users").document(UserDefaultsUtil().loadReference()).collection("following").addDocument(data: ["user" : ref])
+        
+        self.updateUser(user)
     }
     
     func createPost(_ newPost: Post){
@@ -83,7 +153,7 @@ class DatabaseUtil{
             }
         })
         
-        newGuide.mReference = reference
+        newGuide.mReference = (reference?.documentID)!
     }
     
     func createGuideContents(_ title: String, _ contents: String)-> Guide{
@@ -93,7 +163,7 @@ class DatabaseUtil{
             }
             
         })
-        var newGuide = Guide(title: title, text: "", viewCount: 0, comments: 0, reference: reference!)
+        var newGuide = Guide(title: title, text: "", viewCount: 0, comments: 0, reference: (reference?.documentID)!)
         //newGuide.mContent = contents
         return newGuide
     }
@@ -106,7 +176,7 @@ class DatabaseUtil{
         
         if !isFound{
             selectedGuide.mBookmarks += 1
-            db?.collection("users").document(UserDefaultsUtil().loadReference()).collection("bookmarks").addDocument(data: ["guide" : selectedGuide.mReference?.documentID], completion: { (error) in
+            db?.collection("users").document(UserDefaultsUtil().loadReference()).collection("bookmarks").addDocument(data: ["guide" : selectedGuide.mReference], completion: { (error) in
                 if error != nil{
                     print(error?.localizedDescription)
                     return
@@ -120,7 +190,7 @@ class DatabaseUtil{
                 selectedGuide.mBookmarks = 0
             }
 
-            db?.collection("users").document(UserDefaultsUtil().loadReference()).collection("bookmarks").whereField("guide", isEqualTo: selectedGuide.mReference?.documentID).getDocuments(completion: { (snapshot, error) in
+            db?.collection("users").document(UserDefaultsUtil().loadReference()).collection("bookmarks").whereField("guide", isEqualTo: selectedGuide.mReference).getDocuments(completion: { (snapshot, error) in
                 if error != nil{
                     print(error?.localizedDescription)
                 }
@@ -134,7 +204,7 @@ class DatabaseUtil{
     }
     
     func updateGuide(_ guide: Guide){
-        db?.collection("guides").document((guide.mReference?.documentID)!).setData(["user" : guide.mAuthor, "title": guide.mTitle, "text": guide.mText, "views": guide.mViews, "comments": guide.mComments, "image": guide.mImageUrl, "bookmarks": guide.mBookmarks], completion: { (error) in
+        db?.collection("guides").document((guide.mReference)).setData(["user" : guide.mAuthor, "title": guide.mTitle, "text": guide.mText, "views": guide.mViews, "comments": guide.mComments, "image": guide.mImageUrl, "bookmarks": guide.mBookmarks], completion: { (error) in
             if error != nil{
                 print(error?.localizedDescription)
                 return

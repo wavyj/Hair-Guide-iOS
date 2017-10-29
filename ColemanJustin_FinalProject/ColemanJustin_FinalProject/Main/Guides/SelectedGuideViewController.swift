@@ -81,7 +81,7 @@ class SelectedGuideViewController: /*WPEditorViewController, WPEditorViewDelegat
     func checkBookmark(_ guide: Guide){
         var isFound = false
         let db = Firestore.firestore()
-        db.collection("users").document(UserDefaultsUtil().loadReference()).collection("bookmarks").whereField("guide", isEqualTo: guide.mReference?.documentID).getDocuments(completion: { (snapshot, error) in
+        db.collection("users").document(UserDefaultsUtil().loadReference()).collection("bookmarks").whereField("guide", isEqualTo: guide.mReference).getDocuments(completion: { (snapshot, error) in
             
             if error != nil{
                 print(error?.localizedDescription)
@@ -102,7 +102,7 @@ class SelectedGuideViewController: /*WPEditorViewController, WPEditorViewDelegat
     func checkOnTapped(_ guide: Guide){
         var isFound = false
         let db = Firestore.firestore()
-        db.collection("users").document(UserDefaultsUtil().loadReference()).collection("bookmarks").whereField("guide", isEqualTo: guide.mReference?.documentID).getDocuments(completion: { (snapshot, error) in
+        db.collection("users").document(UserDefaultsUtil().loadReference()).collection("bookmarks").whereField("guide", isEqualTo: guide.mReference).getDocuments(completion: { (snapshot, error) in
             
             if error != nil{
                 print(error?.localizedDescription)

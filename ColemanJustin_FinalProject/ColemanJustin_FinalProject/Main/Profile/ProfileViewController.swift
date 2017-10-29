@@ -21,13 +21,16 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     @IBOutlet weak var bioView: UIView!
     @IBOutlet weak var bioText: UITextView!
     @IBOutlet weak var reAnalyzeBtn: MDCRaisedButton!
-    @IBOutlet weak var pagerBar: UIView!
+    @IBOutlet weak var buttonBar: MDCButtonBar!
     @IBOutlet weak var imageContainer: UIView!
     @IBOutlet weak var postsCollectionView: UICollectionView!
+    @IBOutlet weak var guidesCollectionView: UICollectionView!
     
     //MARK: - Variables
     var currentUser: User? = nil
     var posts = [Post]()
+    var guides = [Guide]()
+    var currentMode = 1
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +43,10 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         imageContainer.layer.cornerRadius = imageContainer.frame.size.width / 2
         currentUser = UserDefaultsUtil().loadUserData()
         update()
-        loadPosts()
+        updateMode()
+        
+        followersLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showFollowers(_:))))
+        followingLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showFollowing(_:))))
     }
 
     override func didReceiveMemoryWarning() {
@@ -75,8 +81,41 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         performSegue(withIdentifier: "toEditProfile", sender: self)
     }
     
+    func guideEditTapped(_ sender: MDCRaisedButton){
+        
+    }
+    
     @IBAction func profileUpdated(_ sender: UIStoryboardSegue){
         update()
+    }
+    
+    func showFollowers(_ sender: UILabel){
+        performSegue(withIdentifier: "toFollowers", sender: self)
+    }
+    
+    func showFollowing(_ sender: UILabel){
+        performSegue(withIdentifier: "toFollowing", sender: self)
+    }
+    
+    func postsTapped(_ sender: UIBarButtonItem){
+        if currentMode != 1{
+            currentMode = 1
+            updateMode()
+        }
+    }
+    
+    func guidesTapped(_ sender: UIBarButtonItem){
+        if currentMode != 2{
+            currentMode = 2
+            updateMode()
+        }
+    }
+    
+    func bookmarksTapped(_ sender: UIBarButtonItem){
+        if currentMode != 3{
+            currentMode = 3
+            updateMode()
+        }
     }
     
     //MARK: - CollectionView Callbacks
@@ -89,22 +128,65 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "postCell", for: indexPath) as! GridPostCell
-        //cell.image.image = WebPImage(image: UIImage(named: "image1"))
-        //cell.image.frame = cell.bounds
-        //let current = posts.first
-        //cell.image.url = URL(string: (current?.mImageUrl)!)
+        switch collectionView.tag {
+        case 1:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "postCell", for: indexPath) as! PostCell
+            let selected = posts[indexPath.row]
+            if selected.mImage == nil{
+                cell.butterDownloadImage(selected)
+            } else{
+                cell.butterSetImage(selected)
+            }
+            cell.authorText.text = selected.mUser?.username.lowercased()
+            cell.captionText.text = selected.mCaption
+            //cell.likeBtn.setImage(UIImage(named: "like")?.withRenderingMode(.alwaysTemplate), for: .normal)
+            //cell.likeBtn.tintColor = MDCPalette.grey.tint400
+            //cell.commentBtn.setImage(UIImage(named: "comment")?.withRenderingMode(.alwaysTemplate), for: .normal)
+            //cell.commentBtn.tintColor = MDCPalette.grey.tint400
+            cell.profileImg.layer.cornerRadius = cell.profileImg.frame.size.width / 2
+            cell.timeLabel.text = selected.dateString
+            //cell.viewCommentsBtn.setTitle("View All 5 Comments", for: .normal)
+            //cell.likesLabel.text = "20 Likes"
+            //cell.applyVisuals()
+            return cell
+        case 2:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "guideCell", for: indexPath) as! GuideCell
+            let current = guides[indexPath.row]
+            cell.guideTitle.text = current.mTitle
+            cell.viewLabel.text = current.mViews.description
+            if current.mAuthor == UserDefaultsUtil().loadReference(){
+                cell.editBtn.tag = indexPath.row
+                cell.editBtn.addTarget(self, action: #selector(guideEditTapped(_:)), for: .touchUpInside)
+                cell.editBtn.isEnabled = true
+                cell.editBtn.isHidden = false
+            }else{
+                cell.editBtn.isHidden = true
+                cell.editBtn.isEnabled = false
+            }
+            return cell
+        default:
+            break
+        }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "", for: indexPath)
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        var width = collectionView.bounds.width / 3
-        var height = collectionView.bounds.height * 0.5
-        return CGSize(width: width, height: height)
+        switch collectionView.tag {
+        case 1:
+            return CGSize(width: self.view.bounds.width, height: (self.guidesCollectionView?.bounds.height)! - 200)
+        case 2:
+            return CGSize(width: 256, height: 335)
+        default:
+            return CGSize()
+        }
     }
     
     //MARK: - Methods
     func setupMaterialComponents(){
+        let nib = UINib(nibName: "GuideCell", bundle: nil)
+        guidesCollectionView?.register(nib, forCellWithReuseIdentifier: "guideCell")
         
         // Buttons
         editProfileBtn.setTitle("Edit Profile", for: .normal)
@@ -113,9 +195,15 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         reAnalyzeBtn.setImage(UIImage(named: "refresh")?.withRenderingMode(.alwaysTemplate), for: .normal)
         reAnalyzeBtn.tintColor = MDCPalette.blue.tint500
         
-        
         // ButtonBar
-        //buttonBar.backgroundColor = MDCPalette.grey.tint100
+        buttonBar.backgroundColor = MDCPalette.grey.tint100
+        let postsAction = UIBarButtonItem(title: "Posts", style: .plain, target: self, action: #selector(postsTapped(_:)))
+        postsAction.width = buttonBar.bounds.width / 3
+        let guidesAction = UIBarButtonItem(title: "Guides", style: .plain, target: self, action: #selector(guidesTapped(_:)))
+        guidesAction.width = buttonBar.bounds.width / 3
+        let bookmarkAction = UIBarButtonItem(title: "Bookmarks", style: .plain, target: self, action: #selector(bookmarksTapped(_:)))
+        bookmarkAction.width = buttonBar.bounds.width / 3
+        buttonBar.items = [postsAction, guidesAction, bookmarkAction]
         
         // AppBar Setup
         let appBar = MDCAppBar()
@@ -126,6 +214,33 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         settingsAction.tintColor = UIColor.black
         navigationItem.rightBarButtonItem = settingsAction
         appBar.addSubviewsToParent()
+    }
+    
+    func updateMode(){
+        for i in [postsCollectionView, guidesCollectionView]{
+            i?.isHidden = true
+            i?.isUserInteractionEnabled = false
+        }
+        
+        switch currentMode {
+        case 1:
+            postsCollectionView.isHidden = false
+            postsCollectionView.isUserInteractionEnabled = true
+            posts.removeAll()
+            loadPosts()
+        case 2:
+            guidesCollectionView.isHidden = false
+            guidesCollectionView.isUserInteractionEnabled = true
+            guides.removeAll()
+            loadGuides()
+        case 3:
+            guidesCollectionView.isHidden = false
+            guidesCollectionView.isUserInteractionEnabled = true
+            guides.removeAll()
+            loadBookmarks()
+        default:
+            break
+        }
     }
     
     func loadProfile(){
@@ -146,8 +261,6 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
             let userGender = data!["gender"] as! String
             let userFollowers = data!["followers"] as! Int
             let userFollowing = data!["following"] as! Int
-            let userFollowersList = data!["followerList"] as! [String]
-            let userFollowingsList = data!["followingList"] as! [String]
             let user = User(email: userEmail, username: userName, bio: userBio, profilePicUrl: userPic, gender: userGender)
             user.hairTypes = userHairTypes
             user.followerCount = userFollowers
@@ -168,24 +281,109 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
                 print(error?.localizedDescription)
                 return
             }
-            print(snapshot?.documents.count)
+            
             for i in (snapshot?.documents)!{
-                
-                let data = i.data()
-                let postCaption = data["caption"] as! String
-                let postComments = data["comments"] as! Int
-                let postDate = data["date"] as! Date
-                let pic = data["imageUrl"] as! String
-                let postLikes = data["likes"] as! Int
-                let postTags = data["tags"] as! [String]
-                let userRef = data["user"] as! String
-                let post = Post(caption: postCaption, likes: postLikes, comments: postComments, date: postDate, imageUrl: pic, tags: postTags)
-                post.mReference = i.reference
-                self.posts += [post]
+                    let data = i.data()
+                    let postCaption = data["caption"] as! String
+                    let postComments = data["comments"] as! Int
+                    let postDate = data["date"] as! Date
+                    let pic = data["imageUrl"] as! String
+                    let postLikes = data["likes"] as! Int
+                    let postTags = data["tags"] as! [String]
+                    let userRef = data["user"] as! String
+                    let post = Post(caption: postCaption, likes: postLikes, comments: postComments, date: postDate, imageUrl: pic, tags: postTags)
+                    post.mReference = i.reference
+                    self.posts += [post]
+                    self.loadUser(userRef, post)
             }
-            self.postsCollectionView.reloadData()
         }
         
+    }
+    
+    func loadUser(_ ref: String, _ post: Post){
+        // Get Post's author data
+        let db = Firestore.firestore()
+        db.collection("users").document(ref).getDocument { (snapshot, error) in
+            if error != nil{
+                // Error
+                print(error?.localizedDescription)
+                return
+            }
+            
+            let data = snapshot?.data()
+            let userEmail = data!["email"] as! String
+            let userName = data!["username"] as! String
+            let userBio = data!["bio"] as! String
+            let userHairTypes = data!["hairTypes"] as! [String]
+            let userPic = data!["profilePicUrl"] as! String
+            let userGender = data!["gender"] as! String
+            let userFollowers = data!["followers"] as! Int
+            let userFollowing = data!["following"] as! Int
+            let user = User(email: userEmail, username: userName, bio: userBio, profilePicUrl: userPic, gender: userGender)
+            user.hairTypes = userHairTypes
+            user.followerCount = userFollowers
+            user.followingCount = userFollowing
+            post.mUser = user
+            self.postsCollectionView.reloadData()
+        }
+    }
+    
+    func loadGuides(){
+        let db = Firestore.firestore()
+        db.collection("guides").getDocuments { (snapshot, error) in
+            if error != nil{
+                // Error
+                print(error?.localizedDescription)
+                return
+            }
+            
+            // Get Each Guide data
+            self.guides.removeAll()
+            for i in (snapshot?.documents)!{
+                let guideTitle = i.data()["title"] as! String
+                let guideText = i.data()["text"] as! String
+                let user = i.data()["user"] as! String
+                let view = i.data()["views"] as! Int
+                let comment = i.data()["comments"] as! Int
+                let guide = Guide(title: guideTitle, text: guideText, viewCount: view, comments: comment, reference: i.reference.documentID)
+                guide.mAuthor = user
+                self.guides.append(guide)
+            }
+            self.guidesCollectionView.reloadData()
+        }
+    }
+    
+    func loadBookmarks(){
+        let db = Firestore.firestore()
+        db.collection("users").document(UserDefaultsUtil().loadReference()).collection("bookmarks").getDocuments { (snapshot, error) in
+            if error != nil{
+                print(error?.localizedDescription)
+                return
+            }
+            
+            for i in (snapshot?.documents)!{
+                let guideRef = i.data()["guide"] as! String
+                
+                db.collection("guides").document(guideRef).getDocument(completion: { (snapshot, error) in
+                    if error != nil{
+                        print(error?.localizedDescription)
+                        return
+                    }
+                    
+                    let data = snapshot?.data()
+                    let guideTitle = data!["title"] as! String
+                    let guideText = data!["text"] as! String
+                    let user = data!["user"] as! String
+                    let view = data!["views"] as! Int
+                    let comment = data!["comments"] as! Int
+                    let guide = Guide(title: guideTitle, text: guideText, viewCount: view, comments: comment, reference: guideRef)
+                    guide.mAuthor = user
+                    self.guides.append(guide)
+                    self.guidesCollectionView.reloadData()
+                })
+            }
+            
+        }
     }
     
     func update(){

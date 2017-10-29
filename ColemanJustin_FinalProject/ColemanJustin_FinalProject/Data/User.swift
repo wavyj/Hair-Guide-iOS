@@ -20,9 +20,9 @@ class User{
     var hairTypes: [String] = [String]()
     var followerCount = 0
     var followingCount = 0
-    var followerList = [String]()
-    var followingList = [String]()
     var reference = ""
+    var iFollow = false
+    //var followMe = false TODO: show that user follows you back on their profile
     
     init(email: String, username: String, bio: String, profilePicUrl: String, gender: String) {
         self.email = email

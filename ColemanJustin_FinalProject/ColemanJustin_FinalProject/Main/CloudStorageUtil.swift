@@ -44,12 +44,8 @@ class CloudStorageUtil {
             imageRefString = imageRefString + ".png"
             imageRef = storageRef?.child(imageRefString)
         }
-        
-        let uploadTask = imageRef?.putData(imageData!, metadata: nil, completion: { (metaData, error) in
-            guard let metaData = metaData else{
-                // Error
-                return
-            }
+        let metaData = StorageMetadata(dictionary: ["contentType" : "image/jpg"])
+        let uploadTask = imageRef?.putData(imageData!, metadata: metaData, completion: { (metaData, error) in
             if let error = error{
                 // Error
                 print(error.localizedDescription)
@@ -103,7 +99,7 @@ class CloudStorageUtil {
 
 extension UIImage{
     var jpegImg: Data?{
-        return UIImageJPEGRepresentation(self, 1)
+        return UIImageJPEGRepresentation(self, 0.1)
     }
     
     var pngImg: Data?{

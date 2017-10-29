@@ -22,6 +22,12 @@
 		D03D40F61F8FD8DD007ACE22 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03D40F51F8FD8DD007ACE22 /* Post.swift */; };
 		D03D40FC1F8FDCC7007ACE22 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03D40FA1F8FDCC7007ACE22 /* PostCell.swift */; };
 		D03E03B61F97DC5400A947E4 /* SelectedProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03E03B51F97DC5400A947E4 /* SelectedProfileViewController.swift */; };
+		D040E54F1FA516010051D166 /* FollowingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D040E54E1FA516010051D166 /* FollowingViewController.swift */; };
+		D040E5511FA535DB0051D166 /* AutoAnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D040E5501FA535DB0051D166 /* AutoAnalysisViewController.swift */; };
+		D040E5561FA53E560051D166 /* VisualRecognitionV3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D040E5551FA53E560051D166 /* VisualRecognitionV3.framework */; };
+		D040E5571FA53E560051D166 /* VisualRecognitionV3.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D040E5551FA53E560051D166 /* VisualRecognitionV3.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D040E55A1FA571660051D166 /* AnalysisDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D040E5591FA571660051D166 /* AnalysisDetailsViewController.swift */; };
+		D040E55C1FA5765A0051D166 /* HairPatternInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D040E55B1FA5765A0051D166 /* HairPatternInfo.swift */; };
 		D050F9721F9110C00008370E /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D050F9711F9110C00008370E /* SearchViewController.swift */; };
 		D050F9741F91114F0008370E /* GuidesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D050F9731F91114F0008370E /* GuidesViewController.swift */; };
 		D050F9771F9111800008370E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D050F9761F9111800008370E /* ProfileViewController.swift */; };
@@ -30,6 +36,7 @@
 		D05AAD7C1F8E639C00716C74 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05AAD7B1F8E639C00716C74 /* AuthenticationViewController.swift */; };
 		D05AAD801F8E91CD00716C74 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05AAD7F1F8E91CD00716C74 /* SignupViewController.swift */; };
 		D062C0941F91082E007BE5D7 /* AnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D062C0931F91082E007BE5D7 /* AnalysisViewController.swift */; };
+		D064CB971FA50B5500A013FF /* FollowersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D064CB961FA50B5500A013FF /* FollowersViewController.swift */; };
 		D06641651F92768900258FB1 /* NewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06641641F92768900258FB1 /* NewPostViewController.swift */; };
 		D06F9A631FA21E79006B578E /* GridPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06F9A621FA21E79006B578E /* GridPostCell.swift */; };
 		D078B5BE1F7C1A5F00A6F8C5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D078B5BD1F7C1A5F00A6F8C5 /* AppDelegate.swift */; };
@@ -52,6 +59,20 @@
 		D0FD59D21FA3B4C500CE71BB /* TagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FD59D11FA3B4C500CE71BB /* TagsViewController.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		D040E5581FA53E560051D166 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D040E5571FA53E560051D166 /* VisualRecognitionV3.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		0A297C7FD92E8AEBEFF56DB1 /* Pods-ColemanJustin_FinalProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColemanJustin_FinalProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-ColemanJustin_FinalProject/Pods-ColemanJustin_FinalProject.release.xcconfig"; sourceTree = "<group>"; };
 		348F691C9077B0E0DDDED67B /* Pods-ColemanJustin_FinalProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColemanJustin_FinalProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ColemanJustin_FinalProject/Pods-ColemanJustin_FinalProject.debug.xcconfig"; sourceTree = "<group>"; };
@@ -70,6 +91,12 @@
 		D03D40F51F8FD8DD007ACE22 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		D03D40FA1F8FDCC7007ACE22 /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		D03E03B51F97DC5400A947E4 /* SelectedProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedProfileViewController.swift; sourceTree = "<group>"; };
+		D040E54E1FA516010051D166 /* FollowingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingViewController.swift; sourceTree = "<group>"; };
+		D040E5501FA535DB0051D166 /* AutoAnalysisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoAnalysisViewController.swift; sourceTree = "<group>"; };
+		D040E5531FA53D360051D166 /* VisualRecognitionV3.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VisualRecognitionV3.framework; path = Carthage/Build/iOS/VisualRecognitionV3.framework; sourceTree = "<group>"; };
+		D040E5551FA53E560051D166 /* VisualRecognitionV3.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VisualRecognitionV3.framework; path = Carthage/Build/iOS/VisualRecognitionV3.framework; sourceTree = "<group>"; };
+		D040E5591FA571660051D166 /* AnalysisDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisDetailsViewController.swift; sourceTree = "<group>"; };
+		D040E55B1FA5765A0051D166 /* HairPatternInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HairPatternInfo.swift; sourceTree = "<group>"; };
 		D050F9711F9110C00008370E /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		D050F9731F91114F0008370E /* GuidesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuidesViewController.swift; sourceTree = "<group>"; };
 		D050F9761F9111800008370E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -78,6 +105,7 @@
 		D05AAD7B1F8E639C00716C74 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 		D05AAD7F1F8E91CD00716C74 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		D062C0931F91082E007BE5D7 /* AnalysisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisViewController.swift; sourceTree = "<group>"; };
+		D064CB961FA50B5500A013FF /* FollowersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersViewController.swift; sourceTree = "<group>"; };
 		D06641641F92768900258FB1 /* NewPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostViewController.swift; sourceTree = "<group>"; };
 		D06F9A621FA21E79006B578E /* GridPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridPostCell.swift; sourceTree = "<group>"; };
 		D078B5BA1F7C1A5F00A6F8C5 /* ColemanJustin_FinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColemanJustin_FinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,6 +136,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A0596DFA66F8F5928BB5C6D /* Pods_ColemanJustin_FinalProject.framework in Frameworks */,
+				D040E5561FA53E560051D166 /* VisualRecognitionV3.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,6 +218,7 @@
 				D03D40F51F8FD8DD007ACE22 /* Post.swift */,
 				D0964F8E1F9652A50022CB7A /* User.swift */,
 				D0964F921F9667400022CB7A /* Guide.swift */,
+				D040E55B1FA5765A0051D166 /* HairPatternInfo.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -200,6 +230,13 @@
 				D0AE936E1F97BBBE0087028C /* AddTagCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		D040E5521FA536FC0051D166 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Images;
 			sourceTree = "<group>";
 		};
 		D050F9701F9110B10008370E /* Search */ = {
@@ -219,6 +256,8 @@
 				D02A8AC41FA0FF0100DA0F75 /* EditProfileViewController.swift */,
 				D06F9A621FA21E79006B578E /* GridPostCell.swift */,
 				D0CD6A1C1FA24E90001F5CEC /* ProfileSetupViewController.swift */,
+				D064CB961FA50B5500A013FF /* FollowersViewController.swift */,
+				D040E54E1FA516010051D166 /* FollowingViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -240,6 +279,8 @@
 				D010E26F1F9A617C0042A031 /* Cells */,
 				D006D4DA1F8BC9AA00BAFD24 /* Onboarding */,
 				D062C0931F91082E007BE5D7 /* AnalysisViewController.swift */,
+				D040E5501FA535DB0051D166 /* AutoAnalysisViewController.swift */,
+				D040E5591FA571660051D166 /* AnalysisDetailsViewController.swift */,
 			);
 			path = Analysis;
 			sourceTree = "<group>";
@@ -264,6 +305,7 @@
 		D078B5B11F7C1A5F00A6F8C5 = {
 			isa = PBXGroup;
 			children = (
+				D040E5551FA53E560051D166 /* VisualRecognitionV3.framework */,
 				D078B5BC1F7C1A5F00A6F8C5 /* ColemanJustin_FinalProject */,
 				D078B5BB1F7C1A5F00A6F8C5 /* Products */,
 				1EB5D59F2FE2E0ADF1588872 /* Pods */,
@@ -282,6 +324,7 @@
 		D078B5BC1F7C1A5F00A6F8C5 /* ColemanJustin_FinalProject */ = {
 			isa = PBXGroup;
 			children = (
+				D040E5521FA536FC0051D166 /* Images */,
 				D078B5BD1F7C1A5F00A6F8C5 /* AppDelegate.swift */,
 				D03D40ED1F8FB3A3007ACE22 /* Navigation */,
 				D006D4DB1F8BC9B600BAFD24 /* Main */,
@@ -347,6 +390,7 @@
 		F395B42B686BE62C7D677EDB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D040E5531FA53D360051D166 /* VisualRecognitionV3.framework */,
 				7E6DE5ACE8D6560A9FF5F979 /* Pods_ColemanJustin_FinalProject.framework */,
 			);
 			name = Frameworks;
@@ -365,6 +409,7 @@
 				D078B5B81F7C1A5F00A6F8C5 /* Resources */,
 				A451100A01E4576D9A5A5DA7 /* [CP] Embed Pods Frameworks */,
 				5B2A458364777DE2E5C84219 /* [CP] Copy Pods Resources */,
+				D040E5581FA53E560051D166 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -482,9 +527,12 @@
 				D01BB59F1F8EECE000EBE6C6 /* LoginViewController.swift in Sources */,
 				D01BB5A11F8EFAB200EBE6C6 /* ValidationError.swift in Sources */,
 				D0AE936F1F97BBBE0087028C /* AddTagCell.swift in Sources */,
+				D040E55C1FA5765A0051D166 /* HairPatternInfo.swift in Sources */,
 				D03E03B61F97DC5400A947E4 /* SelectedProfileViewController.swift in Sources */,
 				D05AAD801F8E91CD00716C74 /* SignupViewController.swift in Sources */,
 				D062C0941F91082E007BE5D7 /* AnalysisViewController.swift in Sources */,
+				D064CB971FA50B5500A013FF /* FollowersViewController.swift in Sources */,
+				D040E5511FA535DB0051D166 /* AutoAnalysisViewController.swift in Sources */,
 				D0CD6A1D1FA24E90001F5CEC /* ProfileSetupViewController.swift in Sources */,
 				D050F9771F9111800008370E /* ProfileViewController.swift in Sources */,
 				D02A8AC51FA0FF0100DA0F75 /* EditProfileViewController.swift in Sources */,
@@ -492,6 +540,7 @@
 				D07F3B9B1F999FA500B4BF34 /* SplashScreen.swift in Sources */,
 				D06F9A631FA21E79006B578E /* GridPostCell.swift in Sources */,
 				D0964F911F9659A90022CB7A /* CloudStorageUtil.swift in Sources */,
+				D040E55A1FA571660051D166 /* AnalysisDetailsViewController.swift in Sources */,
 				D05AAD7C1F8E639C00716C74 /* AuthenticationViewController.swift in Sources */,
 				D01BB5A41F8F0E1200EBE6C6 /* FeedViewController.swift in Sources */,
 				D050F9721F9110C00008370E /* SearchViewController.swift in Sources */,
@@ -506,6 +555,7 @@
 				D03D40F31F8FD249007ACE22 /* UserDefaultsUtil.swift in Sources */,
 				D09691451F93D22A00763F83 /* NewGuideViewController.swift in Sources */,
 				D0964F8D1F9652150022CB7A /* DatabaseUtil.swift in Sources */,
+				D040E54F1FA516010051D166 /* FollowingViewController.swift in Sources */,
 				D0964F951F9696850022CB7A /* SelectedGuideViewController.swift in Sources */,
 				D06641651F92768900258FB1 /* NewPostViewController.swift in Sources */,
 				D078B5BE1F7C1A5F00A6F8C5 /* AppDelegate.swift in Sources */,
@@ -654,6 +704,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 246T637V2T;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = ColemanJustin_FinalProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "ColemanJustin.ColemanJustin-FinalProject";
@@ -671,6 +725,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 246T637V2T;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = ColemanJustin_FinalProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "ColemanJustin.ColemanJustin-FinalProject";

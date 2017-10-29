@@ -132,7 +132,7 @@ class GuidesViewController: UIViewController, UICollectionViewDelegate, UICollec
                 let user = i.data()["user"] as! String
                 let view = i.data()["views"] as! Int
                 let comment = i.data()["comments"] as! Int
-                let guide = Guide(title: guideTitle, text: guideText, viewCount: view, comments: comment, reference: i.reference)
+                let guide = Guide(title: guideTitle, text: guideText, viewCount: view, comments: comment, reference: i.reference.documentID)
                 guide.mAuthor = user
                 self.guides.append(guide)
             }
