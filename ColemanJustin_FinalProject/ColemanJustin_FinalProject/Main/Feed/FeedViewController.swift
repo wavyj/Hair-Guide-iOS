@@ -83,13 +83,14 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
         } else{
             cell.butterSetImage(selected)
         }
+        cell.profileImg.url = URL(string: selected.mImageUrl)
         cell.authorText.text = selected.mUser?.username.lowercased()
         cell.captionText.text = selected.mCaption
         //cell.likeBtn.setImage(UIImage(named: "like")?.withRenderingMode(.alwaysTemplate), for: .normal)
         //cell.likeBtn.tintColor = MDCPalette.grey.tint400
         //cell.commentBtn.setImage(UIImage(named: "comment")?.withRenderingMode(.alwaysTemplate), for: .normal)
         //cell.commentBtn.tintColor = MDCPalette.grey.tint400
-        cell.profileImg.layer.cornerRadius = cell.profileImg.frame.size.width / 2
+        //cell.profileImg.layer.cornerRadius = cell.profileImg.frame.size.width / 2
         cell.timeLabel.text = selected.dateString
         //cell.viewCommentsBtn.setTitle("View All 5 Comments", for: .normal)
         //cell.likesLabel.text = "20 Likes"
@@ -169,7 +170,6 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
                 post.mReference = i.reference
                 self.loadUser(userRef, post)
                 self.posts += [post]
-                //self.update()
             }
             
         }
@@ -200,16 +200,25 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
             user.followerCount = userFollowers
             user.followingCount = userFollowing
             post.mUser = user
-            self.update()
+            
+            db.collection("users").document(UserDefaultsUtil().loadReference()).collection("following").whereField("user", isEqualTo: snapshot?.documentID).getDocuments(completion: { (snapshot, err) in
+                if err != nil{
+                    print(err?.localizedDescription)
+                    return
+                }
+                for i in (snapshot?.documents)!{
+                    let ref = i.data()["user"] as! String
+                    if ref == user.reference{
+                        post.mUser?.iFollow = true
+                    }
+                }
+                DispatchQueue.main.async {
+                    self.collectionView?.reloadData()
+                }
+            })
         }
     }
-    
-    func update(){
-        self.collectionView?.reloadData()
-    }
-    
 
-    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation

@@ -232,13 +232,6 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		D040E5521FA536FC0051D166 /* Images */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Images;
-			sourceTree = "<group>";
-		};
 		D050F9701F9110B10008370E /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -324,7 +317,6 @@
 		D078B5BC1F7C1A5F00A6F8C5 /* ColemanJustin_FinalProject */ = {
 			isa = PBXGroup;
 			children = (
-				D040E5521FA536FC0051D166 /* Images */,
 				D078B5BD1F7C1A5F00A6F8C5 /* AppDelegate.swift */,
 				D03D40ED1F8FB3A3007ACE22 /* Navigation */,
 				D006D4DB1F8BC9B600BAFD24 /* Main */,

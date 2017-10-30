@@ -31,6 +31,9 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     var posts = [Post]()
     var guides = [Guide]()
     var currentMode = 1
+    var items = [UIBarButtonItem]()
+    let onColor = MDCPalette.blue.tint500
+    let offColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.2)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,11 +93,11 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     func showFollowers(_ sender: UILabel){
-        performSegue(withIdentifier: "toFollowers", sender: self)
+        //performSegue(withIdentifier: "toFollowers", sender: self)
     }
     
     func showFollowing(_ sender: UILabel){
-        performSegue(withIdentifier: "toFollowing", sender: self)
+        //performSegue(withIdentifier: "toFollowing", sender: self)
     }
     
     func postsTapped(_ sender: UIBarButtonItem){
@@ -124,30 +127,22 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return posts.count
+        switch collectionView.tag {
+        case 1:
+            return posts.count
+        case 2:
+            return guides.count
+        default:
+            return 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch collectionView.tag {
         case 1:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "postCell", for: indexPath) as! PostCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "postCell", for: indexPath) as! GridPostCell
             let selected = posts[indexPath.row]
-            if selected.mImage == nil{
-                cell.butterDownloadImage(selected)
-            } else{
-                cell.butterSetImage(selected)
-            }
-            cell.authorText.text = selected.mUser?.username.lowercased()
-            cell.captionText.text = selected.mCaption
-            //cell.likeBtn.setImage(UIImage(named: "like")?.withRenderingMode(.alwaysTemplate), for: .normal)
-            //cell.likeBtn.tintColor = MDCPalette.grey.tint400
-            //cell.commentBtn.setImage(UIImage(named: "comment")?.withRenderingMode(.alwaysTemplate), for: .normal)
-            //cell.commentBtn.tintColor = MDCPalette.grey.tint400
-            cell.profileImg.layer.cornerRadius = cell.profileImg.frame.size.width / 2
-            cell.timeLabel.text = selected.dateString
-            //cell.viewCommentsBtn.setTitle("View All 5 Comments", for: .normal)
-            //cell.likesLabel.text = "20 Likes"
-            //cell.applyVisuals()
+            cell.image.url = URL(string: selected.mImageUrl)
             return cell
         case 2:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "guideCell", for: indexPath) as! GuideCell
@@ -175,7 +170,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch collectionView.tag {
         case 1:
-            return CGSize(width: self.view.bounds.width, height: (self.guidesCollectionView?.bounds.height)! - 200)
+            return CGSize(width: self.view.bounds.width / 3, height: (self.postsCollectionView?.bounds.height)! / 3)
         case 2:
             return CGSize(width: 256, height: 335)
         default:
@@ -196,14 +191,18 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         reAnalyzeBtn.tintColor = MDCPalette.blue.tint500
         
         // ButtonBar
-        buttonBar.backgroundColor = MDCPalette.grey.tint100
-        let postsAction = UIBarButtonItem(title: "Posts", style: .plain, target: self, action: #selector(postsTapped(_:)))
-        postsAction.width = buttonBar.bounds.width / 3
-        let guidesAction = UIBarButtonItem(title: "Guides", style: .plain, target: self, action: #selector(guidesTapped(_:)))
-        guidesAction.width = buttonBar.bounds.width / 3
-        let bookmarkAction = UIBarButtonItem(title: "Bookmarks", style: .plain, target: self, action: #selector(bookmarksTapped(_:)))
-        bookmarkAction.width = buttonBar.bounds.width / 3
-        buttonBar.items = [postsAction, guidesAction, bookmarkAction]
+        buttonBar.backgroundColor = MDCPalette.grey.tint50
+        let postsAction = UIBarButtonItem(image: UIImage(named: "posts")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(postsTapped(_:)))
+        postsAction.width = view.bounds.width / 3
+        postsAction.tintColor = onColor
+        let guidesAction = UIBarButtonItem(image: UIImage(named: "guides-light")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(guidesTapped(_:)))
+        guidesAction.width = view.bounds.width / 3
+        guidesAction.tintColor = offColor
+        let bookmarkAction = UIBarButtonItem(image: UIImage(named: "bookmark"), style: .plain, target: self, action: #selector(bookmarksTapped(_:)))
+        bookmarkAction.width = view.bounds.width / 3
+        bookmarkAction.tintColor = offColor
+        items = [postsAction, guidesAction, bookmarkAction]
+        buttonBar.items = items
         
         // AppBar Setup
         let appBar = MDCAppBar()
@@ -221,6 +220,10 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
             i?.isHidden = true
             i?.isUserInteractionEnabled = false
         }
+        for i in items{
+            i.image = i.image?.withRenderingMode(.alwaysTemplate)
+            i.tintColor = offColor
+        }
         
         switch currentMode {
         case 1:
@@ -228,19 +231,24 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
             postsCollectionView.isUserInteractionEnabled = true
             posts.removeAll()
             loadPosts()
+            items[0].tintColor = onColor
         case 2:
             guidesCollectionView.isHidden = false
             guidesCollectionView.isUserInteractionEnabled = true
             guides.removeAll()
             loadGuides()
+            items[1].tintColor = onColor
         case 3:
             guidesCollectionView.isHidden = false
             guidesCollectionView.isUserInteractionEnabled = true
             guides.removeAll()
             loadBookmarks()
+            items[2].tintColor = onColor
         default:
             break
         }
+        buttonBar.items?.removeAll()
+        buttonBar.items = items
     }
     
     func loadProfile(){
@@ -265,6 +273,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
             user.hairTypes = userHairTypes
             user.followerCount = userFollowers
             user.followingCount = userFollowing
+            user.reference = (snapshot?.documentID)!
             self.currentUser = user
             self.update()
             UserDefaultsUtil().saveUserData(user)
@@ -409,6 +418,14 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         
         if let vc = segue.destination as? EditProfileViewController{
             vc.currentUser = currentUser
+        }
+        
+        if let vc = segue.destination as? FollowersViewController{
+            vc.currentUser = UserDefaultsUtil().loadUserData()
+        }
+        
+        if let vc = segue.destination as? FollowingViewController{
+            vc.currentUser = UserDefaultsUtil().loadUserData()
         }
     }
  

@@ -18,11 +18,15 @@ class FollowersViewController: UIViewController, UICollectionViewDelegate, UICol
     
     //MARK: - Varibles
     var users = [User]()
+    var currentUser: User?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.navigationController?.setToolbarHidden(true, animated: false)
+        setupMaterialComponents()
+        loadUsers()
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,7 +36,21 @@ class FollowersViewController: UIViewController, UICollectionViewDelegate, UICol
     
     //MARK: - Storyboard Actions
     func followTapped(_ sender: MDCRaisedButton){
-        
+        sender.removeTarget(self, action: #selector(followTapped(_:)), for: .touchUpInside)
+        sender.addTarget(self, action: #selector(unfollowTapped(_:)), for: .touchUpInside)
+        sender.setBackgroundColor(UIColor.white, for: .normal)
+        sender.setTitle("Following", for: .normal)
+        sender.setTitleColor(UIColor.black, for: .normal)
+        DatabaseUtil().followUser(users[sender.tag])
+    }
+    
+    func unfollowTapped(_ sender: MDCRaisedButton){
+        sender.removeTarget(self, action: #selector(unfollowTapped(_:)), for: .touchUpInside)
+        sender.addTarget(self, action: #selector(followTapped(_:)), for: .touchUpInside)
+        sender.setBackgroundColor(MDCPalette.blue.tint500, for: .normal)
+        sender.setTitle("Follow", for: .normal)
+        sender.setTitleColor(UIColor.white, for: .normal)
+        DatabaseUtil().unfollowUser(users[sender.tag])
     }
     
     //MARK: - Collection View Callbacks
@@ -51,14 +69,18 @@ class FollowersViewController: UIViewController, UICollectionViewDelegate, UICol
         cell.profilePic.frame = cell.profilePicContainer.bounds
         cell.usernameLabel.text = current.username.lowercased()
         cell.profilePicContainer.layer.cornerRadius = cell.profilePicContainer.bounds.width / 2
-        if current.reference == UserDefaultsUtil().loadReference(){
-            cell.followBtn.isHidden = true
-            cell.followBtn.isEnabled = false
+        if !current.iFollow{
+            cell.followBtn.addTarget(self, action: #selector(followTapped(_:)), for: .touchUpInside)
+            cell.followBtn.setBackgroundColor(MDCPalette.blue.tint500, for: .normal)
+            cell.followBtn.setTitle("Follow", for: .normal)
+            cell.followBtn.setTitleColor(UIColor.white, for: .normal)
+            cell.followBtn.tag = indexPath.row
         }else{
-                cell.followBtn.addTarget(self, action: #selector(followTapped(_:)), for: .touchUpInside)
-                cell.followBtn.setBackgroundColor(MDCPalette.blue.tint500, for: .normal)
-                cell.followBtn.setTitle("Follow", for: .normal)
-                cell.followBtn.setTitleColor(UIColor.white, for: .normal)
+            cell.followBtn.addTarget(self, action: #selector(unfollowTapped(_:)), for: .touchUpInside)
+            cell.followBtn.setBackgroundColor(UIColor.white, for: .normal)
+            cell.followBtn.setTitle("Following", for: .normal)
+            cell.followBtn.setTitleColor(UIColor.black, for: .normal)
+            cell.followBtn.tag = indexPath.row
         }
         return cell
     }
@@ -80,7 +102,7 @@ class FollowersViewController: UIViewController, UICollectionViewDelegate, UICol
     
     func loadUsers(){
         let db = Firestore.firestore()
-        db.collection("users").document(UserDefaultsUtil().loadReference()).collection("followers").getDocuments { (snapshot, error) in
+        db.collection("users").document((currentUser?.reference)!).collection("followers").getDocuments { (snapshot, error) in
             if error != nil{
                 print(error?.localizedDescription)
                 return
@@ -89,12 +111,12 @@ class FollowersViewController: UIViewController, UICollectionViewDelegate, UICol
             for i in (snapshot?.documents)!{
                 let userRef = i.data()["user"] as! String
                 
-                db.collection("users").document(userRef).getDocument(completion: { (snapshot, err) in
+                db.collection("users").document(userRef).getDocument(completion: { (snap, err) in
                     if err != nil{
                         print(err?.localizedDescription)
                         return
                     }
-                    let data = snapshot?.data()
+                    let data = snap?.data()
                     let userEmail = data!["email"] as! String
                     let userName = data!["username"] as! String
                     let userBio = data!["bio"] as! String
@@ -109,21 +131,38 @@ class FollowersViewController: UIViewController, UICollectionViewDelegate, UICol
                     user.followerCount = userFollowers
                     user.followingCount = userFollowing
                     self.users.append(user)
-                    self.usersCollectionView.reloadData()
+                    
+                    db.collection("users").document(userRef).collection("followers").whereField("user", isEqualTo: UserDefaultsUtil().loadReference()).getDocuments(completion: { (snaps, er) in
+                        if er != nil{
+                            print(er?.localizedDescription)
+                            return
+                        }
+                        
+                        if snaps?.documents != nil{
+                            if (snap?.exists)!{
+                            user.iFollow = true
+                            }
+                        }
+                        self.usersCollectionView.reloadData()
+                    })
                 })
             }
         }
     }
     
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        if let vc = segue.destination as? SelectedProfileViewController{
+            vc.selectedUser = currentUser
+        }
     }
-    */
+ 
 
 }

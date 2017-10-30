@@ -25,6 +25,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UICollectionV
     var tagsEnabled = false
     var currentMode = 1
     var tagsToSearch = [String.SubSequence]()
+    var selectedUser: User?
+    var selectedGuide: Guide?
+    var selectedPost: Post?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -156,7 +159,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UICollectionV
             cell.profilePic.url = URL(string: (current.profilePicUrl))
             cell.profilePic.frame = cell.profilePicContainer.bounds
             cell.usernameLabel.text = current.username.lowercased()
-            cell.profilePicContainer.layer.cornerRadius = cell.profilePicContainer.bounds.width / 2
+            //cell.profilePicContainer.layer.cornerRadius = cell.profilePicContainer.bounds.width / 2
             if current.reference == UserDefaultsUtil().loadReference(){
                 cell.followBtn.isHidden = true
                 cell.followBtn.isEnabled = false
@@ -168,7 +171,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UICollectionV
                     cell.followBtn.setTitleColor(UIColor.white, for: .normal)
                     cell.followBtn.tag = indexPath.row
                 }else{
-                    cell.followBtn.addTarget(self, action: #selector(followTapped(_:)), for: .touchUpInside)
+                    cell.followBtn.addTarget(self, action: #selector(unfollowTapped(_:)), for: .touchUpInside)
                     cell.followBtn.setBackgroundColor(UIColor.white, for: .normal)
                     cell.followBtn.setTitle("Following", for: .normal)
                     cell.followBtn.setTitleColor(UIColor.black, for: .normal)
@@ -177,24 +180,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UICollectionV
             }
             return cell
         case 2:
-            let cell = postsCollection.dequeueReusableCell(withReuseIdentifier: "postCell", for: indexPath) as! PostCell
+            let cell = postsCollection.dequeueReusableCell(withReuseIdentifier: "postCell", for: indexPath) as! GridPostCell
             let selected = posts[indexPath.row]
-            if selected.mImage == nil{
-                cell.butterDownloadImage(selected)
-            } else{
-                cell.butterSetImage(selected)
-            }
-            cell.authorText.text = selected.mUser?.username.lowercased()
-            cell.captionText.text = selected.mCaption
-            //cell.likeBtn.setImage(UIImage(named: "like")?.withRenderingMode(.alwaysTemplate), for: .normal)
-            //cell.likeBtn.tintColor = MDCPalette.grey.tint400
-            //cell.commentBtn.setImage(UIImage(named: "comment")?.withRenderingMode(.alwaysTemplate), for: .normal)
-            //cell.commentBtn.tintColor = MDCPalette.grey.tint400
-            cell.profileImg.layer.cornerRadius = cell.profileImg.frame.size.width / 2
-            cell.timeLabel.text = selected.dateString
-            //cell.viewCommentsBtn.setTitle("View All 5 Comments", for: .normal)
-            //cell.likesLabel.text = "20 Likes"
-            //cell.applyVisuals()
+            cell.image.url = URL(string: selected.mImageUrl)
             return cell
         case 3:
             let cell = guidesCollection.dequeueReusableCell(withReuseIdentifier: "guideCell", for: indexPath) as! GuideCell
@@ -212,11 +200,27 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UICollectionV
         case 1:
             return CGSize(width: collectionView.bounds.width - 16, height: 75)
         case 2:
-            return CGSize(width: self.view.bounds.width, height: (self.guidesCollection?.bounds.height)! - 200)
+            return CGSize(width: self.view.bounds.width / 3, height: (self.view?.bounds.height)! - 60 / 3 )
         case 3:
             return CGSize(width: 256, height: 335)
         default:
             return CGSize.init()
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch collectionView.tag {
+        case 1:
+            selectedUser = users[indexPath.row]
+            performSegue(withIdentifier: "toSelectedUser", sender: self)
+        case 2:
+            selectedPost = posts[indexPath.row]
+            //performSegue(withIdentifier: "toSelectedPost", sender: self)
+        case 3:
+            selectedGuide = guides[indexPath.row]
+            performSegue(withIdentifier: "toSelectedGuide", sender: self)
+        default:
+            break
         }
     }
     
@@ -263,15 +267,24 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UICollectionV
         
     }
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        if let vc = segue.destination  as? SelectedProfileViewController{
+            vc.selectedUser = selectedUser
+        }
+        
+        if let vc = segue.destination as? SelectedGuideViewController{
+            vc.selectedGuide = selectedGuide
+        }
+        
     }
-    */
+ 
 
 }
 extension SearchViewController{

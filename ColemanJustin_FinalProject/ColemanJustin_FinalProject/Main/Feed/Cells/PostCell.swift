@@ -19,7 +19,7 @@ class PostCell: MDCCollectionViewCell{
     @IBOutlet weak var captionText: UITextView!
     @IBOutlet weak var authorText: UILabel!
     @IBOutlet weak var content: UIView!
-    @IBOutlet weak var profileImg: UIImageView!
+    @IBOutlet weak var profileImg: WebPImageView!
     @IBOutlet weak var viewCommentsBtn: MDCFlatButton!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var likesLabel: UILabel!
