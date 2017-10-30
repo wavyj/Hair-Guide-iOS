@@ -62,6 +62,33 @@ class UserDefaultsUtil{
         return user
     }
     
+    public func saveFBData(_ data: [String]){
+        UserDefaults.standard.set(data[0], forKey: "fbID")
+        UserDefaults.standard.set(data[1], forKey: "fbName")
+        UserDefaults.standard.set(data[2], forKey: "fbImage")
+    }
+    
+    public func loadFBData()-> [String]{
+        let id = UserDefaults.standard.object(forKey: "fbID") as! String
+        let name = UserDefaults.standard.object(forKey: "fbName") as! String
+        let url = UserDefaults.standard.object(forKey: "fbImage") as! String
+        return [id, name, url]
+    }
+    
+    public func checkFB()-> Bool{
+        if UserDefaults.standard.object(forKey: "fbID") != nil{
+            return true
+        }else{
+            return false
+        }
+    }
+    
+    public func signOutFB(){
+        UserDefaults.standard.removeObject(forKey: "fbID")
+        UserDefaults.standard.removeObject(forKey: "fbName")
+        UserDefaults.standard.removeObject(forKey: "fbImage")
+    }
+    
     public func signOut(){
         // Remove all Defaults
         UserDefaults.standard.removeObject(forKey: "userEmail")

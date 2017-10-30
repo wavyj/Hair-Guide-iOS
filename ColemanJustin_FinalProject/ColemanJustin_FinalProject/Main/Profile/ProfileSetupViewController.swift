@@ -12,19 +12,22 @@ import Fusuma
 import ImageButter
 import Firebase
 
-class ProfileSetupViewController: UIViewController, FusumaDelegate {
+class ProfileSetupViewController: UIViewController, FusumaDelegate, UITextFieldDelegate {
     
     //MARK: - Outlets
     @IBOutlet weak var profilePicContainer: UIView!
     @IBOutlet weak var profilePic: WebPImageView!
+    @IBOutlet weak var usernameInput: MDCTextField!
     @IBOutlet weak var bioFieldContainer: UIView!
     @IBOutlet weak var progressView: UIProgressView!
     
     //MARK: - Variables
+    var usernameField: MDCTextInputController?
     var bioField: MDCMultilineTextField?
     var multiTextController: MDCTextInputController?
     var selectedImage: UIImage? = nil
     var currentUser: User? = nil
+    var validInput = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,23 +53,42 @@ class ProfileSetupViewController: UIViewController, FusumaDelegate {
     }
     
     func doneTapped(_ sender: UIBarButtonItem){
-        if selectedImage != nil{
-            progressView.isHidden = false
-            bioField?.isEnabled = false
-            view.isUserInteractionEnabled = false
-            saveImage(selectedImage!)
-        } else{
-            uploadComplete()
+        if validInput{
+            if selectedImage != nil{
+                progressView.isHidden = false
+                bioField?.isEnabled = false
+                view.isUserInteractionEnabled = false
+                saveImage(selectedImage!)
+            } else{
+                uploadComplete()
+            }
         }
     }
     
-    func skipTapped(_ sender: UIBarButtonItem){
-        performSegue(withIdentifier: "toFeed", sender: self)
+    
+    //MARK: - Text Field Callbacks
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if let textf = textField as? MDCTextInput{
+            if (textf.text?.isEmpty)!{
+                validInput = false
+                usernameField?.setErrorText("Must have a username", errorAccessibilityValue: nil)
+            }else{
+                validInput = true
+                checkUsername(textf.text!)
+            }
+        }
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        usernameField?.setErrorText(nil, errorAccessibilityValue: nil)
     }
     
     //MARK: - Methods
     func setupMaterialComponents(){
         // Textfield
+        usernameInput.placeholder = "Username"
+        usernameField = MDCTextInputControllerDefault(textInput: usernameInput)
+        usernameField?.activeColor = MDCPalette.blue.tint500
         bioField = MDCMultilineTextField()
         bioFieldContainer.addSubview(bioField!)
         bioField?.frame = bioFieldContainer.bounds
@@ -82,19 +104,42 @@ class ProfileSetupViewController: UIViewController, FusumaDelegate {
         title = "Edit Profile"
         let doneAction = UIBarButtonItem(image: UIImage(named: "done")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(doneTapped(_:)))
         doneAction.tintColor = UIColor.black
-        let skipAction = UIBarButtonItem(title: "Skip", style: .plain, target: self, action: #selector(skipTapped(_:)))
-        navigationItem.leftBarButtonItem = skipAction
         navigationItem.rightBarButtonItems = [doneAction]
         appBar.addSubviewsToParent()
     }
     
     func uploadComplete(){
-        if !(bioField?.text?.isEmpty)!{
+        if !(usernameInput?.text?.isEmpty)!{
+            currentUser?.username = (usernameInput?.text)!
             currentUser?.bio = (bioField?.text)!
             UserDefaultsUtil().saveUserData(currentUser!)
         }
-        DatabaseUtil().updateUser(currentUser!)
+        
+        DatabaseUtil().createUser(currentUser!)
         performSegue(withIdentifier: "toFeed", sender: self)
+    }
+    
+    func checkUsername(_ username: String){
+        let db = Firestore.firestore()
+        db.collection("users").whereField("username", isEqualTo: username).getDocuments { (snapshot, error) in
+            if (snapshot?.documents.isEmpty)!{
+                self.usernameField?.setErrorText(nil, errorAccessibilityValue: nil)
+                self.validInput = true
+                return
+            }
+            
+            for i in (snapshot?.documents)!{
+                let nameToCheck = i.data()["username"] as! String
+                if nameToCheck == username{
+                    // Username is taken
+                    self.usernameField?.setErrorText("Username is taken", errorAccessibilityValue: nil)
+                    self.validInput = false
+                }else{
+                    self.usernameField?.setErrorText(nil, errorAccessibilityValue: nil)
+                    self.validInput = true
+                }
+            }
+        }
     }
     
     //MARK: - Fusama Callbacks

@@ -115,7 +115,12 @@ class AutoAnalysisViewController: UIViewController, FusumaDelegate {
                 self.hairType.isHidden = false
                 self.continueBtn.isHidden = false
                 self.progressView.stopAnimating()
+                
             }
+            
+            let u = UserDefaultsUtil().loadUserData()
+            u.hairTypes.append((sorted?.first?.classification)!)
+            UserDefaultsUtil().saveUserData(u)
         })
         
     }

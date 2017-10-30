@@ -18,5 +18,6 @@ pod 'WordPress-iOS-Editor'
 pod 'Kingfisher', '~> 4.0'
 pod 'DateToolsSwift'
 pod 'Fusuma'
+pod 'FBSDKLoginKit'
 
 end

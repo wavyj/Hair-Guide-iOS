@@ -15,7 +15,6 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
     
     //MARK: - Outlets
     @IBOutlet weak var emailField: MDCTextField!
-    @IBOutlet weak var usernameField: MDCTextField!
     @IBOutlet weak var passwordField: MDCTextField!
     @IBOutlet weak var confirmPassField: MDCTextField!
     @IBOutlet weak var enterBtn: MDCRaisedButton!
@@ -63,7 +62,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
                     return
                 }
                 
-                let u = User(email: self.emailField.text!, username: self.usernameField.text!, bio: "", profilePicUrl: "", gender: "")
+                let u = User(email: self.emailField.text!, username: "", bio: "", profilePicUrl: "", gender: "")
                 
                 UserDefaultsUtil().saveUser(u.email, self.passwordField.text!)
                 UserDefaultsUtil().saveUserData(u)
@@ -85,7 +84,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
         enterBtn.setBackgroundColor(MDCPalette.blue.tint500, for: .normal)
         enterBtn.addTarget(self, action: #selector(submitTapped(_:)), for: .touchUpInside)
         
-        for i in [emailField, usernameField, passwordField, confirmPassField]{
+        for i in [emailField, passwordField, confirmPassField]{
             i?.delegate = self
             textFieldControllers.append(MDCTextInputControllerDefault(textInput: i))
         }
@@ -192,7 +191,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
         }
         
         // Character Count
-        for i in [usernameField, passwordField, confirmPassField]{
+        for i in [passwordField, confirmPassField]{
             tempBool = validateCharCount(i!)
             
             if (tempBool == false){
