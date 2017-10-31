@@ -1652,15 +1652,12 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="704.5"/>
                                         <subviews>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="VeF-sn-19f">
-                                                <rect key="frame" x="8" y="181" width="359" height="422.5"/>
+                                                <rect key="frame" x="8" y="145.5" width="359" height="422.5"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="um4-ga-ZF1">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="141"/>
-                                            </imageView>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="dXF-D0-CFG">
                                                 <rect key="frame" x="-68" y="14" width="375" height="100"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1688,26 +1685,30 @@
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vRy-QW-lPY">
-                                                <rect key="frame" x="0.0" y="149" width="375" height="24"/>
+                                                <rect key="frame" x="0.0" y="113.5" width="375" height="24"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8kr-oR-5YI" customClass="WebPImageView">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="105.5"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="VeF-sn-19f" firstAttribute="leading" secondItem="GHu-Pm-yjr" secondAttribute="leading" constant="8" id="2VZ-Tk-a7p"/>
                                             <constraint firstItem="vRy-QW-lPY" firstAttribute="leading" secondItem="GHu-Pm-yjr" secondAttribute="leading" id="3F6-wR-ki8"/>
-                                            <constraint firstItem="um4-ga-ZF1" firstAttribute="top" secondItem="GHu-Pm-yjr" secondAttribute="top" id="7tl-U1-oG7"/>
                                             <constraint firstAttribute="trailing" secondItem="VeF-sn-19f" secondAttribute="trailing" constant="8" id="Dpq-hO-o6P"/>
-                                            <constraint firstAttribute="trailing" secondItem="um4-ga-ZF1" secondAttribute="trailing" id="K7h-vT-4vk"/>
-                                            <constraint firstItem="um4-ga-ZF1" firstAttribute="height" secondItem="GHu-Pm-yjr" secondAttribute="height" multiplier="0.2" id="NWq-9D-xw2"/>
-                                            <constraint firstItem="vRy-QW-lPY" firstAttribute="top" secondItem="um4-ga-ZF1" secondAttribute="bottom" constant="8" id="TFF-CF-obG"/>
                                             <constraint firstAttribute="trailing" secondItem="vRy-QW-lPY" secondAttribute="trailing" id="WeD-Me-E1t"/>
                                             <constraint firstItem="VeF-sn-19f" firstAttribute="height" secondItem="GHu-Pm-yjr" secondAttribute="height" multiplier="0.6" id="X2J-yT-awD"/>
+                                            <constraint firstItem="8kr-oR-5YI" firstAttribute="top" secondItem="GHu-Pm-yjr" secondAttribute="top" id="XEI-ch-i5b"/>
                                             <constraint firstItem="VeF-sn-19f" firstAttribute="top" secondItem="vRy-QW-lPY" secondAttribute="bottom" constant="8" id="f9O-Xd-jEL"/>
-                                            <constraint firstItem="um4-ga-ZF1" firstAttribute="leading" secondItem="GHu-Pm-yjr" secondAttribute="leading" id="fyk-z5-0f2"/>
+                                            <constraint firstItem="vRy-QW-lPY" firstAttribute="top" secondItem="8kr-oR-5YI" secondAttribute="bottom" constant="8" id="lvE-1J-5LD"/>
+                                            <constraint firstItem="8kr-oR-5YI" firstAttribute="leading" secondItem="GHu-Pm-yjr" secondAttribute="leading" id="okk-6Y-7bA"/>
                                             <constraint firstItem="vRy-QW-lPY" firstAttribute="top" secondItem="GHu-Pm-yjr" secondAttribute="top" id="qIV-es-gKf"/>
+                                            <constraint firstItem="8kr-oR-5YI" firstAttribute="height" secondItem="GHu-Pm-yjr" secondAttribute="height" multiplier="0.15" id="sK1-zL-G57"/>
+                                            <constraint firstAttribute="trailing" secondItem="8kr-oR-5YI" secondAttribute="trailing" id="se7-Yq-Z8S"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="subviews">
@@ -1742,8 +1743,7 @@
                     <connections>
                         <outlet property="content" destination="GHu-Pm-yjr" id="ZUT-Vl-LxH"/>
                         <outlet property="contentView" destination="VeF-sn-19f" id="YFg-rc-JzU"/>
-                        <outlet property="guideImage" destination="um4-ga-ZF1" id="FGH-WB-ftb"/>
-                        <outlet property="titleToImageConstraint" destination="TFF-CF-obG" id="dNb-cE-ccM"/>
+                        <outlet property="guideImage" destination="8kr-oR-5YI" id="CSp-2E-Pcy"/>
                         <outlet property="titleToTopConstraint" destination="qIV-es-gKf" id="cqm-U4-nNU"/>
                         <outlet property="titleView" destination="vRy-QW-lPY" id="9xd-K9-LsX"/>
                     </connections>
