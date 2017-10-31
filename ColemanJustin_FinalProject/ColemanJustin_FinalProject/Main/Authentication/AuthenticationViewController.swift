@@ -79,10 +79,6 @@ class AuthenticationViewController: UIViewController, FBSDKLoginButtonDelegate {
         performSegue(withIdentifier: "toSignup", sender: sender)
     }
     
-    func facebookTapped(_ sender: UIButton){
-        print("Facebook Tapped")
-    }
-    
     func instagramTapped(_sender: UIButton){
         print("Instagram Tapped")
     }

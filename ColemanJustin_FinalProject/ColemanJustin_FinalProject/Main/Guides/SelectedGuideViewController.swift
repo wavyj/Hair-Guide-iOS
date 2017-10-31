@@ -10,7 +10,7 @@ import UIKit
 import MaterialComponents
 import WordPressEditor
 import Firebase
-import ImageButter
+import Kingfisher
 
 class SelectedGuideViewController: /*WPEditorViewController, WPEditorViewDelegate, WPEditorViewControllerDelegate*/ UIViewController {
     
@@ -18,8 +18,10 @@ class SelectedGuideViewController: /*WPEditorViewController, WPEditorViewDelegat
     //@IBOutlet weak var editor: UIView!
     @IBOutlet weak var titleView: UILabel!
     @IBOutlet weak var contentView: UITextView!
-    @IBOutlet weak var guideImage: WebPImageView!
-    @IBOutlet weak var imageHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var guideImage: UIImageView!
+    @IBOutlet weak var titleToImageConstraint: NSLayoutConstraint!
+    @IBOutlet weak var titleToTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var content: UIView!
     
     //MARK: - Variables
     var selectedGuide: Guide? = nil
@@ -55,12 +57,10 @@ class SelectedGuideViewController: /*WPEditorViewController, WPEditorViewDelegat
         imageHeightOrig = self.view.bounds.height * 0.2
         
         if selectedGuide?.mImageUrl == ""{
-            print("here")
-            imageHeightConstraint.constant = 0
+           //titleView.removeConstraint(titleToImageConstraint)
+            //titleView.addConstraint(titleToTopConstraint)
         }else{
-            imageHeightConstraint.constant = imageHeightOrig
-            guideImage.url = URL(string: (selectedGuide?.mImageUrl)!)
-            guideImage.frame = guideImage.bounds
+            guideImage.kf.setImage(with: URL(string: (selectedGuide?.mImageUrl)!))
         }
     }
 

@@ -7,21 +7,21 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>471346129518-cjc8c3vppo01pl38bp8v0r4ksebrjsd9.apps.googleusercontent.com</string>
+	<string>12732669818-600cmd58o33vblrgtb9ovr51doocl2dv.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.471346129518-cjc8c3vppo01pl38bp8v0r4ksebrjsd9</string>
+	<string>com.googleusercontent.apps.12732669818-600cmd58o33vblrgtb9ovr51doocl2dv</string>
 	<key>API_KEY</key>
-	<string>AIzaSyD2rgFRPQir_ECUHMQwk0e0-OV0W3cmNqk</string>
+	<string>AIzaSyBuy4N2BArO3NQm9a-e1GN8xqfQQHVmKac</string>
 	<key>GCM_SENDER_ID</key>
-	<string>471346129518</string>
+	<string>12732669818</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>ColemanJustin.ColemanJustin-FinalProject</string>
 	<key>PROJECT_ID</key>
-	<string>final-project-af0ee</string>
+	<string>final-project-user-test</string>
 	<key>STORAGE_BUCKET</key>
-	<string>final-project-af0ee.appspot.com</string>
+	<string>final-project-user-test.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<true/>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -33,7 +33,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:471346129518:ios:fe6c16054bfa2cca</string>
+	<string>1:12732669818:ios:fe6c16054bfa2cca</string>
 	<key>DATABASE_URL</key>
 	<string>https://final-project-user-test.firebaseio.com</string>
 </dict>
