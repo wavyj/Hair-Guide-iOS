@@ -690,7 +690,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EU4-DA-eI2" customClass="MDCRaisedButton">
-                                        <rect key="frame" x="122" y="95" width="169" height="30"/>
+                                        <rect key="frame" x="150" y="85" width="169" height="30"/>
                                     </button>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hNe-sb-21h">
                                         <rect key="frame" x="16" y="26.5" width="80.5" height="80.5"/>
@@ -2320,7 +2320,7 @@
                                     <constraint firstItem="nOU-fT-qfk" firstAttribute="width" secondItem="6MK-JA-H68" secondAttribute="width" multiplier="0.3" id="xZz-Tw-Fo2"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qzl-c7-yry" customClass="MDCButtonBar">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qzl-c7-yry" customClass="MDCButtonBar">
                                 <rect key="frame" x="0.0" y="253.5" width="375" height="53.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
