@@ -21,6 +21,7 @@ class EditGuideViewController: UIViewController, UITextFieldDelegate, FusumaDele
     @IBOutlet weak var titleInput: MDCTextField!
     @IBOutlet weak var productsBtn: MDCRaisedButton!
     @IBOutlet weak var progressView: UIProgressView!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     //MARK: - Variables
     var textController: MDCTextInputController?
@@ -43,6 +44,8 @@ class EditGuideViewController: UIViewController, UITextFieldDelegate, FusumaDele
             loadingView.lineWidth = 2
             guideImage.loadingView = loadingView
         }
+        
+        scrollView.contentSize = CGSize(width: view.bounds.width, height: view.bounds.height)
     }
     
     override func didReceiveMemoryWarning() {

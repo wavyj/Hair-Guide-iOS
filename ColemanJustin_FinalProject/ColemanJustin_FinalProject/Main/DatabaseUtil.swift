@@ -19,6 +19,21 @@ class DatabaseUtil{
     }
     
     func createUser(_ newUser: User){
+        if UserDefaultsUtil().checkFB(){
+            let fb = UserDefaultsUtil().loadFBData()
+            ref = db?.collection("users").addDocument(data: ["email" : newUser.email,
+                                                             "username": newUser.username,
+                                                             "profilePicUrl": "",
+                                                             "bio": "",
+                                                             "gender": "", "hairTypes": [], "followers": 0, "following": 0, "fbuser": fb.first], completion: { (error) in
+                                                                if let error = error{
+                                                                    print("Error adding document: \(error)")
+                                                                } else{
+                                                                    UserDefaultsUtil().saveReference(DocumentID: (self.ref?.documentID)!)
+                                                                    print("Document added with ID: \(self.ref!.documentID)")
+                                                                }
+            })
+        }else{
         ref = db?.collection("users").addDocument(data: ["email" : newUser.email,
          "username": newUser.username,
          "profilePicUrl": "",
@@ -31,6 +46,7 @@ class DatabaseUtil{
                 print("Document added with ID: \(self.ref!.documentID)")
             }
         })
+        }
     }
     
     func getUser(_ email: String){
@@ -52,25 +68,70 @@ class DatabaseUtil{
             let user = User(email: email, username: username, bio: bio, profilePicUrl: pic, gender: gender)
             user.followerCount = followers
             user.followingCount = following
+            if let fb = userData!["fbuser"] as? String{
+                user.fb = fb
+            }
             UserDefaultsUtil().saveUserData(user)
         })
         
     }
     
+    func getFbUser(_ token: String){
+        db?.collection("users").whereField("fbuser", isEqualTo: token).getDocuments(completion: { (snapshot, error) in
+            if error != nil{
+                // Error
+                print(error?.localizedDescription)
+            }
+            
+            UserDefaultsUtil().saveReference(DocumentID: (snapshot?.documents[0].reference.documentID)!)
+            let userData = snapshot?.documents[0].data()
+            let username = userData!["username"] as! String
+            let email = userData!["email"] as! String
+            let pic = userData!["profilePicUrl"] as! String
+            let gender = userData!["gender"] as! String
+            let bio = userData!["bio"] as! String
+            let followers = userData!["followers"] as! Int
+            let following = userData!["following"] as! Int
+            let user = User(email: email, username: username, bio: bio, profilePicUrl: pic, gender: gender)
+            user.followerCount = followers
+            user.followingCount = following
+            if let fb = userData!["fbuser"] as? String{
+                user.fb = fb
+            }
+            UserDefaultsUtil().saveUserData(user)
+        })
+    }
+    
     func updateUser(_ user: User){
+        if user.fb != nil{
+            db?.collection("users").document(UserDefaultsUtil().loadReference()).setData(["email" : user.email, "username": user.username, "profilePicUrl": user.profilePicUrl, "bio": user.bio, "gender": user.gender, "hairTypes": user.hairTypes,  "followers": user.followerCount, "following": user.followingCount, "fbuser": user.fb], completion: { (error) in
+                if error != nil{
+                    print(error?.localizedDescription)
+                }
+            })
+        }else{
         db?.collection("users").document(UserDefaultsUtil().loadReference()).setData(["email" : user.email, "username": user.username, "profilePicUrl": user.profilePicUrl, "bio": user.bio, "gender": user.gender, "hairTypes": user.hairTypes,  "followers": user.followerCount, "following": user.followingCount], completion: { (error) in
             if error != nil{
                 print(error?.localizedDescription)
             }
         })
+        }
     }
     
     func updateOtherUser(_ user: User){
+        if user.fb != nil{
+            db?.collection("users").document(user.reference).setData(["email" : user.email, "username": user.username, "profilePicUrl": user.profilePicUrl, "bio": user.bio, "gender": user.gender, "hairTypes": user.hairTypes,  "followers": user.followerCount, "following": user.followingCount, "fbuser": user.fb], completion: { (error) in
+                if error != nil{
+                    print(error?.localizedDescription)
+                }
+            })
+        }else{
         db?.collection("users").document(user.reference).setData(["email" : user.email, "username": user.username, "profilePicUrl": user.profilePicUrl, "bio": user.bio, "gender": user.gender, "hairTypes": user.hairTypes,  "followers": user.followerCount, "following": user.followingCount], completion: { (error) in
             if error != nil{
                 print(error?.localizedDescription)
             }
         })
+        }
 
     }
     

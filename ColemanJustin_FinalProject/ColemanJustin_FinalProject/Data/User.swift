@@ -22,6 +22,7 @@ class User{
     var followingCount = 0
     var reference = ""
     var iFollow = false
+    var fb: String? = nil
     //var followMe = false TODO: show that user follows you back on their profile
     
     init(email: String, username: String, bio: String, profilePicUrl: String, gender: String) {

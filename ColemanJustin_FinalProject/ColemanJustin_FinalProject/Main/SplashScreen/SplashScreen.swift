@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FBSDKLoginKit
 
 class SplashScreen: UIViewController {
 
@@ -19,7 +20,9 @@ class SplashScreen: UIViewController {
         //Check if logged in
         if UserDefaultsUtil().loadUserEmail() != nil{
             login()
-        } else{
+        }else if FBSDKAccessToken.current() != nil{
+            fbLogin()
+        }else{
             DispatchQueue.main.async {
                 self.toAuth()
             }
@@ -40,6 +43,17 @@ class SplashScreen: UIViewController {
                 return
             }
             
+            self.toFeed()
+        }
+    }
+    
+    func fbLogin(){
+        let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+        Auth.auth().signIn(with: credential) { (user, error) in
+            if error != nil{
+                print(error?.localizedDescription)
+                return
+            }
             self.toFeed()
         }
     }

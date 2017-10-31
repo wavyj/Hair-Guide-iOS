@@ -1,4 +1,10 @@
 PODS:
+  - Bolts (1.8.4):
+    - Bolts/AppLinks (= 1.8.4)
+    - Bolts/Tasks (= 1.8.4)
+  - Bolts/AppLinks (1.8.4):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.8.4)
   - BoringSSL (9.0):
     - BoringSSL/Implementation (= 9.0)
     - BoringSSL/Interface (= 9.0)
@@ -12,6 +18,10 @@ PODS:
   - CocoaLumberjack/Extensions (3.2.1):
     - CocoaLumberjack/Default
   - DateToolsSwift (2.0.3)
+  - FBSDKCoreKit (4.27.1):
+    - Bolts (~> 1.7)
+  - FBSDKLoginKit (4.27.1):
+    - FBSDKCoreKit
   - Firebase/Auth (4.3.0):
     - Firebase/Core
     - FirebaseAuth (= 4.2.1)
@@ -407,6 +417,7 @@ PODS:
 
 DEPENDENCIES:
   - DateToolsSwift
+  - FBSDKLoginKit
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Firestore
@@ -419,9 +430,12 @@ DEPENDENCIES:
   - WordPress-iOS-Editor
 
 SPEC CHECKSUMS:
+  Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   BoringSSL: 19083b821ef3ae0f758fae15482e183003b1e265
   CocoaLumberjack: 2800c03334042fe80589423c8d80e582dcaec482
   DateToolsSwift: bf69bf9056d9e53c5c03f06e51f219b9b8b02f9e
+  FBSDKCoreKit: 03365dad5d790249196ffad8be4f6d8a2d98f932
+  FBSDKLoginKit: 66ff53b73cffd967ab773e32fac39e90a60e6d46
   Firebase: 83283761a1ef6dc9846e03d08059f51421afbd65
   FirebaseAnalytics: 722b53c7b32bfc7806b06e0093a2f5180d4f2c5a
   FirebaseAuth: d7f047fbeab98062b98ea933b8d934e0fb1190e2
@@ -450,6 +464,6 @@ SPEC CHECKSUMS:
   Validator: 7d9828daffabc757604603052e407f208fa9b6d5
   WordPress-iOS-Editor: 03b3bc631a31520ccf78e665548286c6d12c17f4
 
-PODFILE CHECKSUM: d8153d6cea286a5686e3c5dd0a28ae86ed6b42df
+PODFILE CHECKSUM: 8595df2981d1e4c1b27566149c402ef7fcaa877c
 
 COCOAPODS: 1.2.0
