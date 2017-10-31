@@ -7,21 +7,21 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>12732669818-600cmd58o33vblrgtb9ovr51doocl2dv.apps.googleusercontent.com</string>
+	<string>471346129518-jh0pr5c0in4bc6nr2amfiq8vq49baerc.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.12732669818-600cmd58o33vblrgtb9ovr51doocl2dv</string>
+	<string>com.googleusercontent.apps.471346129518-jh0pr5c0in4bc6nr2amfiq8vq49baerc</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBuy4N2BArO3NQm9a-e1GN8xqfQQHVmKac</string>
+	<string>AIzaSyD2rgFRPQir_ECUHMQwk0e0-OV0W3cmNqk</string>
 	<key>GCM_SENDER_ID</key>
-	<string>12732669818</string>
+	<string>471346129518</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>ColemanJustin.ColemanJustin-FinalProject</string>
+	<string>ColemanJustin.Firestore-Test</string>
 	<key>PROJECT_ID</key>
-	<string>final-project-user-test</string>
+	<string>final-project-af0ee</string>
 	<key>STORAGE_BUCKET</key>
-	<string>final-project-user-test.appspot.com</string>
+	<string>final-project-af0ee.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<true/>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -33,8 +33,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:12732669818:ios:fe6c16054bfa2cca</string>
+	<string>1:471346129518:ios:7456182422704182</string>
 	<key>DATABASE_URL</key>
-	<string>https://final-project-user-test.firebaseio.com</string>
+	<string>https://final-project-af0ee.firebaseio.com</string>
 </dict>
 </plist>
