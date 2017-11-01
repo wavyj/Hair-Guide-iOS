@@ -43,7 +43,6 @@ class SelectedProfileViewController: UIViewController, UICollectionViewDelegate,
         setupMaterialComponents()
         update()
         updateMode()
-        
         followersLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showFollowers(_:))))
         followingLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showFollowing(_:))))
     }
@@ -87,7 +86,7 @@ class SelectedProfileViewController: UIViewController, UICollectionViewDelegate,
     }
     
     func showFollowers(_ sender: UILabel){
-        //performSegue(withIdentifier: "toFollowers", sender: self)
+        performSegue(withIdentifier: "toFollowers", sender: self)
     }
     
     func showFollowing(_ sender: UILabel){

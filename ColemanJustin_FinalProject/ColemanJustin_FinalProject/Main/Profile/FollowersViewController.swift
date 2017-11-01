@@ -27,6 +27,7 @@ class FollowersViewController: UIViewController, UICollectionViewDelegate, UICol
         self.navigationController?.setToolbarHidden(true, animated: false)
         setupMaterialComponents()
         loadUsers()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -102,7 +103,12 @@ class FollowersViewController: UIViewController, UICollectionViewDelegate, UICol
     
     func loadUsers(){
         let db = Firestore.firestore()
-        db.collection("users").document((currentUser?.reference)!).collection("followers").getDocuments { (snapshot, error) in
+        
+        if (currentUser?.reference.isEmpty)!{
+            print("Error: Reference is Empty")
+            return
+        }
+            db.collection("users").document((currentUser?.reference)!).collection("followers").getDocuments { (snapshot, error) in
             if error != nil{
                 print(error?.localizedDescription)
                 return

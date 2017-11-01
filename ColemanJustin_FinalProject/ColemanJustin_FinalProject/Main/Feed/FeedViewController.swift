@@ -196,6 +196,7 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
             let userFollowers = data!["followers"] as! Int
             let userFollowing = data!["following"] as! Int
             let user = User(email: userEmail, username: userName, bio: userBio, profilePicUrl: userPic, gender: userGender)
+            user.reference = (snapshot?.documentID)!
             user.hairTypes = userHairTypes
             user.followerCount = userFollowers
             user.followingCount = userFollowing

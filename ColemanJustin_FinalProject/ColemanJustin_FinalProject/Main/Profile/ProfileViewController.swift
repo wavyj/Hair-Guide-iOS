@@ -46,6 +46,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         imageContainer.layer.cornerRadius = imageContainer.frame.size.width / 2
         currentUser = UserDefaultsUtil().loadUserData()
         update()
+        loadProfile()
         updateMode()
         
         followersLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showFollowers(_:))))
@@ -93,11 +94,11 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     func showFollowers(_ sender: UILabel){
-        //performSegue(withIdentifier: "toFollowers", sender: self)
+        performSegue(withIdentifier: "toFollowers", sender: self)
     }
     
     func showFollowing(_ sender: UILabel){
-        //performSegue(withIdentifier: "toFollowing", sender: self)
+        performSegue(withIdentifier: "toFollowing", sender: self)
     }
     
     func postsTapped(_ sender: UIBarButtonItem){
@@ -421,11 +422,11 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         }
         
         if let vc = segue.destination as? FollowersViewController{
-            vc.currentUser = UserDefaultsUtil().loadUserData()
+            vc.currentUser = currentUser
         }
         
         if let vc = segue.destination as? FollowingViewController{
-            vc.currentUser = UserDefaultsUtil().loadUserData()
+            vc.currentUser = currentUser
         }
     }
  

@@ -92,6 +92,10 @@ class FollowingViewController: UIViewController, UICollectionViewDelegate, UICol
     
     func loadUsers(){
         let db = Firestore.firestore()
+        if (currentUser?.reference.isEmpty)!{
+            print("Error: Reference is Empty")
+            return
+        }
         db.collection("users").document((currentUser?.reference)!).collection("following").getDocuments { (snapshot, error) in
             if error != nil{
                 print(error?.localizedDescription)
