@@ -7,11 +7,10 @@
 //
 
 import UIKit
-import ImageButter
 import MaterialComponents
 
 class UserCell: UICollectionViewCell {
-    @IBOutlet weak var profilePic: WebPImageView!
+    @IBOutlet weak var profilePic: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var followBtn: MDCRaisedButton!
     @IBOutlet weak var view: UIView!

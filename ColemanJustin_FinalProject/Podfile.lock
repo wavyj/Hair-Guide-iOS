@@ -58,6 +58,7 @@ PODS:
     - FirebaseAnalytics (~> 4.0)
     - FirebaseCore (~> 4.0)
     - GTMSessionFetcher/Core (~> 1.1)
+  - FLAnimatedImage (1.0.12)
   - Fusuma (1.2.0)
   - GoogleToolboxForMac/DebugUtils (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
@@ -86,7 +87,6 @@ PODS:
     - Protobuf (~> 3.0)
   - gRPC-RxLibrary (1.6.0)
   - GTMSessionFetcher/Core (1.1.12)
-  - ImageButter (1.1.0)
   - leveldb-library (1.18.3)
   - MaterialComponents (35.2.0):
     - MaterialComponents/ActivityIndicator (= 35.2.0)
@@ -408,6 +408,14 @@ PODS:
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
   - NSObject-SafeExpectations (0.0.2)
+  - PINCache (2.3)
+  - PINRemoteImage (2.1.4):
+    - PINRemoteImage/FLAnimatedImage (= 2.1.4)
+  - PINRemoteImage/Core (2.1.4):
+    - PINCache (>= 2.1)
+  - PINRemoteImage/FLAnimatedImage (2.1.4):
+    - FLAnimatedImage (>= 1.0)
+    - PINRemoteImage/Core
   - Protobuf (3.4.0)
   - Validator (3.0)
   - WordPress-iOS-Editor (1.9.7):
@@ -422,8 +430,8 @@ DEPENDENCIES:
   - Firebase/Firestore
   - Firebase/Storage
   - Fusuma
-  - ImageButter
   - MaterialComponents
+  - PINRemoteImage
   - Validator
   - WordPress-iOS-Editor
 
@@ -441,6 +449,7 @@ SPEC CHECKSUMS:
   FirebaseFirestore: 8e2fd99a621ae6fc6acfac3bdea824fe9d9c128d
   FirebaseInstanceID: 70c2b877e9338971b2429ea5a4293df6961aa44e
   FirebaseStorage: 0cca42d9b889a0227c3a50121f45a4469fc9eb27
+  FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   Fusuma: e8158ad6650507455c9898c22bc01583fbc86d8e
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   gRPC: 07788969b862af21491908f82b83d17ac08c94cd
@@ -448,7 +457,6 @@ SPEC CHECKSUMS:
   gRPC-ProtoRPC: de7505e493a9d1b6b96c8ea8f976c73100fdf53f
   gRPC-RxLibrary: 17b9699beb0a838b95b57832244f9ead18e66777
   GTMSessionFetcher: ebaa1f79a5366922c1735f1566901f50beba23b7
-  ImageButter: b17bb31996f9989b4ca5554942ebdbaececba9f5
   leveldb-library: 10fb39c39e243db4af1828441162405bbcec1404
   MaterialComponents: 3edb4c96d32042242ecdfb2159e697e3c59e9f38
   MDFTextAccessibility: 94098925e0853551c5a311ce7c1ecefbe297cdb6
@@ -457,10 +465,12 @@ SPEC CHECKSUMS:
   MotionTransitioning: caaa488e0469d93f004793b96a2ed04447af808d
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   NSObject-SafeExpectations: 7d7f48df90df4e11da7cfe86b64f45eff7a7f521
+  PINCache: ce36ed282031b92fc7733ffe831f474ff80fddc2
+  PINRemoteImage: 4ac4011c5caefd6befd99758e09becede05d3226
   Protobuf: 03eef2ee0b674770735cf79d9c4d3659cf6908e8
   Validator: 7d9828daffabc757604603052e407f208fa9b6d5
   WordPress-iOS-Editor: 03b3bc631a31520ccf78e665548286c6d12c17f4
 
-PODFILE CHECKSUM: 62b84b166cca8fb3d6c6c8b4dcfeaafc46853aa7
+PODFILE CHECKSUM: 7b7caf0740b7e69bf4c899b1a29aad5a57ae3fe1
 
 COCOAPODS: 1.2.0

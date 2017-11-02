@@ -51,7 +51,7 @@ class NewPostViewController: UIViewController, UICollectionViewDelegate, UIColle
         newPost?.mTags = tags
         
         // Upload Image
-        CloudStorageUtil(self).saveImage((newPost?.mImageAlt)!, newPost!)
+        CloudStorageUtil(self).saveImage((newPost?.mImage)!, newPost!)
         progressView.isHidden = false
         spinner.isHidden = false
         submitBtn.isEnabled = false

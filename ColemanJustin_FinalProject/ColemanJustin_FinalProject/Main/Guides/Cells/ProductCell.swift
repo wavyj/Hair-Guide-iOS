@@ -11,7 +11,7 @@ import UIKit
 class ProductCell: UICollectionViewCell {
     
     //MARK: - Outlets
-    @IBOutlet weak var productImage: UIImageView!
+    @IBOutlet weak var productImage: UIImage!
     @IBOutlet weak var productName: UILabel!
     @IBOutlet weak var productPrice: UILabel!
 
@@ -19,13 +19,5 @@ class ProductCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
         
-        createShadow()
     }
-    
-    func createShadow(){
-        self.layer.shadowOffset = CGSize(width: 1, height: 1)
-        self.layer.shadowOpacity = 0.75
-        self.layer.shadowRadius = 2
-    }
-
 }

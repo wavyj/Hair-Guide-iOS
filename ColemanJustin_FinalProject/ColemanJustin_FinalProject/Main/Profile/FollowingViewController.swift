@@ -64,10 +64,10 @@ class FollowingViewController: UIViewController, UICollectionViewDelegate, UICol
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "user", for: indexPath) as! UserCell
         let current = users[indexPath.row]
-        cell.profilePic.url = URL(string: (current.profilePicUrl))
-        cell.profilePic.frame = cell.profilePicContainer.bounds
+        
+        cell.profilePic.pin_updateWithProgress = true
+        cell.profilePic.pin_setImage(from: URL(string: current.profilePicUrl))
         cell.usernameLabel.text = current.username.lowercased()
-        cell.profilePicContainer.layer.cornerRadius = cell.profilePicContainer.bounds.width / 2
             cell.followBtn.addTarget(self, action: #selector(followTapped(_:)), for: .touchUpInside)
             cell.followBtn.setBackgroundColor(UIColor.white, for: .normal)
             cell.followBtn.setTitle("Following", for: .normal)

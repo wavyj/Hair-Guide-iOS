@@ -9,12 +9,11 @@
 import Foundation
 import UIKit
 import Firebase
-import ImageButter
 import DateToolsSwift
 
 class Post{
     let mCaption: String?
-    var mImage: WebPImage? = nil
+    var mImage: UIImage? = nil
     var mImageAlt: UIImage? = nil
     let mLikes: Int?
     let mComments: Int?
@@ -26,11 +25,10 @@ class Post{
     
     init(caption: String, image: UIImage, likes: Int, comments: Int){
         mCaption = caption
-        mImageAlt = image
         mLikes = likes
         mComments = comments
         mDate = Date()
-        mImage = WebPImage(image: mImageAlt)
+        mImage = image
     }
     
     init(caption: String, likes: Int, comments: Int, date: Date, imageUrl: String, tags: [String]){

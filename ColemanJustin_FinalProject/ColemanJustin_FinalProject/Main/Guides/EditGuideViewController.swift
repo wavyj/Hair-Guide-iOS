@@ -10,13 +10,12 @@ import UIKit
 import MaterialComponents
 import Fusuma
 import Firebase
-import ImageButter
 
 class EditGuideViewController: UIViewController, UITextFieldDelegate, FusumaDelegate {
 
     //MARK: - Outlets
     @IBOutlet weak var imageContainer: UIView!
-    @IBOutlet weak var guideImage: WebPImageView!
+    @IBOutlet weak var guideImage: UIImageView!
     @IBOutlet weak var textInputContainer: UIView!
     @IBOutlet weak var titleInput: MDCTextField!
     @IBOutlet weak var productsBtn: MDCRaisedButton!
@@ -38,14 +37,11 @@ class EditGuideViewController: UIViewController, UITextFieldDelegate, FusumaDele
         setupMaterialComponents()
         imageContainer.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTapped(_:))))
         if !(editGuide?.mImageUrl.isEmpty)!{
-            guideImage.url = URL(string: (editGuide?.mImageUrl)!)
-            let loadingView = WebPLoadingView()
-            loadingView.lineColor = MDCPalette.blue.tint500
-            loadingView.lineWidth = 2
-            guideImage.loadingView = loadingView
+            
         }
+        guideImage.pin_updateWithProgress = true
+        guideImage.pin_setImage(from: URL(string: (editGuide?.mImageUrl)!))
         
-        scrollView.contentSize = CGSize(width: view.bounds.width, height: view.bounds.height)
     }
     
     override func didReceiveMemoryWarning() {
@@ -147,7 +143,7 @@ class EditGuideViewController: UIViewController, UITextFieldDelegate, FusumaDele
     //MARK: - Fusama Callbacks
     func fusumaImageSelected(_ image: UIImage, source: FusumaMode) {
         selectedImage = image
-        guideImage.image = WebPImage(image: image)
+        
     }
     
     func fusumaMultipleImageSelected(_ images: [UIImage], source: FusumaMode) {

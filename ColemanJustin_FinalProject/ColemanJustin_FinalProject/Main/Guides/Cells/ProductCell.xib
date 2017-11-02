@@ -21,9 +21,10 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oj9-rZ-lrt" userLabel="Content">
                         <rect key="frame" x="0.0" y="-0.5" width="260" height="260"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OeJ-uU-LIF">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n1p-aa-Q0m" customClass="WebPImagePageView">
                                 <rect key="frame" x="0.0" y="-0.5" width="260" height="260"/>
-                            </imageView>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$20" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Yd-8E-fsf">
                                 <rect key="frame" x="200" y="8" width="52" height="20.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
@@ -39,16 +40,16 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="OeJ-uU-LIF" secondAttribute="trailing" id="30e-yo-DkW"/>
                             <constraint firstAttribute="trailing" secondItem="SX1-G5-OTy" secondAttribute="trailing" constant="8" id="4Zu-5J-TQt"/>
                             <constraint firstItem="7Yd-8E-fsf" firstAttribute="leading" secondItem="oj9-rZ-lrt" secondAttribute="leading" constant="200" id="AoV-R2-shh"/>
-                            <constraint firstAttribute="bottom" secondItem="OeJ-uU-LIF" secondAttribute="bottom" id="CZ5-Cc-92w"/>
+                            <constraint firstItem="n1p-aa-Q0m" firstAttribute="height" secondItem="oj9-rZ-lrt" secondAttribute="height" id="BDz-9g-jTv"/>
+                            <constraint firstItem="n1p-aa-Q0m" firstAttribute="centerX" secondItem="oj9-rZ-lrt" secondAttribute="centerX" id="La2-5M-K72"/>
                             <constraint firstItem="SX1-G5-OTy" firstAttribute="leading" secondItem="oj9-rZ-lrt" secondAttribute="leading" constant="8" id="TME-KX-IQE"/>
-                            <constraint firstItem="OeJ-uU-LIF" firstAttribute="top" secondItem="oj9-rZ-lrt" secondAttribute="top" id="eCt-4s-P4e"/>
-                            <constraint firstItem="OeJ-uU-LIF" firstAttribute="leading" secondItem="oj9-rZ-lrt" secondAttribute="leading" id="hOR-Td-PQ1"/>
+                            <constraint firstItem="n1p-aa-Q0m" firstAttribute="centerY" secondItem="oj9-rZ-lrt" secondAttribute="centerY" id="YKU-U7-FT8"/>
                             <constraint firstAttribute="trailing" secondItem="7Yd-8E-fsf" secondAttribute="trailing" constant="8" id="lSq-lb-oxX"/>
                             <constraint firstItem="7Yd-8E-fsf" firstAttribute="top" secondItem="oj9-rZ-lrt" secondAttribute="top" constant="8" id="tsr-sQ-IK5"/>
                             <constraint firstAttribute="bottom" secondItem="SX1-G5-OTy" secondAttribute="bottom" constant="8" id="xKr-Vr-GhX"/>
+                            <constraint firstItem="n1p-aa-Q0m" firstAttribute="width" secondItem="oj9-rZ-lrt" secondAttribute="width" id="xjf-Dl-RhZ"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -62,7 +63,6 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="264" height="259"/>
             <connections>
-                <outlet property="productImage" destination="OeJ-uU-LIF" id="n0q-E6-X9V"/>
                 <outlet property="productName" destination="SX1-G5-OTy" id="tTj-CF-ddO"/>
                 <outlet property="productPrice" destination="7Yd-8E-fsf" id="aLH-Pu-x9O"/>
             </connections>

@@ -10,6 +10,7 @@ import UIKit
 import MaterialComponents
 import Fusuma
 import Firebase
+import PINRemoteImage
 
 class FeedViewController: UICollectionViewController, FusumaDelegate, UICollectionViewDelegateFlowLayout {
     
@@ -60,10 +61,7 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
     }
     
     @IBAction func newPost(_ sender: UIStoryboardSegue){
-        if addedPost != nil{
-            posts.removeAll()
-            loadPosts()
-        }
+        loadPosts()
     }
     
     //MARK: - Collection View
@@ -78,12 +76,10 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! PostCell
         let selected = posts[indexPath.row]
-        if selected.mImage == nil{
-            cell.butterDownloadImage(selected)
-        } else{
-            cell.butterSetImage(selected)
-        }
-        cell.profileImg.url = URL(string: selected.mImageUrl)
+        cell.imageView.pin_updateWithProgress = true
+        cell.imageView.pin_setImage(from: URL(string: selected.mImageUrl)!)
+        cell.profileImg.pin_updateWithProgress = true
+        cell.profileImg.pin_setImage(from: URL(string: (selected.mUser?.profilePicUrl)!))
         cell.authorText.text = selected.mUser?.username.lowercased()
         cell.captionText.text = selected.mCaption
         //cell.likeBtn.setImage(UIImage(named: "like")?.withRenderingMode(.alwaysTemplate), for: .normal)
@@ -201,7 +197,9 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
             user.followerCount = userFollowers
             user.followingCount = userFollowing
             post.mUser = user
-            
+            DispatchQueue.main.async {
+                self.collectionView?.reloadData()
+            }
             db.collection("users").document(UserDefaultsUtil().loadReference()).collection("following").whereField("user", isEqualTo: snapshot?.documentID).getDocuments(completion: { (snapshot, err) in
                 if err != nil{
                     print(err?.localizedDescription)
@@ -212,9 +210,6 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
                     if ref == user.reference{
                         post.mUser?.iFollow = true
                     }
-                }
-                DispatchQueue.main.async {
-                    self.collectionView?.reloadData()
                 }
             })
         }

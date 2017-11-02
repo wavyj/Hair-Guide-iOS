@@ -57,6 +57,8 @@
 		D0E559511FA3E07000642FE6 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E559501FA3E07000642FE6 /* UserCell.swift */; };
 		D0E97AED1FA36DFC00292763 /* EditGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E97AEC1FA36DFC00292763 /* EditGuideViewController.swift */; };
 		D0FD59D21FA3B4C500CE71BB /* TagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FD59D11FA3B4C500CE71BB /* TagsViewController.swift */; };
+		D0FF7EAE1FA95DFA005B5798 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF7EAD1FA95DFA005B5798 /* Product.swift */; };
+		D0FF7EB11FA9605D005B5798 /* ProductSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF7EB01FA9605D005B5798 /* ProductSearchViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -128,6 +130,8 @@
 		D0E559501FA3E07000642FE6 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		D0E97AEC1FA36DFC00292763 /* EditGuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGuideViewController.swift; sourceTree = "<group>"; };
 		D0FD59D11FA3B4C500CE71BB /* TagsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsViewController.swift; sourceTree = "<group>"; };
+		D0FF7EAD1FA95DFA005B5798 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		D0FF7EB01FA9605D005B5798 /* ProductSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductSearchViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,6 +223,7 @@
 				D0964F8E1F9652A50022CB7A /* User.swift */,
 				D0964F921F9667400022CB7A /* Guide.swift */,
 				D040E55B1FA5765A0051D166 /* HairPatternInfo.swift */,
+				D0FF7EAD1FA95DFA005B5798 /* Product.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -375,6 +380,7 @@
 				D0964F941F9696850022CB7A /* SelectedGuideViewController.swift */,
 				D020E9E51F9E31E6009E44BF /* ProductsViewController.swift */,
 				D0E97AEC1FA36DFC00292763 /* EditGuideViewController.swift */,
+				D0FF7EB01FA9605D005B5798 /* ProductSearchViewController.swift */,
 			);
 			path = Guides;
 			sourceTree = "<group>";
@@ -553,10 +559,12 @@
 				D078B5BE1F7C1A5F00A6F8C5 /* AppDelegate.swift in Sources */,
 				D020E9E31F9E2918009E44BF /* ProductCell.swift in Sources */,
 				D0E97AED1FA36DFC00292763 /* EditGuideViewController.swift in Sources */,
+				D0FF7EB11FA9605D005B5798 /* ProductSearchViewController.swift in Sources */,
 				D0E559511FA3E07000642FE6 /* UserCell.swift in Sources */,
 				D03D40FC1F8FDCC7007ACE22 /* PostCell.swift in Sources */,
 				D010E2711F9A61920042A031 /* HairTypeCell.swift in Sources */,
 				D020E9E61F9E31E6009E44BF /* ProductsViewController.swift in Sources */,
+				D0FF7EAE1FA95DFA005B5798 /* Product.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -702,7 +710,7 @@
 				);
 				INFOPLIST_FILE = ColemanJustin_FinalProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "ColemanJustin.ColemanJustin-FinalProject";
+				PRODUCT_BUNDLE_IDENTIFIER = "ColemanJustin.ColemanJustin-HairGuide";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 3.0;
@@ -723,7 +731,7 @@
 				);
 				INFOPLIST_FILE = ColemanJustin_FinalProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "ColemanJustin.ColemanJustin-FinalProject";
+				PRODUCT_BUNDLE_IDENTIFIER = "ColemanJustin.ColemanJustin-HairGuide";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 3.0;

@@ -70,6 +70,10 @@ class NewGuideViewController: /*WPEditorViewController, WPEditorViewControllerDe
         present(fusama, animated: true, completion: nil)
     }
     
+    func productTapped(_ sender: MDCRaisedButton){
+        performSegue(withIdentifier: "toAddProduct", sender: self)
+    }
+    
     //MARK: - Methods
     func setupMaterialComponents(){
         
@@ -86,9 +90,9 @@ class NewGuideViewController: /*WPEditorViewController, WPEditorViewControllerDe
         multiTextController?.activeColor = MDCPalette.blue.tint500
         
         productsBtn.setBackgroundColor(MDCPalette.blue.tint500, for: .normal)
-            productsBtn.setImage(UIImage(named: "product")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        productsBtn.setTitle("Add Product", for: .normal)
         productsBtn.tintColor = UIColor.white
-        productsBtn.setTitle("", for: .normal)
+        productsBtn.addTarget(self, action: #selector(productTapped(_:)), for: .touchUpInside)
 
         // AppBar Setup
         let appBar = MDCAppBar()

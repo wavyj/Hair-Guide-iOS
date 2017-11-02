@@ -13,10 +13,10 @@ pod ’Firebase/Firestore'
 pod 'Firebase/Storage'
 pod 'MaterialComponents'
 pod 'Validator'
-pod 'ImageButter'
 pod 'WordPress-iOS-Editor'
 pod 'DateToolsSwift'
 pod 'Fusuma'
 pod 'FBSDKLoginKit'
+pod ‘PINRemoteImage’
 
 end

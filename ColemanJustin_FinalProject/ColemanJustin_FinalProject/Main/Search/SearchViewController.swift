@@ -156,10 +156,11 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UICollectionV
         case 1:
             let cell = usersCollection.dequeueReusableCell(withReuseIdentifier: "user", for: indexPath) as! UserCell
             let current = users[indexPath.row]
-            cell.profilePic.url = URL(string: (current.profilePicUrl))
-            cell.profilePic.frame = cell.profilePicContainer.bounds
+            
+            cell.profilePic.pin_updateWithProgress = true
+            cell.profilePic.pin_setImage(from: URL(string: current.profilePicUrl))
             cell.usernameLabel.text = current.username.lowercased()
-            //cell.profilePicContainer.layer.cornerRadius = cell.profilePicContainer.bounds.width / 2
+            
             if current.reference == UserDefaultsUtil().loadReference(){
                 cell.followBtn.isHidden = true
                 cell.followBtn.isEnabled = false
@@ -182,13 +183,16 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UICollectionV
         case 2:
             let cell = postsCollection.dequeueReusableCell(withReuseIdentifier: "postCell", for: indexPath) as! GridPostCell
             let selected = posts[indexPath.row]
-            cell.image.url = URL(string: selected.mImageUrl)
+            cell.image.pin_updateWithProgress = true
+            cell.image.pin_setImage(from: URL(string: selected.mImageUrl))
             return cell
         case 3:
             let cell = guidesCollection.dequeueReusableCell(withReuseIdentifier: "guideCell", for: indexPath) as! GuideCell
             let current = guides[indexPath.row]
             cell.guideTitle.text = current.mTitle
             cell.viewLabel.text = current.mViews.description
+            //cell.image.pin_updateWithProgress = true
+            //cell.image.pin_setImage(from: URL(string: current.mImageUrl))
             return cell
         default:
             return UICollectionViewCell()
@@ -200,7 +204,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UICollectionV
         case 1:
             return CGSize(width: collectionView.bounds.width - 16, height: 75)
         case 2:
-            return CGSize(width: self.view.bounds.width / 3, height: (self.view?.bounds.height)! - 60 / 3 )
+            return CGSize(width: self.view.bounds.width / 3, height: (self.postsCollection?.bounds.height)! / 3 - 60 )
         case 3:
             return CGSize(width: 256, height: 335)
         default:

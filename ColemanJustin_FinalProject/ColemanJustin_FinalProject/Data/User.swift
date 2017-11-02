@@ -8,14 +8,13 @@
 
 import Foundation
 import UIKit
-import ImageButter
 
 class User{
     var email: String
     var username: String
     var bio: String
     var profilePicUrl: String
-    var profilePic: WebPImage? = nil
+    var profilePic: UIImage? = nil
     var gender: String
     var hairTypes: [String] = [String]()
     var followerCount = 0

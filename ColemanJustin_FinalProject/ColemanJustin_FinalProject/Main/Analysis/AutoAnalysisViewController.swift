@@ -11,7 +11,6 @@ import MaterialComponents
 import VisualRecognitionV3
 import Fusuma
 import Firebase
-import ImageButter
 
 class AutoAnalysisViewController: UIViewController, FusumaDelegate {
     

@@ -8,13 +8,12 @@
 
 import UIKit
 import MaterialComponents
-import ImageButter
 import Firebase
 
 class SelectedProfileViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     //MARK: - Outlets
-    @IBOutlet weak var profileImage: WebPImageView!
+    @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var followingLabel: UILabel!
     @IBOutlet weak var followersLabel: UILabel!
     @IBOutlet weak var followBtn: MDCRaisedButton!
@@ -50,6 +49,14 @@ class SelectedProfileViewController: UIViewController, UICollectionViewDelegate,
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if self.navigationController != nil{
+            if (self.navigationController?.isToolbarHidden)!{
+                self.navigationController?.setToolbarHidden(false, animated: false)
+            }
+        }
     }
     
     //MARK: - Storyboard Methods
@@ -113,7 +120,8 @@ class SelectedProfileViewController: UIViewController, UICollectionViewDelegate,
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "postCell", for: indexPath) as! GridPostCell
             let selected = posts[indexPath.row]
-            cell.image.url = URL(string: selected.mImageUrl)
+            cell.image.pin_updateWithProgress = true
+            cell.image.pin_setImage(from: URL(string: selected.mImageUrl))
             return cell
         case 2:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "guideCell", for: indexPath) as! GuideCell
@@ -175,7 +183,8 @@ class SelectedProfileViewController: UIViewController, UICollectionViewDelegate,
     }
     
     func update(){
-        profileImage.url = URL(string: (selectedUser?.profilePicUrl)!)
+        profileImage.pin_updateWithProgress = true
+        profileImage.pin_setImage(from: URL(string: (selectedUser?.profilePicUrl)!))
         followersLabel.text = selectedUser?.followerCount.description
         followingLabel.text = selectedUser?.followingCount.description
         

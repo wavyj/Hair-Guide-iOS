@@ -8,7 +8,6 @@
 
 import UIKit
 import MaterialComponents
-import ImageButter
 import Fusuma
 import Firebase
 
@@ -16,7 +15,7 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, FusumaDe
     
     //MARK: - Outlets
     @IBOutlet weak var profilePicContainer: UIView!
-    @IBOutlet weak var profilePic: WebPImageView!
+    @IBOutlet weak var profilePic: UIImageView!
     @IBOutlet weak var usernameField: MDCTextField!
     @IBOutlet weak var bioFieldContainer: UIView!
     @IBOutlet weak var progressView: UIProgressView!
@@ -39,11 +38,8 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, FusumaDe
         profilePicContainer.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTapped(_:))))
         currentUser = UserDefaultsUtil().loadUserData()
         setupMaterialComponents()
-        profilePic.url = URL(string: (currentUser?.profilePicUrl)!)
-        let loadingView = WebPLoadingView()
-        loadingView.lineColor = MDCPalette.blue.tint500
-        loadingView.lineWidth = 2
-        profilePic.loadingView = loadingView
+        profilePic.pin_updateWithProgress = true
+        profilePic.pin_setImage(from: URL(string: (currentUser?.profilePicUrl)!))
         
     }
 
@@ -158,7 +154,7 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, FusumaDe
     //MARK: - Fusama Callbacks
     func fusumaImageSelected(_ image: UIImage, source: FusumaMode) {
         selectedImage = image
-        profilePic.image = WebPImage(image: image)
+        
     }
     
     func fusumaMultipleImageSelected(_ images: [UIImage], source: FusumaMode) {

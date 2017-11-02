@@ -8,18 +8,18 @@
 
 import UIKit
 import MaterialComponents
-import ImageButter
+import PINRemoteImage
 
 class PostCell: MDCCollectionViewCell{
     
     //MARK: - Outlets
-    @IBOutlet weak var imageView: WebPImageView!
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var likeBtn: MDCFlatButton!
     @IBOutlet weak var commentBtn: MDCFlatButton!
     @IBOutlet weak var captionText: UITextView!
     @IBOutlet weak var authorText: UILabel!
     @IBOutlet weak var content: UIView!
-    @IBOutlet weak var profileImg: WebPImageView!
+    @IBOutlet weak var profileImg: UIImageView!
     @IBOutlet weak var viewCommentsBtn: MDCFlatButton!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var likesLabel: UILabel!
@@ -37,17 +37,14 @@ class PostCell: MDCCollectionViewCell{
     }
     
     func butterSetImage(_ post: Post){
-        imageView.image = post.mImage
+        
         
     }
     
-    func butterDownloadImage(_ post: Post){
-        imageView.url = URL(string: post.mImageUrl)
-        let loadingView = WebPLoadingView()
-        loadingView.lineColor = MDCPalette.blue.tint500
-        loadingView.lineWidth = 2
-        imageView.loadingView = loadingView
-        post.mImage = imageView.image
+    func butterDownloadImage(_ imageUrl: String, _ imageView: UIImageView){
+        imageView.pin_updateWithProgress = true
+        imageView.pin_setImage(from: URL(string: imageUrl)!)
+        
     }
     
     

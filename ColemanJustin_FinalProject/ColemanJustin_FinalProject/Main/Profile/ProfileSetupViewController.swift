@@ -9,14 +9,13 @@
 import UIKit
 import MaterialComponents
 import Fusuma
-import ImageButter
 import Firebase
 
 class ProfileSetupViewController: UIViewController, FusumaDelegate, UITextFieldDelegate {
     
     //MARK: - Outlets
     @IBOutlet weak var profilePicContainer: UIView!
-    @IBOutlet weak var profilePic: WebPImageView!
+    @IBOutlet weak var profilePic: UIImageView!
     @IBOutlet weak var usernameInput: MDCTextField!
     @IBOutlet weak var bioFieldContainer: UIView!
     @IBOutlet weak var progressView: UIProgressView!
@@ -145,7 +144,7 @@ class ProfileSetupViewController: UIViewController, FusumaDelegate, UITextFieldD
     //MARK: - Fusama Callbacks
     func fusumaImageSelected(_ image: UIImage, source: FusumaMode) {
         selectedImage = image
-        profilePic.image = WebPImage(image: image)
+        
     }
     
     func fusumaMultipleImageSelected(_ images: [UIImage], source: FusumaMode) {

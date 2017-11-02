@@ -10,7 +10,6 @@ import UIKit
 import MaterialComponents
 import WordPressEditor
 import Firebase
-import ImageButter
 
 class SelectedGuideViewController: /*WPEditorViewController, WPEditorViewDelegate, WPEditorViewControllerDelegate*/ UIViewController {
     
@@ -18,7 +17,7 @@ class SelectedGuideViewController: /*WPEditorViewController, WPEditorViewDelegat
     //@IBOutlet weak var editor: UIView!
     @IBOutlet weak var titleView: UILabel!
     @IBOutlet weak var contentView: UITextView!
-    @IBOutlet weak var guideImage: WebPImageView!
+    @IBOutlet weak var guideImage: UIImageView!
     @IBOutlet weak var titleToImageConstraint: NSLayoutConstraint!
     @IBOutlet weak var titleToTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var content: UIView!
@@ -46,7 +45,8 @@ class SelectedGuideViewController: /*WPEditorViewController, WPEditorViewDelegat
         
         titleView.text = selectedGuide?.mTitle
         contentView.text = selectedGuide?.mText
-        
+        guideImage.pin_updateWithProgress = true
+        guideImage.pin_setImage(from: URL(string: (selectedGuide?.mImageUrl)!))
         
         // Update View Count
         selectedGuide?.mViews += 1
@@ -60,7 +60,7 @@ class SelectedGuideViewController: /*WPEditorViewController, WPEditorViewDelegat
            //titleView.removeConstraint(titleToImageConstraint)
             //titleView.addConstraint(titleToTopConstraint)
         }else{
-            guideImage.url = URL(string: (selectedGuide?.mImageUrl)!)
+            
         }
     }
 

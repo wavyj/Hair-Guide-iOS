@@ -9,12 +9,11 @@
 import UIKit
 import MaterialComponents
 import Firebase
-import ImageButter
 
 class ProfileViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     //MARK: - Outlets
-    @IBOutlet weak var profileImage: WebPImageView!
+    @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var followingLabel: UILabel!
     @IBOutlet weak var followersLabel: UILabel!
     @IBOutlet weak var editProfileBtn: MDCRaisedButton!
@@ -134,7 +133,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         case 2:
             return guides.count
         default:
-            return 0
+            return guides.count
         }
     }
     
@@ -143,7 +142,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "postCell", for: indexPath) as! GridPostCell
             let selected = posts[indexPath.row]
-            cell.image.url = URL(string: selected.mImageUrl)
+            cell.image.pin_updateWithProgress = true
+            cell.image.pin_setImage(from: URL(string: selected.mImageUrl))
             return cell
         case 2:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "guideCell", for: indexPath) as! GuideCell
@@ -397,11 +397,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     func update(){
-        profileImage.url = URL(string: currentUser!.profilePicUrl)
-        let loadingView = WebPLoadingView()
-        loadingView.lineColor = MDCPalette.blue.tint500
-        loadingView.lineWidth = 2
-        profileImage.loadingView = loadingView
+        profileImage.pin_updateWithProgress = true
+        profileImage.pin_setImage(from: URL(string: (currentUser?.profilePicUrl)!))
         bioText.text = currentUser?.bio
         title = currentUser?.username.lowercased()
         followersLabel.text = currentUser?.followerCount.description

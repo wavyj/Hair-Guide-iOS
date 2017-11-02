@@ -7,8 +7,7 @@
 //
 
 import UIKit
-import ImageButter
 
 class GridPostCell: UICollectionViewCell {
-    @IBOutlet weak var image: WebPImageView!
+    @IBOutlet weak var image: UIImageView!
 }

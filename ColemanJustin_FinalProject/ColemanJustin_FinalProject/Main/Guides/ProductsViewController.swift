@@ -13,6 +13,9 @@ class ProductsViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     //MARK: - Outlets
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    //MARK: - Variables
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
