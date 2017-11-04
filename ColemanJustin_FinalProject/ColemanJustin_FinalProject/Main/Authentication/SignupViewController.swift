@@ -59,6 +59,14 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
                 if (error != nil){
                     // Error
                     print(error?.localizedDescription)
+                    var alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                    alert.addAction(okAction)
+                    if error?.localizedDescription == "The email address is already in use by another account."{
+                        alert.title = "Email is Taken"
+                        alert.message = "There is already an account created with that email address."
+                    }
+                    self.present(alert, animated: true, completion: nil)
                     return
                 }
                 
@@ -113,9 +121,6 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
             validateCharCount(textField)
             break
         case 2:
-            validateCharCount(textField)
-            break
-        case 3:
             let b = validateCharCount(textField)
             if (b){
             validatePasswordsMatch()
@@ -131,6 +136,10 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textFieldControllers[textField.tag].setErrorText(nil, errorAccessibilityValue: nil)
     }
     
     func validateEmail(_ textField: UITextField) -> Bool{
@@ -170,12 +179,12 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
         
         switch r {
         case .valid:
+            textFieldControllers[1].setErrorText(nil, errorAccessibilityValue: nil)
             textFieldControllers[2].setErrorText(nil, errorAccessibilityValue: nil)
-            textFieldControllers[3].setErrorText(nil, errorAccessibilityValue: nil)
             return true
         case .invalid(_):
+            textFieldControllers[1].setErrorText("Passwords Don't Match", errorAccessibilityValue: "Passwords Don't Match")
             textFieldControllers[2].setErrorText("Passwords Don't Match", errorAccessibilityValue: "Passwords Don't Match")
-            textFieldControllers[3].setErrorText("Passwords Don't Match", errorAccessibilityValue: "Passwords Don't Match")
             return false
         }
     }

@@ -168,7 +168,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IYR-wF-cGN" userLabel="ConfirmPassContainer">
                                                 <rect key="frame" x="37.5" y="323" width="300" height="77.5"/>
                                                 <subviews>
-                                                    <textField opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dpg-9h-b4s" customClass="MDCTextField">
+                                                    <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dpg-9h-b4s" customClass="MDCTextField">
                                                         <rect key="frame" x="0.0" y="0.0" width="300" height="77.5"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -189,7 +189,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b44-lr-6Sl" userLabel="PasswordContainer">
                                                 <rect key="frame" x="37.5" y="229.5" width="300" height="77.5"/>
                                                 <subviews>
-                                                    <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kVc-qV-7mn" customClass="MDCTextField">
+                                                    <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kVc-qV-7mn" customClass="MDCTextField">
                                                         <rect key="frame" x="0.0" y="0.0" width="300" height="77.5"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -2701,6 +2701,6 @@
         <segue reference="R10-bn-hCJ"/>
         <segue reference="eNI-Wb-hJI"/>
         <segue reference="Nqy-7d-amG"/>
-        <segue reference="vB3-RH-cJX"/>
+        <segue reference="Bww-1h-TUe"/>
     </inferredMetricsTieBreakers>
 </document>
