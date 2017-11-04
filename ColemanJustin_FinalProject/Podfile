@@ -17,6 +17,8 @@ pod 'WordPress-iOS-Editor'
 pod 'DateToolsSwift'
 pod 'Fusuma'
 pod 'FBSDKLoginKit'
+pod 'FBSDKShareKit'
 pod ‘PINRemoteImage’
+
 
 end

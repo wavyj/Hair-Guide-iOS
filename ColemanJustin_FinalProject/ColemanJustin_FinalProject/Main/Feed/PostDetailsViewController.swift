@@ -8,31 +8,31 @@
 
 import UIKit
 import MaterialComponents
+import Firebase
 
-
-class PostDetailsViewController: UIViewController {
+class PostDetailsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     //MARK: - Outlets
     @IBOutlet weak var postImage: UIImageView!
-    @IBOutlet weak var commentsView: UIView!
-    @IBOutlet var commentLabels: [UILabel]!
-    @IBOutlet var commentTextLabels: [UILabel]!
-    @IBOutlet weak var allCommentsBtn: MDCFlatButton!
-    @IBOutlet weak var buttonBarContainer: UIView!
-    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var commentsView: UICollectionView!
+    @IBOutlet weak var captionText: UITextView!
+    @IBOutlet weak var likeBtn: UIImageView!
+    @IBOutlet weak var commentBtn: UIImageView!
+    @IBOutlet weak var shareBtn: UIImageView!
+    @IBOutlet weak var commentEntryContainer: UIView!
+    @IBOutlet weak var enterBtn: MDCFlatButton!
     
     //MARK: - Variables
     var currentPost: Post? = nil
-    var items = [UIBarButtonItem]()
-    let offColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.2)
+    var comments = [Comment]()
+    var multiLineController: MDCTextInputController?
+    var commentInput: MDCMultilineTextField?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
-        title = "Curlygurl11's Post"
-        postImage.image = currentPost?.mImageAlt
+        update()
         setupMaterialComponents()
     }
 
@@ -58,33 +58,52 @@ class PostDetailsViewController: UIViewController {
         
     }
     
+    func enterTapped(_ sender: MDCFlatButton){
+        if !(commentInput?.text?.isEmpty)!{
+            let newComment = Comment(text: (commentInput?.text)!, date: Date(), ref: "", user: UserDefaultsUtil().loadReference())
+            DatabaseUtil().addComment((currentPost?.mReference?.documentID)!, newComment)
+            comments.append(newComment)
+            commentsView.reloadData()
+        }
+    }
+    
+    //MARK: - CollectionView Callback
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return comments.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "commentCell", for: indexPath) as! CommentCell
+        let current = comments[indexPath.row]
+        cell.profilePic.pin_setImage(from: URL(string: (current.mUser?.profilePicUrl)!))
+        cell.profilePic.pin_updateWithProgress = true
+        cell.usernameLabel.text = current.mUser?.username.lowercased()
+        cell.commentView.text = current.text
+        return cell
+    }
+    
     //MARK: - Methods
     func setupMaterialComponents(){
+        let nib = UINib(nibName: "CommentCell", bundle: nil)
+        commentsView?.register(nib, forCellWithReuseIdentifier: "commentCell")
         
-        // ButtonBar
-        let buttonBar = MDCButtonBar()
-        buttonBar.backgroundColor = MDCPalette.grey.tint200
+        // TextField
+        commentInput = MDCMultilineTextField()
+        commentEntryContainer.addSubview(commentInput!)
+        commentInput?.frame = commentEntryContainer.bounds
+        commentInput?.placeholder = "Add a comment..."
+        multiLineController = MDCTextInputControllerDefault(textInput: commentInput)
+        multiLineController?.activeColor = MDCPalette.blue.tint500
         
-        let likeAction = UIBarButtonItem(title: "", style: .plain, target: self, action: #selector(likeTapped(_:)))
-        likeAction.image = UIImage(named: "like")?.withRenderingMode(.alwaysTemplate)
-        likeAction.tintColor = offColor
-        likeAction.width = view.bounds.width / 3
-        
-        let commentAction = UIBarButtonItem(title: "", style: .plain, target: self, action: #selector(commentTapped(_:)))
-        commentAction.image = UIImage(named: "comment")?.withRenderingMode(.alwaysTemplate)
-        commentAction.tintColor = offColor
-        commentAction.width = view.bounds.width / 3
-        
-        let shareAction = UIBarButtonItem(title: "", style: .plain, target: self, action: #selector(shareTapped(_:)))
-        shareAction.image = UIImage(named: "guides-light")?.withRenderingMode(.alwaysTemplate)
-        shareAction.tintColor = offColor
-        shareAction.width = view.bounds.width / 3
-        
-        items = [likeAction, commentAction, shareAction]
-        buttonBar.items = items
-        
-        buttonBar.frame = CGRect(x: buttonBarContainer.bounds.origin.x, y: buttonBarContainer.bounds.origin.y, width: view.bounds.width, height: buttonBarContainer.bounds.height)
-        buttonBarContainer.addSubview(buttonBar)
+        // Button
+        enterBtn.setImage(UIImage(named: "share")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        enterBtn.tintColor = UIColor.white
+        enterBtn.setBackgroundColor(MDCPalette.blue.tint500, for: .normal)
+        enterBtn.addTarget(self, action: #selector(enterTapped(_:)), for: .touchUpInside)
         
         // AppBar Setup
         let appBar = MDCAppBar()
@@ -94,6 +113,79 @@ class PostDetailsViewController: UIViewController {
         //title = "Feed"
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "back-arrow"), style: .plain, target: self, action: #selector(backTapped(_:)))
         appBar.addSubviewsToParent()
+    }
+    
+    func update(){
+        title = (currentPost?.mUser?.username.lowercased())! + "'s Post"
+        postImage.pin_setImage(from: URL(string: (currentPost?.mImageUrl)!)!)
+        captionText.text = currentPost?.mCaption
+        
+    }
+    
+    func getComments(){
+        let db = Firestore.firestore()
+        db.collection("users").document((currentPost?.mReference?.documentID)!).collection("comments").getDocuments { (snapshot, error) in
+            if error != nil{
+                print(error?.localizedDescription)
+            }
+            
+            if snapshot?.documents == nil || (snapshot?.documents.isEmpty)!{
+                return
+            }
+            
+            for i in (snapshot?.documents)!{
+                let data = i.data()
+                let commentText = data["text"] as! String
+                let commentDate = data["date"] as! Date
+                let commentUser = data["user"] as! String
+                let commentRef = i.documentID
+                let comment = Comment(text: commentText, date: commentDate, ref: commentRef, user: commentUser)
+                self.comments.append(comment)
+                self.loadUser(commentUser, comment)
+            }
+        }
+    }
+    
+    func loadUser(_ userRef: String, _ comment: Comment){
+        let db = Firestore.firestore()
+        db.collection("users").document(userRef).getDocument { (snapshot, error) in
+            if error != nil{
+                // Error
+                print(error?.localizedDescription)
+                return
+            }
+            
+            let data = snapshot?.data()
+            let userEmail = data!["email"] as! String
+            let userName = data!["username"] as! String
+            let userBio = data!["bio"] as! String
+            let userHairTypes = data!["hairTypes"] as! [String]
+            let userPic = data!["profilePicUrl"] as! String
+            let userGender = data!["gender"] as! String
+            let userFollowers = data!["followers"] as! Int
+            let userFollowing = data!["following"] as! Int
+            let user = User(email: userEmail, username: userName, bio: userBio, profilePicUrl: userPic, gender: userGender)
+            user.reference = (snapshot?.documentID)!
+            user.hairTypes = userHairTypes
+            user.followerCount = userFollowers
+            user.followingCount = userFollowing
+            comment.mUser = user
+            DispatchQueue.main.async {
+                self.commentsView?.reloadData()
+            }
+            db.collection("users").document(UserDefaultsUtil().loadReference()).collection("following").whereField("user", isEqualTo: snapshot?.documentID).getDocuments(completion: { (snapshot, err) in
+                if err != nil{
+                    print(err?.localizedDescription)
+                    return
+                }
+                for i in (snapshot?.documents)!{
+                    let ref = i.data()["user"] as! String
+                    if ref == user.reference{
+                        comment.mUser?.iFollow = true
+                    }
+                }
+            })
+        }
     }
 
     /*

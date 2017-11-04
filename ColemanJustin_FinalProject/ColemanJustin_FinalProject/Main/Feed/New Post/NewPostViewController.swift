@@ -9,9 +9,10 @@
 import UIKit
 import MaterialComponents
 import Fusuma
+import FBSDKShareKit
 
-class NewPostViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITextFieldDelegate {
-    
+class NewPostViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITextFieldDelegate, FBSDKSharingDelegate {
+
     //MARK: - Outlets
     @IBOutlet weak var postImage: UIImageView!
     @IBOutlet weak var captionField: MDCTextField!
@@ -19,6 +20,7 @@ class NewPostViewController: UIViewController, UICollectionViewDelegate, UIColle
     @IBOutlet weak var tagsView: UICollectionView!
     @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet weak var shareBtn: FBSDKShareButton!
     
     //MARK: - Variables
     var newPost: Post? = nil
@@ -115,6 +117,21 @@ class NewPostViewController: UIViewController, UICollectionViewDelegate, UIColle
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
+    }
+    
+    //MARK: - FB Share Delegate Callbacks
+    func sharer(_ sharer: FBSDKSharing!, didCompleteWithResults results: [AnyHashable : Any]!) {
+        print(results)
+    }
+    
+    func sharer(_ sharer: FBSDKSharing!, didFailWithError error: Error!) {
+        if error != nil{
+            print(error.localizedDescription)
+        }
+    }
+    
+    func sharerDidCancel(_ sharer: FBSDKSharing!) {
+        print("Cancelled")
     }
     
     //MARK: - Methods

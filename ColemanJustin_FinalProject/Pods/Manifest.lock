@@ -22,6 +22,8 @@ PODS:
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.27.1):
     - FBSDKCoreKit
+  - FBSDKShareKit (4.27.1):
+    - FBSDKCoreKit
   - Firebase/Auth (4.3.0):
     - Firebase/Core
     - FirebaseAuth (= 4.2.1)
@@ -425,6 +427,7 @@ PODS:
 DEPENDENCIES:
   - DateToolsSwift
   - FBSDKLoginKit
+  - FBSDKShareKit
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Firestore
@@ -442,6 +445,7 @@ SPEC CHECKSUMS:
   DateToolsSwift: bf69bf9056d9e53c5c03f06e51f219b9b8b02f9e
   FBSDKCoreKit: 03365dad5d790249196ffad8be4f6d8a2d98f932
   FBSDKLoginKit: 66ff53b73cffd967ab773e32fac39e90a60e6d46
+  FBSDKShareKit: 6a6a0ef9e850c741e4e1d7a7d21335205e997ec1
   Firebase: 83283761a1ef6dc9846e03d08059f51421afbd65
   FirebaseAnalytics: 722b53c7b32bfc7806b06e0093a2f5180d4f2c5a
   FirebaseAuth: d7f047fbeab98062b98ea933b8d934e0fb1190e2
@@ -471,6 +475,6 @@ SPEC CHECKSUMS:
   Validator: 7d9828daffabc757604603052e407f208fa9b6d5
   WordPress-iOS-Editor: 03b3bc631a31520ccf78e665548286c6d12c17f4
 
-PODFILE CHECKSUM: 7b7caf0740b7e69bf4c899b1a29aad5a57ae3fe1
+PODFILE CHECKSUM: 73ce03f17e947cf379785c18c73f954bdf881d27
 
 COCOAPODS: 1.2.0

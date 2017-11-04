@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3A0596DFA66F8F5928BB5C6D /* Pods_ColemanJustin_FinalProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E6DE5ACE8D6560A9FF5F979 /* Pods_ColemanJustin_FinalProject.framework */; };
+		D00231A21FABFB4900ABE983 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00231A01FABFB4900ABE983 /* CommentCell.swift */; };
+		D00231A31FABFB4900ABE983 /* CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D00231A11FABFB4900ABE983 /* CommentCell.xib */; };
 		D010E2711F9A61920042A031 /* HairTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D010E2701F9A61920042A031 /* HairTypeCell.swift */; };
 		D010E2731F9A61F80042A031 /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D010E2721F9A61F80042A031 /* SectionHeaderView.swift */; };
 		D01BB59F1F8EECE000EBE6C6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01BB59E1F8EECE000EBE6C6 /* LoginViewController.swift */; };
@@ -53,6 +55,9 @@
 		D0AE936F1F97BBBE0087028C /* AddTagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AE936E1F97BBBE0087028C /* AddTagCell.swift */; };
 		D0BC3ACE1F9506C500423B99 /* GuideCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BC3ACC1F9506C500423B99 /* GuideCell.swift */; };
 		D0BC3ACF1F9506C500423B99 /* GuideCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0BC3ACD1F9506C500423B99 /* GuideCell.xib */; };
+		D0C3F5721FAB997F006AF43E /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C3F5711FAB997F006AF43E /* Comment.swift */; };
+		D0C3F5751FAB9A75006AF43E /* PostViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C3F5731FAB9A75006AF43E /* PostViewCell.swift */; };
+		D0C3F5761FAB9A75006AF43E /* PostViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0C3F5741FAB9A75006AF43E /* PostViewCell.xib */; };
 		D0CD6A1D1FA24E90001F5CEC /* ProfileSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CD6A1C1FA24E90001F5CEC /* ProfileSetupViewController.swift */; };
 		D0E559511FA3E07000642FE6 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E559501FA3E07000642FE6 /* UserCell.swift */; };
 		D0E97AED1FA36DFC00292763 /* EditGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E97AEC1FA36DFC00292763 /* EditGuideViewController.swift */; };
@@ -79,6 +84,8 @@
 		0A297C7FD92E8AEBEFF56DB1 /* Pods-ColemanJustin_FinalProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColemanJustin_FinalProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-ColemanJustin_FinalProject/Pods-ColemanJustin_FinalProject.release.xcconfig"; sourceTree = "<group>"; };
 		348F691C9077B0E0DDDED67B /* Pods-ColemanJustin_FinalProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColemanJustin_FinalProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ColemanJustin_FinalProject/Pods-ColemanJustin_FinalProject.debug.xcconfig"; sourceTree = "<group>"; };
 		7E6DE5ACE8D6560A9FF5F979 /* Pods_ColemanJustin_FinalProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ColemanJustin_FinalProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D00231A01FABFB4900ABE983 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
+		D00231A11FABFB4900ABE983 /* CommentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentCell.xib; sourceTree = "<group>"; };
 		D010E2701F9A61920042A031 /* HairTypeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HairTypeCell.swift; sourceTree = "<group>"; };
 		D010E2721F9A61F80042A031 /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
 		D01BB59E1F8EECE000EBE6C6 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -126,6 +133,9 @@
 		D0AE936E1F97BBBE0087028C /* AddTagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagCell.swift; sourceTree = "<group>"; };
 		D0BC3ACC1F9506C500423B99 /* GuideCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideCell.swift; sourceTree = "<group>"; };
 		D0BC3ACD1F9506C500423B99 /* GuideCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GuideCell.xib; sourceTree = "<group>"; };
+		D0C3F5711FAB997F006AF43E /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		D0C3F5731FAB9A75006AF43E /* PostViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewCell.swift; sourceTree = "<group>"; };
+		D0C3F5741FAB9A75006AF43E /* PostViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostViewCell.xib; sourceTree = "<group>"; };
 		D0CD6A1C1FA24E90001F5CEC /* ProfileSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSetupViewController.swift; sourceTree = "<group>"; };
 		D0E559501FA3E07000642FE6 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		D0E97AEC1FA36DFC00292763 /* EditGuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGuideViewController.swift; sourceTree = "<group>"; };
@@ -224,6 +234,7 @@
 				D0964F921F9667400022CB7A /* Guide.swift */,
 				D040E55B1FA5765A0051D166 /* HairPatternInfo.swift */,
 				D0FF7EAD1FA95DFA005B5798 /* Product.swift */,
+				D0C3F5711FAB997F006AF43E /* Comment.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -233,6 +244,10 @@
 			children = (
 				D03D40FA1F8FDCC7007ACE22 /* PostCell.swift */,
 				D0AE936E1F97BBBE0087028C /* AddTagCell.swift */,
+				D0C3F5731FAB9A75006AF43E /* PostViewCell.swift */,
+				D0C3F5741FAB9A75006AF43E /* PostViewCell.xib */,
+				D00231A01FABFB4900ABE983 /* CommentCell.swift */,
+				D00231A11FABFB4900ABE983 /* CommentCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -458,9 +473,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D00231A31FABFB4900ABE983 /* CommentCell.xib in Resources */,
 				D0BC3ACF1F9506C500423B99 /* GuideCell.xib in Resources */,
 				D078B5C81F7C1A5F00A6F8C5 /* LaunchScreen.storyboard in Resources */,
 				D078B5C51F7C1A5F00A6F8C5 /* Assets.xcassets in Resources */,
+				D0C3F5761FAB9A75006AF43E /* PostViewCell.xib in Resources */,
 				D020E9E41F9E2918009E44BF /* ProductCell.xib in Resources */,
 				D078B5C31F7C1A5F00A6F8C5 /* Main.storyboard in Resources */,
 				D0570D221FA9125000B73EE4 /* GoogleService-Info.plist in Resources */,
@@ -534,6 +551,7 @@
 				D0CD6A1D1FA24E90001F5CEC /* ProfileSetupViewController.swift in Sources */,
 				D050F9771F9111800008370E /* ProfileViewController.swift in Sources */,
 				D02A8AC51FA0FF0100DA0F75 /* EditProfileViewController.swift in Sources */,
+				D00231A21FABFB4900ABE983 /* CommentCell.swift in Sources */,
 				D050F9741F91114F0008370E /* GuidesViewController.swift in Sources */,
 				D07F3B9B1F999FA500B4BF34 /* SplashScreen.swift in Sources */,
 				D06F9A631FA21E79006B578E /* GridPostCell.swift in Sources */,
@@ -553,6 +571,7 @@
 				D03D40F31F8FD249007ACE22 /* UserDefaultsUtil.swift in Sources */,
 				D09691451F93D22A00763F83 /* NewGuideViewController.swift in Sources */,
 				D0964F8D1F9652150022CB7A /* DatabaseUtil.swift in Sources */,
+				D0C3F5721FAB997F006AF43E /* Comment.swift in Sources */,
 				D040E54F1FA516010051D166 /* FollowingViewController.swift in Sources */,
 				D0964F951F9696850022CB7A /* SelectedGuideViewController.swift in Sources */,
 				D06641651F92768900258FB1 /* NewPostViewController.swift in Sources */,
@@ -560,6 +579,7 @@
 				D020E9E31F9E2918009E44BF /* ProductCell.swift in Sources */,
 				D0E97AED1FA36DFC00292763 /* EditGuideViewController.swift in Sources */,
 				D0FF7EB11FA9605D005B5798 /* ProductSearchViewController.swift in Sources */,
+				D0C3F5751FAB9A75006AF43E /* PostViewCell.swift in Sources */,
 				D0E559511FA3E07000642FE6 /* UserCell.swift in Sources */,
 				D03D40FC1F8FDCC7007ACE22 /* PostCell.swift in Sources */,
 				D010E2711F9A61920042A031 /* HairTypeCell.swift in Sources */,

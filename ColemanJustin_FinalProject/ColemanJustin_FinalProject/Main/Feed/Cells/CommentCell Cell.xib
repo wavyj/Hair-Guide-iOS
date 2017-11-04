@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="CommentCell_Cell" customModule="ColemanJustin_FinalProject" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="623" height="150"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="623" height="150"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y6m-W0-5eC">
+                        <rect key="frame" x="0.0" y="0.0" width="623" height="150"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cdM-Hy-THp">
+                                <rect key="frame" x="8" y="8" width="62.5" height="63"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y76-sS-SrT">
+                                <rect key="frame" x="78.5" y="8" width="536.5" height="21"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="cOa-dg-k5p">
+                                <rect key="frame" x="78.5" y="29" width="536.5" height="113"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Y76-sS-SrT" secondAttribute="trailing" constant="8" id="CNa-5W-wbo"/>
+                            <constraint firstItem="cOa-dg-k5p" firstAttribute="leading" secondItem="cdM-Hy-THp" secondAttribute="trailing" constant="8" id="D1R-Zh-cL1"/>
+                            <constraint firstItem="cdM-Hy-THp" firstAttribute="width" secondItem="y6m-W0-5eC" secondAttribute="width" multiplier="0.1" id="Hgo-ZI-sMI"/>
+                            <constraint firstItem="cdM-Hy-THp" firstAttribute="top" secondItem="y6m-W0-5eC" secondAttribute="top" constant="8" id="PeJ-V0-0qY"/>
+                            <constraint firstItem="cdM-Hy-THp" firstAttribute="leading" secondItem="y6m-W0-5eC" secondAttribute="leading" constant="8" id="T7z-SX-AbL"/>
+                            <constraint firstItem="Y76-sS-SrT" firstAttribute="top" secondItem="y6m-W0-5eC" secondAttribute="top" constant="8" id="aFd-o1-YUO"/>
+                            <constraint firstAttribute="bottom" secondItem="cOa-dg-k5p" secondAttribute="bottom" constant="8" id="gXh-Bp-Mzt"/>
+                            <constraint firstItem="Y76-sS-SrT" firstAttribute="leading" secondItem="cdM-Hy-THp" secondAttribute="trailing" constant="8" id="i69-BA-nnT"/>
+                            <constraint firstItem="cdM-Hy-THp" firstAttribute="height" secondItem="y6m-W0-5eC" secondAttribute="height" multiplier="0.42" id="pBX-Wc-6Ve"/>
+                            <constraint firstAttribute="trailing" secondItem="cOa-dg-k5p" secondAttribute="trailing" constant="8" id="wwn-5W-CAy"/>
+                            <constraint firstItem="cOa-dg-k5p" firstAttribute="top" secondItem="Y76-sS-SrT" secondAttribute="bottom" id="yCp-y4-Dco"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="y6m-W0-5eC" secondAttribute="trailing" id="Ei2-20-Go4"/>
+                <constraint firstItem="y6m-W0-5eC" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Nkt-nY-vCp"/>
+                <constraint firstAttribute="bottom" secondItem="y6m-W0-5eC" secondAttribute="bottom" id="Pde-vv-HF4"/>
+                <constraint firstItem="y6m-W0-5eC" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Tbh-IO-UdP"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="623" height="150"/>
+            <connections>
+                <outlet property="commentView" destination="cOa-dg-k5p" id="ElP-Ef-hep"/>
+                <outlet property="profilePic" destination="cdM-Hy-THp" id="U3A-qn-Que"/>
+                <outlet property="usernameLabel" destination="Y76-sS-SrT" id="Gmz-oT-64f"/>
+            </connections>
+            <point key="canvasLocation" x="329.5" y="74"/>
+        </collectionViewCell>
+    </objects>
+</document>

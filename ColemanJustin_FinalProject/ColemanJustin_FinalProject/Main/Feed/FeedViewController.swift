@@ -74,7 +74,7 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! PostCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "postCell", for: indexPath) as! PostViewCell
         let selected = posts[indexPath.row]
         cell.imageView.pin_updateWithProgress = true
         cell.imageView.pin_setImage(from: URL(string: selected.mImageUrl)!)
@@ -82,20 +82,12 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
         cell.profileImg.pin_setImage(from: URL(string: (selected.mUser?.profilePicUrl)!))
         cell.authorText.text = selected.mUser?.username.lowercased()
         cell.captionText.text = selected.mCaption
-        //cell.likeBtn.setImage(UIImage(named: "like")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        //cell.likeBtn.tintColor = MDCPalette.grey.tint400
-        //cell.commentBtn.setImage(UIImage(named: "comment")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        //cell.commentBtn.tintColor = MDCPalette.grey.tint400
-        //cell.profileImg.layer.cornerRadius = cell.profileImg.frame.size.width / 2
         cell.timeLabel.text = selected.dateString
-        //cell.viewCommentsBtn.setTitle("View All 5 Comments", for: .normal)
-        //cell.likesLabel.text = "20 Likes"
-        //cell.applyVisuals()
         return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as! PostCell
+        let cell = collectionView.cellForItem(at: indexPath) as! PostViewCell
         
         selectedPost = posts[indexPath.row]
         
@@ -128,6 +120,9 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
     //MARK: - Methods
     func setupMaterialComponents(){
         
+        let nib = UINib(nibName: "PostViewCell", bundle: nil)
+        collectionView?.register(nib, forCellWithReuseIdentifier: "postCell")
+        
         appBarHeight = self.view.bounds.height * 0.1
         
         // AppBar Setup
@@ -146,7 +141,7 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
         posts.removeAll()
         // Get Post data
         let db = Firestore.firestore()
-        db.collection("posts").getDocuments { (snapshot, error) in
+        db.collection("posts").order(by: "date", descending: true).getDocuments { (snapshot, error) in
             // Error
             if error != nil{
                 print(error?.localizedDescription)
@@ -234,6 +229,7 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
             let vc = segue.destination as! SelectedProfileViewController
             vc.selectedUser = selectedPost?.mUser
         }
+        
         // Pass the selected object to the new view controller.
     }
  

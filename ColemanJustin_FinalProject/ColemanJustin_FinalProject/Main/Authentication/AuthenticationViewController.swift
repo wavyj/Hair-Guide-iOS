@@ -80,7 +80,7 @@ class AuthenticationViewController: UIViewController, FBSDKLoginButtonDelegate {
     }
     
     func instagramTapped(_sender: UIButton){
-        print("Instagram Tapped")
+        
     }
     
     @IBAction func unwind(_ sender: UIStoryboardSegue){
@@ -99,7 +99,7 @@ class AuthenticationViewController: UIViewController, FBSDKLoginButtonDelegate {
         signupBtn.addTarget(self, action: #selector(signupTapped(_:)) , for: .touchUpInside)
         
         instagramBtn.setTitleColor(MDCPalette.blue.tint400, for: .normal)
-        instagramBtn.setTitle("Log In With Instagram", for: .normal)
+        instagramBtn.setTitle("Connect Instagram", for: .normal)
         instagramBtn.addTarget(self, action: #selector(instagramTapped(_sender:)), for: .touchUpInside)
     }
     
@@ -149,8 +149,17 @@ class AuthenticationViewController: UIViewController, FBSDKLoginButtonDelegate {
             }
         }
     }
+    
+    //MARK: - Instagram Delegate Callbacks
+    func authControllerDidFinish(accessToken: String?, error: NSError?) {
+        if error != nil{
+            print(error?.localizedDescription)
+            return
+        }
+        print(accessToken)
+    }
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -158,6 +167,6 @@ class AuthenticationViewController: UIViewController, FBSDKLoginButtonDelegate {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    */
+ 
 
 }

@@ -10,6 +10,7 @@ import UIKit
 import MaterialComponents
 import WordPressEditor
 import Firebase
+import PINRemoteImage
 
 class SelectedGuideViewController: /*WPEditorViewController, WPEditorViewDelegate, WPEditorViewControllerDelegate*/ UIViewController {
     

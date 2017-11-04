@@ -42,7 +42,7 @@ class Post{
     }
     
     var dateString: String{
-        return (mDate?.timeAgo(since: Date(), numericDates: true, numericTimes: false))!
+        return (mDate?.shortTimeAgoSinceNow)!
     }
     
     func setImageUrl(_ imageURl: String){
