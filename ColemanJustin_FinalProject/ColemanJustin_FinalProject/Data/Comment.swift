@@ -23,6 +23,6 @@ class Comment{
     }
     
     var dateString: String{
-        return (date.shortTimeAgo(since: date))
+        return (date.shortTimeAgoSinceNow)
     }
 }

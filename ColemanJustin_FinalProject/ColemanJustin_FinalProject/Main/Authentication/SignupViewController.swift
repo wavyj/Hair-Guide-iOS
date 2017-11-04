@@ -59,6 +59,14 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
                 if (error != nil){
                     // Error
                     print(error?.localizedDescription)
+                    var alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                    alert.addAction(okAction)
+                    if error?.localizedDescription == "The email address is already in use by another account."{
+                        alert.title = "Email is Taken"
+                        alert.message = "There is already an account created with that email address."
+                    }
+                    self.present(alert, animated: true, completion: nil)
                     return
                 }
                 
@@ -104,6 +112,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
         appBar.addSubviewsToParent()
     }
     
+    //MARK: - TextField Delegate Callbacks
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         switch textField.tag {
         case 0:
@@ -133,6 +142,10 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
         return false
     }
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textFieldControllers[textField.tag].setErrorText(nil, errorAccessibilityValue: nil)
+    }
+    
     func validateEmail(_ textField: UITextField) -> Bool{
         // Email
         let emailRule = ValidationRulePattern(pattern: EmailValidationPattern.standard, error: ValidationError(message: "Invalid Email"))
@@ -157,8 +170,13 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
                 textFieldControllers[textField.tag].setErrorText(nil, errorAccessibilityValue: nil)
                 return true
             case .invalid( _):
-            
-                textFieldControllers[textField.tag].setErrorText("Requires Between 6 and 14 Characters", errorAccessibilityValue: "Requires Between 6 and 14 Characters")
+                var errorText = ""
+                if (textField.text?.characters.count)! < 6{
+                    errorText = "Too short"
+                }else{
+                    errorText = "Too long"
+                }
+                textFieldControllers[textField.tag].setErrorText(errorText, errorAccessibilityValue: errorText)
                 return false
             }
         }
@@ -170,12 +188,12 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
         
         switch r {
         case .valid:
+            textFieldControllers[1].setErrorText(nil, errorAccessibilityValue: nil)
             textFieldControllers[2].setErrorText(nil, errorAccessibilityValue: nil)
-            textFieldControllers[3].setErrorText(nil, errorAccessibilityValue: nil)
             return true
         case .invalid(_):
+            textFieldControllers[1].setErrorText("Passwords Don't Match", errorAccessibilityValue: "Passwords Don't Match")
             textFieldControllers[2].setErrorText("Passwords Don't Match", errorAccessibilityValue: "Passwords Don't Match")
-            textFieldControllers[3].setErrorText("Passwords Don't Match", errorAccessibilityValue: "Passwords Don't Match")
             return false
         }
     }

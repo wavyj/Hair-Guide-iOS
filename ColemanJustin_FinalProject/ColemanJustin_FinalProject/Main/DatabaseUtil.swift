@@ -272,12 +272,15 @@ class DatabaseUtil{
         })
     }
     
-    func addComment(_ postRef: String, _ comment: Comment){
+    func addComment(_ postRef: String, _ comment: Comment, _ collectionView: UICollectionView){
        let reference = db?.collection("posts").document(postRef).collection("comments").addDocument(data: ["text" : comment.text, "date": comment.date, "user": comment.user], completion: { (error) in
             if error != nil{
                 print(error?.localizedDescription)
                 return
             }
+        DispatchQueue.main.async {
+            collectionView.reloadData()
+        }
             
         })
         

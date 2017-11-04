@@ -53,6 +53,17 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 if (error != nil){
                     // Error
                     print(error?.localizedDescription)
+                    var alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                    alert.addAction(okAction)
+                    if error?.localizedDescription == "There is no user record corresponding to this identifier. The user may have been deleted."{
+                        alert.title = "Account Not Found"
+                        alert.message = "No account with that email was found."
+                    }else if error?.localizedDescription == "The password is invalid or the user does not have a password."{
+                        alert.title = "Incorrect Password"
+                        alert.message = "The password you entered was incorrect. If you can not remember your password tap forgot password."
+                    }
+                    self.present(alert, animated: true, completion: nil)
                     return
                 }
             
@@ -87,6 +98,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textFieldControllers[textField.tag].setErrorText(nil, errorAccessibilityValue: nil)
     }
     
     //MARK: - Methods
@@ -140,8 +155,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             textFieldControllers[textField.tag].setErrorText(nil, errorAccessibilityValue: nil)
             return true
         case .invalid( _):
-            
-            textFieldControllers[textField.tag].setErrorText("Requires Between 6 and 14 Characters", errorAccessibilityValue: "Requires Between 6 and 14 Characters")
+            var errorText = ""
+            if (textField.text?.characters.count)! < 6{
+                errorText = "Too short"
+            }else{
+                errorText = "Too long"
+            }
+            textFieldControllers[textField.tag].setErrorText(errorText, errorAccessibilityValue: errorText)
             return false
         }
     }

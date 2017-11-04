@@ -53,14 +53,7 @@ class ProfileSetupViewController: UIViewController, FusumaDelegate, UITextFieldD
     
     func doneTapped(_ sender: UIBarButtonItem){
         if validInput{
-            if selectedImage != nil{
-                progressView.isHidden = false
-                bioField?.isEnabled = false
-                view.isUserInteractionEnabled = false
-                saveImage(selectedImage!)
-            } else{
-                uploadComplete()
-            }
+            onValid()
         }
     }
     
@@ -100,11 +93,22 @@ class ProfileSetupViewController: UIViewController, FusumaDelegate, UITextFieldD
         self.addChildViewController(appBar.headerViewController)
         appBar.headerViewController.headerView.backgroundColor = MDCPalette.grey.tint100
         appBar.navigationBar.tintColor = MDCPalette.blueGrey.tint900
-        title = "Edit Profile"
+        title = "Profile Setup"
         let doneAction = UIBarButtonItem(image: UIImage(named: "done")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(doneTapped(_:)))
         doneAction.tintColor = UIColor.black
         navigationItem.rightBarButtonItems = [doneAction]
         appBar.addSubviewsToParent()
+    }
+    
+    func onValid(){
+        if selectedImage != nil{
+            progressView.isHidden = false
+            bioField?.isEnabled = false
+            view.isUserInteractionEnabled = false
+            saveImage(selectedImage!)
+        } else{
+            uploadComplete()
+        }
     }
     
     func uploadComplete(){
@@ -124,8 +128,10 @@ class ProfileSetupViewController: UIViewController, FusumaDelegate, UITextFieldD
             if (snapshot?.documents.isEmpty)!{
                 self.usernameField?.setErrorText(nil, errorAccessibilityValue: nil)
                 self.validInput = true
+                self.onValid()
                 return
             }
+            self.validInput = true
             
             for i in (snapshot?.documents)!{
                 let nameToCheck = i.data()["username"] as! String
@@ -133,10 +139,12 @@ class ProfileSetupViewController: UIViewController, FusumaDelegate, UITextFieldD
                     // Username is taken
                     self.usernameField?.setErrorText("Username is taken", errorAccessibilityValue: nil)
                     self.validInput = false
-                }else{
-                    self.usernameField?.setErrorText(nil, errorAccessibilityValue: nil)
-                    self.validInput = true
+                    return
                 }
+            }
+            
+            if self.validInput{
+                self.onValid()
             }
         }
     }

@@ -10,7 +10,7 @@ import UIKit
 import MaterialComponents
 import Firebase
 
-class PostDetailsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class PostDetailsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     //MARK: - Outlets
     @IBOutlet weak var postImage: UIImageView!
@@ -19,19 +19,19 @@ class PostDetailsViewController: UIViewController, UICollectionViewDelegate, UIC
     @IBOutlet weak var likeBtn: UIImageView!
     @IBOutlet weak var commentBtn: UIImageView!
     @IBOutlet weak var shareBtn: UIImageView!
-    @IBOutlet weak var commentEntryContainer: UIView!
-    @IBOutlet weak var enterBtn: MDCFlatButton!
+    @IBOutlet weak var commentInput: MDCTextField!
+    @IBOutlet weak var enterBtnContainer: UIView!
     
     //MARK: - Variables
     var currentPost: Post? = nil
     var comments = [Comment]()
-    var multiLineController: MDCTextInputController?
-    var commentInput: MDCMultilineTextField?
+    var textController: MDCTextInputController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        getComments()
         update()
         setupMaterialComponents()
     }
@@ -61,9 +61,9 @@ class PostDetailsViewController: UIViewController, UICollectionViewDelegate, UIC
     func enterTapped(_ sender: MDCFlatButton){
         if !(commentInput?.text?.isEmpty)!{
             let newComment = Comment(text: (commentInput?.text)!, date: Date(), ref: "", user: UserDefaultsUtil().loadReference())
-            DatabaseUtil().addComment((currentPost?.mReference?.documentID)!, newComment)
-            comments.append(newComment)
-            commentsView.reloadData()
+            newComment.mUser = UserDefaultsUtil().loadUserData()
+            comments.append(newComment); DatabaseUtil().addComment((currentPost?.mReference?.documentID)!, newComment, commentsView)
+            //commentsView.reloadData()
         }
     }
     
@@ -83,7 +83,12 @@ class PostDetailsViewController: UIViewController, UICollectionViewDelegate, UIC
         cell.profilePic.pin_updateWithProgress = true
         cell.usernameLabel.text = current.mUser?.username.lowercased()
         cell.commentView.text = current.text
+        cell.dateLabel.text = current.dateString
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: commentsView.bounds.width, height: commentsView.bounds.height * 0.3)
     }
     
     //MARK: - Methods
@@ -92,18 +97,19 @@ class PostDetailsViewController: UIViewController, UICollectionViewDelegate, UIC
         commentsView?.register(nib, forCellWithReuseIdentifier: "commentCell")
         
         // TextField
-        commentInput = MDCMultilineTextField()
-        commentEntryContainer.addSubview(commentInput!)
-        commentInput?.frame = commentEntryContainer.bounds
         commentInput?.placeholder = "Add a comment..."
-        multiLineController = MDCTextInputControllerDefault(textInput: commentInput)
-        multiLineController?.activeColor = MDCPalette.blue.tint500
+        textController = MDCTextInputControllerDefault(textInput: commentInput)
+        textController?.activeColor = MDCPalette.blue.tint500
         
         // Button
+        let enterBtn = MDCFlatButton()
+        enterBtnContainer.addSubview(enterBtn)
+        enterBtn.frame = enterBtnContainer.bounds
         enterBtn.setImage(UIImage(named: "share")?.withRenderingMode(.alwaysTemplate), for: .normal)
         enterBtn.tintColor = UIColor.white
         enterBtn.setBackgroundColor(MDCPalette.blue.tint500, for: .normal)
         enterBtn.addTarget(self, action: #selector(enterTapped(_:)), for: .touchUpInside)
+        enterBtn.setTitle("", for: .normal)
         
         // AppBar Setup
         let appBar = MDCAppBar()
@@ -124,12 +130,13 @@ class PostDetailsViewController: UIViewController, UICollectionViewDelegate, UIC
     
     func getComments(){
         let db = Firestore.firestore()
-        db.collection("users").document((currentPost?.mReference?.documentID)!).collection("comments").getDocuments { (snapshot, error) in
+        db.collection("posts").document((currentPost?.mReference?.documentID)!).collection("comments").order(by: "date", descending: false).getDocuments { (snapshot, error) in
             if error != nil{
                 print(error?.localizedDescription)
             }
             
             if snapshot?.documents == nil || (snapshot?.documents.isEmpty)!{
+                print("No Comments")
                 return
             }
             

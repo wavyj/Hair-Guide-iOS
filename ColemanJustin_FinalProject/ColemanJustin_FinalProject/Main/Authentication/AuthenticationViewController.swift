@@ -135,18 +135,23 @@ class AuthenticationViewController: UIViewController, FBSDKLoginButtonDelegate {
                 return
             }
     
-            if snapshot?.documents != nil && snapshot?.documents.count != 0{
-                // Get User
-                DatabaseUtil().getFbUser(FBSDKAccessToken.current().tokenString)
-                print("Existing User")
-            }else{
-                // Create New User
-                print("New User")
-                let u = User(email: "", username: "", bio: "", profilePicUrl: "", gender: "")
-                UserDefaultsUtil().saveReference(DocumentID: "")
-                UserDefaultsUtil().saveUserData(u)
-                self.performSegue(withIdentifier: "toAnalysis", sender: self)
+            for i in (snapshot?.documents)!{
+                let data = i.data()
+                let fbToken = data["fbuser"] as! String
+                print(fbToken)
+                if fbToken == FBSDKAccessToken.current().tokenString{
+                    // Get User
+                    DatabaseUtil().getFbUser(FBSDKAccessToken.current().tokenString)
+                    print("Existing User")
+                    return
+                }
             }
+            // Create New User
+            print("New User")
+            let u = User(email: "", username: "", bio: "", profilePicUrl: "", gender: "")
+            UserDefaultsUtil().saveReference(DocumentID: "")
+            UserDefaultsUtil().saveUserData(u)
+            self.performSegue(withIdentifier: "toAnalysis", sender: self)
         }
     }
     

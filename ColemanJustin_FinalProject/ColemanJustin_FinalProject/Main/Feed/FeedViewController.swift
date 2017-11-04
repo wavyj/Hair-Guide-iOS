@@ -91,7 +91,7 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
         
         selectedPost = posts[indexPath.row]
         
-        performSegue(withIdentifier: "toSelectedProfile", sender: self)
+        performSegue(withIdentifier: "toSelectedPost", sender: self)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
