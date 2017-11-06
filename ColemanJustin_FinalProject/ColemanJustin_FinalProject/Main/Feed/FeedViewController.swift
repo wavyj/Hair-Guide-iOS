@@ -95,7 +95,7 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
-        return CGSize(width: self.view.bounds.width, height: (self.collectionView?.bounds.height)! - 200)
+        return CGSize(width: self.view.bounds.width * 0.95, height: (self.collectionView?.bounds.height)! * 0.75)
     }
     
     //MARK: - Fusama Delegate Callbacks
@@ -128,7 +128,7 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
         // AppBar Setup
         let appBar = MDCAppBar()
         self.addChildViewController(appBar.headerViewController)
-        appBar.headerViewController.headerView.backgroundColor = MDCPalette.grey.tint100
+        appBar.headerViewController.headerView.backgroundColor = UIColor.white
         appBar.navigationBar.tintColor = MDCPalette.blueGrey.tint900
         title = "Feed"
         let cameraAction = UIBarButtonItem(image: UIImage(named: "cameraPlus")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(cameraTapped(_:)))

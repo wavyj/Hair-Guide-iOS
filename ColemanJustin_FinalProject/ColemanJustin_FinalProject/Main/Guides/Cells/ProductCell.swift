@@ -11,7 +11,8 @@ import UIKit
 class ProductCell: UICollectionViewCell {
     
     //MARK: - Outlets
-    @IBOutlet weak var productImage: UIImage!
+    @IBOutlet weak var content: UIView!
+    @IBOutlet weak var productImage: UIImageView!
     @IBOutlet weak var productName: UILabel!
     @IBOutlet weak var productPrice: UILabel!
 
@@ -19,5 +20,14 @@ class ProductCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
         
+        // Shadow
+        self.clipsToBounds = false
+        self.layer.shadowOffset = CGSize(width: 0, height: 0)
+        self.layer.shadowOpacity = 0.2
+        self.layer.shadowRadius = 3
+        
+        // Rounded Corner
+        content.layer.masksToBounds = true
+        content.layer.cornerRadius = 1.5
     }
 }

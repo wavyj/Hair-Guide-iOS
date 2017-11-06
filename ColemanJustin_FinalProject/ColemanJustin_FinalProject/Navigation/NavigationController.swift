@@ -170,7 +170,7 @@ class NavigationController: UINavigationController, UINavigationControllerDelega
     func setupMaterialComponents(){
 
         // ButtonBar
-        buttonBar.backgroundColor = MDCPalette.grey.tint100
+        buttonBar.backgroundColor = UIColor.white
         
         let homeAction = UIBarButtonItem(title: "", style: .plain, target: self, action: #selector(homeTapped(_:)))
         homeAction.image = UIImage(named: "home-light")?.withRenderingMode(.alwaysTemplate)

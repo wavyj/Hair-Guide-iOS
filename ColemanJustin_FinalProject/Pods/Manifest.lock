@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (4.5.1)
   - Bolts (1.8.4):
     - Bolts/AppLinks (= 1.8.4)
     - Bolts/Tasks (= 1.8.4)
@@ -425,6 +426,7 @@ PODS:
     - NSObject-SafeExpectations (~> 0.0.2)
 
 DEPENDENCIES:
+  - Alamofire (~> 4.5)
   - DateToolsSwift
   - FBSDKLoginKit
   - FBSDKShareKit
@@ -439,6 +441,7 @@ DEPENDENCIES:
   - WordPress-iOS-Editor
 
 SPEC CHECKSUMS:
+  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   BoringSSL: 19083b821ef3ae0f758fae15482e183003b1e265
   CocoaLumberjack: 2800c03334042fe80589423c8d80e582dcaec482
@@ -475,6 +478,6 @@ SPEC CHECKSUMS:
   Validator: 7d9828daffabc757604603052e407f208fa9b6d5
   WordPress-iOS-Editor: 03b3bc631a31520ccf78e665548286c6d12c17f4
 
-PODFILE CHECKSUM: 73ce03f17e947cf379785c18c73f954bdf881d27
+PODFILE CHECKSUM: 1966c40cc8eec34605c9f765b7eb02bdc075f457
 
 COCOAPODS: 1.2.0

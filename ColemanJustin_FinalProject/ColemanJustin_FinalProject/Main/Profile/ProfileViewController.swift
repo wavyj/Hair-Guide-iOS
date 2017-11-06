@@ -14,14 +14,17 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     //MARK: - Outlets
     @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var bannerImage: UIImageView!
+    @IBOutlet weak var postsLabel: UILabel!
+    @IBOutlet weak var guidesLabel: UILabel!
     @IBOutlet weak var followingLabel: UILabel!
     @IBOutlet weak var followersLabel: UILabel!
+    @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var editProfileBtn: MDCRaisedButton!
-    @IBOutlet weak var bioView: UIView!
     @IBOutlet weak var bioText: UITextView!
     @IBOutlet weak var reAnalyzeBtn: MDCRaisedButton!
     @IBOutlet weak var buttonBar: MDCButtonBar!
-    @IBOutlet weak var imageContainer: UIView!
+    @IBOutlet weak var imageBorder: UIView!
     @IBOutlet weak var postsCollectionView: UICollectionView!
     @IBOutlet weak var guidesCollectionView: UICollectionView!
     
@@ -42,7 +45,9 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         self.navigationItem.setHidesBackButton(true, animated: false)
         setupMaterialComponents()
         
-        imageContainer.layer.cornerRadius = imageContainer.frame.size.width / 2
+        imageBorder.clipsToBounds = true
+        imageBorder.layer.cornerRadius = 2
+        profileImage.clipsToBounds = true
         currentUser = UserDefaultsUtil().loadUserData()
         update()
         loadProfile()
@@ -55,6 +60,10 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle{
+        return .lightContent
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -185,14 +194,17 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         guidesCollectionView?.register(nib, forCellWithReuseIdentifier: "guideCell")
         
         // Buttons
+        editProfileBtn.setBackgroundColor(MDCPalette.blue.tint500, for: .normal)
         editProfileBtn.setTitle("Edit Profile", for: .normal)
-        editProfileBtn.tintColor = MDCPalette.blue.tint500
+        editProfileBtn.tintColor = UIColor.white
         editProfileBtn.addTarget(self, action: #selector(editTapped(_:)), for: .touchUpInside)
+        reAnalyzeBtn.setBackgroundColor(MDCPalette.blue.tint500, for: .normal)
+        reAnalyzeBtn.setTitle(nil, for: .normal)
         reAnalyzeBtn.setImage(UIImage(named: "refresh")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        reAnalyzeBtn.tintColor = MDCPalette.blue.tint500
+        reAnalyzeBtn.tintColor = UIColor.white
         
         // ButtonBar
-        buttonBar.backgroundColor = MDCPalette.grey.tint50
+        buttonBar.backgroundColor = UIColor.white
         let postsAction = UIBarButtonItem(image: UIImage(named: "posts")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(postsTapped(_:)))
         postsAction.width = view.bounds.width / 3
         postsAction.tintColor = onColor
@@ -205,15 +217,10 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         items = [postsAction, guidesAction, bookmarkAction]
         buttonBar.items = items
         
-        // AppBar Setup
-        let appBar = MDCAppBar()
-        self.addChildViewController(appBar.headerViewController)
-        appBar.headerViewController.headerView.backgroundColor = MDCPalette.grey.tint100
-        appBar.navigationBar.tintColor = MDCPalette.blueGrey.tint900
+        // Navigation Item
         let settingsAction = UIBarButtonItem(image: UIImage(named: "signout")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(settingsTapped(_:)))
-        settingsAction.tintColor = UIColor.black
+        settingsAction.tintColor = UIColor.white
         navigationItem.rightBarButtonItem = settingsAction
-        appBar.addSubviewsToParent()
     }
     
     func updateMode(){
@@ -400,7 +407,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         profileImage.pin_updateWithProgress = true
         profileImage.pin_setImage(from: URL(string: (currentUser?.profilePicUrl)!))
         bioText.text = currentUser?.bio
-        title = currentUser?.username.lowercased()
+        usernameLabel.text = currentUser?.username.lowercased()
         followersLabel.text = currentUser?.followerCount.description
         followingLabel.text = currentUser?.followingCount.description
     }

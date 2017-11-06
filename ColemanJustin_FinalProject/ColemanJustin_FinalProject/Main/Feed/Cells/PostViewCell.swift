@@ -36,6 +36,16 @@ class PostViewCell: UICollectionViewCell {
         for i in [likeBtn, commentBtn, shareBtn]{
             i?.tintColor = MDCPalette.blue.tint500
         }
+        
+        // Shadow
+        self.clipsToBounds = false
+        self.layer.shadowOffset = CGSize(width: 0, height: 0)
+        self.layer.shadowOpacity = 0.2
+        self.layer.shadowRadius = 3
+        
+        // Rounded Corner
+        content.layer.masksToBounds = true
+        content.layer.cornerRadius = 1.5
     
     }
 

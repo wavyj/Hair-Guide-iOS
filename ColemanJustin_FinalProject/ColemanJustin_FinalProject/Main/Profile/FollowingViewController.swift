@@ -85,7 +85,7 @@ class FollowingViewController: UIViewController, UICollectionViewDelegate, UICol
         let appBar = MDCAppBar()
         title = "Following"
         self.addChildViewController(appBar.headerViewController)
-        appBar.headerViewController.headerView.backgroundColor = MDCPalette.grey.tint100
+        appBar.headerViewController.headerView.backgroundColor = UIColor.white
         appBar.navigationBar.tintColor = MDCPalette.blueGrey.tint900
         appBar.addSubviewsToParent()
     }

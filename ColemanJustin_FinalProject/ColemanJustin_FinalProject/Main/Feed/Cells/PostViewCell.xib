@@ -40,13 +40,13 @@
                                         <rect key="frame" x="478" y="8" width="30" height="30"/>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="This is my first post!" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6hh-Yg-owY">
-                                        <rect key="frame" x="8" y="614" width="500" height="34"/>
+                                        <rect key="frame" x="8" y="609" width="500" height="34"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Wtu-f6-J2l">
-                                        <rect key="frame" x="0.0" y="53" width="516" height="553"/>
+                                        <rect key="frame" x="0.0" y="53" width="516" height="548"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="U62-78-wTc">
                                         <rect key="frame" x="8" y="8" width="41" height="37"/>
@@ -58,7 +58,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Da1-ee-jCx">
-                                        <rect key="frame" x="0.0" y="656" width="516" height="24"/>
+                                        <rect key="frame" x="0.0" y="651" width="516" height="24"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="OuS-aA-dbh">
                                                 <rect key="frame" x="142" y="0.0" width="232" height="24"/>
@@ -112,7 +112,7 @@
                                     <constraint firstItem="6hh-Yg-owY" firstAttribute="leading" secondItem="SF1-4x-QWO" secondAttribute="leading" constant="8" id="ejv-Aj-aoS"/>
                                     <constraint firstAttribute="trailing" secondItem="6hh-Yg-owY" secondAttribute="trailing" constant="8" id="el1-DS-hg4"/>
                                     <constraint firstItem="fHe-ea-JzG" firstAttribute="centerY" secondItem="aB1-aN-8Gy" secondAttribute="centerY" id="epD-W7-TOh"/>
-                                    <constraint firstAttribute="bottom" secondItem="Da1-ee-jCx" secondAttribute="bottom" id="f5u-g9-Ioy"/>
+                                    <constraint firstAttribute="bottom" secondItem="Da1-ee-jCx" secondAttribute="bottom" constant="5" id="f5u-g9-Ioy"/>
                                     <constraint firstItem="U62-78-wTc" firstAttribute="width" secondItem="SF1-4x-QWO" secondAttribute="width" multiplier="0.08" id="f6g-jA-V2n"/>
                                     <constraint firstItem="MTh-hq-zWm" firstAttribute="centerY" secondItem="U62-78-wTc" secondAttribute="centerY" id="j4h-AV-oOf"/>
                                     <constraint firstItem="aB1-aN-8Gy" firstAttribute="leading" secondItem="SF1-4x-QWO" secondAttribute="leading" constant="8" id="l9E-wB-EK5"/>
@@ -121,7 +121,7 @@
                                     <constraint firstItem="MTh-hq-zWm" firstAttribute="leading" secondItem="U62-78-wTc" secondAttribute="trailing" constant="8" id="nj1-6j-DRx"/>
                                     <constraint firstItem="0Se-FO-kFS" firstAttribute="centerY" secondItem="MTh-hq-zWm" secondAttribute="centerY" id="pgn-u0-Rqh"/>
                                     <constraint firstItem="U62-78-wTc" firstAttribute="leading" secondItem="SF1-4x-QWO" secondAttribute="leading" constant="8" id="rQo-BT-Wu0"/>
-                                    <constraint firstItem="Da1-ee-jCx" firstAttribute="top" secondItem="6hh-Yg-owY" secondAttribute="bottom" constant="8" id="xaP-TW-AqU"/>
+                                    <constraint firstItem="Da1-ee-jCx" firstAttribute="top" secondItem="6hh-Yg-owY" secondAttribute="bottom" constant="8" id="u03-Pc-ccs"/>
                                     <constraint firstAttribute="trailing" secondItem="Da1-ee-jCx" secondAttribute="trailing" id="z4v-Hj-Pv3"/>
                                 </constraints>
                                 <variation key="default">

@@ -8,15 +8,16 @@
 
 import UIKit
 import MaterialComponents
+import Alamofire
 
-class ProductSearchViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate {
+class ProductSearchViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
     
     //MARK: - Outlets
     @IBOutlet weak var productsCollectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
     
     //MARK: - Variables
-    let walmartapi = "http://api.walmartlabs.com/v1/search?"
+    let walmartapi = "https://api.walmartlabs.com/v1/search?query="
     let walmartkey = "&format=json&apiKey=c557qwauwuyr864padta5zng"
     var products = [Product]()
 
@@ -51,9 +52,14 @@ class ProductSearchViewController: UIViewController, UICollectionViewDelegate, U
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "productCell", for: indexPath) as! ProductCell
         let selected = products[indexPath.row]
         cell.productName.text = selected.name
-        cell.productPrice.text = selected.price.description
-    
+        cell.productPrice.text = selected.getPrice
+        cell.productImage.pin_setImage(from: URL(string: selected.imageUrl))
+        cell.productImage.pin_updateWithProgress = true
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.bounds.width * 0.45, height: collectionView.bounds.height * 0.35)
     }
     
     //MARK: - Methods
@@ -73,9 +79,51 @@ class ProductSearchViewController: UIViewController, UICollectionViewDelegate, U
     
     func getProducts(_ query: String){
         let request = walmartapi + query + walmartkey
-//        Alamofire.request(URL(string: request)!).responseJSON { (results) in
-//            print(results.result)
-//        }
+        Alamofire.request(URL(string: request)!).responseJSON { (results) in
+            if let json = results.result.value{
+                if results.error != nil{
+                    print(results.error?.localizedDescription)
+                    let alert = UIAlertController(title: "Uh Oh", message: "There was a problem getting the product results. Try again shortly.", preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                    self.present(alert, animated: true, completion: nil)
+                    return
+                }
+                if let data = json as? [String: Any]{
+                    let items = data["items"] as! [[String: Any]]
+                    for i in items{
+                        let name = i["name"] as! String
+                        let productUrl = i["productUrl"] as! String
+                        var imageUrl = ""
+                        if let image = i["thumbnailImage"] as? String{
+                            imageUrl = image
+                        }
+                        var shortDescrip = ""
+                        if let shortDescription = i["shortDescription"] as? String{
+                            shortDescrip = shortDescription
+                        }
+                        var fullDescrip = ""
+                        if let fullDescription = i["longDescription"] as? String{
+                            fullDescrip = fullDescription
+                        }
+                        var price = 0.00
+                        if let salePrice = i["salePrice"] as? Double{
+                            price = salePrice
+                        }
+                        var rating = ""
+                        if let ratingImg = i["customerRatingImage"] as? String{
+                            rating = ratingImg
+                        }
+                        
+                        let newProduct = Product(name: name, price: price, imageUrl: imageUrl, productUrl: productUrl, description: fullDescrip, shortDescription: shortDescrip, rating: rating)
+                        self.products.append(newProduct)
+                    }
+                    DispatchQueue.main.async {
+                        self.productsCollectionView.reloadData()
+                    }
+                    
+                }
+            }
+        }
     }
 
     /*

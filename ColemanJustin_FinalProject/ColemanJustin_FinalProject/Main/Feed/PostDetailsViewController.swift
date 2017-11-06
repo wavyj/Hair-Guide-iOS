@@ -114,7 +114,7 @@ class PostDetailsViewController: UIViewController, UICollectionViewDelegate, UIC
         // AppBar Setup
         let appBar = MDCAppBar()
         self.addChildViewController(appBar.headerViewController)
-        appBar.headerViewController.headerView.backgroundColor = MDCPalette.grey.tint100
+        appBar.headerViewController.headerView.backgroundColor = UIColor.white
         appBar.navigationBar.tintColor = MDCPalette.blueGrey.tint900
         //title = "Feed"
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "back-arrow"), style: .plain, target: self, action: #selector(backTapped(_:)))

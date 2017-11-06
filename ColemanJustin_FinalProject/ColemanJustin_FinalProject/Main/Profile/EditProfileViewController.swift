@@ -96,7 +96,7 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, FusumaDe
         // AppBar Setup
         let appBar = MDCAppBar()
         self.addChildViewController(appBar.headerViewController)
-        appBar.headerViewController.headerView.backgroundColor = MDCPalette.grey.tint100
+        appBar.headerViewController.headerView.backgroundColor = UIColor.white
         appBar.navigationBar.tintColor = MDCPalette.blueGrey.tint900
         title = "Edit Profile"
         let doneAction = UIBarButtonItem(image: UIImage(named: "done")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(doneTapped(_:)))

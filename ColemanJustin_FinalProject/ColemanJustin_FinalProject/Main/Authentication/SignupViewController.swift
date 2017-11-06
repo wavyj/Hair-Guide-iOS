@@ -105,7 +105,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
         // AppBar Setup
         let appBar = MDCAppBar()
         self.addChildViewController(appBar.headerViewController)
-        appBar.headerViewController.headerView.backgroundColor = MDCPalette.grey.tint100
+        appBar.headerViewController.headerView.backgroundColor = UIColor.white
         appBar.navigationBar.tintColor = MDCPalette.blueGrey.tint900
         title = "Create Account"
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "back-arrow"), style: .plain, target: self, action: #selector(backTapped(_:)))
@@ -122,9 +122,6 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
             validateCharCount(textField)
             break
         case 2:
-            validateCharCount(textField)
-            break
-        case 3:
             let b = validateCharCount(textField)
             if (b){
             validatePasswordsMatch()
