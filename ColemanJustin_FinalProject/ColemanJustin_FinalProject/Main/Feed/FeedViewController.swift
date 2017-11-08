@@ -12,13 +12,17 @@ import Fusuma
 import Firebase
 import PINRemoteImage
 
-class FeedViewController: UICollectionViewController, FusumaDelegate, UICollectionViewDelegateFlowLayout {
+class FeedViewController: UIViewController, FusumaDelegate, UICollectionViewDelegate, UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
     
     //MARK: - Outlets
+    @IBOutlet weak var postsCollectionView: UICollectionView!
+    @IBOutlet weak var guidesCollectionView: UICollectionView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     //MARK: - Variables
     var posts = [Post]()
+    var guides = [Guide]()
+    var userGuides = [Guide]()
     var selectedPost: Post? = nil
     var appBarHeight: CGFloat? = nil
     var transition: MDCMaskedTransition? = nil
@@ -65,28 +69,36 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
     }
     
     //MARK: - Collection View
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return posts.count
     }
     
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "postCell", for: indexPath) as! PostViewCell
-        let selected = posts[indexPath.row]
-        cell.imageView.pin_updateWithProgress = true
-        cell.imageView.pin_setImage(from: URL(string: selected.mImageUrl)!)
-        cell.profileImg.pin_updateWithProgress = true
-        cell.profileImg.pin_setImage(from: URL(string: (selected.mUser?.profilePicUrl)!))
-        cell.authorText.text = selected.mUser?.username.lowercased()
-        cell.captionText.text = selected.mCaption
-        cell.timeLabel.text = selected.dateString
-        return cell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        switch collectionView.tag {
+        case 0:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "postCell", for: indexPath) as! PostViewCell
+            let selected = posts[indexPath.row]
+            cell.imageView.pin_updateWithProgress = true
+            cell.imageView.pin_setImage(from: URL(string: selected.mImageUrl)!)
+            cell.profileImg.pin_updateWithProgress = true
+            cell.profileImg.pin_setImage(from: URL(string: (selected.mUser?.profilePicUrl)!))
+            cell.authorText.text = selected.mUser?.username.lowercased()
+            cell.captionText.text = selected.mCaption
+            cell.timeLabel.text = selected.dateString
+            return cell
+        case 1:
+            return UICollectionViewCell()
+        default:
+            return UICollectionViewCell()
+        }
+        
     }
     
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! PostViewCell
         
         selectedPost = posts[indexPath.row]
@@ -95,7 +107,7 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
-        return CGSize(width: self.view.bounds.width * 0.95, height: (self.collectionView?.bounds.height)! * 0.75)
+        return CGSize(width: self.view.bounds.width * 0.95, height: (postsCollectionView.bounds.height) * 0.75)
     }
     
     //MARK: - Fusama Delegate Callbacks
@@ -121,20 +133,20 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
     func setupMaterialComponents(){
         
         let nib = UINib(nibName: "PostViewCell", bundle: nil)
-        collectionView?.register(nib, forCellWithReuseIdentifier: "postCell")
+        postsCollectionView?.register(nib, forCellWithReuseIdentifier: "postCell")
         
         appBarHeight = self.view.bounds.height * 0.1
         
         // AppBar Setup
-        let appBar = MDCAppBar()
-        self.addChildViewController(appBar.headerViewController)
-        appBar.headerViewController.headerView.backgroundColor = UIColor.white
-        appBar.navigationBar.tintColor = MDCPalette.blueGrey.tint900
-        title = "Feed"
-        let cameraAction = UIBarButtonItem(image: UIImage(named: "cameraPlus")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(cameraTapped(_:)))
-        cameraAction.tintColor = UIColor.black
-        navigationItem.rightBarButtonItem = cameraAction
-        appBar.addSubviewsToParent()
+//        let appBar = MDCAppBar()
+//        self.addChildViewController(appBar.headerViewController)
+//        appBar.headerViewController.headerView.backgroundColor = UIColor.white
+//        appBar.navigationBar.tintColor = MDCPalette.blueGrey.tint900
+//        title = "Feed"
+//        let cameraAction = UIBarButtonItem(image: UIImage(named: "cameraPlus")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(cameraTapped(_:)))
+//        cameraAction.tintColor = UIColor.black
+//        navigationItem.rightBarButtonItem = cameraAction
+//        appBar.addSubviewsToParent()
     }
     
     func loadPosts(){
@@ -193,7 +205,7 @@ class FeedViewController: UICollectionViewController, FusumaDelegate, UICollecti
             user.followingCount = userFollowing
             post.mUser = user
             DispatchQueue.main.async {
-                self.collectionView?.reloadData()
+                self.postsCollectionView.reloadData()
             }
             db.collection("users").document(UserDefaultsUtil().loadReference()).collection("following").whereField("user", isEqualTo: snapshot?.documentID).getDocuments(completion: { (snapshot, err) in
                 if err != nil{

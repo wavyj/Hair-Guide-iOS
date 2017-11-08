@@ -19,6 +19,7 @@ class Guide{
     var mReference = ""
     var mAuthor = ""
     var mBookmarks: Int = 0
+    var mProducts = [Product]()
     
     init(title: String, text: String, viewCount: Int, comments: Int, reference: String){
         mTitle = title

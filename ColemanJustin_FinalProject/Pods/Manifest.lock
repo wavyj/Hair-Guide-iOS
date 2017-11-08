@@ -90,6 +90,7 @@ PODS:
     - Protobuf (~> 3.0)
   - gRPC-RxLibrary (1.6.0)
   - GTMSessionFetcher/Core (1.1.12)
+  - HTMLReader (2.1)
   - leveldb-library (1.18.3)
   - MaterialComponents (35.2.0):
     - MaterialComponents/ActivityIndicator (= 35.2.0)
@@ -420,6 +421,7 @@ PODS:
     - FLAnimatedImage (>= 1.0)
     - PINRemoteImage/Core
   - Protobuf (3.4.0)
+  - SwiftSoup (1.5.5)
   - Validator (3.0)
   - WordPress-iOS-Editor (1.9.7):
     - CocoaLumberjack (~> 3.2.0)
@@ -435,8 +437,10 @@ DEPENDENCIES:
   - Firebase/Firestore
   - Firebase/Storage
   - Fusuma
+  - HTMLReader
   - MaterialComponents
   - PINRemoteImage
+  - SwiftSoup
   - Validator
   - WordPress-iOS-Editor
 
@@ -464,6 +468,7 @@ SPEC CHECKSUMS:
   gRPC-ProtoRPC: de7505e493a9d1b6b96c8ea8f976c73100fdf53f
   gRPC-RxLibrary: 17b9699beb0a838b95b57832244f9ead18e66777
   GTMSessionFetcher: ebaa1f79a5366922c1735f1566901f50beba23b7
+  HTMLReader: dd75279b0532ff5d005ffe1c6512e33d1d52f861
   leveldb-library: 10fb39c39e243db4af1828441162405bbcec1404
   MaterialComponents: 3edb4c96d32042242ecdfb2159e697e3c59e9f38
   MDFTextAccessibility: 94098925e0853551c5a311ce7c1ecefbe297cdb6
@@ -475,9 +480,10 @@ SPEC CHECKSUMS:
   PINCache: ce36ed282031b92fc7733ffe831f474ff80fddc2
   PINRemoteImage: 4ac4011c5caefd6befd99758e09becede05d3226
   Protobuf: 03eef2ee0b674770735cf79d9c4d3659cf6908e8
+  SwiftSoup: 6a31eb02551c9c523eea14aef9d9e70f1466ff99
   Validator: 7d9828daffabc757604603052e407f208fa9b6d5
   WordPress-iOS-Editor: 03b3bc631a31520ccf78e665548286c6d12c17f4
 
-PODFILE CHECKSUM: 1966c40cc8eec34605c9f765b7eb02bdc075f457
+PODFILE CHECKSUM: f03d8f13d2a7d09874f60e478ae28fb0d9d387a5
 
 COCOAPODS: 1.2.0

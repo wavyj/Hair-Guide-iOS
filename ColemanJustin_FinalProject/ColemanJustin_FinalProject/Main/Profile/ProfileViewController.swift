@@ -19,6 +19,10 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     @IBOutlet weak var guidesLabel: UILabel!
     @IBOutlet weak var followingLabel: UILabel!
     @IBOutlet weak var followersLabel: UILabel!
+    @IBOutlet weak var followersView: UIView!
+    @IBOutlet weak var followingView: UIView!
+    @IBOutlet weak var postsView: UIView!
+    @IBOutlet weak var guidesView: UIView!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var editProfileBtn: MDCRaisedButton!
     @IBOutlet weak var bioText: UITextView!
@@ -27,6 +31,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     @IBOutlet weak var imageBorder: UIView!
     @IBOutlet weak var postsCollectionView: UICollectionView!
     @IBOutlet weak var guidesCollectionView: UICollectionView!
+    @IBOutlet weak var signoutBtn: MDCFlatButton!
     
     //MARK: - Variables
     var currentUser: User? = nil
@@ -45,16 +50,14 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         self.navigationItem.setHidesBackButton(true, animated: false)
         setupMaterialComponents()
         
-        imageBorder.clipsToBounds = true
-        imageBorder.layer.cornerRadius = 2
-        profileImage.clipsToBounds = true
+        profileImage.layer.cornerRadius = 2
         currentUser = UserDefaultsUtil().loadUserData()
         update()
         loadProfile()
         updateMode()
         
-        followersLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showFollowers(_:))))
-        followingLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showFollowing(_:))))
+        followersView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showFollowers(_:))))
+        followingView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showFollowing(_:))))
     }
 
     override func didReceiveMemoryWarning() {
@@ -202,6 +205,11 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         reAnalyzeBtn.setTitle(nil, for: .normal)
         reAnalyzeBtn.setImage(UIImage(named: "refresh")?.withRenderingMode(.alwaysTemplate), for: .normal)
         reAnalyzeBtn.tintColor = UIColor.white
+        signoutBtn.setImage(UIImage(named: "signout")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        signoutBtn.tintColor = UIColor.white
+        signoutBtn.addTarget(self, action: #selector(settingsTapped(_:)), for: .touchUpInside)
+        let color = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
+        signoutBtn.setBackgroundColor(color, for: .normal)
         
         // ButtonBar
         buttonBar.backgroundColor = UIColor.white

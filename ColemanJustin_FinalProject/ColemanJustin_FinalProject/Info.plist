@@ -69,5 +69,15 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>New item</key>
+			<string>https://c.affil.walmart.com</string>
+			<key>New item - 2</key>
+			<string>https%3A%2F%2Fwww.walmart.com%2Fip</string>
+		</dict>
+	</dict>
 </dict>
 </plist>

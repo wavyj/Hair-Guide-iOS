@@ -106,7 +106,7 @@ class GuidesViewController: UIViewController, UICollectionViewDelegate, UICollec
         // AppBar Setup
         let appBar = MDCAppBar()
         self.addChildViewController(appBar.headerViewController)
-        appBar.headerViewController.headerView.backgroundColor = MDCPalette.grey.tint100
+        appBar.headerViewController.headerView.backgroundColor = UIColor.white
         appBar.navigationBar.tintColor = MDCPalette.blueGrey.tint900
         title = "Guides"
         let addAction = UIBarButtonItem(image: UIImage(named: "guides-add")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(addTapped(_:)))

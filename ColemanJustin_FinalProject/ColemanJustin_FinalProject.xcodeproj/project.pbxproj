@@ -23,6 +23,8 @@
 		D03D40F61F8FD8DD007ACE22 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03D40F51F8FD8DD007ACE22 /* Post.swift */; };
 		D03D40FC1F8FDCC7007ACE22 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03D40FA1F8FDCC7007ACE22 /* PostCell.swift */; };
 		D03E03B61F97DC5400A947E4 /* SelectedProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03E03B51F97DC5400A947E4 /* SelectedProfileViewController.swift */; };
+		D03E31501FB14FF200341679 /* ProductLinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03E314F1FB14FF200341679 /* ProductLinkViewController.swift */; };
+		D03E31531FB1608000341679 /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03E31521FB1608000341679 /* SegmentedControl.swift */; };
 		D040E54F1FA516010051D166 /* FollowingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D040E54E1FA516010051D166 /* FollowingViewController.swift */; };
 		D040E5511FA535DB0051D166 /* AutoAnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D040E5501FA535DB0051D166 /* AutoAnalysisViewController.swift */; };
 		D040E5561FA53E560051D166 /* VisualRecognitionV3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D040E5551FA53E560051D166 /* VisualRecognitionV3.framework */; };
@@ -45,6 +47,7 @@
 		D078B5C51F7C1A5F00A6F8C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D078B5C41F7C1A5F00A6F8C5 /* Assets.xcassets */; };
 		D078B5C81F7C1A5F00A6F8C5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D078B5C61F7C1A5F00A6F8C5 /* LaunchScreen.storyboard */; };
 		D07F3B9B1F999FA500B4BF34 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07F3B9A1F999FA500B4BF34 /* SplashScreen.swift */; };
+		D091EE331FB0AC4100A8FD43 /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D091EE321FB0AC4100A8FD43 /* ProductDetailViewController.swift */; };
 		D0964F8D1F9652150022CB7A /* DatabaseUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0964F8C1F9652150022CB7A /* DatabaseUtil.swift */; };
 		D0964F8F1F9652A50022CB7A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0964F8E1F9652A50022CB7A /* User.swift */; };
 		D0964F911F9659A90022CB7A /* CloudStorageUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0964F901F9659A90022CB7A /* CloudStorageUtil.swift */; };
@@ -98,6 +101,8 @@
 		D03D40F51F8FD8DD007ACE22 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		D03D40FA1F8FDCC7007ACE22 /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		D03E03B51F97DC5400A947E4 /* SelectedProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedProfileViewController.swift; sourceTree = "<group>"; };
+		D03E314F1FB14FF200341679 /* ProductLinkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductLinkViewController.swift; sourceTree = "<group>"; };
+		D03E31521FB1608000341679 /* SegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
 		D040E54E1FA516010051D166 /* FollowingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingViewController.swift; sourceTree = "<group>"; };
 		D040E5501FA535DB0051D166 /* AutoAnalysisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoAnalysisViewController.swift; sourceTree = "<group>"; };
 		D040E5531FA53D360051D166 /* VisualRecognitionV3.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VisualRecognitionV3.framework; path = Carthage/Build/iOS/VisualRecognitionV3.framework; sourceTree = "<group>"; };
@@ -122,6 +127,7 @@
 		D078B5C71F7C1A5F00A6F8C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D078B5C91F7C1A5F00A6F8C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D07F3B9A1F999FA500B4BF34 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
+		D091EE321FB0AC4100A8FD43 /* ProductDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewController.swift; sourceTree = "<group>"; };
 		D0964F8C1F9652150022CB7A /* DatabaseUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseUtil.swift; sourceTree = "<group>"; };
 		D0964F8E1F9652A50022CB7A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		D0964F901F9659A90022CB7A /* CloudStorageUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudStorageUtil.swift; sourceTree = "<group>"; };
@@ -220,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				D03D40EE1F8FB3C3007ACE22 /* NavigationController.swift */,
+				D03E31521FB1608000341679 /* SegmentedControl.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -248,6 +255,16 @@
 				D00231A11FABFB4900ABE983 /* CommentCell.xib */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		D03E31511FB14FF900341679 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D0FF7EB01FA9605D005B5798 /* ProductSearchViewController.swift */,
+				D091EE321FB0AC4100A8FD43 /* ProductDetailViewController.swift */,
+				D03E314F1FB14FF200341679 /* ProductLinkViewController.swift */,
+			);
+			path = Products;
 			sourceTree = "<group>";
 		};
 		D050F9701F9110B10008370E /* Search */ = {
@@ -392,7 +409,7 @@
 				D0FFAAAD1F8D2569005E11BE /* Cells */,
 				D0964F941F9696850022CB7A /* SelectedGuideViewController.swift */,
 				D0E97AEC1FA36DFC00292763 /* EditGuideViewController.swift */,
-				D0FF7EB01FA9605D005B5798 /* ProductSearchViewController.swift */,
+				D03E31511FB14FF900341679 /* Products */,
 			);
 			path = Guides;
 			sourceTree = "<group>";
@@ -551,6 +568,7 @@
 				D00231A21FABFB4900ABE983 /* CommentCell.swift in Sources */,
 				D050F9741F91114F0008370E /* GuidesViewController.swift in Sources */,
 				D07F3B9B1F999FA500B4BF34 /* SplashScreen.swift in Sources */,
+				D091EE331FB0AC4100A8FD43 /* ProductDetailViewController.swift in Sources */,
 				D06F9A631FA21E79006B578E /* GridPostCell.swift in Sources */,
 				D0964F911F9659A90022CB7A /* CloudStorageUtil.swift in Sources */,
 				D040E55A1FA571660051D166 /* AnalysisDetailsViewController.swift in Sources */,
@@ -564,6 +582,7 @@
 				D051134C1F9143C20077179C /* PostDetailsViewController.swift in Sources */,
 				D0BC3ACE1F9506C500423B99 /* GuideCell.swift in Sources */,
 				D03D40EF1F8FB3C3007ACE22 /* NavigationController.swift in Sources */,
+				D03E31501FB14FF200341679 /* ProductLinkViewController.swift in Sources */,
 				D03D40F61F8FD8DD007ACE22 /* Post.swift in Sources */,
 				D03D40F31F8FD249007ACE22 /* UserDefaultsUtil.swift in Sources */,
 				D09691451F93D22A00763F83 /* NewGuideViewController.swift in Sources */,
@@ -580,6 +599,7 @@
 				D0E559511FA3E07000642FE6 /* UserCell.swift in Sources */,
 				D03D40FC1F8FDCC7007ACE22 /* PostCell.swift in Sources */,
 				D010E2711F9A61920042A031 /* HairTypeCell.swift in Sources */,
+				D03E31531FB1608000341679 /* SegmentedControl.swift in Sources */,
 				D0FF7EAE1FA95DFA005B5798 /* Product.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
