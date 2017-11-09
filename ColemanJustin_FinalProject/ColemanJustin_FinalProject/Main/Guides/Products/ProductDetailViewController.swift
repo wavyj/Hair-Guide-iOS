@@ -48,7 +48,7 @@ class ProductDetailViewController: UIViewController {
         priceLabel.text = currentProduct?.getPrice
         productImage.pin_setImage(from: URL(string: (currentProduct?.imageUrl)!))
         descriptionText.text = currentProduct?.convertHtml
-        rating.pin_setImage(from: URL(string: (currentProduct?.rating)!))
+        rating.pin_setImage(from: URL(string: (currentProduct?.ratingImg)!))
     }
 
     override func didReceiveMemoryWarning() {
@@ -72,7 +72,7 @@ class ProductDetailViewController: UIViewController {
             for i in selectedProducts{
                 if i.description == currentProduct!.description{
                     selectedProducts.remove(at: j)
-                    performSegue(withIdentifier: "toAddProduct", sender: self)
+                    performSegue(withIdentifier: "toRemoveProduct", sender: self)
                 }
                 j += 1
             }
@@ -127,6 +127,12 @@ class ProductDetailViewController: UIViewController {
         
         if let vc = segue.destination as? ProductLinkViewController{
             vc.currentProduct = currentProduct
+        }
+        
+        if segue.identifier == "toRemoveProduct"{
+            if let vc = segue.destination as? ProductSearchViewController{
+                vc.selectedProduct = currentProduct
+            }
         }
     }
  

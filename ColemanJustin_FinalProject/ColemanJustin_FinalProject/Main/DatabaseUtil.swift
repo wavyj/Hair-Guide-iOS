@@ -211,8 +211,14 @@ class DatabaseUtil{
             print(error?.localizedDescription)
                 return
             }
+            
+            
         })
-        
+        if newGuide.mProducts.count > 0{
+            for i in newGuide.mProducts{
+                db?.collection("guides").document((reference?.documentID)!).collection("products").addDocument(data: ["name" : i.name, "price": i.price, "image": i.imageUrl, "productUrl": i.productUrl, "ratingImg": i.ratingImg, "rating": i.rating, "shortDescription": i.shortDescription, "fullDescription": i.description])
+            }
+        }
         newGuide.mReference = (reference?.documentID)!
     }
     
@@ -264,12 +270,19 @@ class DatabaseUtil{
     }
     
     func updateGuide(_ guide: Guide){
-        db?.collection("guides").document((guide.mReference)).setData(["user" : guide.mAuthor, "title": guide.mTitle, "text": guide.mText, "views": guide.mViews, "comments": guide.mComments, "image": guide.mImageUrl, "bookmarks": guide.mBookmarks], completion: { (error) in
+            db?.collection("guides").document((guide.mReference)).setData(["user" : guide.mAuthor, "title": guide.mTitle, "text": guide.mText, "views": guide.mViews, "comments": guide.mComments, "image": guide.mImageUrl, "bookmarks": guide.mBookmarks], completion: { (error) in
             if error != nil{
                 print(error?.localizedDescription)
                 return
             }
+            
         })
+        
+        if guide.mProducts.count > 0{
+            for i in guide.mProducts{
+                db?.collection("guides").document(guide.mReference).collection("products").addDocument(data: ["name" : i.name, "price": i.price, "image": i.imageUrl, "productUrl": i.productUrl, "ratingImg": i.ratingImg, "rating": i.rating, "shortDescription": i.shortDescription, "fullDescription": i.description])
+            }
+        }
     }
     
     func addComment(_ postRef: String, _ comment: Comment, _ collectionView: UICollectionView){

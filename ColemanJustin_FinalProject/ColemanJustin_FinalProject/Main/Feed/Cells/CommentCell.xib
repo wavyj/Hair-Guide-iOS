@@ -19,61 +19,72 @@
                 <rect key="frame" x="0.0" y="0.0" width="623" height="113"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y6m-W0-5eC">
-                        <rect key="frame" x="0.0" y="0.0" width="623" height="113"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t2z-23-0dc">
+                        <rect key="frame" x="-0.5" y="-0.5" width="623" height="113"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cdM-Hy-THp">
-                                <rect key="frame" x="8" y="26.5" width="62.5" height="61"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y76-sS-SrT">
-                                <rect key="frame" x="78.5" y="16" width="536.5" height="21"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="cOa-dg-k5p">
-                                <rect key="frame" x="78.5" y="37" width="536.5" height="39"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y6m-W0-5eC" userLabel="Content View">
+                                <rect key="frame" x="-0.5" y="-0.5" width="623" height="113"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cdM-Hy-THp">
+                                        <rect key="frame" x="8" y="26.5" width="62.5" height="61"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y76-sS-SrT">
+                                        <rect key="frame" x="90.5" y="16" width="80.5" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textView clipsSubviews="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="cOa-dg-k5p">
+                                        <rect key="frame" x="86.5" y="37" width="528.5" height="34"/>
+                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ea-oi-H5N">
+                                        <rect key="frame" x="579" y="88" width="36" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ea-oi-H5N">
-                                <rect key="frame" x="78" y="84" width="43" height="21"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <constraints>
+                                    <constraint firstItem="cdM-Hy-THp" firstAttribute="centerY" secondItem="y6m-W0-5eC" secondAttribute="centerY" id="8w8-Bn-Stb"/>
+                                    <constraint firstItem="cOa-dg-k5p" firstAttribute="leading" secondItem="cdM-Hy-THp" secondAttribute="trailing" constant="16" id="D1R-Zh-cL1"/>
+                                    <constraint firstItem="cdM-Hy-THp" firstAttribute="width" secondItem="y6m-W0-5eC" secondAttribute="width" multiplier="0.1" id="Hgo-ZI-sMI"/>
+                                    <constraint firstAttribute="trailing" secondItem="8ea-oi-H5N" secondAttribute="trailing" constant="8" id="Qqc-39-ZNk"/>
+                                    <constraint firstItem="cdM-Hy-THp" firstAttribute="leading" secondItem="y6m-W0-5eC" secondAttribute="leading" constant="8" id="T7z-SX-AbL"/>
+                                    <constraint firstItem="Y76-sS-SrT" firstAttribute="top" secondItem="y6m-W0-5eC" secondAttribute="top" constant="16" id="aFd-o1-YUO"/>
+                                    <constraint firstItem="cOa-dg-k5p" firstAttribute="height" secondItem="y6m-W0-5eC" secondAttribute="height" multiplier="0.3" id="bpx-2m-VkG"/>
+                                    <constraint firstItem="Y76-sS-SrT" firstAttribute="leading" secondItem="cdM-Hy-THp" secondAttribute="trailing" constant="20" id="e8h-Ap-uNo"/>
+                                    <constraint firstItem="cdM-Hy-THp" firstAttribute="height" secondItem="y6m-W0-5eC" secondAttribute="height" multiplier="0.54" id="pBX-Wc-6Ve"/>
+                                    <constraint firstAttribute="bottom" secondItem="8ea-oi-H5N" secondAttribute="bottom" constant="8" id="umg-i7-ATc"/>
+                                    <constraint firstAttribute="trailing" secondItem="cOa-dg-k5p" secondAttribute="trailing" constant="8" id="wwn-5W-CAy"/>
+                                    <constraint firstItem="cOa-dg-k5p" firstAttribute="top" secondItem="Y76-sS-SrT" secondAttribute="bottom" id="yCp-y4-Dco"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="8ea-oi-H5N" firstAttribute="leading" secondItem="cdM-Hy-THp" secondAttribute="trailing" constant="8" id="5SH-eg-2Jj"/>
-                            <constraint firstItem="cdM-Hy-THp" firstAttribute="centerY" secondItem="y6m-W0-5eC" secondAttribute="centerY" id="8w8-Bn-Stb"/>
-                            <constraint firstAttribute="trailing" secondItem="Y76-sS-SrT" secondAttribute="trailing" constant="8" id="CNa-5W-wbo"/>
-                            <constraint firstItem="cOa-dg-k5p" firstAttribute="leading" secondItem="cdM-Hy-THp" secondAttribute="trailing" constant="8" id="D1R-Zh-cL1"/>
-                            <constraint firstItem="8ea-oi-H5N" firstAttribute="top" secondItem="cOa-dg-k5p" secondAttribute="bottom" constant="8" id="HYk-lo-8q4"/>
-                            <constraint firstItem="cdM-Hy-THp" firstAttribute="width" secondItem="y6m-W0-5eC" secondAttribute="width" multiplier="0.1" id="Hgo-ZI-sMI"/>
-                            <constraint firstItem="cdM-Hy-THp" firstAttribute="leading" secondItem="y6m-W0-5eC" secondAttribute="leading" constant="8" id="T7z-SX-AbL"/>
-                            <constraint firstItem="Y76-sS-SrT" firstAttribute="top" secondItem="y6m-W0-5eC" secondAttribute="top" constant="16" id="aFd-o1-YUO"/>
-                            <constraint firstItem="Y76-sS-SrT" firstAttribute="leading" secondItem="cdM-Hy-THp" secondAttribute="trailing" constant="8" id="i69-BA-nnT"/>
-                            <constraint firstItem="cdM-Hy-THp" firstAttribute="height" secondItem="y6m-W0-5eC" secondAttribute="height" multiplier="0.54" id="pBX-Wc-6Ve"/>
-                            <constraint firstAttribute="bottom" secondItem="8ea-oi-H5N" secondAttribute="bottom" constant="8" id="umg-i7-ATc"/>
-                            <constraint firstAttribute="trailing" secondItem="cOa-dg-k5p" secondAttribute="trailing" constant="8" id="wwn-5W-CAy"/>
-                            <constraint firstItem="cOa-dg-k5p" firstAttribute="top" secondItem="Y76-sS-SrT" secondAttribute="bottom" id="yCp-y4-Dco"/>
+                            <constraint firstItem="y6m-W0-5eC" firstAttribute="centerX" secondItem="t2z-23-0dc" secondAttribute="centerX" id="D48-mE-SC0"/>
+                            <constraint firstItem="y6m-W0-5eC" firstAttribute="width" secondItem="t2z-23-0dc" secondAttribute="width" id="E1n-xV-Pmz"/>
+                            <constraint firstItem="y6m-W0-5eC" firstAttribute="height" secondItem="t2z-23-0dc" secondAttribute="height" id="P3r-cH-U9v"/>
+                            <constraint firstItem="y6m-W0-5eC" firstAttribute="centerY" secondItem="t2z-23-0dc" secondAttribute="centerY" id="kTO-P4-epZ"/>
                         </constraints>
                     </view>
                 </subviews>
             </view>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="y6m-W0-5eC" secondAttribute="trailing" id="Ei2-20-Go4"/>
-                <constraint firstItem="y6m-W0-5eC" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Nkt-nY-vCp"/>
-                <constraint firstAttribute="bottom" secondItem="y6m-W0-5eC" secondAttribute="bottom" id="Pde-vv-HF4"/>
-                <constraint firstItem="y6m-W0-5eC" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Tbh-IO-UdP"/>
+                <constraint firstItem="t2z-23-0dc" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="FVo-R1-x8v"/>
+                <constraint firstItem="t2z-23-0dc" firstAttribute="centerY" secondItem="ZTg-uK-7eu" secondAttribute="centerY" id="nj4-AH-JQG"/>
+                <constraint firstItem="t2z-23-0dc" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" id="tc7-Ay-pWB"/>
+                <constraint firstItem="t2z-23-0dc" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" id="wap-Sp-LDY"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="623" height="113"/>
             <connections>
                 <outlet property="commentView" destination="cOa-dg-k5p" id="ElP-Ef-hep"/>
+                <outlet property="content" destination="y6m-W0-5eC" id="GKq-hP-hke"/>
                 <outlet property="dateLabel" destination="8ea-oi-H5N" id="tYR-dT-JCA"/>
                 <outlet property="profilePic" destination="cdM-Hy-THp" id="U3A-qn-Que"/>
                 <outlet property="usernameLabel" destination="Y76-sS-SrT" id="Gmz-oT-64f"/>

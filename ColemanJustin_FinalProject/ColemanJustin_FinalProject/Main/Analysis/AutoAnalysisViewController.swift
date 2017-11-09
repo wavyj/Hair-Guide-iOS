@@ -71,6 +71,10 @@ class AutoAnalysisViewController: UIViewController, FusumaDelegate {
         // AppBar Setup
         let appBar = MDCAppBar()
         self.addChildViewController(appBar.headerViewController)
+        appBar.headerViewController.headerView.clipsToBounds = false
+        appBar.headerViewController.headerView.layer.shadowOffset = CGSize(width: 0, height: 1)
+        appBar.headerViewController.headerView.layer.shadowOpacity = 0.3
+        appBar.headerViewController.headerView.layer.shadowRadius = 3
         appBar.headerViewController.headerView.backgroundColor = UIColor.white
         appBar.navigationBar.tintColor = MDCPalette.blueGrey.tint900
         title = "Hair Analysis"

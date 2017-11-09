@@ -14,6 +14,7 @@ class ProductLinkViewController: UIViewController, WKNavigationDelegate {
     
     //MARK: - Outlets
     @IBOutlet weak var webView: WKWebView!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     //MARK: - Variables
     var currentProduct: Product?
@@ -47,10 +48,12 @@ class ProductLinkViewController: UIViewController, WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         print("Started Loading")
+        spinner.startAnimating()
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         print("Finished Loading")
+        spinner.stopAnimating()
     }
     
     //MARK: - Methods
@@ -59,7 +62,11 @@ class ProductLinkViewController: UIViewController, WKNavigationDelegate {
         // AppBar Setup
         let appBar = MDCAppBar()
         self.addChildViewController(appBar.headerViewController)
-        appBar.headerViewController.headerView.backgroundColor = MDCPalette.grey.tint100
+        appBar.headerViewController.headerView.clipsToBounds = false
+        appBar.headerViewController.headerView.layer.shadowOffset = CGSize(width: 0, height: 1)
+        appBar.headerViewController.headerView.layer.shadowOpacity = 0.3
+        appBar.headerViewController.headerView.layer.shadowRadius = 3
+        appBar.headerViewController.headerView.backgroundColor = UIColor.white
         appBar.navigationBar.tintColor = MDCPalette.blueGrey.tint900
         title = "Viewing on Walmart"
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "back-arrow"), style: .plain, target: self, action: #selector(backTapped(_:)))

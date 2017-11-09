@@ -88,7 +88,7 @@ class PostDetailsViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: commentsView.bounds.width, height: commentsView.bounds.height * 0.3)
+        return CGSize(width: commentsView.bounds.width * 0.9, height: commentsView.bounds.height * 0.2)
     }
     
     //MARK: - Methods
@@ -115,6 +115,10 @@ class PostDetailsViewController: UIViewController, UICollectionViewDelegate, UIC
         let appBar = MDCAppBar()
         self.addChildViewController(appBar.headerViewController)
         appBar.headerViewController.headerView.backgroundColor = UIColor.white
+        appBar.headerViewController.headerView.clipsToBounds = false
+        appBar.headerViewController.headerView.layer.shadowOffset = CGSize(width: 0, height: 1)
+        appBar.headerViewController.headerView.layer.shadowOpacity = 0.3
+        appBar.headerViewController.headerView.layer.shadowRadius = 3
         appBar.navigationBar.tintColor = MDCPalette.blueGrey.tint900
         //title = "Feed"
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "back-arrow"), style: .plain, target: self, action: #selector(backTapped(_:)))

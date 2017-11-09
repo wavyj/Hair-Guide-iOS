@@ -65,6 +65,16 @@ class FollowingViewController: UIViewController, UICollectionViewDelegate, UICol
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "user", for: indexPath) as! UserCell
         let current = users[indexPath.row]
         
+        //Shadow
+        cell.clipsToBounds = false
+        cell.layer.shadowOffset = CGSize(width: 0, height: 0)
+        cell.layer.shadowOpacity = 0.2
+        cell.layer.shadowRadius = 3
+        
+        //Corner Radius
+        cell.view.layer.masksToBounds = true
+        cell.view.layer.cornerRadius = 1.5
+        
         cell.profilePic.pin_updateWithProgress = true
         cell.profilePic.pin_setImage(from: URL(string: current.profilePicUrl))
         cell.usernameLabel.text = current.username.lowercased()
@@ -85,6 +95,10 @@ class FollowingViewController: UIViewController, UICollectionViewDelegate, UICol
         let appBar = MDCAppBar()
         title = "Following"
         self.addChildViewController(appBar.headerViewController)
+        appBar.headerViewController.headerView.clipsToBounds = false
+        appBar.headerViewController.headerView.layer.shadowOffset = CGSize(width: 0, height: 1)
+        appBar.headerViewController.headerView.layer.shadowOpacity = 0.3
+        appBar.headerViewController.headerView.layer.shadowRadius = 3
         appBar.headerViewController.headerView.backgroundColor = UIColor.white
         appBar.navigationBar.tintColor = MDCPalette.blueGrey.tint900
         appBar.addSubviewsToParent()

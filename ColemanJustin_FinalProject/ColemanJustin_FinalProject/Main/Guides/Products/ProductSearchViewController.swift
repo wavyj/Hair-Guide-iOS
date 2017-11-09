@@ -16,6 +16,7 @@ class ProductSearchViewController: UIViewController, UICollectionViewDelegate, U
     @IBOutlet weak var productsCollectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var overlay: UIView!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     //MARK: - Variables
     let walmartapi = "https://api.walmartlabs.com/v1/search?query="
@@ -44,27 +45,49 @@ class ProductSearchViewController: UIViewController, UICollectionViewDelegate, U
     
     @IBAction func addProduct(_ sender: UIStoryboardSegue){
         overlay.isHidden = true
+        updateProductsList()
+    }
+    
+    @IBAction func removeProduct(_ sender: UIStoryboardSegue){
+        overlay.isHidden = true
+        products.append(selectedProduct!)
         productsCollectionView.reloadData()
+    }
+    
+    func backTapped(_ sender: UIBarButtonItem){
+        performSegue(withIdentifier: "toProductAdd", sender: self)
     }
     
     //MARK: - SearchBar Delegate Callbacks
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         self.view.endEditing(true)
         getProducts(searchBar.text!)
+        spinner.startAnimating()
     }
     
     //MARK: - CollectionView Callbacks
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        return 2
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return products.count
+        switch section {
+        case 0:
+            return selectedProducts.count
+        default:
+            return products.count
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "productCell", for: indexPath) as! ProductCell
-        let selected = products[indexPath.row]
+        var selected: Product!
+        if indexPath.section == 0{
+            selected = selectedProducts[indexPath.row]
+        } else{
+            selected = products[indexPath.row]
+        }
         cell.productName.text = selected.name
         cell.productPrice.text = selected.getPrice
         cell.productImage.pin_setImage(from: URL(string: selected.imageUrl))
@@ -77,9 +100,28 @@ class ProductSearchViewController: UIViewController, UICollectionViewDelegate, U
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedProduct = products[indexPath.row]
+        if indexPath.section == 0{
+            selectedProduct = selectedProducts[indexPath.row]
+        } else{
+            selectedProduct = products[indexPath.row]
+        }
+        print(selectedProduct?.name)
         overlay.isHidden = false
         performSegue(withIdentifier: "toProductDetail", sender: self)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if indexPath.section == 0{
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "headerView", for: indexPath) as! HeaderView
+            header.titleLabel.text = "Selected"
+            return header
+        }else {
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "headerView", for: indexPath) as! HeaderView
+            header.titleLabel.text = "Results"
+            return header
+        }
+        
+        return UICollectionReusableView()
     }
     
     //MARK: - Methods
@@ -90,18 +132,33 @@ class ProductSearchViewController: UIViewController, UICollectionViewDelegate, U
         
         // AppBar Setup
         let appBar = MDCAppBar()
-        self.addChildViewController(appBar.headerViewController)
+        self.addChildViewController((appBar.headerViewController))
+        appBar.headerViewController.headerView.clipsToBounds = false
+        appBar.headerViewController.headerView.layer.shadowOffset = CGSize(width: 0, height: 1)
+        appBar.headerViewController.headerView.layer.shadowOpacity = 0.3
+        appBar.headerViewController.headerView.layer.shadowRadius = 3
         appBar.headerViewController.headerView.backgroundColor = UIColor.white
         appBar.navigationBar.tintColor = MDCPalette.blueGrey.tint900
-        title = "Products"
+        title = "Product Search"
+        
+        let backAction = UIBarButtonItem(image: UIImage(named: "back-arrow"), style: .plain, target: self, action: #selector(backTapped(_:)))
+        backAction.title = ""
+        navigationItem.leftBarButtonItem = backAction
         appBar.addSubviewsToParent()
+        
     }
     
     func getProducts(_ query: String){
-        let request = walmartapi + query + walmartkey
+        // Remove spaces from query
+        let q = query.replacingOccurrences(of: " ", with: "%20")
+        print(q)
+        let request = walmartapi + q + walmartkey
         let url = URL(string: request)
         if url == nil{
             print(url)
+            DispatchQueue.main.async {
+                self.spinner.stopAnimating()
+            }
             let alert = UIAlertController(title: "Uh Oh", message: "There was a problem getting the product results. Try again shortly.", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
             alert.addAction(okAction)
@@ -111,6 +168,7 @@ class ProductSearchViewController: UIViewController, UICollectionViewDelegate, U
         Alamofire.request(url!).responseJSON { (results) in
             if let json = results.result.value{
                 if results.error != nil{
+                    
                     print(results.error?.localizedDescription)
                     let alert = UIAlertController(title: "Uh Oh", message: "There was a problem getting the product results. Try again shortly.", preferredStyle: .alert)
                     let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
@@ -140,18 +198,29 @@ class ProductSearchViewController: UIViewController, UICollectionViewDelegate, U
                             if let salePrice = i["salePrice"] as? Double{
                                 price = salePrice
                             }
-                            var rating = ""
+                            var ratingUrl = ""
                             if let ratingImg = i["customerRatingImage"] as? String{
-                                rating = ratingImg
+                                ratingUrl = ratingImg
+                            }
+                            var rating = 0.00
+                            if let ratingNum = i["customerRating"] as? Double{
+                                rating = ratingNum
                             }
                             
-                            let newProduct = Product(name: name, price: price, imageUrl: imageUrl, productUrl: productUrl, description: fullDescrip, shortDescription: shortDescrip, rating: rating)
+                            let newProduct = Product(name: name, price: price, imageUrl: imageUrl, productUrl: productUrl, description: fullDescrip, shortDescription: shortDescrip, ratingUrl: ratingUrl, rating: rating)
                             self.products.append(newProduct)
                             DispatchQueue.main.async {
                                 self.productsCollectionView.reloadData()
                             }
                         }
+                        
+                        DispatchQueue.main.async {
+                            self.spinner.stopAnimating()
+                        }
                     }else{
+                        DispatchQueue.main.async {
+                            self.spinner.stopAnimating()
+                        }
                         let alert = UIAlertController(title: "Uh Oh", message: "There was a problem getting the product results. Try again shortly.", preferredStyle: .alert)
                         let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
                         alert.addAction(okAction)
@@ -161,6 +230,15 @@ class ProductSearchViewController: UIViewController, UICollectionViewDelegate, U
                 }
             }
         }
+    }
+    
+    func updateProductsList(){
+        for i in products{
+            if selectedProducts.contains(i){
+                products.remove(at: products.index(of: i)!)
+            }
+        }
+        productsCollectionView.reloadData()
     }
 
     
@@ -174,6 +252,10 @@ class ProductSearchViewController: UIViewController, UICollectionViewDelegate, U
         if let vc = segue.destination as? ProductDetailViewController{
             vc.currentProduct = selectedProduct
             vc.selectedProducts = selectedProducts
+        }
+        
+        if let vc = segue.destination as? NewGuideViewController{
+            vc.products = selectedProducts
         }
     }
  

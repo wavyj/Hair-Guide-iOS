@@ -58,7 +58,7 @@ class NavigationController: UINavigationController, UINavigationControllerDelega
         }
         
         resetTints()
-        items[1].tintColor = onColor
+        items[2].tintColor = onColor
         resetColor()
         
         // Check if VC exists, need for when home has been tapped and navigation stack is cleared
@@ -124,6 +124,17 @@ class NavigationController: UINavigationController, UINavigationControllerDelega
         controllers.append(vc!)
         self.pushViewController(vc!, animated: false)
     }
+    
+    func createTapped(_ sender: UIBarButtonItem){
+        
+        let vc = storyboard?.instantiateViewController(withIdentifier: "newGuide")
+        self.pushViewController(vc!, animated: true)
+    }
+    
+    func notificationsTapped(_ sender: UIBarButtonItem){
+        
+    }
+    
     func profileTapped(_ sender: UIBarButtonItem){
         if self.visibleViewController as? ProfileViewController != nil{
             return
@@ -182,17 +193,27 @@ class NavigationController: UINavigationController, UINavigationControllerDelega
         searchAction.tintColor = offColor
         searchAction.width = toolbar.bounds.width / 4
         
-        let guidesAction = UIBarButtonItem(title: "", style: .plain, target: self, action: #selector(guidesTapped(_:)))
+        /*let guidesAction = UIBarButtonItem(title: "", style: .plain, target: self, action: #selector(guidesTapped(_:)))
         guidesAction.image = UIImage(named: "guides-light")?.withRenderingMode(.alwaysTemplate)
         guidesAction.tintColor = offColor
-        guidesAction.width = toolbar.bounds.width / 4
+        guidesAction.width = toolbar.bounds.width / 4*/
+        
+        let addAction = UIBarButtonItem(title: "", style: .plain, target: self, action: #selector(createTapped(_:)))
+        addAction.image = UIImage(named: "create")?.withRenderingMode(.alwaysTemplate)
+        addAction.tintColor = offColor
+        addAction.width = toolbar.bounds.width / 4
+        
+        /*let notificationsAction = UIBarButtonItem(title: "", style: .plain, target: self, action: #selector(notificationsTapped(_:)))
+        notificationsAction.image = UIImage(named: "heart")?.withRenderingMode(.alwaysTemplate)
+        notificationsAction.tintColor = offColor
+        notificationsAction.width = toolbar.bounds.width / 5*/
         
         let profileAction = UIBarButtonItem(title: "", style: .plain, target: self, action: #selector(profileTapped(_:)))
         profileAction.image = UIImage(named: "person-light")?.withRenderingMode(.alwaysTemplate)
         profileAction.tintColor = offColor
         profileAction.width = toolbar.bounds.width / 4
         
-        items = [homeAction, searchAction, guidesAction, profileAction]
+        items = [homeAction, addAction, searchAction, profileAction]
         buttonBar.items = items
         
     }

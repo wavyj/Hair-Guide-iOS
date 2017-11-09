@@ -161,6 +161,16 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UICollectionV
             cell.profilePic.pin_setImage(from: URL(string: current.profilePicUrl))
             cell.usernameLabel.text = current.username.lowercased()
             
+            //Shadow
+            cell.clipsToBounds = false
+            cell.layer.shadowOffset = CGSize(width: 0, height: 0)
+            cell.layer.shadowOpacity = 0.2
+            cell.layer.shadowRadius = 3
+            
+            //Corner Radius
+            cell.view.layer.masksToBounds = true
+            cell.view.layer.cornerRadius = 1.5
+            
             if current.reference == UserDefaultsUtil().loadReference(){
                 cell.followBtn.isHidden = true
                 cell.followBtn.isEnabled = false
@@ -240,6 +250,10 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UICollectionV
         let appBar = MDCAppBar()
         self.addChildViewController(appBar.headerViewController)
         appBar.headerViewController.headerView.backgroundColor = UIColor.white
+        appBar.headerViewController.headerView.clipsToBounds = false
+        appBar.headerViewController.headerView.layer.shadowOffset = CGSize(width: 0, height: 1)
+        appBar.headerViewController.headerView.layer.shadowOpacity = 0.3
+        appBar.headerViewController.headerView.layer.shadowRadius = 3
         appBar.navigationBar.tintColor = MDCPalette.blueGrey.tint900
         title = "Search"
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "tag"), style: .plain, target: self, action: #selector(tagTapped(_:)))

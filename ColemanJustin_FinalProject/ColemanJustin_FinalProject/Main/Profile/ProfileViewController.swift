@@ -213,9 +213,14 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         
         // ButtonBar
         buttonBar.backgroundColor = UIColor.white
+        buttonBar.clipsToBounds = false
+        buttonBar.layer.shadowOffset = CGSize(width: 0, height: 0)
+        buttonBar.layer.shadowOpacity = 0.3
+        buttonBar.layer.shadowRadius = 3
         let postsAction = UIBarButtonItem(image: UIImage(named: "posts")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(postsTapped(_:)))
         postsAction.width = view.bounds.width / 3
         postsAction.tintColor = onColor
+        postsAction.title = "1"
         let guidesAction = UIBarButtonItem(image: UIImage(named: "guides-light")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(guidesTapped(_:)))
         guidesAction.width = view.bounds.width / 3
         guidesAction.tintColor = offColor

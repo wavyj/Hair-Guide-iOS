@@ -63,6 +63,7 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="264" height="259"/>
             <connections>
+                <outlet property="bottomConstraint" destination="xKr-Vr-GhX" id="b19-LA-LfR"/>
                 <outlet property="content" destination="oj9-rZ-lrt" id="qJa-1o-8YH"/>
                 <outlet property="productImage" destination="1cB-TG-QCg" id="cPh-mB-HG4"/>
                 <outlet property="productName" destination="SX1-G5-OTy" id="tTj-CF-ddO"/>

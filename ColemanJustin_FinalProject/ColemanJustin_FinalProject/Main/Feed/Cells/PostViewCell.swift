@@ -34,7 +34,7 @@ class PostViewCell: UICollectionViewCell {
         shareBtn.image = UIImage(named: "share")?.withRenderingMode(.alwaysTemplate)
         
         for i in [likeBtn, commentBtn, shareBtn]{
-            i?.tintColor = MDCPalette.blue.tint500
+            i?.tintColor = UIColor.black
         }
         
         // Shadow

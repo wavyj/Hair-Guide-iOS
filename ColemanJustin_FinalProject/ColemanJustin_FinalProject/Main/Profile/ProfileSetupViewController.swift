@@ -92,6 +92,10 @@ class ProfileSetupViewController: UIViewController, FusumaDelegate, UITextFieldD
         let appBar = MDCAppBar()
         self.addChildViewController(appBar.headerViewController)
         appBar.headerViewController.headerView.backgroundColor = UIColor.white
+        appBar.headerViewController.headerView.clipsToBounds = false
+        appBar.headerViewController.headerView.layer.shadowOffset = CGSize(width: 0, height: 1)
+        appBar.headerViewController.headerView.layer.shadowOpacity = 0.3
+        appBar.headerViewController.headerView.layer.shadowRadius = 3
         appBar.navigationBar.tintColor = MDCPalette.blueGrey.tint900
         title = "Profile Setup"
         let doneAction = UIBarButtonItem(image: UIImage(named: "done")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(doneTapped(_:)))
