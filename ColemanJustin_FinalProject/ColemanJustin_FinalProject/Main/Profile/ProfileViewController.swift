@@ -14,7 +14,6 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     //MARK: - Outlets
     @IBOutlet weak var profileImage: UIImageView!
-    @IBOutlet weak var bannerImage: UIImageView!
     @IBOutlet weak var postsLabel: UILabel!
     @IBOutlet weak var guidesLabel: UILabel!
     @IBOutlet weak var followingLabel: UILabel!
@@ -24,14 +23,12 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     @IBOutlet weak var postsView: UIView!
     @IBOutlet weak var guidesView: UIView!
     @IBOutlet weak var usernameLabel: UILabel!
-    @IBOutlet weak var editProfileBtn: MDCRaisedButton!
     @IBOutlet weak var bioText: UITextView!
-    @IBOutlet weak var reAnalyzeBtn: MDCRaisedButton!
     @IBOutlet weak var buttonBar: MDCButtonBar!
     @IBOutlet weak var imageBorder: UIView!
     @IBOutlet weak var postsCollectionView: UICollectionView!
     @IBOutlet weak var guidesCollectionView: UICollectionView!
-    @IBOutlet weak var signoutBtn: MDCFlatButton!
+    @IBOutlet weak var settingsBtn: MDCFlatButton!
     
     //MARK: - Variables
     var currentUser: User? = nil
@@ -55,6 +52,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         update()
         loadProfile()
         updateMode()
+        loadGuides()
         
         followersView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showFollowers(_:))))
         followingView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showFollowing(_:))))
@@ -63,10 +61,6 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle{
-        return .lightContent
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -78,18 +72,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     //MARK: - Storyboard Actions
-    func settingsTapped(_ sender: UIBarButtonItem){
-        let alert = UIAlertController(title: "Signing Out?", message: "Are you sure you want to go? All local data will be removed and you will need to sign in again to continue use.", preferredStyle: .alert)
-        let yesAction = UIAlertAction(title: "Yes", style: .default) { (action) in
-            UserDefaultsUtil().signOut()
-            //TODO: Segue to authentication
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "Authentication")
-            self.present(vc!, animated: true, completion: nil)
-        }
-        let noAction = UIAlertAction(title: "No", style: .cancel, handler: nil)
-        alert.addAction(yesAction)
-        alert.addAction(noAction)
-        present(alert, animated: true, completion: nil)
+    func settingsTapped(_ sender: MDCFlatButton){
+        performSegue(withIdentifier: "toSettings", sender: self)
     }
     
     func editTapped(_ sender: MDCRaisedButton){
@@ -197,19 +181,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         guidesCollectionView?.register(nib, forCellWithReuseIdentifier: "guideCell")
         
         // Buttons
-        editProfileBtn.setBackgroundColor(MDCPalette.blue.tint500, for: .normal)
-        editProfileBtn.setTitle("Edit Profile", for: .normal)
-        editProfileBtn.tintColor = UIColor.white
-        editProfileBtn.addTarget(self, action: #selector(editTapped(_:)), for: .touchUpInside)
-        reAnalyzeBtn.setBackgroundColor(MDCPalette.blue.tint500, for: .normal)
-        reAnalyzeBtn.setTitle(nil, for: .normal)
-        reAnalyzeBtn.setImage(UIImage(named: "refresh")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        reAnalyzeBtn.tintColor = UIColor.white
-        signoutBtn.setImage(UIImage(named: "signout")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        signoutBtn.tintColor = UIColor.white
-        signoutBtn.addTarget(self, action: #selector(settingsTapped(_:)), for: .touchUpInside)
-        let color = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
-        signoutBtn.setBackgroundColor(color, for: .normal)
+        settingsBtn.addTarget(self, action: #selector(settingsTapped(_:)), for: .touchUpInside)
         
         // ButtonBar
         buttonBar.backgroundColor = UIColor.white
@@ -218,22 +190,17 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         buttonBar.layer.shadowOpacity = 0.3
         buttonBar.layer.shadowRadius = 3
         let postsAction = UIBarButtonItem(image: UIImage(named: "posts")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(postsTapped(_:)))
-        postsAction.width = view.bounds.width / 3
+        postsAction.width = view.bounds.width / 2
         postsAction.tintColor = onColor
-        postsAction.title = "1"
         let guidesAction = UIBarButtonItem(image: UIImage(named: "guides-light")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(guidesTapped(_:)))
-        guidesAction.width = view.bounds.width / 3
+        guidesAction.width = view.bounds.width / 2
         guidesAction.tintColor = offColor
-        let bookmarkAction = UIBarButtonItem(image: UIImage(named: "bookmark"), style: .plain, target: self, action: #selector(bookmarksTapped(_:)))
-        bookmarkAction.width = view.bounds.width / 3
-        bookmarkAction.tintColor = offColor
-        items = [postsAction, guidesAction, bookmarkAction]
+//        let bookmarkAction = UIBarButtonItem(image: UIImage(named: "bookmark"), style: .plain, target: self, action: #selector(bookmarksTapped(_:)))
+//        bookmarkAction.width = view.bounds.width / 3
+//        bookmarkAction.tintColor = offColor
+        items = [postsAction, guidesAction]
         buttonBar.items = items
         
-        // Navigation Item
-        let settingsAction = UIBarButtonItem(image: UIImage(named: "signout")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(settingsTapped(_:)))
-        settingsAction.tintColor = UIColor.white
-        navigationItem.rightBarButtonItem = settingsAction
     }
     
     func updateMode(){
@@ -253,12 +220,16 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
             posts.removeAll()
             loadPosts()
             items[0].tintColor = onColor
+            postsView.alpha = 1
+            guidesView.alpha = 0.4
         case 2:
             guidesCollectionView.isHidden = false
             guidesCollectionView.isUserInteractionEnabled = true
             guides.removeAll()
             loadGuides()
             items[1].tintColor = onColor
+            postsView.alpha = 0.4
+            guidesView.alpha = 1
         case 3:
             guidesCollectionView.isHidden = false
             guidesCollectionView.isUserInteractionEnabled = true
@@ -310,6 +281,10 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
             if error != nil{
                 print(error?.localizedDescription)
                 return
+            }
+            
+            DispatchQueue.main.async {
+                self.postsLabel.text = (snapshot?.documents.count)!.description
             }
             
             for i in (snapshot?.documents)!{
@@ -369,6 +344,11 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
             
             // Get Each Guide data
             self.guides.removeAll()
+            
+            DispatchQueue.main.async {
+                self.guidesLabel.text = (snapshot?.documents.count)!.description
+            }
+            
             for i in (snapshot?.documents)!{
                 let guideTitle = i.data()["title"] as! String
                 let guideText = i.data()["text"] as! String
@@ -419,6 +399,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     func update(){
         profileImage.pin_updateWithProgress = true
         profileImage.pin_setImage(from: URL(string: (currentUser?.profilePicUrl)!))
+        profileImage.layer.cornerRadius = profileImage.bounds.width / 2
         bioText.text = currentUser?.bio
         usernameLabel.text = currentUser?.username.lowercased()
         followersLabel.text = currentUser?.followerCount.description
