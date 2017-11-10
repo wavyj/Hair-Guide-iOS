@@ -37,6 +37,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UICollectionV
         self.navigationItem.setHidesBackButton(true, animated: false)
         
         setupMaterialComponents()
+        searchBar.showsCancelButton = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -116,6 +117,10 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UICollectionV
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         let query = searchBar.text
+        if (query?.isEmpty)!{
+            return
+        }
+        self.view.endEditing(true)
         switch currentMode {
         case 1:
             users.removeAll()
@@ -131,6 +136,10 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UICollectionV
         default:
             break
         }
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.view.endEditing(true)
     }
     
     //MARK: - CollectionView Callbacks

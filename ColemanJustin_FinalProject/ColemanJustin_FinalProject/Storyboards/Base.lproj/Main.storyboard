@@ -1105,25 +1105,25 @@
                                                 <rect key="frame" x="0.0" y="528.5" width="375" height="58.5"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5H5-1c-tvp" customClass="MDCTextField">
-                                                        <rect key="frame" x="8" y="14.5" width="300" height="30"/>
+                                                        <rect key="frame" x="8" y="14.5" width="262.5" height="30"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RtY-7i-sk7">
-                                                        <rect key="frame" x="316" y="15" width="51" height="30"/>
+                                                        <rect key="frame" x="311" y="12.5" width="56" height="35.5"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </view>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstItem="5H5-1c-tvp" firstAttribute="width" secondItem="eud-dT-VHV" secondAttribute="width" multiplier="0.8" id="LeD-xw-Tqv"/>
+                                                    <constraint firstItem="RtY-7i-sk7" firstAttribute="centerY" secondItem="5H5-1c-tvp" secondAttribute="centerY" id="2YO-fn-LWg"/>
+                                                    <constraint firstAttribute="trailing" secondItem="RtY-7i-sk7" secondAttribute="trailing" constant="8" id="GZW-BD-VOV"/>
+                                                    <constraint firstItem="5H5-1c-tvp" firstAttribute="width" secondItem="eud-dT-VHV" secondAttribute="width" multiplier="0.7" id="LeD-xw-Tqv"/>
+                                                    <constraint firstItem="RtY-7i-sk7" firstAttribute="height" secondItem="eud-dT-VHV" secondAttribute="height" multiplier="0.6" id="Nnx-WP-7jx"/>
                                                     <constraint firstItem="5H5-1c-tvp" firstAttribute="centerY" secondItem="eud-dT-VHV" secondAttribute="centerY" id="WTk-au-Y4u"/>
-                                                    <constraint firstItem="RtY-7i-sk7" firstAttribute="height" secondItem="5H5-1c-tvp" secondAttribute="height" id="d4p-Np-jWU"/>
+                                                    <constraint firstItem="RtY-7i-sk7" firstAttribute="width" secondItem="eud-dT-VHV" secondAttribute="width" multiplier="0.15" id="gOl-DQ-55i"/>
                                                     <constraint firstItem="5H5-1c-tvp" firstAttribute="leading" secondItem="eud-dT-VHV" secondAttribute="leading" constant="8" id="kkP-ok-i1y"/>
-                                                    <constraint firstItem="RtY-7i-sk7" firstAttribute="leading" secondItem="5H5-1c-tvp" secondAttribute="trailing" constant="8" id="oam-Qj-4hx"/>
-                                                    <constraint firstAttribute="trailing" secondItem="RtY-7i-sk7" secondAttribute="trailing" constant="8" id="puO-bi-FWx"/>
-                                                    <constraint firstItem="RtY-7i-sk7" firstAttribute="centerY" secondItem="5H5-1c-tvp" secondAttribute="centerY" id="vzw-ri-cwf"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -2224,7 +2224,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7us-Nq-5h8">
-                                <rect key="frame" x="0.0" y="80" width="375" height="587"/>
+                                <rect key="frame" x="0.0" y="80" width="375" height="543"/>
                                 <color key="backgroundColor" red="0.93323183060000003" green="0.93339174989999996" blue="0.93322181699999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="1hi-qs-tNy">
                                     <size key="itemSize" width="250" height="75"/>
@@ -3044,7 +3044,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="v0x-GP-4oY"/>
-        <segue reference="DBz-V5-OKQ"/>
+        <segue reference="skr-a3-4nu"/>
         <segue reference="gGU-KH-rDv"/>
         <segue reference="JpE-jH-a0l"/>
         <segue reference="uPN-K4-pWf"/>
