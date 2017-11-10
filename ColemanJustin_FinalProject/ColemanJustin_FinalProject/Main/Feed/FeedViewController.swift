@@ -202,9 +202,11 @@ class FeedViewController: UIViewController, FusumaDelegate, UICollectionViewDele
             cell.imageView.pin_updateWithProgress = true
             cell.imageView.pin_setImage(from: URL(string: selected.mImageUrl)!)
             cell.profileImg.pin_updateWithProgress = true
-            let url = URL(string: (selected.mUser?.profilePicUrl)!)
-            if url != nil{
-                cell.profileImg.pin_setImage(from: url)
+            if selected.mUser?.profilePicUrl != nil{
+                let url = URL(string: (selected.mUser?.profilePicUrl)!)
+                if url != nil{
+                    cell.profileImg.pin_setImage(from: url)
+                }
             }
             cell.authorText.text = selected.mUser?.username.lowercased()
             cell.captionText.text = selected.mCaption

@@ -9,6 +9,7 @@
 import UIKit
 import MaterialComponents
 import Firebase
+import PINRemoteImage
 
 class PostDetailsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate {
     
