@@ -72,7 +72,7 @@ class PostDetailsViewController: UIViewController, UICollectionViewDelegate, UIC
         
         var info = sender.userInfo!
         var keyboardSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
-        scrollView.contentInset = UIEdgeInsetsMake(0.0, 0.0, (keyboardSize?.height)!, 0.0)
+        scrollView.contentInset = UIEdgeInsetsMake(0.0, 0.0, (keyboardSize?.height)! - commentEntryView.bounds.height, 0.0)
     }
     
     func keyboardHidden(_ sender: Notification){
