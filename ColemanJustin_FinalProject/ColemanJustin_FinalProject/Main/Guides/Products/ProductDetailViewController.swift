@@ -31,6 +31,7 @@ class ProductDetailViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(closeTapped(_:))))
         setupButtons()
         update()
         

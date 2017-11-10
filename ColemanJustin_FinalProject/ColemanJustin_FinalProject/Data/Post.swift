@@ -15,13 +15,14 @@ class Post{
     let mCaption: String?
     var mImage: UIImage? = nil
     var mImageAlt: UIImage? = nil
-    let mLikes: Int?
-    let mComments: Int?
+    var mLikes = 0
+    var mComments = 0
     let mDate: Date?
     var mImageUrl: String = ""
     var mTags: [String]?
     var mReference: DocumentReference? = nil
     var mUser: User? = nil
+    var iLiked = false
     
     init(caption: String, image: UIImage, likes: Int, comments: Int){
         mCaption = caption

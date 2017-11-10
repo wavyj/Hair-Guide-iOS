@@ -15,7 +15,6 @@ class ProductSearchViewController: UIViewController, UICollectionViewDelegate, U
     //MARK: - Outlets
     @IBOutlet weak var productsCollectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var overlay: UIView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     //MARK: - Variables
@@ -40,16 +39,16 @@ class ProductSearchViewController: UIViewController, UICollectionViewDelegate, U
     
     //MARK: - Storyboard Actions
     @IBAction func closeModal(_ sender: UIStoryboardSegue){
-        overlay.isHidden = true
+        
     }
     
     @IBAction func addProduct(_ sender: UIStoryboardSegue){
-        overlay.isHidden = true
+        
         updateProductsList()
     }
     
     @IBAction func removeProduct(_ sender: UIStoryboardSegue){
-        overlay.isHidden = true
+        
         products.append(selectedProduct!)
         productsCollectionView.reloadData()
     }
@@ -105,8 +104,6 @@ class ProductSearchViewController: UIViewController, UICollectionViewDelegate, U
         } else{
             selectedProduct = products[indexPath.row]
         }
-        print(selectedProduct?.name)
-        overlay.isHidden = false
         performSegue(withIdentifier: "toProductDetail", sender: self)
     }
     

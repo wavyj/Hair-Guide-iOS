@@ -201,7 +201,7 @@ class DatabaseUtil{
     
     func createPost(_ newPost: Post){
         db?.collection("posts").addDocument(data: ["user": UserDefaultsUtil().loadReference()
-            ,"caption" : newPost.mCaption!, "likes": newPost.mLikes!, "comments": newPost.mComments!, "imageUrl": newPost.mImageUrl, "date": newPost.mDate, "tags": newPost.mTags])
+            ,"caption" : newPost.mCaption!, "likes": newPost.mLikes, "comments": newPost.mComments, "imageUrl": newPost.mImageUrl, "date": newPost.mDate, "tags": newPost.mTags])
     }
     
     func createGuide(_ newGuide: Guide){
@@ -298,5 +298,38 @@ class DatabaseUtil{
         })
         
         comment.ref = (reference?.documentID)!
+    }
+    
+    func updatePost(_ postRef: String, _ post: Post){
+        db?.collection("posts").document(postRef).setData(["user": post.mUser?.reference
+            ,"caption" : post.mCaption!, "likes": post.mLikes, "comments": post.mComments, "imageUrl": post.mImageUrl, "date": post.mDate, "tags": post.mTags])
+    }
+    
+    func likePost(_ post: Post){
+        db?.collection("users").document(UserDefaultsUtil().loadReference()).collection("likes").addDocument(data: ["post" : post.mReference?.documentID])
+    }
+    
+    func unLikePost(_ post: Post){
+    
+        db?.collection("users").document(UserDefaultsUtil().loadReference()).collection("likes").getDocuments(completion: { (snapshot, error) in
+            if error != nil{
+                print(error?.localizedDescription)
+                return
+            }
+            
+            for i in (snapshot?.documents)!{
+                let data = i.data()
+                let postRef = data["post"] as! String
+                if postRef == post.mReference?.documentID{
+                    self.db?.collection("users").document(UserDefaultsUtil().loadReference()).collection("likes").document(postRef).delete(completion: { (error) in
+                        if error != nil{
+                            print(error?.localizedDescription)
+                            
+                        }
+                    })
+                }
+            }
+        })
+        
     }
 }

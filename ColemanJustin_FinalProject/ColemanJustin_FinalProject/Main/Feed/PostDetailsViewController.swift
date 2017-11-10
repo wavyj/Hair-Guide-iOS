@@ -10,22 +10,22 @@ import UIKit
 import MaterialComponents
 import Firebase
 
-class PostDetailsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class PostDetailsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate {
     
     //MARK: - Outlets
     @IBOutlet weak var postImage: UIImageView!
     @IBOutlet weak var commentsView: UICollectionView!
     @IBOutlet weak var captionText: UITextView!
-    @IBOutlet weak var likeBtn: UIImageView!
-    @IBOutlet weak var commentBtn: UIImageView!
-    @IBOutlet weak var shareBtn: UIImageView!
     @IBOutlet weak var commentInput: MDCTextField!
     @IBOutlet weak var enterBtnContainer: UIView!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var commentEntryView: UIView!
     
     //MARK: - Variables
     var currentPost: Post? = nil
     var comments = [Comment]()
     var textController: MDCTextInputController?
+    var originFrame: CGRect?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +34,7 @@ class PostDetailsViewController: UIViewController, UICollectionViewDelegate, UIC
         getComments()
         update()
         setupMaterialComponents()
+        registerKeyboardNotifications()
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,25 +47,44 @@ class PostDetailsViewController: UIViewController, UICollectionViewDelegate, UIC
         performSegue(withIdentifier: "unwindDetails", sender: self)
     }
     
-    func likeTapped(_ sender: UIBarButtonItem){
-        
-    }
-    
-    func commentTapped(_ sender: UIBarButtonItem){
-        
-    }
-    
-    func shareTapped(_ sender: UIBarButtonItem){
-        
-    }
-    
     func enterTapped(_ sender: MDCFlatButton){
         if !(commentInput?.text?.isEmpty)!{
             let newComment = Comment(text: (commentInput?.text)!, date: Date(), ref: "", user: UserDefaultsUtil().loadReference())
             newComment.mUser = UserDefaultsUtil().loadUserData()
             comments.append(newComment); DatabaseUtil().addComment((currentPost?.mReference?.documentID)!, newComment, commentsView)
+            currentPost?.mComments += 1
             //commentsView.reloadData()
         }
+    }
+    
+    //MARK: - Keyboard Callbacks
+    func registerKeyboardNotifications(){
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardShown(_:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardHidden(_:)), name: Notification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    func deregisterKeyboardNotifications(){
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    func keyboardShown(_ sender: Notification){
+        
+        var info = sender.userInfo!
+        var keyboardSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
+        scrollView.contentInset = UIEdgeInsetsMake(0.0, 0.0, (keyboardSize?.height)!, 0.0)
+    }
+    
+    func keyboardHidden(_ sender: Notification){
+        var info = sender.userInfo!
+        var keyboardSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
+        scrollView.contentInset = UIEdgeInsetsMake(0.0, 0.0, -(keyboardSize?.height)!, 0.0)
+    }
+    
+    //MARK: - TextField Callbacks
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
     
     //MARK: - CollectionView Callback
@@ -98,8 +118,14 @@ class PostDetailsViewController: UIViewController, UICollectionViewDelegate, UIC
         
         // TextField
         commentInput?.placeholder = "Add a comment..."
+        commentInput.delegate = self
         textController = MDCTextInputControllerDefault(textInput: commentInput)
         textController?.activeColor = MDCPalette.blue.tint500
+        
+        commentEntryView.clipsToBounds = false
+        commentEntryView.layer.shadowOffset = CGSize(width: 0, height: -1)
+        commentEntryView.layer.shadowOpacity = 0.2
+        commentEntryView.layer.shadowRadius = 3
         
         // Button
         let enterBtn = MDCFlatButton()

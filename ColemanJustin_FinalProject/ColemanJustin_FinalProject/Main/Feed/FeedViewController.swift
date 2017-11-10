@@ -58,11 +58,25 @@ class FeedViewController: UIViewController, FusumaDelegate, UICollectionViewDele
     }
     
     //MARK: - Storyboard Actions
-    func cameraTapped(_ sender: UIBarButtonItem){
+    func cameraTapped(){
+        if currentMode != 0{
+            currentMode = 0
+            updateSelectionBorder(currentMode)
+            updateMode()
+        }
         addedPost = nil
         let fusama = FusumaViewController()
         fusama.delegate = self
         present(fusama, animated: true, completion: nil)
+    }
+    
+    func toNewGuide(){
+        if currentMode != 1{
+            currentMode = 1
+            updateSelectionBorder(currentMode)
+            updateMode()
+        }
+        performSegue(withIdentifier: "toNewGuide", sender: self)
     }
     
     @IBAction func unwind(_ sender: UIStoryboardSegue){
@@ -83,6 +97,7 @@ class FeedViewController: UIViewController, FusumaDelegate, UICollectionViewDele
         loadGuides()
     }
     
+    
     func postsTapped(_ sender: UIBarButtonItem){
         if currentMode != 0{
             currentMode = 0
@@ -99,8 +114,62 @@ class FeedViewController: UIViewController, FusumaDelegate, UICollectionViewDele
         }
     }
     
+    func createTapped(_ sender: UIBarButtonItem){
+        performSegue(withIdentifier: "toCreate", sender: self)
+    }
+    
     func guidesEditTapped(_ sender: UIBarButtonItem){
         
+    }
+    
+    func likePost(_ sender: UITapGestureRecognizer){
+        print("Liked")
+        let s = sender.view as! UIImageView
+        let post = posts[s.tag]
+        post.mLikes += 1
+        post.iLiked = true
+        
+        for i in (s.gestureRecognizers)!{
+            s.removeGestureRecognizer(i)
+        }
+        
+        // Update Count
+        DatabaseUtil().updatePost((post.mReference?.documentID)!, post)
+        
+        // Update user likes list
+        DatabaseUtil().likePost(post)
+        
+        postsCollectionView.reloadData()
+    }
+    
+    func unLikePost(_ sender: UITapGestureRecognizer){
+        print("Unliked")
+        let s = sender.view as! UIImageView
+        let post = posts[s.tag]
+        if post.mLikes > 0{
+            post.mLikes -= 1
+        }else{
+            post.mLikes = 0
+        }
+        post.iLiked = false
+        
+        for i in (s.gestureRecognizers)!{
+            s.removeGestureRecognizer(i)
+        }
+        
+        // Update Count
+        DatabaseUtil().updatePost((post.mReference?.documentID)!, post)
+        
+        // Update user likes list
+        DatabaseUtil().unLikePost(post)
+        
+        postsCollectionView.reloadData()
+    }
+    
+    func commentTapped(_ sender: UITapGestureRecognizer){
+        let s = sender.view as! UIImageView
+        selectedPost = posts[s.tag]
+        performSegue(withIdentifier: "toSelectedPost", sender: self)
     }
     
     //MARK: - Collection View
@@ -129,13 +198,31 @@ class FeedViewController: UIViewController, FusumaDelegate, UICollectionViewDele
         case 0:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "postCell", for: indexPath) as! PostViewCell
             let selected = posts[indexPath.row]
+    
             cell.imageView.pin_updateWithProgress = true
             cell.imageView.pin_setImage(from: URL(string: selected.mImageUrl)!)
             cell.profileImg.pin_updateWithProgress = true
-            cell.profileImg.pin_setImage(from: URL(string: (selected.mUser?.profilePicUrl)!))
+            let url = URL(string: (selected.mUser?.profilePicUrl)!)!
+            cell.profileImg.pin_setImage(from: url)
             cell.authorText.text = selected.mUser?.username.lowercased()
             cell.captionText.text = selected.mCaption
             cell.timeLabel.text = selected.dateString
+            cell.likesLabel.text = selected.mLikes.description
+            cell.commentLabel.text = selected.mComments.description
+            cell.commentBtn.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(commentTapped(_:))))
+            cell.commentBtn.tag = indexPath.row
+            
+            if selected.iLiked{
+                cell.likeBtn.image = UIImage(named: "heart")?.withRenderingMode(.alwaysTemplate)
+                cell.likeBtn.tintColor = MDCPalette.red.tint500
+                cell.likeBtn.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(unLikePost(_:))))
+                cell.likeBtn.tag = indexPath.row
+            }else{
+                cell.likeBtn.image = UIImage(named: "like")?.withRenderingMode(.alwaysTemplate)
+                cell.likeBtn.tintColor = UIColor(white: 0, alpha: 0.5)
+                cell.likeBtn.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(likePost(_:))))
+                cell.likeBtn.tag = indexPath.row
+            }
             return cell
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "guideCell", for: indexPath) as! GuideCell
@@ -160,12 +247,8 @@ class FeedViewController: UIViewController, FusumaDelegate, UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch collectionView.tag {
-        case 0:
-            let cell = collectionView.cellForItem(at: indexPath) as! PostViewCell
+        case 0: break
             
-            selectedPost = posts[indexPath.row]
-            
-            performSegue(withIdentifier: "toSelectedPost", sender: self)
         case 1:
             selectedGuide = guides[indexPath.item]
             performSegue(withIdentifier: "toSelectedGuide", sender: self)
@@ -219,18 +302,23 @@ class FeedViewController: UIViewController, FusumaDelegate, UICollectionViewDele
         
         //Button Bar
         let postsAction = UIBarButtonItem(title: "Posts", style: .plain, target: self, action: #selector(postsTapped(_:)))
-        postsAction.width = view.bounds.width / 2
+        postsAction.width = view.bounds.width / 3
        
         let guidesAction = UIBarButtonItem(title: "Guides", style: .plain, target: self, action: #selector(guidesTapped(_:)))
-        guidesAction.width = view.bounds.width / 2
+        guidesAction.width = view.bounds.width / 3
+        
+        let addAction = UIBarButtonItem(image: UIImage(named: "create")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(createTapped(_:)))
+        addAction.width = view.bounds.width / 3
+        addAction.title = ""
+        addAction.tintColor = UIColor(white: 0, alpha: 0.4)
     
-        items = [postsAction, guidesAction]
+        items = [postsAction, guidesAction, addAction]
         buttonBar.items = items
         buttonBar.tintColor = UIColor.black
         
         // Shadow
         buttonBar.clipsToBounds = false
-        buttonBar.layer.shadowOffset = CGSize(width: 0, height: 0)
+        buttonBar.layer.shadowOffset = CGSize(width: 0, height: 1)
         buttonBar.layer.shadowOpacity = 0.3
         buttonBar.layer.shadowRadius = 3
         
@@ -268,14 +356,14 @@ class FeedViewController: UIViewController, FusumaDelegate, UICollectionViewDele
                 //self.borderTrailing.isActive = false
                 //self.borderLeading.isActive = true
                 
-                self.selectionBorder.frame = CGRect(x: 0.0, y: self.buttonBar.bounds.height - (self.buttonBar.bounds.height * 0.1), width: self.view.bounds.width / 2, height: self.buttonBar.bounds.height * 0.1)
+                self.selectionBorder.frame = CGRect(x: 0.0, y: self.buttonBar.bounds.height - (self.buttonBar.bounds.height * 0.1), width: self.view.bounds.width / 3, height: self.buttonBar.bounds.height * 0.1)
             })
         }else{
             UIView.animate(withDuration: 0.4, animations: {
                 //self.borderLeading.isActive = false
                 //self.borderTrailing.isActive = true
             
-                self.selectionBorder.frame = CGRect(x: self.view.bounds.width / 2, y: self.buttonBar.bounds.height - (self.buttonBar.bounds.height * 0.1), width: self.view.bounds.width / 2, height: self.buttonBar.bounds.height * 0.1)
+                self.selectionBorder.frame = CGRect(x: self.view.bounds.width / 3, y: self.buttonBar.bounds.height - (self.buttonBar.bounds.height * 0.1), width: self.view.bounds.width / 3, height: self.buttonBar.bounds.height * 0.1)
             })
         }
         
@@ -309,12 +397,49 @@ class FeedViewController: UIViewController, FusumaDelegate, UICollectionViewDele
                 let userRef = data["user"] as! String
                 let post = Post(caption: postCaption, likes: postLikes, comments: postComments, date: postDate, imageUrl: pic, tags: postTags)
                 post.mReference = i.reference
-                self.loadUser(userRef, post)
+                self.checkLiked(post, userRef)
+                self.countComments(post)
                 self.posts += [post]
             }
             
         }
         
+    }
+    
+    func countComments(_ post: Post){
+        let db = Firestore.firestore()
+        db.collection("posts").document((post.mReference?.documentID)!).collection("comments").getDocuments { (snapshot, error) in
+            if error != nil{
+                print(error?.localizedDescription)
+                return
+            }
+            
+            if snapshot?.documents == nil{
+                return
+            }
+            
+            post.mComments = (snapshot?.documents.count)!
+        }
+    }
+    
+    func checkLiked(_ post: Post, _ user: String){
+        let db = Firestore.firestore()
+        db.collection("users").document(UserDefaultsUtil().loadReference()).collection("likes").whereField("post", isEqualTo: post.mReference?.documentID).getDocuments { (snapshot, error) in
+            if error != nil{
+                print(error?.localizedDescription)
+                return
+            }
+            
+            if snapshot?.documents == nil{
+                return
+            }
+            
+            if (snapshot?.documents.count)! > 0{
+                post.iLiked = true
+            }
+            
+            self.loadUser(user, post)
+        }
     }
     
     func loadUser(_ ref: String, _ post: Post){
@@ -390,7 +515,6 @@ class FeedViewController: UIViewController, FusumaDelegate, UICollectionViewDele
                 guide.mAuthor = user
                 self.guides.append(guide)
             }
-            print(self.guides)
             self.guidesCollectionView.reloadData()
             
             DispatchQueue.main.async {
@@ -421,6 +545,10 @@ class FeedViewController: UIViewController, FusumaDelegate, UICollectionViewDele
         
         if let vc = segue.destination as? SelectedGuideViewController{
             vc.selectedGuide = selectedGuide
+        }
+        
+        if let vc = segue.destination as? CreateViewController{
+            vc.parentVC = self
         }
         
         // Pass the selected object to the new view controller.
