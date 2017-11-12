@@ -12,7 +12,7 @@ import WordPressEditor
 import Firebase
 import PINRemoteImage
 
-class SelectedGuideViewController: /*WPEditorViewController, WPEditorViewDelegate, WPEditorViewControllerDelegate*/ UIViewController {
+class SelectedGuideViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     //MARK: - Outlets
     //@IBOutlet weak var editor: UIView!
@@ -22,6 +22,8 @@ class SelectedGuideViewController: /*WPEditorViewController, WPEditorViewDelegat
     @IBOutlet weak var titleToImageConstraint: NSLayoutConstraint!
     @IBOutlet weak var titleToTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var content: UIView!
+    @IBOutlet weak var productsCollectionView: UICollectionView!
+    @IBOutlet weak var scrollview: UIScrollView!
     
     //MARK: - Variables
     var selectedGuide: Guide? = nil
@@ -35,14 +37,6 @@ class SelectedGuideViewController: /*WPEditorViewController, WPEditorViewDelegat
         // Do any additional setup after loading the view.
         
         setupMaterialComponents()
-        
-        /*editorView.delegate = self
-        editor.addSubview(self.editorView)
-        
-        titleText = selectedGuide?.mTitle
-        bodyText = selectedGuide?.mContent
-        
-        self.stopEditing()*/
         
         titleView.text = selectedGuide?.mTitle
         contentView.text = selectedGuide?.mText
@@ -58,8 +52,8 @@ class SelectedGuideViewController: /*WPEditorViewController, WPEditorViewDelegat
         imageHeightOrig = self.view.bounds.height * 0.2
         
         if selectedGuide?.mImageUrl == ""{
-           //titleView.removeConstraint(titleToImageConstraint)
-            //titleView.addConstraint(titleToTopConstraint)
+            guideImage.removeFromSuperview()
+           scrollview.contentInset = UIEdgeInsetsMake(guideImage.bounds.height, 0, 0, 0)
         }else{
             
         }
@@ -75,11 +69,40 @@ class SelectedGuideViewController: /*WPEditorViewController, WPEditorViewDelegat
         checkOnTapped(selectedGuide!)
     }
     
+    //MARK: - CollectionView Callbacks
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return (selectedGuide?.mProducts.count)!
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "productCell", for: indexPath) as! ProductGridCell
+        let selected = selectedGuide?.mProducts[indexPath.row]
+        cell.priceLabel.text = selected?.getPrice
+        cell.productImage.pin_setImage(from: URL(string: (selected?.imageUrl)!))
+        cell.productImage.pin_updateWithProgress = true
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.bounds.width * 0.25, height: collectionView.bounds.height * 0.9)
+    }
+    
     //MARK: - Methods
     func setupMaterialComponents(){
         
         // Display bookmark
         checkBookmark(selectedGuide!)
+        
+        let nib = UINib(nibName: "ProductGridCell", bundle: nil)
+        productsCollectionView?.register(nib, forCellWithReuseIdentifier: "productCell")
         
         // AppBar Setup
         appBar = MDCAppBar()

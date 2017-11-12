@@ -83,7 +83,7 @@ class NewGuideViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     //MARK: - Methods
     func setupMaterialComponents(){
-        let nib = UINib(nibName: "ProductCell", bundle: nil)
+        let nib = UINib(nibName: "ProductGridCell", bundle: nil)
         productsCollectionView?.register(nib, forCellWithReuseIdentifier: "productCell")
         
         // TextField
@@ -134,16 +134,11 @@ class NewGuideViewController: UIViewController, UICollectionViewDelegate, UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "productCell", for: indexPath) as! ProductCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "productCell", for: indexPath) as! ProductGridCell
         let selected = products[indexPath.row]
-        cell.productName.text = selected.name
-        cell.productPrice.text = selected.getPrice
-        cell.productName.isHidden = true
+        cell.priceLabel.text = selected.getPrice
         cell.productImage.pin_setImage(from: URL(string: selected.imageUrl))
         cell.productImage.pin_updateWithProgress = true
-        cell.productImage.contentMode = .scaleAspectFill
-        cell.productImage.removeConstraint(cell.bottomConstraint)
-        cell.productImage.frame = cell.bounds
         return cell
     }
     

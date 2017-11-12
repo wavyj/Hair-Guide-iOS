@@ -10,21 +10,28 @@ import UIKit
 import MaterialComponents
 import Firebase
 
-class SelectedProfileViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class SelectedProfileViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate {
     
     //MARK: - Outlets
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var followingLabel: UILabel!
     @IBOutlet weak var followersLabel: UILabel!
+    @IBOutlet weak var followingView: UIView!
+    @IBOutlet weak var follwersView: UIView!
     @IBOutlet weak var followBtn: MDCRaisedButton!
-    @IBOutlet weak var bioView: UIView!
     @IBOutlet weak var bioText: UITextView!
+    @IBOutlet weak var postsView: UIView!
+    @IBOutlet weak var guidesView: UIView!
+    @IBOutlet weak var postsLabel: UILabel!
+    @IBOutlet weak var guidesLabel: UILabel!
     @IBOutlet weak var buttonBar: MDCButtonBar!
-    @IBOutlet weak var imageContainer: UIView!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var border: UIView!
     @IBOutlet weak var postsCollectionView: UICollectionView!
     @IBOutlet weak var guidesCollectionView: UICollectionView!
     
     //MARK: - Variables
+    var headerVC: MDCFlexibleHeaderViewController?
     var selectedUser: User? = nil
     var posts = [Post]()
     var guides = [Guide]()
@@ -38,10 +45,12 @@ class SelectedProfileViewController: UIViewController, UICollectionViewDelegate,
 
         // Do any additional setup after loading the view.
         
-        imageContainer.layer.cornerRadius = imageContainer.frame.width / 2
+        profileImage.layer.cornerRadius = profileImage.bounds.width / 2
         setupMaterialComponents()
         update()
         updateMode()
+        loadGuides()
+        
         followersLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showFollowers(_:))))
         followingLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showFollowing(_:))))
     }
@@ -66,7 +75,7 @@ class SelectedProfileViewController: UIViewController, UICollectionViewDelegate,
         sender.setBackgroundColor(UIColor.white, for: .normal)
         sender.setTitle("Following", for: .normal)
         sender.setTitleColor(UIColor.black, for: .normal)
-        //DatabaseUtil().followUser(selectedUser!)
+        DatabaseUtil().followUser(selectedUser!)
     }
     
     func unfollowTapped(_ sender: MDCRaisedButton){
@@ -75,7 +84,7 @@ class SelectedProfileViewController: UIViewController, UICollectionViewDelegate,
         sender.setBackgroundColor(MDCPalette.blue.tint500, for: .normal)
         sender.setTitle("Follow", for: .normal)
         sender.setTitleColor(UIColor.white, for: .normal)
-        //DatabaseUtil().unfollowUser(selectedUser!)
+        DatabaseUtil().unfollowUser(selectedUser!)
     }
     
     func postsTapped(_ sender: UIBarButtonItem){
@@ -97,7 +106,7 @@ class SelectedProfileViewController: UIViewController, UICollectionViewDelegate,
     }
     
     func showFollowing(_ sender: UILabel){
-        //performSegue(withIdentifier: "toFollowing", sender: self)
+        performSegue(withIdentifier: "toFollowing", sender: self)
     }
     
     //MARK: - CollectionView Callbacks
@@ -157,13 +166,34 @@ class SelectedProfileViewController: UIViewController, UICollectionViewDelegate,
         }
     }
     
+    //MARK: - Scrollview Callbacks
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        headerVC?.headerView.trackingScrollDidScroll()
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        headerVC?.headerView.trackingScrollDidEndDecelerating()
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        headerVC?.headerView.trackingScrollDidEndDraggingWillDecelerate(decelerate)
+    }
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        headerVC?.headerView.trackingScrollWillEndDragging(withVelocity: velocity, targetContentOffset: targetContentOffset)
+    }
+    
     //MARK: - Methods
     func setupMaterialComponents(){
         let nib = UINib(nibName: "GuideCell", bundle: nil)
         guidesCollectionView?.register(nib, forCellWithReuseIdentifier: "guideCell")
         
         // ButtonBar
-        buttonBar.backgroundColor = MDCPalette.grey.tint50
+        buttonBar.backgroundColor = UIColor.white
+        buttonBar.clipsToBounds = false
+        buttonBar.layer.shadowOffset = CGSize(width: 0, height: 0)
+        buttonBar.layer.shadowOpacity = 0.3
+        buttonBar.layer.shadowRadius = 3
         let postsAction = UIBarButtonItem(image: UIImage(named: "posts")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(postsTapped(_:)))
         postsAction.width = view.bounds.width / 2
         postsAction.tintColor = onColor
@@ -176,7 +206,11 @@ class SelectedProfileViewController: UIViewController, UICollectionViewDelegate,
         // AppBar Setup
         let appBar = MDCAppBar()
         self.addChildViewController(appBar.headerViewController)
+        appBar.headerViewController.headerView.trackingScrollView = scrollView
+        scrollView.delegate = appBar.headerViewController
         appBar.headerViewController.headerView.backgroundColor = UIColor.white
+        headerVC = appBar.headerViewController
+        headerVC?.headerView.shiftBehavior = .enabledWithStatusBar
         appBar.navigationBar.tintColor = MDCPalette.blueGrey.tint900
         title = selectedUser?.username.lowercased()
         appBar.addSubviewsToParent()
@@ -187,6 +221,10 @@ class SelectedProfileViewController: UIViewController, UICollectionViewDelegate,
         profileImage.pin_setImage(from: URL(string: (selectedUser?.profilePicUrl)!))
         followersLabel.text = selectedUser?.followerCount.description
         followingLabel.text = selectedUser?.followingCount.description
+        bioText.text = selectedUser?.bio
+        followersLabel.text = selectedUser?.followerCount.description
+        followingLabel.text = selectedUser?.followingCount.description
+        title = selectedUser?.username
         
         if !(selectedUser?.iFollow)!{
             followBtn.addTarget(self, action: #selector(followTapped(_:)), for: .touchUpInside)
@@ -218,12 +256,16 @@ class SelectedProfileViewController: UIViewController, UICollectionViewDelegate,
             posts.removeAll()
             loadPosts()
             items[0].tintColor = onColor
+            postsView.alpha = 1
+            guidesView.alpha = 0.4
         case 2:
             guidesCollectionView.isHidden = false
             guidesCollectionView.isUserInteractionEnabled = true
             guides.removeAll()
             loadGuides()
             items[1].tintColor = onColor
+            postsView.alpha = 0.4
+            guidesView.alpha = 1
         default:
             break
         }
@@ -236,10 +278,14 @@ class SelectedProfileViewController: UIViewController, UICollectionViewDelegate,
         
         // Get Post data
         let db = Firestore.firestore()
-        db.collection("posts").whereField("user", isEqualTo: UserDefaultsUtil().loadReference()).getDocuments { (snapshot, error) in
+        db.collection("posts").whereField("user", isEqualTo: selectedUser?.reference).getDocuments { (snapshot, error) in
             if error != nil{
                 print(error?.localizedDescription)
                 return
+            }
+            
+            DispatchQueue.main.async {
+                self.postsLabel.text = (snapshot?.documents.count)!.description
             }
             
             for i in (snapshot?.documents)!{
@@ -284,17 +330,23 @@ class SelectedProfileViewController: UIViewController, UICollectionViewDelegate,
             user.followerCount = userFollowers
             user.followingCount = userFollowing
             post.mUser = user
-            self.postsCollectionView.reloadData()
+            DispatchQueue.main.async {
+                self.postsCollectionView.reloadData()
+            }
         }
     }
     
     func loadGuides(){
         let db = Firestore.firestore()
-        db.collection("guides").getDocuments { (snapshot, error) in
+        db.collection("guides").whereField("user", isEqualTo: selectedUser?.reference).getDocuments { (snapshot, error) in
             if error != nil{
                 // Error
                 print(error?.localizedDescription)
                 return
+            }
+            
+            DispatchQueue.main.async {
+                self.guidesLabel.text = (snapshot?.documents.count)!.description
             }
             
             // Get Each Guide data

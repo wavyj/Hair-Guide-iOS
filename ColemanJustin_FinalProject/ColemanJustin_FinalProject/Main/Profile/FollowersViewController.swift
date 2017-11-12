@@ -18,6 +18,7 @@ class FollowersViewController: UIViewController, UICollectionViewDelegate, UICol
     //MARK: - Varibles
     var users = [User]()
     var currentUser: User?
+    var selectedUser: User?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,6 +69,7 @@ class FollowersViewController: UIViewController, UICollectionViewDelegate, UICol
         
         cell.profilePic.pin_updateWithProgress = true
         cell.profilePic.pin_setImage(from: URL(string: current.profilePicUrl))
+        cell.profilePic.layer.cornerRadius = cell.profilePic.bounds.width / 2
         cell.usernameLabel.text = current.username.lowercased()
         
         //Shadow
@@ -98,6 +100,11 @@ class FollowersViewController: UIViewController, UICollectionViewDelegate, UICol
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.bounds.width - 16, height: 75)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedUser = users[indexPath.row]
+        performSegue(withIdentifier: "toSelectedUser", sender: self)
     }
     
     //MARK: - Methods

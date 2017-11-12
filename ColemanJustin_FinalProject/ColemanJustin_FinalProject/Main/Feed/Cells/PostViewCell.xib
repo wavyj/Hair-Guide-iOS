@@ -32,7 +32,7 @@
                                         <rect key="frame" x="46" y="443.5" width="30" height="30"/>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Curlygurl11" textAlignment="natural" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MTh-hq-zWm">
-                                        <rect key="frame" x="57" y="16.5" width="206.5" height="20.5"/>
+                                        <rect key="frame" x="52" y="16.5" width="206.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -48,8 +48,8 @@
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Wtu-f6-J2l">
                                         <rect key="frame" x="0.0" y="53" width="516" height="548"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="U62-78-wTc">
-                                        <rect key="frame" x="8" y="8" width="41" height="37"/>
+                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="U62-78-wTc">
+                                        <rect key="frame" x="8" y="8" width="36" height="37"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15 M" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Se-FO-kFS">
                                         <rect key="frame" x="468.5" y="18" width="31.5" height="17"/>
@@ -113,7 +113,7 @@
                                     <constraint firstAttribute="trailing" secondItem="6hh-Yg-owY" secondAttribute="trailing" constant="8" id="el1-DS-hg4"/>
                                     <constraint firstItem="fHe-ea-JzG" firstAttribute="centerY" secondItem="aB1-aN-8Gy" secondAttribute="centerY" id="epD-W7-TOh"/>
                                     <constraint firstAttribute="bottom" secondItem="Da1-ee-jCx" secondAttribute="bottom" constant="5" id="f5u-g9-Ioy"/>
-                                    <constraint firstItem="U62-78-wTc" firstAttribute="width" secondItem="SF1-4x-QWO" secondAttribute="width" multiplier="0.08" id="f6g-jA-V2n"/>
+                                    <constraint firstItem="U62-78-wTc" firstAttribute="width" secondItem="SF1-4x-QWO" secondAttribute="width" multiplier="0.07" id="f6g-jA-V2n"/>
                                     <constraint firstItem="MTh-hq-zWm" firstAttribute="centerY" secondItem="U62-78-wTc" secondAttribute="centerY" id="j4h-AV-oOf"/>
                                     <constraint firstItem="aB1-aN-8Gy" firstAttribute="leading" secondItem="SF1-4x-QWO" secondAttribute="leading" constant="8" id="l9E-wB-EK5"/>
                                     <constraint firstItem="Da1-ee-jCx" firstAttribute="leading" secondItem="SF1-4x-QWO" secondAttribute="leading" id="mzd-ty-5bo"/>

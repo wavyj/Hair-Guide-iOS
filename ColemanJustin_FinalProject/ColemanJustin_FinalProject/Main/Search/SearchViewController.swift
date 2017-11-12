@@ -165,9 +165,15 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UICollectionV
         case 1:
             let cell = usersCollection.dequeueReusableCell(withReuseIdentifier: "user", for: indexPath) as! UserCell
             let current = users[indexPath.row]
+            if current.profilePicUrl != nil{
+                let url = URL(string: current.profilePicUrl)
+                if url != nil{
+                    cell.profilePic.pin_setImage(from: url)
+                }
+            }
             
+            cell.profilePic.layer.cornerRadius = cell.profilePic.bounds.width / 2
             cell.profilePic.pin_updateWithProgress = true
-            cell.profilePic.pin_setImage(from: URL(string: current.profilePicUrl))
             cell.usernameLabel.text = current.username.lowercased()
             
             //Shadow
@@ -259,10 +265,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UICollectionV
         let appBar = MDCAppBar()
         self.addChildViewController(appBar.headerViewController)
         appBar.headerViewController.headerView.backgroundColor = UIColor.white
-        appBar.headerViewController.headerView.clipsToBounds = false
-        appBar.headerViewController.headerView.layer.shadowOffset = CGSize(width: 0, height: 1)
-        appBar.headerViewController.headerView.layer.shadowOpacity = 0.3
-        appBar.headerViewController.headerView.layer.shadowRadius = 3
         appBar.navigationBar.tintColor = MDCPalette.blueGrey.tint900
         title = "Search"
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "tag"), style: .plain, target: self, action: #selector(tagTapped(_:)))
@@ -364,6 +366,7 @@ extension SearchViewController{
                     self.usersCollection.reloadData()
                 })
             }
+            print(self.users.count)
             self.loadComplete()
         }
     }

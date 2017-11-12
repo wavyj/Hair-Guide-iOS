@@ -20,6 +20,7 @@ class FeedViewController: UIViewController, FusumaDelegate, UICollectionViewDele
     @IBOutlet weak var buttonBar: MDCButtonBar!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var selectionBorder: UIView!
+    @IBOutlet weak var userGuidesCollectionView: UICollectionView!
     
     //MARK: - Variables
     var posts = [Post]()
@@ -172,6 +173,12 @@ class FeedViewController: UIViewController, FusumaDelegate, UICollectionViewDele
         performSegue(withIdentifier: "toSelectedPost", sender: self)
     }
     
+    func profileTapped(_ sender: UITapGestureRecognizer){
+        let s = sender.view as! UIImageView
+        selectedPost = posts[s.tag]
+        performSegue(withIdentifier: "toSelectedUser", sender: self)
+    }
+    
     //MARK: - Collection View
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         switch collectionView.tag {
@@ -188,6 +195,8 @@ class FeedViewController: UIViewController, FusumaDelegate, UICollectionViewDele
             return posts.count
         case 1:
             return guides.count
+        case 2:
+            return userGuides.count
         default:
             return 0
         }
@@ -208,6 +217,9 @@ class FeedViewController: UIViewController, FusumaDelegate, UICollectionViewDele
                     cell.profileImg.pin_setImage(from: url)
                 }
             }
+            cell.profileImg.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(profileTapped(_:))))
+                cell.profileImg.tag = indexPath.row
+            cell.profileImg.layer.cornerRadius = cell.profileImg.bounds.width / 2
             cell.authorText.text = selected.mUser?.username.lowercased()
             cell.captionText.text = selected.mCaption
             cell.timeLabel.text = selected.dateString
@@ -243,6 +255,21 @@ class FeedViewController: UIViewController, FusumaDelegate, UICollectionViewDele
                 cell.editBtn.isEnabled = false
             }
             return cell
+        case 2:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "guideCell", for: indexPath) as! GuideCell
+            let current = userGuides[indexPath.row]
+            cell.guideTitle.text = current.mTitle
+            cell.viewLabel.text = current.mViews.description
+            if current.mAuthor == UserDefaultsUtil().loadReference(){
+                cell.editBtn.tag = indexPath.row
+                cell.editBtn.addTarget(self, action: #selector(guidesEditTapped(_:)), for: .touchUpInside)
+                cell.editBtn.isEnabled = true
+                cell.editBtn.isHidden = false
+            }else{
+                cell.editBtn.isHidden = true
+                cell.editBtn.isEnabled = false
+            }
+            return cell
         default:
             return UICollectionViewCell()
         }
@@ -256,6 +283,9 @@ class FeedViewController: UIViewController, FusumaDelegate, UICollectionViewDele
         case 1:
             selectedGuide = guides[indexPath.item]
             performSegue(withIdentifier: "toSelectedGuide", sender: self)
+        case 2:
+            selectedGuide = userGuides[indexPath.item]
+            performSegue(withIdentifier: "toSelectedGuide", sender: self)
         default:
             break
         }
@@ -266,7 +296,9 @@ class FeedViewController: UIViewController, FusumaDelegate, UICollectionViewDele
         case 0:
             return CGSize(width: collectionView.bounds.width * 0.9, height: collectionView.bounds.height * 0.75)
         case 1:
-            return CGSize(width: 256, height: 335)
+            return CGSize(width: collectionView.bounds.width * 0.9, height: collectionView.bounds.height * 0.3)
+        case 2:
+            return CGSize(width: collectionView.bounds.width * 0.5, height: collectionView.bounds.height * 0.9)
         default:
             return CGSize()
         }
@@ -300,6 +332,8 @@ class FeedViewController: UIViewController, FusumaDelegate, UICollectionViewDele
         let guideNib = UINib(nibName: "GuideCell", bundle: nil)
         guidesCollectionView?.register(guideNib, forCellWithReuseIdentifier: "guideCell")
         
+        userGuidesCollectionView.register(guideNib, forCellWithReuseIdentifier: "guideCell")
+        
         appBarHeight = self.view.bounds.height * 0.1
         
         selectionBorder.backgroundColor = MDCPalette.blue.tint500
@@ -329,7 +363,7 @@ class FeedViewController: UIViewController, FusumaDelegate, UICollectionViewDele
     }
     
     func updateMode(){
-        for i in [postsCollectionView, guidesCollectionView]{
+        for i in [postsCollectionView, guidesCollectionView, userGuidesCollectionView]{
             i?.isHidden = true
             i?.isUserInteractionEnabled = false
         }
@@ -344,14 +378,16 @@ class FeedViewController: UIViewController, FusumaDelegate, UICollectionViewDele
         case 1:
             guidesCollectionView.isHidden = false
             guidesCollectionView.isUserInteractionEnabled = true
+            userGuidesCollectionView.isHidden = false
+            userGuidesCollectionView.isUserInteractionEnabled = true
+            userGuides.removeAll()
             guides.removeAll()
             loadGuides()
             
         default:
             break
         }
-        //buttonBar.items?.removeAll()
-        //buttonBar.items = items
+        
     }
     
     func updateSelectionBorder(_ mode: Int){
@@ -507,6 +543,7 @@ class FeedViewController: UIViewController, FusumaDelegate, UICollectionViewDele
             }
             
             // Get Each Guide data
+            self.userGuides.removeAll()
             self.guides.removeAll()
             
             for i in (snapshot?.documents)!{
@@ -517,9 +554,48 @@ class FeedViewController: UIViewController, FusumaDelegate, UICollectionViewDele
                 let comment = i.data()["comments"] as! Int
                 let guide = Guide(title: guideTitle, text: guideText, viewCount: view, comments: comment, reference: i.reference.documentID)
                 guide.mAuthor = user
-                self.guides.append(guide)
+                if guide.mAuthor == UserDefaultsUtil().loadReference(){
+                    self.userGuides.append(guide)
+                }else{
+                    self.guides.append(guide)
+                }
+                self.loadProducts(i.documentID, guide)
             }
+            self.userGuidesCollectionView.reloadData()
             self.guidesCollectionView.reloadData()
+            
+            DispatchQueue.main.async {
+                self.spinner.stopAnimating()
+            }
+        }
+    }
+    
+    func loadProducts(_ ref: String, _ guide: Guide){
+        let db = Firestore.firestore()
+        db.collection("guides").document(ref).collection("products").getDocuments { (snapshot, error) in
+            if error != nil{
+                print(error?.localizedDescription)
+                return
+            }
+            
+            if snapshot?.documents == nil{
+                return
+            }
+            
+            for i in (snapshot?.documents)!{
+                let data = i.data()
+                let name = data["name"] as! String
+                let price = data["price"] as! Double
+                let productUrl = data["productUrl"] as! String
+                let imageUrl = data["image"] as! String
+                let ratingImg = data["ratingImg"] as! String
+                let rating = data["rating"] as! Double
+                let shortDescription = data["shortDescription"] as! String
+                let fullDescription = data["fullDescription"] as! String
+                let product = Product(name: name, price: price, imageUrl: imageUrl, productUrl: productUrl, description: fullDescription, shortDescription: shortDescription, ratingUrl: ratingImg, rating: rating)
+                guide.mProducts.append(product)
+                self.guidesCollectionView.reloadData()
+            }
             
             DispatchQueue.main.async {
                 self.spinner.stopAnimating()

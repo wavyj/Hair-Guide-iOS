@@ -20,6 +20,7 @@ class Guide{
     var mAuthor = ""
     var mBookmarks: Int = 0
     var mProducts = [Product]()
+    var mUser: User? = nil
     
     init(title: String, text: String, viewCount: Int, comments: Int, reference: String){
         mTitle = title

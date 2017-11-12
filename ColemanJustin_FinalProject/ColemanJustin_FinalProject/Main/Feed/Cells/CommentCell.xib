@@ -25,8 +25,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y6m-W0-5eC" userLabel="Content View">
                                 <rect key="frame" x="-0.5" y="-0.5" width="623" height="113"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cdM-Hy-THp">
-                                        <rect key="frame" x="8" y="26.5" width="62.5" height="61"/>
+                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cdM-Hy-THp">
+                                        <rect key="frame" x="8" y="8" width="62.5" height="56.5"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y76-sS-SrT">
                                         <rect key="frame" x="90.5" y="16" width="80.5" height="21"/>
@@ -49,7 +49,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="cdM-Hy-THp" firstAttribute="centerY" secondItem="y6m-W0-5eC" secondAttribute="centerY" id="8w8-Bn-Stb"/>
+                                    <constraint firstItem="cdM-Hy-THp" firstAttribute="top" secondItem="y6m-W0-5eC" secondAttribute="top" constant="8" id="8Yb-yc-Rc1"/>
                                     <constraint firstItem="cOa-dg-k5p" firstAttribute="leading" secondItem="cdM-Hy-THp" secondAttribute="trailing" constant="16" id="D1R-Zh-cL1"/>
                                     <constraint firstItem="cdM-Hy-THp" firstAttribute="width" secondItem="y6m-W0-5eC" secondAttribute="width" multiplier="0.1" id="Hgo-ZI-sMI"/>
                                     <constraint firstAttribute="trailing" secondItem="8ea-oi-H5N" secondAttribute="trailing" constant="8" id="Qqc-39-ZNk"/>
@@ -57,7 +57,7 @@
                                     <constraint firstItem="Y76-sS-SrT" firstAttribute="top" secondItem="y6m-W0-5eC" secondAttribute="top" constant="16" id="aFd-o1-YUO"/>
                                     <constraint firstItem="cOa-dg-k5p" firstAttribute="height" secondItem="y6m-W0-5eC" secondAttribute="height" multiplier="0.3" id="bpx-2m-VkG"/>
                                     <constraint firstItem="Y76-sS-SrT" firstAttribute="leading" secondItem="cdM-Hy-THp" secondAttribute="trailing" constant="20" id="e8h-Ap-uNo"/>
-                                    <constraint firstItem="cdM-Hy-THp" firstAttribute="height" secondItem="y6m-W0-5eC" secondAttribute="height" multiplier="0.54" id="pBX-Wc-6Ve"/>
+                                    <constraint firstItem="cdM-Hy-THp" firstAttribute="height" secondItem="y6m-W0-5eC" secondAttribute="height" multiplier="0.5" id="pBX-Wc-6Ve"/>
                                     <constraint firstAttribute="bottom" secondItem="8ea-oi-H5N" secondAttribute="bottom" constant="8" id="umg-i7-ATc"/>
                                     <constraint firstAttribute="trailing" secondItem="cOa-dg-k5p" secondAttribute="trailing" constant="8" id="wwn-5W-CAy"/>
                                     <constraint firstItem="cOa-dg-k5p" firstAttribute="top" secondItem="Y76-sS-SrT" secondAttribute="bottom" id="yCp-y4-Dco"/>

@@ -24,6 +24,7 @@ class PostDetailsViewController: UIViewController, UICollectionViewDelegate, UIC
     
     //MARK: - Variables
     var currentPost: Post? = nil
+    var selectedUser: User? = nil
     var comments = [Comment]()
     var textController: MDCTextInputController?
     var originFrame: CGRect?
@@ -56,6 +57,12 @@ class PostDetailsViewController: UIViewController, UICollectionViewDelegate, UIC
             currentPost?.mComments += 1
             //commentsView.reloadData()
         }
+    }
+    
+    func profileTapped(_ sender: UITapGestureRecognizer){
+        let s = sender.view as! UIImageView
+        selectedUser = comments[s.tag].mUser
+        performSegue(withIdentifier: "toSelectedUser", sender: self)
     }
     
     //MARK: - Keyboard Callbacks
@@ -100,7 +107,15 @@ class PostDetailsViewController: UIViewController, UICollectionViewDelegate, UIC
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "commentCell", for: indexPath) as! CommentCell
         let current = comments[indexPath.row]
-        cell.profilePic.pin_setImage(from: URL(string: (current.mUser?.profilePicUrl)!))
+        if current.mUser?.profilePicUrl != nil{
+            let url = URL(string: (current.mUser?.profilePicUrl)!)
+            if url != nil{
+                cell.profilePic.pin_setImage(from: url)
+            }
+        }
+        cell.profilePic.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(profileTapped(_:))))
+        cell.profilePic.tag = indexPath.row
+        cell.profilePic.layer.cornerRadius = cell.profilePic.bounds.width / 2
         cell.profilePic.pin_updateWithProgress = true
         cell.usernameLabel.text = current.mUser?.username.lowercased()
         cell.commentView.text = current.text
@@ -109,7 +124,7 @@ class PostDetailsViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: commentsView.bounds.width * 0.9, height: commentsView.bounds.height * 0.2)
+        return CGSize(width: commentsView.bounds.width * 0.9, height: commentsView.bounds.height * 0.18)
     }
     
     //MARK: - Methods
