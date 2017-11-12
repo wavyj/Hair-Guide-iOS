@@ -8,10 +8,10 @@
 
 import UIKit
 import MaterialComponents
-import Fusuma
 import Firebase
+import ImagePicker
 
-class NewGuideViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, FusumaDelegate {
+class NewGuideViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ImagePickerDelegate {
     
     //MARK: - Outlets
     //@IBOutlet weak var editor: UIView!
@@ -72,9 +72,17 @@ class NewGuideViewController: UIViewController, UICollectionViewDelegate, UIColl
     }
     
     func imageTapped(_ sender: UIBarButtonItem){
-        let fusama = FusumaViewController()
-        fusama.delegate = self
-        present(fusama, animated: true, completion: nil)
+        var config = Configuration()
+        config.doneButtonTitle = "Done"
+        config.noImagesTitle = "Sorry! No images found"
+        config.recordLocation = false
+        config.allowMultiplePhotoSelection = false
+        config.allowVideoSelection = false
+        
+        let imagePicker = ImagePickerController(configuration: config)
+        imagePicker.imageLimit = 1
+        imagePicker.delegate = self
+        present(imagePicker, animated: true, completion: nil)
     }
     
     func productTapped(_ sender: MDCRaisedButton){
@@ -150,21 +158,17 @@ class NewGuideViewController: UIViewController, UICollectionViewDelegate, UIColl
         return CGSize(width: collectionView.bounds.width * 0.25, height: collectionView.bounds.height * 0.9)
     }
     
-    //MARK: - Fusama Callbacks
-    func fusumaImageSelected(_ image: UIImage, source: FusumaMode) {
-        selectedImage = image
-        guideImage.image = image
+    //MARK: - ImagePicker Delegate Callbacks
+    func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
+        selectedImage = images.first!
+        guideImage.image = images.first!
     }
     
-    func fusumaMultipleImageSelected(_ images: [UIImage], source: FusumaMode) {
-        
+    func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
+        imagePicker.dismiss(animated: true, completion: nil)
     }
     
-    func fusumaVideoCompleted(withFileURL fileURL: URL) {
-        
-    }
-    
-    func fusumaCameraRollUnauthorized() {
+    func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
         
     }
     

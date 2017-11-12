@@ -40,7 +40,7 @@ class NavigationController: UINavigationController, UINavigationControllerDelega
     
     
     //MARK: - Storyboard Actions
-    func homeTapped(_ sender: UIBarButtonItem){
+    @objc func homeTapped(_ sender: UIBarButtonItem){
         // Check if this is already the current view controller
         if self.visibleViewController as? FeedViewController != nil{
             return
@@ -52,7 +52,7 @@ class NavigationController: UINavigationController, UINavigationControllerDelega
 
         self.popToRootViewController(animated: false)
     }
-    func searchTapped(_ sender: UIBarButtonItem){
+    @objc func searchTapped(_ sender: UIBarButtonItem){
         if self.visibleViewController as? SearchViewController != nil{
             return
         }
@@ -64,7 +64,7 @@ class NavigationController: UINavigationController, UINavigationControllerDelega
         // Check if VC exists, need for when home has been tapped and navigation stack is cleared
         var containVC = false
         for i in self.viewControllers{
-            if let vc = i as? SearchViewController{
+            if i is SearchViewController{
                 containVC = true
             }
         }
@@ -129,7 +129,7 @@ class NavigationController: UINavigationController, UINavigationControllerDelega
         
     }
     
-    func profileTapped(_ sender: UIBarButtonItem){
+    @objc func profileTapped(_ sender: UIBarButtonItem){
         if self.visibleViewController as? ProfileViewController != nil{
             return
         }
@@ -141,7 +141,7 @@ class NavigationController: UINavigationController, UINavigationControllerDelega
         // Check if VC exists, need for when home has been tapped and navigation stack is cleared
         var containVC = false
         for i in self.viewControllers{
-            if let vc = i as? ProfileViewController{
+            if i is ProfileViewController{
                 containVC = true
             }
         }

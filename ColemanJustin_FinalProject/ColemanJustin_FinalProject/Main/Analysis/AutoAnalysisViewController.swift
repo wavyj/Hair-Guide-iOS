@@ -9,10 +9,10 @@
 import UIKit
 import MaterialComponents
 import VisualRecognitionV3
-import Fusuma
 import Firebase
+import ImagePicker
 
-class AutoAnalysisViewController: UIViewController, FusumaDelegate {
+class AutoAnalysisViewController: UIViewController, ImagePickerDelegate {
     
     //MARK: - Outlets
     @IBOutlet weak var selectedImage: UIImageView!
@@ -38,7 +38,7 @@ class AutoAnalysisViewController: UIViewController, FusumaDelegate {
 
         // Do any additional setup after loading the view.
         visualRecognition = VisualRecognition(apiKey: key, version: version)
-        //addPositives()
+        addPositives()
         setupMaterialComponents()
         //createClassifyer()
         selectedImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTapped(_:))))
@@ -49,10 +49,18 @@ class AutoAnalysisViewController: UIViewController, FusumaDelegate {
         // Dispose of any resources that can be recreated.
     }
     //MARK: - Storyboard Actions
-    func imageTapped(_ sender: UIImageView){
-        let fusama = FusumaViewController()
-        fusama.delegate = self
-        present(fusama, animated: true, completion: nil)
+    @objc func imageTapped(_ sender: UIImageView){
+        var config = Configuration()
+        config.doneButtonTitle = "Done"
+        config.noImagesTitle = "Sorry! No images found"
+        config.recordLocation = false
+        config.allowMultiplePhotoSelection = false
+        config.allowVideoSelection = false
+        
+        let imagePicker = ImagePickerController(configuration: config)
+        imagePicker.imageLimit = 1
+        //imagePicker.delegate = self
+        present(imagePicker, animated: true, completion: nil)
     }
     
     func continueTapped(_ sender: MDCRaisedButton){
@@ -143,28 +151,22 @@ class AutoAnalysisViewController: UIViewController, FusumaDelegate {
         positives = [oneA, twoA, twoB, twoC, threeA, threeB, threeC, fourA, fourB, fourC]
     }
     
-    //MARk: - Fusama Delegate Callbacks
-    func fusumaImageSelected(_ image: UIImage, source: FusumaMode) {
-        selectedImage.image = image
+     //MARK: - ImagePicker Delegate Callbacks
+    func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
+        selectedImage.image = images.first!
         self.view.isUserInteractionEnabled = false
         progressView.isHidden = false
         progressView.startAnimating()
-        saveImage(image)
+        saveImage(images.first!)
     }
-    
-    func fusumaMultipleImageSelected(_ images: [UIImage], source: FusumaMode) {
-        
-    }
-    
-    func fusumaVideoCompleted(withFileURL fileURL: URL) {
-        
-    }
-    
-    func fusumaCameraRollUnauthorized() {
-        
-    }
-    
-
+     
+     func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
+     imagePicker.dismiss(animated: true, completion: nil)
+     }
+     
+     func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
+     
+     }
     
     // MARK: - Navigation
 
@@ -218,4 +220,4 @@ extension AutoAnalysisViewController{
         })
         
     }
-}
+ }

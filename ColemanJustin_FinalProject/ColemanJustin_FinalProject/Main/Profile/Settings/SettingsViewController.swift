@@ -58,7 +58,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         case 1:
             break
         case 2:
-            break
+            performSegue(withIdentifier: "toConnectedAccounts", sender: self)
         case 3:
             break
         case 4:

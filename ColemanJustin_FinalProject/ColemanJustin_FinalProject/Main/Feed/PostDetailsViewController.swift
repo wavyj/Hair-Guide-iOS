@@ -45,7 +45,7 @@ class PostDetailsViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
     //MARK: - Storyboard Actions
-    func backTapped(_ sender: UIBarButtonItem){
+    @objc func backTapped(_ sender: UIBarButtonItem){
         performSegue(withIdentifier: "unwindDetails", sender: self)
     }
     
@@ -76,14 +76,14 @@ class PostDetailsViewController: UIViewController, UICollectionViewDelegate, UIC
         NotificationCenter.default.removeObserver(self, name: Notification.Name.UIKeyboardWillHide, object: nil)
     }
     
-    func keyboardShown(_ sender: Notification){
+    @objc func keyboardShown(_ sender: Notification){
         
         var info = sender.userInfo!
         var keyboardSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
         scrollView.contentInset = UIEdgeInsetsMake(0.0, 0.0, (keyboardSize?.height)! - commentEntryView.bounds.height, 0.0)
     }
     
-    func keyboardHidden(_ sender: Notification){
+    @objc func keyboardHidden(_ sender: Notification){
         var info = sender.userInfo!
         var keyboardSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
         scrollView.contentInset = UIEdgeInsetsMake(0.0, 0.0, -(keyboardSize?.height)!, 0.0)

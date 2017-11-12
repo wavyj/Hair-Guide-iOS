@@ -8,7 +8,6 @@
 
 import UIKit
 import MaterialComponents
-import Fusuma
 import FBSDKShareKit
 
 class NewPostViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITextFieldDelegate, FBSDKSharingDelegate {
@@ -43,11 +42,11 @@ class NewPostViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     //MARK: - Storyboard Actions
-    func backTapped(_ sender: UIBarButtonItem){
+    @objc func backTapped(_ sender: UIBarButtonItem){
         performSegue(withIdentifier: "unwindFeed", sender: self)
     }
     
-    func submitTapped(_ sender: UIButton){
+    @objc func submitTapped(_ sender: UIButton){
         // Create Post
         newPost = Post(caption: captionField!.text!, image: currentImage!, likes: 0, comments: 0)
         newPost?.mTags = tags
@@ -61,7 +60,7 @@ class NewPostViewController: UIViewController, UICollectionViewDelegate, UIColle
         tagsView.isUserInteractionEnabled = false
     }
     
-    func addTapped(_ sender: MDCRaisedButton){
+    @objc func addTapped(_ sender: MDCRaisedButton){
         performSegue(withIdentifier: "toAddTag", sender: self)
     }
     
@@ -73,7 +72,7 @@ class NewPostViewController: UIViewController, UICollectionViewDelegate, UIColle
         
     }
     
-    func tagTapped(_ sender: MDCRaisedButton){
+    @objc func tagTapped(_ sender: MDCRaisedButton){
         let alert = UIAlertController(title: "Remove \(tags[sender.tag])?", message: "", preferredStyle: .alert)
         let yesAction = UIAlertAction(title: "Yes", style: .default, handler: { (action) in
             self.tags.remove(at: sender.tag)

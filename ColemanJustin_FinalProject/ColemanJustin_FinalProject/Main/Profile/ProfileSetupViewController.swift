@@ -8,10 +8,10 @@
 
 import UIKit
 import MaterialComponents
-import Fusuma
 import Firebase
+import ImagePicker
 
-class ProfileSetupViewController: UIViewController, FusumaDelegate, UITextFieldDelegate {
+class ProfileSetupViewController: UIViewController, UITextFieldDelegate, ImagePickerDelegate {
     
     //MARK: - Outlets
     @IBOutlet weak var profilePicContainer: UIView!
@@ -46,9 +46,17 @@ class ProfileSetupViewController: UIViewController, FusumaDelegate, UITextFieldD
     
     //MARK: - Storyboard Actions
     func imageTapped(_ sender: UIView){
-        let fusama = FusumaViewController()
-        fusama.delegate = self
-        present(fusama, animated: true, completion: nil)
+        var config = Configuration()
+        config.doneButtonTitle = "Done"
+        config.noImagesTitle = "Sorry! No images found"
+        config.recordLocation = false
+        config.allowMultiplePhotoSelection = false
+        config.allowVideoSelection = false
+        
+        let imagePicker = ImagePickerController(configuration: config)
+        imagePicker.imageLimit = 1
+        imagePicker.delegate = self
+        present(imagePicker, animated: true, completion: nil)
     }
     
     func doneTapped(_ sender: UIBarButtonItem){
@@ -153,21 +161,17 @@ class ProfileSetupViewController: UIViewController, FusumaDelegate, UITextFieldD
         }
     }
     
-    //MARK: - Fusama Callbacks
-    func fusumaImageSelected(_ image: UIImage, source: FusumaMode) {
-        selectedImage = image
-        
+    //MARK: - ImagePicker Delegate Callbacks
+    func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
+        selectedImage = images.first!
+        profilePic.image = images.first!
     }
     
-    func fusumaMultipleImageSelected(_ images: [UIImage], source: FusumaMode) {
-        
+    func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
+        imagePicker.dismiss(animated: true, completion: nil)
     }
     
-    func fusumaVideoCompleted(withFileURL fileURL: URL) {
-        
-    }
-    
-    func fusumaCameraRollUnauthorized() {
+    func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
         
     }
     

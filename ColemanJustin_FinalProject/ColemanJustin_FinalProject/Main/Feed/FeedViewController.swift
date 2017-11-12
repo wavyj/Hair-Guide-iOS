@@ -8,11 +8,11 @@
 
 import UIKit
 import MaterialComponents
-import Fusuma
 import Firebase
 import PINRemoteImage
+import ImagePicker
 
-class FeedViewController: UIViewController, FusumaDelegate, UICollectionViewDelegate, UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
+class FeedViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource , UICollectionViewDelegateFlowLayout, ImagePickerDelegate {
     
     //MARK: - Outlets
     @IBOutlet weak var postsCollectionView: UICollectionView!
@@ -66,9 +66,17 @@ class FeedViewController: UIViewController, FusumaDelegate, UICollectionViewDele
             updateMode()
         }
         addedPost = nil
-        let fusama = FusumaViewController()
-        fusama.delegate = self
-        present(fusama, animated: true, completion: nil)
+        var config = Configuration()
+        config.doneButtonTitle = "Done"
+        config.noImagesTitle = "Sorry! No images found"
+        config.recordLocation = false
+        config.allowMultiplePhotoSelection = false
+        config.allowVideoSelection = false
+        
+        let imagePicker = ImagePickerController(configuration: config)
+        imagePicker.imageLimit = 1
+        imagePicker.delegate = self
+        present(imagePicker, animated: true, completion: nil)
     }
     
     func toNewGuide(){
@@ -99,7 +107,7 @@ class FeedViewController: UIViewController, FusumaDelegate, UICollectionViewDele
     }
     
     
-    func postsTapped(_ sender: UIBarButtonItem){
+    @objc func postsTapped(_ sender: UIBarButtonItem){
         if currentMode != 0{
             currentMode = 0
             updateSelectionBorder(currentMode)
@@ -107,7 +115,7 @@ class FeedViewController: UIViewController, FusumaDelegate, UICollectionViewDele
         }
     }
     
-    func guidesTapped(_ sender: UIBarButtonItem){
+    @objc func guidesTapped(_ sender: UIBarButtonItem){
         if currentMode != 1{
             currentMode = 1
             updateSelectionBorder(currentMode)
@@ -115,15 +123,15 @@ class FeedViewController: UIViewController, FusumaDelegate, UICollectionViewDele
         }
     }
     
-    func createTapped(_ sender: UIBarButtonItem){
+    @objc func createTapped(_ sender: UIBarButtonItem){
         performSegue(withIdentifier: "toCreate", sender: self)
     }
     
-    func guidesEditTapped(_ sender: UIBarButtonItem){
+    @objc func guidesEditTapped(_ sender: UIBarButtonItem){
         
     }
     
-    func likePost(_ sender: UITapGestureRecognizer){
+    @objc func likePost(_ sender: UITapGestureRecognizer){
         print("Liked")
         let s = sender.view as! UIImageView
         let post = posts[s.tag]
@@ -143,7 +151,7 @@ class FeedViewController: UIViewController, FusumaDelegate, UICollectionViewDele
         postsCollectionView.reloadData()
     }
     
-    func unLikePost(_ sender: UITapGestureRecognizer){
+    @objc func unLikePost(_ sender: UITapGestureRecognizer){
         print("Unliked")
         let s = sender.view as! UIImageView
         let post = posts[s.tag]
@@ -167,13 +175,13 @@ class FeedViewController: UIViewController, FusumaDelegate, UICollectionViewDele
         postsCollectionView.reloadData()
     }
     
-    func commentTapped(_ sender: UITapGestureRecognizer){
+    @objc func commentTapped(_ sender: UITapGestureRecognizer){
         let s = sender.view as! UIImageView
         selectedPost = posts[s.tag]
         performSegue(withIdentifier: "toSelectedPost", sender: self)
     }
     
-    func profileTapped(_ sender: UITapGestureRecognizer){
+    @objc func profileTapped(_ sender: UITapGestureRecognizer){
         let s = sender.view as! UIImageView
         selectedPost = posts[s.tag]
         performSegue(withIdentifier: "toSelectedUser", sender: self)
@@ -304,22 +312,19 @@ class FeedViewController: UIViewController, FusumaDelegate, UICollectionViewDele
         }
     }
     
-    //MARK: - Fusama Delegate Callbacks
-    func fusumaImageSelected(_ image: UIImage, source: FusumaMode) {
-        selectedImage = image
-        performSegue(withIdentifier: "toNewPost", sender: self)
+    //MARK: - ImagePicker Delegate Callbacks
+    func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
+        selectedImage = images.first!
+        imagePicker.dismiss(animated: true) {
+            self.performSegue(withIdentifier: "toNewPost", sender: self)
+        }
     }
     
-    func fusumaMultipleImageSelected(_ images: [UIImage], source: FusumaMode) {
-        // Do Nothing
+    func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
+        imagePicker.dismiss(animated: true, completion: nil)
     }
     
-    func fusumaVideoCompleted(withFileURL fileURL: URL) {
-        // Do Nothing
-    }
-    
-    func fusumaCameraRollUnauthorized() {
-        // Display Error
+    func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
         
     }
     
@@ -417,7 +422,7 @@ class FeedViewController: UIViewController, FusumaDelegate, UICollectionViewDele
         db.collection("posts").order(by: "date", descending: true).getDocuments { (snapshot, error) in
             // Error
             if error != nil{
-                print(error?.localizedDescription)
+                print(error?.localizedDescription ?? "Error")
         
                 DispatchQueue.main.async {
                     self.spinner.stopAnimating()
@@ -450,7 +455,7 @@ class FeedViewController: UIViewController, FusumaDelegate, UICollectionViewDele
         let db = Firestore.firestore()
         db.collection("posts").document((post.mReference?.documentID)!).collection("comments").getDocuments { (snapshot, error) in
             if error != nil{
-                print(error?.localizedDescription)
+                print(error?.localizedDescription ?? "Error")
                 return
             }
             
@@ -466,7 +471,7 @@ class FeedViewController: UIViewController, FusumaDelegate, UICollectionViewDele
         let db = Firestore.firestore()
         db.collection("users").document(UserDefaultsUtil().loadReference()).collection("likes").whereField("post", isEqualTo: post.mReference?.documentID).getDocuments { (snapshot, error) in
             if error != nil{
-                print(error?.localizedDescription)
+                print(error?.localizedDescription ?? "Error")
                 return
             }
             
@@ -488,7 +493,7 @@ class FeedViewController: UIViewController, FusumaDelegate, UICollectionViewDele
         db.collection("users").document(ref).getDocument { (snapshot, error) in
             if error != nil{
                 // Error
-                print(error?.localizedDescription)
+                print(error?.localizedDescription ?? "Error")
                 return
             }
            
@@ -512,7 +517,7 @@ class FeedViewController: UIViewController, FusumaDelegate, UICollectionViewDele
             }
             db.collection("users").document(UserDefaultsUtil().loadReference()).collection("following").whereField("user", isEqualTo: snapshot?.documentID).getDocuments(completion: { (snapshot, err) in
                 if err != nil{
-                    print(err?.localizedDescription)
+                    print(err?.localizedDescription ?? "Error")
                     return
                 }
                 for i in (snapshot?.documents)!{
@@ -534,7 +539,7 @@ class FeedViewController: UIViewController, FusumaDelegate, UICollectionViewDele
         db.collection("guides").getDocuments { (snapshot, error) in
             if error != nil{
                 // Error
-                print(error?.localizedDescription)
+                print(error?.localizedDescription ?? "Error")
                 
                 DispatchQueue.main.async {
                     self.spinner.stopAnimating()
@@ -574,7 +579,7 @@ class FeedViewController: UIViewController, FusumaDelegate, UICollectionViewDele
         let db = Firestore.firestore()
         db.collection("guides").document(ref).collection("products").getDocuments { (snapshot, error) in
             if error != nil{
-                print(error?.localizedDescription)
+                print(error?.localizedDescription ?? "Error")
                 return
             }
             

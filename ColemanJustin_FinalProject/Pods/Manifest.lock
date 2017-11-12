@@ -62,7 +62,6 @@ PODS:
     - FirebaseCore (~> 4.0)
     - GTMSessionFetcher/Core (~> 1.1)
   - FLAnimatedImage (1.0.12)
-  - Fusuma (1.2.0)
   - GoogleToolboxForMac/DebugUtils (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
   - GoogleToolboxForMac/Defines (2.1.1)
@@ -91,6 +90,7 @@ PODS:
   - gRPC-RxLibrary (1.6.0)
   - GTMSessionFetcher/Core (1.1.12)
   - HTMLReader (2.1)
+  - ImagePicker (3.0.0)
   - leveldb-library (1.18.3)
   - MaterialComponents (35.2.0):
     - MaterialComponents/ActivityIndicator (= 35.2.0)
@@ -436,8 +436,8 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Firestore
   - Firebase/Storage
-  - Fusuma
   - HTMLReader
+  - ImagePicker
   - MaterialComponents
   - PINRemoteImage
   - SwiftSoup
@@ -461,7 +461,6 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: 70c2b877e9338971b2429ea5a4293df6961aa44e
   FirebaseStorage: 0cca42d9b889a0227c3a50121f45a4469fc9eb27
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
-  Fusuma: e8158ad6650507455c9898c22bc01583fbc86d8e
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   gRPC: 07788969b862af21491908f82b83d17ac08c94cd
   gRPC-Core: f707ade59c559fe718e27713189607d03b15f571
@@ -469,6 +468,7 @@ SPEC CHECKSUMS:
   gRPC-RxLibrary: 17b9699beb0a838b95b57832244f9ead18e66777
   GTMSessionFetcher: ebaa1f79a5366922c1735f1566901f50beba23b7
   HTMLReader: dd75279b0532ff5d005ffe1c6512e33d1d52f861
+  ImagePicker: 973953c25960fe04729a7082a56194321c6762d2
   leveldb-library: 10fb39c39e243db4af1828441162405bbcec1404
   MaterialComponents: 3edb4c96d32042242ecdfb2159e697e3c59e9f38
   MDFTextAccessibility: 94098925e0853551c5a311ce7c1ecefbe297cdb6
@@ -484,6 +484,6 @@ SPEC CHECKSUMS:
   Validator: 7d9828daffabc757604603052e407f208fa9b6d5
   WordPress-iOS-Editor: 03b3bc631a31520ccf78e665548286c6d12c17f4
 
-PODFILE CHECKSUM: f03d8f13d2a7d09874f60e478ae28fb0d9d387a5
+PODFILE CHECKSUM: 5944c7c9eb41a5c4ca79e437770098e921a0a37a
 
 COCOAPODS: 1.2.0

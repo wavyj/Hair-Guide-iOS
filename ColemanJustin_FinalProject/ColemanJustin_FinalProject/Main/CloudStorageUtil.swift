@@ -25,10 +25,10 @@ class CloudStorageUtil {
     }
     
     func saveImage(_ image: UIImage, _ post: Post?){
-        var downloadUrl: String = ""
+        var _: String = ""
         var imageData: Data? = nil
         let user = UserDefaultsUtil().loadUserData()
-        var format = DateFormatter()
+        let format = DateFormatter()
         format.dateFormat = "yyyyMMddHHmmss"
         
         var imageRefString = "images/\(UserDefaultsUtil().loadReference())" + format.string(from: Date())

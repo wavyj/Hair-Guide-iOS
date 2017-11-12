@@ -34,11 +34,11 @@ class TagsViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     //MARK: - Storyboard Actions
-    func backTapped(_ sender: UIBarButtonItem){
+    @objc func backTapped(_ sender: UIBarButtonItem){
         performSegue(withIdentifier: "unwindTags", sender: self)
     }
     
-    func saveTapped(_ sender: UIBarButtonItem){
+    @objc func saveTapped(_ sender: UIBarButtonItem){
         performSegue(withIdentifier: "toAddTags", sender: self)
     }
     

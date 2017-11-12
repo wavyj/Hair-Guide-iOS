@@ -72,7 +72,7 @@ class ProfileViewController: UIViewController {
     }
     
     //MARK: - Storyboard Actions
-    func settingsTapped(_ sender: UIBarButtonItem){
+    @objc func settingsTapped(_ sender: UIBarButtonItem){
         performSegue(withIdentifier: "toSettings", sender: self)
     }
     

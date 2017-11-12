@@ -42,7 +42,7 @@ class CreateViewController: UIViewController {
     }
     
     //MARK: - Storyboard Actions
-    func postTapped(_ sender: MDCFlatButton){
+    @objc func postTapped(_ sender: MDCFlatButton){
         self.dismiss(animated: true) {
             if let vc = self.parentVC as? FeedViewController{
                 vc.cameraTapped()
@@ -50,7 +50,7 @@ class CreateViewController: UIViewController {
         }
     }
     
-    func guideTapped(_ sender: MDCFlatButton){
+    @objc func guideTapped(_ sender: MDCFlatButton){
         self.dismiss(animated: true) {
             if let vc = self.parentVC as? FeedViewController{
                 vc.toNewGuide()
@@ -58,7 +58,7 @@ class CreateViewController: UIViewController {
         }
     }
     
-    func closeModal(_ sender: UIView){
+    @objc func closeModal(_ sender: UIView){
         self.dismiss(animated: true) {
             
         }

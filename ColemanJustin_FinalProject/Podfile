@@ -16,11 +16,11 @@ pod 'Validator'
 pod "HTMLReader"
 pod 'WordPress-iOS-Editor'
 pod 'DateToolsSwift'
-pod 'Fusuma'
 pod 'FBSDKLoginKit'
 pod 'FBSDKShareKit'
 pod ‘PINRemoteImage’
 pod 'Alamofire', '~> 4.5'
 pod "SwiftSoup"
+pod 'ImagePicker'
 
 end
