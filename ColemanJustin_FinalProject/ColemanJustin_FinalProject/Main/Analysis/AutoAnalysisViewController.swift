@@ -153,6 +153,7 @@ class AutoAnalysisViewController: UIViewController, ImagePickerDelegate {
     
      //MARK: - ImagePicker Delegate Callbacks
     func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
+        imagePicker.dismiss(animated: true, completion: nil)
         selectedImage.image = images.first!
         self.view.isUserInteractionEnabled = false
         progressView.isHidden = false
