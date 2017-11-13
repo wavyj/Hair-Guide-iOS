@@ -163,7 +163,7 @@ class FollowingViewController: UIViewController, UICollectionViewDelegate, UICol
         // Pass the selected object to the new view controller.
         
         if let vc = segue.destination as? SelectedProfileViewController{
-            vc.selectedUser = currentUser
+            vc.selectedUser = selectedUser
         }
     }
  
