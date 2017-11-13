@@ -35,7 +35,7 @@ class AnalysisViewController: UIViewController, UICollectionViewDelegate, UIColl
     }
     
     //MARK: - Storyboard Actions
-    func submitTapped(_ sender: MDCRaisedButton){
+    @objc func submitTapped(_ sender: MDCRaisedButton){
         let user = UserDefaultsUtil().loadUserData()
         user.hairTypes = selectedHairTypes
         DatabaseUtil().updateUser(user)

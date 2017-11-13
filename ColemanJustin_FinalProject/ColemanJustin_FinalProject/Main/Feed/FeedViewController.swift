@@ -11,8 +11,9 @@ import MaterialComponents
 import Firebase
 import PINRemoteImage
 import ImagePicker
+import FBSDKShareKit
 
-class FeedViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource , UICollectionViewDelegateFlowLayout, ImagePickerDelegate {
+class FeedViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource , UICollectionViewDelegateFlowLayout, ImagePickerDelegate, FBSDKSharingDelegate {
     
     //MARK: - Outlets
     @IBOutlet weak var postsCollectionView: UICollectionView!
@@ -181,6 +182,24 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         performSegue(withIdentifier: "toSelectedPost", sender: self)
     }
     
+    @objc func shareTapped(_ sender: UITapGestureRecognizer){
+        let s = sender.view as! UIImageView
+        let current = posts[s.tag]
+        print("here")
+        let photo = FBSDKSharePhoto()
+        photo.image = current.mImage
+        photo.isUserGenerated = true
+        let content = FBSDKSharePhotoContent()
+        content.photos = [photo]
+        content.contentURL = URL(string: "https://final-project-af0ee.firebaseapp.com/__/auth/handler")
+        let shareDialog = FBSDKShareDialog()
+        shareDialog.delegate = self
+        shareDialog.fromViewController = self
+        shareDialog.shareContent = content
+        shareDialog.mode = .shareSheet
+        shareDialog.show()
+    }
+    
     @objc func profileTapped(_ sender: UITapGestureRecognizer){
         let s = sender.view as! UIImageView
         selectedPost = posts[s.tag]
@@ -218,13 +237,17 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
             cell.imageView.pin_updateWithProgress = true
             cell.imageView.pin_setImage(from: URL(string: selected.mImageUrl)!)
+            selected.mImage = cell.imageView.image
             cell.profileImg.pin_updateWithProgress = true
             if selected.mUser?.profilePicUrl != nil{
                 let url = URL(string: (selected.mUser?.profilePicUrl)!)
                 if url != nil{
                     cell.profileImg.pin_setImage(from: url)
+                    
                 }
             }
+            cell.shareBtn.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(shareTapped(_:))))
+            cell.shareBtn.tag = indexPath.row
             cell.profileImg.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(profileTapped(_:))))
                 cell.profileImg.tag = indexPath.row
             cell.profileImg.layer.cornerRadius = cell.profileImg.bounds.width / 2
@@ -310,6 +333,18 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         default:
             return CGSize()
         }
+    }
+    
+    func sharer(_ sharer: FBSDKSharing!, didCompleteWithResults results: [AnyHashable : Any]!) {
+        
+    }
+    
+    func sharer(_ sharer: FBSDKSharing!, didFailWithError error: Error!) {
+        print(error.localizedDescription)
+    }
+    
+    func sharerDidCancel(_ sharer: FBSDKSharing!) {
+        
     }
     
     //MARK: - ImagePicker Delegate Callbacks

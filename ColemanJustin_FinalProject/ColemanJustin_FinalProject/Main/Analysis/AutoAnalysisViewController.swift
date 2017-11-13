@@ -63,7 +63,7 @@ class AutoAnalysisViewController: UIViewController, ImagePickerDelegate {
         present(imagePicker, animated: true, completion: nil)
     }
     
-    func continueTapped(_ sender: MDCRaisedButton){
+    @objc func continueTapped(_ sender: MDCRaisedButton){
         performSegue(withIdentifier: "toAnalysisDetails", sender: self)
     }
     

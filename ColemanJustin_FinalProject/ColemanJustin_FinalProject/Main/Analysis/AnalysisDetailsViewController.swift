@@ -34,7 +34,7 @@ class AnalysisDetailsViewController: UIViewController {
     }
     
     //MARK: - Storyboard Actions
-    func continueTapped(_ sender: MDCRaisedButton){
+    @objc func continueTapped(_ sender: MDCRaisedButton){
         performSegue(withIdentifier: "toProfileSetup", sender: self)
     }
     

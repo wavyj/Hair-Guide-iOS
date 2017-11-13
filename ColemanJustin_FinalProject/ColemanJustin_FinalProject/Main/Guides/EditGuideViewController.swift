@@ -50,7 +50,7 @@ class EditGuideViewController: UIViewController, UITextFieldDelegate, ImagePicke
     }
     
     //MARK: - Storyboard Actions
-    func doneTapped(_ sender: UIBarButtonItem){
+    @objc func doneTapped(_ sender: UIBarButtonItem){
         
         if !titleInput.text!.isEmpty && !(textInput?.text?.isEmpty)!{
             textController?.setErrorText(nil, errorAccessibilityValue: nil)
@@ -70,7 +70,7 @@ class EditGuideViewController: UIViewController, UITextFieldDelegate, ImagePicke
         }
     }
     
-    func deleteTapped(_ sender: UIBarButtonItem){
+    @objc func deleteTapped(_ sender: UIBarButtonItem){
         let alert = UIAlertController(title: "Delete Guide", message: "Are you sure you want to delete this guide? Once it is deleted it is gone forever.", preferredStyle: .alert)
         let yesAction = UIAlertAction(title: "Yes", style: .default) { (action) in
             self.deleteGuide(self.editGuide!)
@@ -81,7 +81,7 @@ class EditGuideViewController: UIViewController, UITextFieldDelegate, ImagePicke
         present(alert, animated: true, completion: nil)
     }
     
-    func imageTapped(_ sender: UIBarButtonItem){
+    @objc func imageTapped(_ sender: UIBarButtonItem){
         var config = Configuration()
         config.doneButtonTitle = "Done"
         config.noImagesTitle = "Sorry! No images found"

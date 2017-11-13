@@ -58,11 +58,11 @@ class ProductDetailViewController: UIViewController {
     }
     
     //MARK: - Storyboard Actions
-    func closeTapped(_ sender: MDCFlatButton){
+    @objc func closeTapped(_ sender: MDCFlatButton){
         performSegue(withIdentifier: "close", sender: self)
     }
     
-    func addTapped(_ sender: MDCRaisedButton){
+    @objc func addTapped(_ sender: MDCRaisedButton){
         if sender.tag == 0{
             currentProduct?.isAdded = true
             selectedProducts.append(currentProduct!)
@@ -80,7 +80,7 @@ class ProductDetailViewController: UIViewController {
         }
     }
     
-    func linkTapped(_ sender: MDCRaisedButton){
+    @objc func linkTapped(_ sender: MDCRaisedButton){
         performSegue(withIdentifier: "toProductLink", sender: self)
     }
     

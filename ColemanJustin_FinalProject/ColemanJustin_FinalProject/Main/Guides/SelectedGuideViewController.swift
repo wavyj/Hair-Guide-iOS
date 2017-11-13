@@ -65,7 +65,7 @@ class SelectedGuideViewController: UIViewController, UICollectionViewDelegate, U
     }
     
     //MARK: - Storyboard Actions
-    func bookmarkTapped(_ sender: UIBarButtonItem){
+    @objc func bookmarkTapped(_ sender: UIBarButtonItem){
         checkOnTapped(selectedGuide!)
     }
     

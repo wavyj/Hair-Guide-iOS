@@ -53,7 +53,7 @@ class ProductSearchViewController: UIViewController, UICollectionViewDelegate, U
         productsCollectionView.reloadData()
     }
     
-    func backTapped(_ sender: UIBarButtonItem){
+    @objc func backTapped(_ sender: UIBarButtonItem){
         performSegue(withIdentifier: "toProductAdd", sender: self)
     }
     

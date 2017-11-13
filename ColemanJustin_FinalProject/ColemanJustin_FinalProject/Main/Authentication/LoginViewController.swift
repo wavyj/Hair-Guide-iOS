@@ -43,7 +43,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     //MARK: - Storyboard Actions
-    func submitTapped(_ sender: UIButton){
+    @objc func submitTapped(_ sender: UIButton){
         print("Submit Tapped")
         
         if (validateInput()){

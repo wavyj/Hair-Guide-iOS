@@ -16,6 +16,7 @@
 		D01BB59F1F8EECE000EBE6C6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01BB59E1F8EECE000EBE6C6 /* LoginViewController.swift */; };
 		D01BB5A11F8EFAB200EBE6C6 /* ValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01BB5A01F8EFAB200EBE6C6 /* ValidationError.swift */; };
 		D01BB5A41F8F0E1200EBE6C6 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01BB5A31F8F0E1200EBE6C6 /* FeedViewController.swift */; };
+		D01CE6C81FB91956000A0A7F /* FacebookLoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01CE6C71FB91956000A0A7F /* FacebookLoginController.swift */; };
 		D020E9E31F9E2918009E44BF /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D020E9E11F9E2918009E44BF /* ProductCell.swift */; };
 		D020E9E41F9E2918009E44BF /* ProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D020E9E21F9E2918009E44BF /* ProductCell.xib */; };
 		D02A8AC51FA0FF0100DA0F75 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02A8AC41FA0FF0100DA0F75 /* EditProfileViewController.swift */; };
@@ -101,6 +102,7 @@
 		D01BB59E1F8EECE000EBE6C6 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D01BB5A01F8EFAB200EBE6C6 /* ValidationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationError.swift; sourceTree = "<group>"; };
 		D01BB5A31F8F0E1200EBE6C6 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		D01CE6C71FB91956000A0A7F /* FacebookLoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookLoginController.swift; sourceTree = "<group>"; };
 		D020E9E11F9E2918009E44BF /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
 		D020E9E21F9E2918009E44BF /* ProductCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductCell.xib; sourceTree = "<group>"; };
 		D02A8AC41FA0FF0100DA0F75 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 				D0729BE61FB8BCBF0013AD2A /* ConnectedAccountsController.swift */,
 				D0729BE81FB8BD830013AD2A /* AccountsCell.swift */,
 				D0729BE91FB8BD830013AD2A /* AccountsCell.xib */,
+				D01CE6C71FB91956000A0A7F /* FacebookLoginController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -597,6 +600,7 @@
 				D0CD6A1D1FA24E90001F5CEC /* ProfileSetupViewController.swift in Sources */,
 				D050F9771F9111800008370E /* ProfileViewController.swift in Sources */,
 				D02A8AC51FA0FF0100DA0F75 /* EditProfileViewController.swift in Sources */,
+				D01CE6C81FB91956000A0A7F /* FacebookLoginController.swift in Sources */,
 				D00231A21FABFB4900ABE983 /* CommentCell.swift in Sources */,
 				D050F9741F91114F0008370E /* GuidesViewController.swift in Sources */,
 				D07F3B9B1F999FA500B4BF34 /* SplashScreen.swift in Sources */,
@@ -781,6 +785,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = ColemanJustin_FinalProject/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "ColemanJustin.ColemanJustin-HairGuide";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -802,6 +807,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = ColemanJustin_FinalProject/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "ColemanJustin.ColemanJustin-HairGuide";
 				PRODUCT_NAME = "$(TARGET_NAME)";

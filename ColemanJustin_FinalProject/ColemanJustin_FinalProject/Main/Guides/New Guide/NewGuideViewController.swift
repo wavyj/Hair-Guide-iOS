@@ -51,7 +51,7 @@ class NewGuideViewController: UIViewController, UICollectionViewDelegate, UIColl
         productsCollectionView.reloadData()
     }
     
-    func doneTapped(_ sender: UIBarButtonItem){
+    @objc func doneTapped(_ sender: UIBarButtonItem){
     
         if !titleInput.text!.isEmpty && !(textInput?.text?.isEmpty)!{
             textController?.setErrorText(nil, errorAccessibilityValue: nil)
@@ -71,7 +71,7 @@ class NewGuideViewController: UIViewController, UICollectionViewDelegate, UIColl
         }
     }
     
-    func imageTapped(_ sender: UIBarButtonItem){
+    @objc func imageTapped(_ sender: UIBarButtonItem){
         var config = Configuration()
         config.doneButtonTitle = "Done"
         config.noImagesTitle = "Sorry! No images found"
@@ -85,7 +85,7 @@ class NewGuideViewController: UIViewController, UICollectionViewDelegate, UIColl
         present(imagePicker, animated: true, completion: nil)
     }
     
-    func productTapped(_ sender: MDCRaisedButton){
+    @objc func productTapped(_ sender: MDCRaisedButton){
         performSegue(withIdentifier: "toAddProduct", sender: self)
     }
     

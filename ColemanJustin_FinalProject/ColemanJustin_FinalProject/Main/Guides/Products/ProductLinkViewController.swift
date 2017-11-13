@@ -37,7 +37,7 @@ class ProductLinkViewController: UIViewController, WKNavigationDelegate {
     }
     
     //MARK: - Storyboard Actions
-    func backTapped(_ sender: UIBarButtonItem){
+    @objc func backTapped(_ sender: UIBarButtonItem){
         performSegue(withIdentifier: "closeLink", sender: self)
     }
     

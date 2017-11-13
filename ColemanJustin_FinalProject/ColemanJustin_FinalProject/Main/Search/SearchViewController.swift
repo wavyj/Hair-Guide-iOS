@@ -46,7 +46,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UICollectionV
     }
     
     //MARK: - Storyboard Actions
-    func tagTapped(_ sender: UIBarButtonItem){
+    @objc func tagTapped(_ sender: UIBarButtonItem){
         tagsToSearch.removeAll()
         let alert = UIAlertController(title: "Tags?", message: "Enter any tag(s) seperated by commas", preferredStyle: .alert)
         let enterAction = UIAlertAction(title: "Enter", style: .default) { (_) in
@@ -69,7 +69,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UICollectionV
         present(alert, animated: true, completion: nil)
     }
     
-    func followTapped(_ sender: MDCRaisedButton){
+    @objc func followTapped(_ sender: MDCRaisedButton){
         sender.removeTarget(self, action: #selector(followTapped(_:)), for: .touchUpInside)
         sender.addTarget(self, action: #selector(unfollowTapped(_:)), for: .touchUpInside)
         sender.setBackgroundColor(UIColor.white, for: .normal)
@@ -78,7 +78,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UICollectionV
         DatabaseUtil().followUser(users[sender.tag])
     }
     
-    func unfollowTapped(_ sender: MDCRaisedButton){
+    @objc func unfollowTapped(_ sender: MDCRaisedButton){
         sender.removeTarget(self, action: #selector(unfollowTapped(_:)), for: .touchUpInside)
         sender.addTarget(self, action: #selector(followTapped(_:)), for: .touchUpInside)
         sender.setBackgroundColor(MDCPalette.blue.tint500, for: .normal)

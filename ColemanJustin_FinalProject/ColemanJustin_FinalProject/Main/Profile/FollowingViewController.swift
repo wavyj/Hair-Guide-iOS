@@ -35,7 +35,7 @@ class FollowingViewController: UIViewController, UICollectionViewDelegate, UICol
     }
     
     //MARK: - Storyboard Actions
-    func followTapped(_ sender: MDCRaisedButton){
+    @objc func followTapped(_ sender: MDCRaisedButton){
         sender.removeTarget(self, action: #selector(followTapped(_:)), for: .touchUpInside)
         sender.addTarget(self, action: #selector(unfollowTapped(_:)), for: .touchUpInside)
         sender.setBackgroundColor(UIColor.white, for: .normal)
@@ -44,7 +44,7 @@ class FollowingViewController: UIViewController, UICollectionViewDelegate, UICol
         DatabaseUtil().followUser(users[sender.tag])
     }
     
-    func unfollowTapped(_ sender: MDCRaisedButton){
+    @objc func unfollowTapped(_ sender: MDCRaisedButton){
         sender.removeTarget(self, action: #selector(unfollowTapped(_:)), for: .touchUpInside)
         sender.addTarget(self, action: #selector(followTapped(_:)), for: .touchUpInside)
         sender.setBackgroundColor(MDCPalette.blue.tint500, for: .normal)

@@ -9,15 +9,13 @@
 import UIKit
 import MaterialComponents
 import Firebase
-import FBSDKLoginKit
 
-class AuthenticationViewController: UIViewController, FBSDKLoginButtonDelegate {
+class AuthenticationViewController: UIViewController {
 
     //MARK: - Outlets
 
     @IBOutlet weak var signupBtn: MDCFlatButton!
     @IBOutlet weak var loginBtn: MDCFlatButton!
-    @IBOutlet weak var facebookBtn: FBSDKLoginButton!
     @IBOutlet weak var instagramBtn: MDCRaisedButton!
     
     //MARK: - Variables
@@ -29,11 +27,6 @@ class AuthenticationViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         // Setup Material Components
         setupMaterialComponents()
-        facebookBtn.readPermissions = ["public_profile"]
-        facebookBtn.delegate = self
-        /*if let accessToken = FBSDKAccessToken.current(){
-            getFBData()
-        }*/
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle{
@@ -45,41 +38,19 @@ class AuthenticationViewController: UIViewController, FBSDKLoginButtonDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    //MARK: - FBSDK Login Button Callbacks
-    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
-        if error != nil{
-            print("Error: " + error.localizedDescription)
-            return
-        }
-        let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
-        Auth.auth().signIn(with: credential) { (user, error) in
-            if error != nil{
-                print("Error: " + (error?.localizedDescription)!)
-                return
-            }
-            self.getFBData()
-            
-        }
-    }
-    
-    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
-        
-    }
-
-    
     //MARK: - Storyboard Actions
-    func loginTapped(_ sender: UIButton){
+    @objc func loginTapped(_ sender: UIButton){
         print("Login Tapped")
         performSegue(withIdentifier: "toLogin", sender: sender)
     }
     
-    func signupTapped(_ sender: UIButton){
+    @objc func signupTapped(_ sender: UIButton){
         print("Signup Tapped")
         
         performSegue(withIdentifier: "toSignup", sender: sender)
     }
     
-    func instagramTapped(_sender: UIButton){
+    @objc func instagramTapped(_sender: UIButton){
         
     }
     
@@ -102,68 +73,6 @@ class AuthenticationViewController: UIViewController, FBSDKLoginButtonDelegate {
         instagramBtn.setTitle("Connect Instagram", for: .normal)
         instagramBtn.addTarget(self, action: #selector(instagramTapped(_sender:)), for: .touchUpInside)
     }
-    
-    
-    
-    func getFBData(){
-        if FBSDKAccessToken.current() != nil{
-            FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, picture.type(large), email"]).start(completionHandler: { (connection, result, error) in
-                if error != nil{
-                    print(error?.localizedDescription)
-                    return
-                }
-                if let results = result as? [String: AnyObject]{
-                    print(results)
-                    let id = results["id"] as! String
-                    let name = results["name"] as! String
-                    let picObj = results["picture"] as! [String: AnyObject]
-                    let data = picObj["data"] as! [String: AnyObject]
-                    let url = data["url"] as! String
-                    UserDefaultsUtil().saveFBData([id, name, url])
-                    self.checkFbUser()
-                }
-                
-            })
-        }
-    }
-    
-    func checkFbUser(){
-        let db = Firestore.firestore()
-        db.collection("users").whereField("fbuser", isEqualTo: FBSDKAccessToken.current().tokenString).getDocuments { (snapshot, error) in
-            if error != nil{
-                print(error?.localizedDescription)
-                return
-            }
-    
-            for i in (snapshot?.documents)!{
-                let data = i.data()
-                let fbToken = data["fbuser"] as! String
-                print(fbToken)
-                if fbToken == FBSDKAccessToken.current().tokenString{
-                    // Get User
-                    DatabaseUtil().getFbUser(FBSDKAccessToken.current().tokenString)
-                    print("Existing User")
-                    return
-                }
-            }
-            // Create New User
-            print("New User")
-            let u = User(email: "", username: "", bio: "", profilePicUrl: "", gender: "")
-            UserDefaultsUtil().saveReference(DocumentID: "")
-            UserDefaultsUtil().saveUserData(u)
-            self.performSegue(withIdentifier: "toAnalysis", sender: self)
-        }
-    }
-    
-    //MARK: - Instagram Delegate Callbacks
-    func authControllerDidFinish(accessToken: String?, error: NSError?) {
-        if error != nil{
-            print(error?.localizedDescription)
-            return
-        }
-        print(accessToken)
-    }
-
     
     // MARK: - Navigation
 

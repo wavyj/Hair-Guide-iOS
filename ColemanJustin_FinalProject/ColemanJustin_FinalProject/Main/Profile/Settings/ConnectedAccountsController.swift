@@ -15,7 +15,7 @@ class ConnectedAccountsController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var tableView: UITableView!
     
     //MARK: - Variables
-    var accounts = ["Facebook", "Instagram"]
+    var accounts = ["Facebook"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,8 +53,8 @@ class ConnectedAccountsController: UIViewController, UITableViewDelegate, UITabl
             cell.socialLabel.text = "Facebook"
             
         default:
-            cell.socialImg.image = UIImage(named: "instagram")
-            cell.socialLabel.text = "Instagram"
+            cell.socialImg.image = UIImage(named: "facebook")
+            cell.socialLabel.text = "Facebook"
         }
         cell.accessoryType = .disclosureIndicator
 
@@ -62,7 +62,11 @@ class ConnectedAccountsController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        switch indexPath.row {
+        case 0:
+            performSegue(withIdentifier: "toFacebook", sender: self)
+        default: break
+        }
     }
     
     //MARK: - Methods

@@ -44,14 +44,14 @@ class GuidesViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     //MARK: - Storyboard Actions
-    func addTapped(_ sender: UIBarButtonItem){
+    @objc func addTapped(_ sender: UIBarButtonItem){
         performSegue(withIdentifier: "toNewGuide", sender: self)
     }
     
     @IBAction func newGuide(_ sender: UIStoryboardSegue){
         updateGuides()
     }
-    func editTapped(_ sender: UIBarButtonItem){
+    @objc func editTapped(_ sender: UIBarButtonItem){
         selectedGuide = guides[sender.tag]
         performSegue(withIdentifier: "toEditGuide", sender: self)
     }

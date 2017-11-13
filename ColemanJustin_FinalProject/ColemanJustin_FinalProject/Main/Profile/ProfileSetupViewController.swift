@@ -45,7 +45,7 @@ class ProfileSetupViewController: UIViewController, UITextFieldDelegate, ImagePi
     }
     
     //MARK: - Storyboard Actions
-    func imageTapped(_ sender: UIView){
+    @objc func imageTapped(_ sender: UIView){
         var config = Configuration()
         config.doneButtonTitle = "Done"
         config.noImagesTitle = "Sorry! No images found"
@@ -59,7 +59,7 @@ class ProfileSetupViewController: UIViewController, UITextFieldDelegate, ImagePi
         present(imagePicker, animated: true, completion: nil)
     }
     
-    func doneTapped(_ sender: UIBarButtonItem){
+    @objc func doneTapped(_ sender: UIBarButtonItem){
         if validInput{
             onValid()
         }

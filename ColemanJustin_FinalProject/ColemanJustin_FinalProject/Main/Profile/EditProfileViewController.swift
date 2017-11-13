@@ -163,6 +163,11 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, ImagePic
         textController?.setErrorText(nil, errorAccessibilityValue: nil)
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
     //MARK: - ImagePicker Delegate Callbacks
     func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
         selectedImage = images.first!

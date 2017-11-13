@@ -27,7 +27,7 @@ class PostDetailsViewController: UIViewController, UICollectionViewDelegate, UIC
     var selectedUser: User? = nil
     var comments = [Comment]()
     var textController: MDCTextInputController?
-    var originFrame: CGRect?
+    var commentViewHeight: CGFloat?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +37,7 @@ class PostDetailsViewController: UIViewController, UICollectionViewDelegate, UIC
         update()
         setupMaterialComponents()
         registerKeyboardNotifications()
+        commentViewHeight = commentEntryView.bounds.height
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,7 +50,7 @@ class PostDetailsViewController: UIViewController, UICollectionViewDelegate, UIC
         performSegue(withIdentifier: "unwindDetails", sender: self)
     }
     
-    func enterTapped(_ sender: MDCFlatButton){
+    @objc func enterTapped(_ sender: MDCFlatButton){
         if !(commentInput?.text?.isEmpty)!{
             let newComment = Comment(text: (commentInput?.text)!, date: Date(), ref: "", user: UserDefaultsUtil().loadReference())
             newComment.mUser = UserDefaultsUtil().loadUserData()
@@ -59,7 +60,7 @@ class PostDetailsViewController: UIViewController, UICollectionViewDelegate, UIC
         }
     }
     
-    func profileTapped(_ sender: UITapGestureRecognizer){
+    @objc func profileTapped(_ sender: UITapGestureRecognizer){
         let s = sender.view as! UIImageView
         selectedUser = comments[s.tag].mUser
         performSegue(withIdentifier: "toSelectedUser", sender: self)
@@ -77,22 +78,27 @@ class PostDetailsViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
     @objc func keyboardShown(_ sender: Notification){
-        
+        print("Show")
         var info = sender.userInfo!
+        print(scrollView.contentInset)
         var keyboardSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
-        scrollView.contentInset = UIEdgeInsetsMake(0.0, 0.0, (keyboardSize?.height)! - commentEntryView.bounds.height, 0.0)
+        scrollView.contentInset = UIEdgeInsetsMake(0.0, 0.0, (keyboardSize?.height)! - commentViewHeight!, 0.0)
+        print(scrollView.contentInset)
     }
     
     @objc func keyboardHidden(_ sender: Notification){
+        print("Hidden")
         var info = sender.userInfo!
         var keyboardSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
-        scrollView.contentInset = UIEdgeInsetsMake(0.0, 0.0, -(keyboardSize?.height)!, 0.0)
+        scrollView.contentInset = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)
+        print(scrollView.contentInset)
     }
     
     //MARK: - TextField Callbacks
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
         self.view.endEditing(true)
-        return false
+        return true
     }
     
     //MARK: - CollectionView Callback

@@ -69,7 +69,7 @@ class SelectedProfileViewController: UIViewController, UICollectionViewDelegate,
     }
     
     //MARK: - Storyboard Methods
-    func followTapped(_ sender: MDCRaisedButton){
+    @objc func followTapped(_ sender: MDCRaisedButton){
         sender.removeTarget(self, action: #selector(followTapped(_:)), for: .touchUpInside)
         sender.addTarget(self, action: #selector(unfollowTapped(_:)), for: .touchUpInside)
         sender.setBackgroundColor(UIColor.white, for: .normal)
@@ -78,7 +78,7 @@ class SelectedProfileViewController: UIViewController, UICollectionViewDelegate,
         DatabaseUtil().followUser(selectedUser!)
     }
     
-    func unfollowTapped(_ sender: MDCRaisedButton){
+    @objc func unfollowTapped(_ sender: MDCRaisedButton){
         sender.removeTarget(self, action: #selector(unfollowTapped(_:)), for: .touchUpInside)
         sender.addTarget(self, action: #selector(followTapped(_:)), for: .touchUpInside)
         sender.setBackgroundColor(MDCPalette.blue.tint500, for: .normal)
@@ -87,25 +87,25 @@ class SelectedProfileViewController: UIViewController, UICollectionViewDelegate,
         DatabaseUtil().unfollowUser(selectedUser!)
     }
     
-    func postsTapped(_ sender: UIBarButtonItem){
+    @objc func postsTapped(_ sender: UIBarButtonItem){
         currentMode = 1
         updateMode()
     }
     
-    func guidesTapped(_ sender: UIBarButtonItem){
+    @objc func guidesTapped(_ sender: UIBarButtonItem){
         currentMode = 2
         updateMode()
     }
     
-    func guidesEditTapped(_ sender: MDCRaisedButton){
+    @objc func guidesEditTapped(_ sender: MDCRaisedButton){
         
     }
     
-    func showFollowers(_ sender: UILabel){
+    @objc func showFollowers(_ sender: UILabel){
         performSegue(withIdentifier: "toFollowers", sender: self)
     }
     
-    func showFollowing(_ sender: UILabel){
+    @objc func showFollowing(_ sender: UILabel){
         performSegue(withIdentifier: "toFollowing", sender: self)
     }
     

@@ -49,7 +49,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
         performSegue(withIdentifier: "unwindSignup", sender: sender)
     }
     
-    func submitTapped(_ sender: UIButton){
+    @objc func submitTapped(_ sender: UIButton){
         print("Submit Tapped")
         
         // Input Validation

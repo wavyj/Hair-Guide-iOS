@@ -80,7 +80,7 @@ class ProfileViewController: UIViewController {
         performSegue(withIdentifier: "toEditProfile", sender: self)
     }
     
-    func guideEditTapped(_ sender: MDCRaisedButton){
+    @objc func guideEditTapped(_ sender: MDCRaisedButton){
         
     }
     
@@ -88,22 +88,22 @@ class ProfileViewController: UIViewController {
         update()
     }
     
-    func showFollowers(_ sender: UILabel){
+    @objc func showFollowers(_ sender: UILabel){
         performSegue(withIdentifier: "toFollowers", sender: self)
     }
     
-    func showFollowing(_ sender: UILabel){
+    @objc func showFollowing(_ sender: UILabel){
         performSegue(withIdentifier: "toFollowing", sender: self)
     }
     
-    func postsTapped(_ sender: UIBarButtonItem){
+    @objc func postsTapped(_ sender: UIBarButtonItem){
         if currentMode != 1{
             currentMode = 1
             updateMode()
         }
     }
     
-    func guidesTapped(_ sender: UIBarButtonItem){
+    @objc func guidesTapped(_ sender: UIBarButtonItem){
         if currentMode != 2{
             currentMode = 2
             updateMode()
