@@ -32,6 +32,8 @@
 		D040E55A1FA571660051D166 /* AnalysisDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D040E5591FA571660051D166 /* AnalysisDetailsViewController.swift */; };
 		D040E55C1FA5765A0051D166 /* HairPatternInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D040E55B1FA5765A0051D166 /* HairPatternInfo.swift */; };
 		D045587F1FB38B0100FC9D15 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D045587E1FB38B0100FC9D15 /* HeaderView.swift */; };
+		D048BB541FB9F2540087763C /* VisualRecognitionV3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D048BB531FB9F2540087763C /* VisualRecognitionV3.framework */; };
+		D048BB551FB9F2540087763C /* VisualRecognitionV3.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D048BB531FB9F2540087763C /* VisualRecognitionV3.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D050F9721F9110C00008370E /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D050F9711F9110C00008370E /* SearchViewController.swift */; };
 		D050F9741F91114F0008370E /* GuidesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D050F9731F91114F0008370E /* GuidesViewController.swift */; };
 		D050F9771F9111800008370E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D050F9761F9111800008370E /* ProfileViewController.swift */; };
@@ -51,8 +53,6 @@
 		D078B5C51F7C1A5F00A6F8C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D078B5C41F7C1A5F00A6F8C5 /* Assets.xcassets */; };
 		D078B5C81F7C1A5F00A6F8C5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D078B5C61F7C1A5F00A6F8C5 /* LaunchScreen.storyboard */; };
 		D07F3B9B1F999FA500B4BF34 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07F3B9A1F999FA500B4BF34 /* SplashScreen.swift */; };
-		D08D7A681FB8D111005E9532 /* VisualRecognitionV3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D040E5551FA53E560051D166 /* VisualRecognitionV3.framework */; };
-		D08D7A691FB8D111005E9532 /* VisualRecognitionV3.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D040E5551FA53E560051D166 /* VisualRecognitionV3.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D091EE331FB0AC4100A8FD43 /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D091EE321FB0AC4100A8FD43 /* ProductDetailViewController.swift */; };
 		D0964F8D1F9652150022CB7A /* DatabaseUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0964F8C1F9652150022CB7A /* DatabaseUtil.swift */; };
 		D0964F8F1F9652A50022CB7A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0964F8E1F9652A50022CB7A /* User.swift */; };
@@ -77,13 +77,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		D08D7A6A1FB8D111005E9532 /* Embed Frameworks */ = {
+		D048BB561FB9F2540087763C /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D08D7A691FB8D111005E9532 /* VisualRecognitionV3.framework in Embed Frameworks */,
+				D048BB551FB9F2540087763C /* VisualRecognitionV3.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -116,10 +116,10 @@
 		D040E54E1FA516010051D166 /* FollowingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingViewController.swift; sourceTree = "<group>"; };
 		D040E5501FA535DB0051D166 /* AutoAnalysisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoAnalysisViewController.swift; sourceTree = "<group>"; };
 		D040E5531FA53D360051D166 /* VisualRecognitionV3.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VisualRecognitionV3.framework; path = Carthage/Build/iOS/VisualRecognitionV3.framework; sourceTree = "<group>"; };
-		D040E5551FA53E560051D166 /* VisualRecognitionV3.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VisualRecognitionV3.framework; path = Carthage/Build/iOS/VisualRecognitionV3.framework; sourceTree = "<group>"; };
 		D040E5591FA571660051D166 /* AnalysisDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisDetailsViewController.swift; sourceTree = "<group>"; };
 		D040E55B1FA5765A0051D166 /* HairPatternInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HairPatternInfo.swift; sourceTree = "<group>"; };
 		D045587E1FB38B0100FC9D15 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		D048BB531FB9F2540087763C /* VisualRecognitionV3.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VisualRecognitionV3.framework; path = Carthage/Build/iOS/VisualRecognitionV3.framework; sourceTree = "<group>"; };
 		D050F9711F9110C00008370E /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		D050F9731F91114F0008370E /* GuidesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuidesViewController.swift; sourceTree = "<group>"; };
 		D050F9761F9111800008370E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -170,7 +170,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A0596DFA66F8F5928BB5C6D /* Pods_ColemanJustin_FinalProject.framework in Frameworks */,
-				D08D7A681FB8D111005E9532 /* VisualRecognitionV3.framework in Frameworks */,
+				D048BB541FB9F2540087763C /* VisualRecognitionV3.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,7 +362,7 @@
 		D078B5B11F7C1A5F00A6F8C5 = {
 			isa = PBXGroup;
 			children = (
-				D040E5551FA53E560051D166 /* VisualRecognitionV3.framework */,
+				D048BB531FB9F2540087763C /* VisualRecognitionV3.framework */,
 				D078B5BC1F7C1A5F00A6F8C5 /* ColemanJustin_FinalProject */,
 				D078B5BB1F7C1A5F00A6F8C5 /* Products */,
 				1EB5D59F2FE2E0ADF1588872 /* Pods */,
@@ -468,7 +468,7 @@
 				D078B5B81F7C1A5F00A6F8C5 /* Resources */,
 				A451100A01E4576D9A5A5DA7 /* [CP] Embed Pods Frameworks */,
 				5B2A458364777DE2E5C84219 /* [CP] Copy Pods Resources */,
-				D08D7A6A1FB8D111005E9532 /* Embed Frameworks */,
+				D048BB561FB9F2540087763C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
