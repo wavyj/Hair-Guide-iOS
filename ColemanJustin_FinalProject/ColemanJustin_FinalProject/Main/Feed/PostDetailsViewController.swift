@@ -28,6 +28,7 @@ class PostDetailsViewController: UIViewController, UICollectionViewDelegate, UIC
     var comments = [Comment]()
     var textController: MDCTextInputController?
     var commentViewHeight: CGFloat?
+    var keyboardHeight: CGSize?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,17 +82,18 @@ class PostDetailsViewController: UIViewController, UICollectionViewDelegate, UIC
         print("Show")
         var info = sender.userInfo!
         print(scrollView.contentInset)
-        var keyboardSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
-        scrollView.contentInset = UIEdgeInsetsMake(0.0, 0.0, (keyboardSize?.height)! - commentViewHeight!, 0.0)
+        if keyboardHeight == nil{
+            keyboardHeight = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
+        }
+        scrollView.contentInset = UIEdgeInsetsMake(0.0, 0.0, (keyboardHeight?.height)! - commentViewHeight!, 0.0)
         print(scrollView.contentInset)
     }
     
     @objc func keyboardHidden(_ sender: Notification){
         print("Hidden")
         var info = sender.userInfo!
-        var keyboardSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
         scrollView.contentInset = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)
-        print(scrollView.contentInset)
+        
     }
     
     //MARK: - TextField Callbacks
