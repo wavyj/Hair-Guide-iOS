@@ -18,7 +18,6 @@ class SelectedGuideViewController: UIViewController, UICollectionViewDelegate, U
     //@IBOutlet weak var editor: UIView!
     @IBOutlet weak var titleView: UILabel!
     @IBOutlet weak var contentView: UITextView!
-    @IBOutlet weak var guideImage: UIImageView!
     @IBOutlet weak var titleToImageConstraint: NSLayoutConstraint!
     @IBOutlet weak var titleToTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var content: UIView!
@@ -40,8 +39,6 @@ class SelectedGuideViewController: UIViewController, UICollectionViewDelegate, U
         
         titleView.text = selectedGuide?.mTitle
         contentView.text = selectedGuide?.mText
-        guideImage.pin_updateWithProgress = true
-        guideImage.pin_setImage(from: URL(string: (selectedGuide?.mImageUrl)!))
         
         // Update View Count
         selectedGuide?.mViews += 1
@@ -50,13 +47,6 @@ class SelectedGuideViewController: UIViewController, UICollectionViewDelegate, U
     
     override func viewWillAppear(_ animated: Bool) {
         imageHeightOrig = self.view.bounds.height * 0.2
-        
-        if selectedGuide?.mImageUrl == ""{
-            guideImage.removeFromSuperview()
-           scrollview.contentInset = UIEdgeInsetsMake(guideImage.bounds.height, 0, 0, 0)
-        }else{
-            
-        }
     }
 
     override func didReceiveMemoryWarning() {
