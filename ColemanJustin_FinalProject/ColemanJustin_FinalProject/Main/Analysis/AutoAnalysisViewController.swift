@@ -58,8 +58,8 @@ class AutoAnalysisViewController: UIViewController, ImagePickerDelegate {
         config.allowVideoSelection = false
         
         let imagePicker = ImagePickerController(configuration: config)
+        imagePicker.delegate = self
         imagePicker.imageLimit = 1
-        //imagePicker.delegate = self
         present(imagePicker, animated: true, completion: nil)
     }
     
