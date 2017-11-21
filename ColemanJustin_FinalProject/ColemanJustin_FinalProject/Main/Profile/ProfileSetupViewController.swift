@@ -163,6 +163,7 @@ class ProfileSetupViewController: UIViewController, UITextFieldDelegate, ImagePi
     
     //MARK: - ImagePicker Delegate Callbacks
     func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
+        imagePicker.dismiss(animated: true, completion: nil)
         selectedImage = images.first!
         profilePic.image = images.first!
     }

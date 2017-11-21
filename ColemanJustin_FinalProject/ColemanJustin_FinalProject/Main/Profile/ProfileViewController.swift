@@ -326,7 +326,7 @@ extension ProfileViewController{
     
     func loadGuides(){
         let db = Firestore.firestore()
-        db.collection("guides").getDocuments { (snapshot, error) in
+        db.collection("guides").whereField("user", isEqualTo: UserDefaultsUtil().loadReference()).getDocuments(completion: { (snapshot, error) in
             if error != nil{
                 // Error
                 print(error?.localizedDescription)
@@ -351,7 +351,7 @@ extension ProfileViewController{
                 self.guides.append(guide)
             }
             self.guidesCollectionView.reloadData()
-        }
+        })
     }
     
     func loadBookmarks(){
